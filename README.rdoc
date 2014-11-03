@@ -1,0 +1,6 @@
+== Rebirth - Iron Man
+
+重生计划(Rebirth)项目代码，主要负责人Iron。
+
+更新信息：
+* 2014-11-04 Mark I 启动
