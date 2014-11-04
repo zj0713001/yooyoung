@@ -1,0 +1,14 @@
+defaults: &defaults
+  redis:
+    cache_store: 'redis://localhost:6379/0/cache_store'
+    meta_store: 'redis://localhost:6379/1/meta_store'
+    entity_store: 'redis://localhost:6379/1/entity_store'
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
