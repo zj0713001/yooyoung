@@ -1,0 +1,70 @@
+doctype html
+html
+  head
+    title = @title
+    = stylesheet_link_tag :'admin/application', media: 'all', :'data-turbolinks-track' => true
+    = javascript_include_tag :'admin/application', :'data-turbolinks-track' => true
+    = csrf_meta_tags
+  body
+    .ui.fixed.transparent.inverted.main.menu
+      .container
+        .title.item
+          b
+            | 后台管理系统
+    .ui.thin.vertical.inverted.labeled.icon.sidebar.menu.js_admin_menu
+      .item
+        b 用户系统
+        .menu
+          a.item href="javascript:void(0);" 注册用户
+          a.item href="javascript:void(0);" vip用户
+          a.item href="javascript:void(0);" 后台编辑
+      .item
+        b 权限系统
+        .menu
+          a.item href="javascript:void(0);" 角色
+          a.item href="javascript:void(0);" 权限
+    .ui.black.right.attached.button.menu-button.js_admin_toggle_menu
+      i.icon.list.layout
+    .admin
+      .container
+        h2.ui.dividing.header
+          | 种类
+        .ui.fluid.form.segment
+          .fields
+            .inline.field
+              label 姓名
+              input placeholder='name' type='text'
+            .inline.field
+              label 电话
+              input placeholder='phone' type='text'
+          .ui.buttons
+            a.ui.blue.button 筛选
+          | &nbsp;&nbsp;
+          .ui.buttons
+            a.ui.green.button 添加
+        table.ui.table.segment
+          thead
+            th 姓名
+            th 状态
+            th 备注
+          tbody
+            tr
+              td 张三
+              td 已接受
+              td 备注
+            tr
+              td 李四
+              td 已接受
+              td 备注
+            tr
+              td 王五
+              td 已接受
+              td 备注
+        .ui.pagination.menu.floated.right
+          a.icon.item
+            i.icon.left.arrow
+          a.item 1
+          a.item 2
+          a.item 3
+          a.icon.item
+            i.icon.right.arrow

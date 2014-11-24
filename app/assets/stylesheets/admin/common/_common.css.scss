@@ -1,0 +1,23 @@
+body {
+  @include background(asset-url("admin/common/bg.jpg"), $gray-light);
+}
+
+.container {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.admin {
+  padding-top: 40px;
+  .container {
+    margin-top: 10px;
+  }
+}
+
+.ui.attached.right.button.menu-button {
+  position: fixed;
+  top: 50px;
+  width: 35px;
+  padding: 8px;
+  z-index: 500;
+}

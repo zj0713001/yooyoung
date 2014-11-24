@@ -51,7 +51,7 @@ gem 'modular_migration'
 gem 'seed-fu'
 
 # Assets
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails', '~> 4.0.4'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
@@ -61,6 +61,8 @@ gem 'facebox-rails', '~> 0.2.0'
 gem 'font-awesome-rails'
 gem 'select2-rails'
 gem 'semantic-ui-sass'
+gem 'compass', '~> 0.12.7'
+gem 'compass-rails', '~> 1.1.7'
 
 # Security
 gem 'rack-attack'
