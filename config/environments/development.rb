@@ -32,6 +32,8 @@ Rails.application.configure do
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
 
+  config.cache_store = :redis_store, 'redis://localhost:6379/0/cache_store', { compress: true,  expires_in: 8.hours, compress_threshold: 32.kilobytes }
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end

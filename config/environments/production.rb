@@ -52,11 +52,11 @@ Rails.application.configure do
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
-  config.cache_store = :redis_store, Settings.redis.cache_store, { expires_in: 90.minutes }
+  config.cache_store = :redis_store, 'redis://localhost:6379/0/cache_store', { compress: true,  expires_in: 8.hours, compress_threshold: 32.kilobytes }
   config.action_dispatch.rack_cache = {
-  metastore: Settings.redis.meta_store,
-  entitystore: Settings.redis.entity_store,
-}
+    metastore: 'redis://localhost:6379/1/meta_store',
+    entitystore: 'redis://localhost:6379/1/entity_store',
+  }
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = "http://assets.example.com"

@@ -2,14 +2,13 @@ source 'https://ruby.taobao.org/'
 ruby '2.1.5'
 
 # Core
-gem 'rails', '4.1.7'
+gem 'rails', '~> 4.1.0'
 
 # Cache
 gem 'redis-rails'
 
 # Upload
 gem 'carrierwave'
-gem 'piet'
 gem 'dropzonejs-rails'
 
 # Analytics
@@ -31,6 +30,7 @@ gem 'devise-i18n', '~> 0.11.2'
 gem 'omniauth'
 
 # Util
+gem 'rails-i18n', '~> 4.0.3'
 gem 'default_value_for'
 gem 'stamp'
 gem 'slim-rails'
@@ -44,6 +44,9 @@ gem 'httparty'
 gem 'cancancan'
 gem 'colored'
 gem 'settingslogic'
+gem 'china_sms', '~> 0.0.7'
+gem 'rack-cache', '~> 1.2'
+gem 'simple_captcha2', require: 'simple_captcha'
 
 # Datebase
 gem 'mysql2'
@@ -72,7 +75,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Dev
 group :development, :test do
-  gem 'byebug'
+  gem 'pry'
   gem 'web-console', '~> 2.0.0.beta4'
   gem 'spring'
   gem 'quiet_assets'

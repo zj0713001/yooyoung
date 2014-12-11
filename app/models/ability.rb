@@ -7,5 +7,4 @@ class Ability
       can permission.action.to_sym, permission.resource.camelize.constantize
     end
   end
-  end
 end

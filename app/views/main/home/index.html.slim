@@ -1,1 +1,3 @@
 首页
+
+= link_to '退出登录', destroy_user_session_path, method: :delete, remote: true if current_user
