@@ -33,5 +33,7 @@ module Iron
     config.filter_parameters += [:password]
 
     config.active_support.escape_html_entities_in_json = true
+
+    config.compass.require "susy"
   end
 end

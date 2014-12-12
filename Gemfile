@@ -69,6 +69,8 @@ gem 'select2-rails'
 gem 'semantic-ui-sass'
 gem 'compass', '~> 0.12.7'
 gem 'compass-rails', '~> 1.1.7'
+gem 'compass-susy-plugin'
+gem 'susy', '~> 1.0.9'
 
 # Security
 gem 'rack-attack'
