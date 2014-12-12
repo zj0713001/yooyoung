@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
-  devise_for :users, controllers: { registrations: 'main/devise/registrations' }
+  devise_for :users, controllers: {
+    registrations: 'main/devise/registrations',
+    sessions: 'main/devise/sessions',
+  }
   devise_scope :user do
     get 'users/send_sms_captcha' => 'main/devise/registrations#send_sms_captcha', as: :users_send_sms_captcha
   end

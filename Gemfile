@@ -53,6 +53,9 @@ gem 'mysql2'
 gem 'modular_migration'
 gem 'seed-fu'
 
+# MongoDB
+gem 'mongoid', '~> 4.0.0'
+
 # Assets
 gem 'sass-rails', '~> 4.0.4'
 gem 'uglifier', '>= 1.3.0'
