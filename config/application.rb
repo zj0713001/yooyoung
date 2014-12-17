@@ -35,5 +35,9 @@ module Iron
     config.active_support.escape_html_entities_in_json = true
 
     config.compass.require "susy"
+
+    config.generators do |g|
+      g.orm :active_record
+    end
   end
 end
