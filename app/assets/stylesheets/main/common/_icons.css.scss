@@ -1,0 +1,12 @@
+@import "3rd/retina-sprites";
+
+$sprites: sprite-map("main/icons/*.png");
+$sprites2x: sprite-map("main/icons-retina/*.png");
+
+[class^="icon-"], [class*="icon-"] {
+  @include inline-block;
+  vertical-align: middle;
+}
+
+.icon-phone { @include retina-sprite(phone); }
+.icon-password { @include retina-sprite(password); }

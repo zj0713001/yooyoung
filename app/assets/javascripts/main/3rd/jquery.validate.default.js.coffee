@@ -1,0 +1,3 @@
+$ ->
+  $.validator.setDefaults
+    onkeyup: false

@@ -1,0 +1,19 @@
+.sessions-new
+  = render 'main/shared/header'
+  .sessions-new__sign-in
+    .sessions-new__sign-in-form
+      = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: :'sessions-new-form main-form js_main_sessions_new_form'}) do |f|
+        = link_to '没有账户，去注册', new_user_registration_path, class: :'sessions-new-form__link sessions-new-form__tips'
+        .main-form__group
+          = f.label :phone, class: :'main-form__label' do
+            .icon-phone
+          = f.phone_field :phone, placeholder: '手机号码', autofocus: true, class: :'sessions-new-form__input main-form__input'
+        .main-form__group
+          = f.label :password, class: :'main-form__label' do
+            .icon-password
+          = f.password_field :password, placeholder: '密码', class: :'sessions-new-form__input main-form__input'
+        .main-form__group.main-form__group--tips
+          = f.check_box :remember_me, class: 'sessions-new-form__remember-me'
+          = f.label :remember_me, '记住我', class: 'sessions-new-form__remember-me-label'
+          a href='#' class='sessions-new-form__link' 忘记密码
+        = f.submit "登录", class: :'primary-button main-form__submit'
