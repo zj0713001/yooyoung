@@ -2,7 +2,7 @@ source 'https://ruby.taobao.org/'
 ruby '2.1.5'
 
 # Core
-gem 'rails', '~> 4.1.0'
+gem 'rails', '~> 4.2.0'
 
 # Cache
 gem 'redis-rails'
@@ -81,8 +81,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Dev
 group :development, :test do
   gem 'pry'
-  gem 'web-console', '~> 2.0.0.beta4'
+  gem 'web-console', '~> 2.0.0'
   gem 'spring'
   gem 'quiet_assets'
   gem 'thin'
+  gem 'grizzled-rails-logger'
 end
