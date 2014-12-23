@@ -2,7 +2,12 @@ doctype html
 html
   head
     title = @title
+    = render :partial => 'main/shared/meta', :formats => :html
     = stylesheet_link_tag :'main/application', media: 'all', :'data-turbolinks-track' => true
+    /[if lte IE 8]
+      = stylesheet_link_tag :'main/ie/ie8', media: 'all', :'data-turbolinks-track' => true
+    /[if lte IE 9]
+      = stylesheet_link_tag :'main/ie/ie9', media: 'all', :'data-turbolinks-track' => true
     = javascript_include_tag :'main/application', :'data-turbolinks-track' => true
     = csrf_meta_tags
   body

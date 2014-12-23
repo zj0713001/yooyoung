@@ -2,7 +2,7 @@ source 'https://ruby.taobao.org/'
 ruby '2.1.5'
 
 # Core
-gem 'rails', '~> 4.2.0'
+gem 'rails', '~> 4.1.0'
 
 # Cache
 gem 'redis-rails'
@@ -68,9 +68,13 @@ gem 'font-awesome-rails'
 gem 'select2-rails'
 gem 'semantic-ui-sass'
 gem 'compass', '~> 0.12.7'
+gem 'compass-rgbapng'
+gem 'oily_png'
 gem 'compass-rails', '~> 1.1.7'
 gem 'compass-susy-plugin'
 gem 'susy', '~> 1.0.9'
+gem 'bourbon'
+gem 'jquery-validation-rails', '~> 1.12.0'
 
 # Security
 gem 'rack-attack'

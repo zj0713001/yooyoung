@@ -1,0 +1,11 @@
+$total-columns: 12;
+$column-width: 100px;
+$gutter-width: 0px;
+$container-style: magic;
+$grid-padding: 0px;
+
+$media-layout: 12;
+
+@import "susy";
+
+@include border-box-sizing;

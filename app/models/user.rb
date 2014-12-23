@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
 
   validates :phone, presence: true, uniqueness: { case_sensitive: false }, format: { with: TotalRegexp.phone }
   validates :email, uniqueness: { case_sensitive: false }, allow_blank: true, format: { with: TotalRegexp.email }
-  validates :nickname, presence: true, uniqueness: { case_sensitive: false }
+  validates :nickname, uniqueness: { case_sensitive: false }
 
   # Ability
   def can? action, resource

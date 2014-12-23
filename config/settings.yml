@@ -4,7 +4,7 @@ defaults: &defaults
     meta_store: 'redis://localhost:6379/1/meta_store'
     entity_store: 'redis://localhost:6379/1/entity_store'
   sms_captcha:
-    length: 4
+    length: 6
     range: <%= (0..9).to_a %>
     switch: false
 

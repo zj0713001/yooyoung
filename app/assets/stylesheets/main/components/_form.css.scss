@@ -1,0 +1,89 @@
+.main-form {
+  position: relative;
+
+  .main-form__group {
+    min-height: 42px;
+    line-height: 42px;
+    padding: 0;
+    margin-bottom: 18px;
+    position: relative;
+    &.main-form__group--tips {
+      min-height: 14px;
+      line-height: 14px;
+    }
+    &.main-form__group--hidden {
+      display: none;
+    }
+  }
+  .main-form__label {
+    height: 36px;
+    width: 36px;
+    position: absolute;
+    left: 8px;
+  }
+  .main-form__input {
+    border: none;
+    @include border-radius(0);
+    padding: 0 0 0 50px;
+    outline: 0;
+    height: 42px;
+    width: 100%;;
+    line-height: 42px;
+    font-size: 18px;
+    color: $dark_black;
+    ::-webkit-input-placeholder { /* WebKit browsers */
+      color: $light_black;
+    }
+    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+      color: $light_black;
+      opacity: 1;
+    }
+    ::-moz-placeholder { /* Mozilla Firefox 19+ */
+      color: $light_black;
+      opacity: 1;
+    }
+    :-ms-input-placeholder { /* Internet Explorer 10+ */
+      color: $light_black;
+    }
+    &.main-form__input--small {
+      width: 220px;
+      padding: 0 14px;
+      float: left;
+    }
+  }
+  .main-form__submit {
+    width: 100%;
+    height: 42px;
+    font-size: 24px;
+    border: none;
+  }
+  //Error
+  .main-form__error-group-clearfix {
+    height: 14px;
+    position: relative;
+  }
+  .main-form__error-group {
+    position: absolute;
+    left: 0;
+    bottom: -14px;
+    line-height: 0px;
+  }
+  .main-form__error-arrow {
+    width: 0px;
+    height: 0px;
+    margin-left: 21px;
+    border: 5px solid;
+    border-color: transparent transparent rgba-inline(rgba($red, 0.5)) transparent;
+    border-color: transparent transparent rgba($red, 0.5) transparent;
+    border-style:dashed dashed solid dashed;
+
+  }
+  .main-form__error-message {
+    padding: 5px 8px;
+    font-size: 14px;
+    line-height: 14px;
+    @include inline-block;
+    color: $white;
+    @include rgba-background-inline(rgba($red, 0.5));
+  }
+}

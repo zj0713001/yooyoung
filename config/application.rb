@@ -38,7 +38,8 @@ module Iron
       g.orm :active_record
     end
 
-    #User Sidekip For ActiveJob
-    config.active_job.queue_adapter = :sidekiq
+    # Compass Config
+    config.compass.require 'susy'
+    config.compass.require 'rgbapng'
   end
 end
