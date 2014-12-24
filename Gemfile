@@ -47,6 +47,9 @@ gem 'settingslogic'
 gem 'china_sms', '~> 0.0.7'
 gem 'rack-cache', '~> 1.2'
 gem 'simple_captcha2', require: 'simple_captcha'
+gem 'friendly_id', '~> 5.0.4'
+gem 'hashids', '~> 1.0.2'
+gem 'validates_existence', '~> 0.9.2'
 
 # Datebase
 gem 'mysql2'
@@ -90,4 +93,5 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'thin'
   gem 'grizzled-rails-logger'
+  gem 'annotate', '~> 2.6.5'
 end
