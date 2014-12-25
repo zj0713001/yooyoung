@@ -3,7 +3,7 @@ $ ->
     user_phone = $('.js_main_registrations_phone_field').val()
     if $(this).hasClass('ajax_disabled')
       return false
-    if Boolean($('.js_main_registrations_phone_field').val().length) && $('.js_main_registrations_phone_field').valid()
+    if !_.isEmpty($('.js_main_registrations_phone_field').val()) && $('.js_main_registrations_phone_field').valid()
       $.ajax
         url: $(this).data('url')
         type: 'GET'
@@ -67,19 +67,19 @@ $ ->
     errorElement: 'div'
 
   $('.js_main_registrations_phone_field').on 'blur', ->
-    if Boolean($('.js_main_registrations_phone_field').val().length) && $('.js_main_registrations_phone_field').valid()
+    if !_.isEmpty($('.js_main_registrations_phone_field').val()) && $('.js_main_registrations_phone_field').valid()
       $('.js_main_registrations_password_field').trigger 'focus'
     else
       $(this).trigger 'focus'
 
   $('.js_main_registrations_password_field').on 'focus', ->
-    if Boolean($('.js_main_registrations_phone_field').val().length) && $('.js_main_registrations_phone_field').valid()
+    if !_.isEmpty($('.js_main_registrations_phone_field').val()) && $('.js_main_registrations_phone_field').valid()
       $('.js_main_registrations_password_confirmation').show()
 
   $('.js_main_registrations_password_field').on 'blur', ->
-    if Boolean($('.js_main_registrations_password_field').val().length) && $('.js_main_registrations_password_field').valid()
+    if !_.isEmpty($('.js_main_registrations_password_field').val()) && $('.js_main_registrations_password_field').valid()
       $('.js_main_registrations_password_confirmation_field').trigger 'focus'
 
   $('.js_main_registrations_password_confirmation_field').on 'focus', ->
-    if Boolean($('.js_main_registrations_password_field').val().length) && $('.js_main_registrations_password_field').valid()
+    if !_.isEmpty($('.js_main_registrations_password_field').val()) && $('.js_main_registrations_password_field').valid()
       $('.js_main_registrations_captcha').show()

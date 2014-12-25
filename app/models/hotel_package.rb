@@ -1,6 +1,6 @@
 class HotelPackage < ActiveRecord::Base
-  has_one :cover_photo, as: :target
-  has_many :photos, -> { where active: true }, as: :target
+  has_one :cover_photo, as: :target, dependent: :destroy
+  has_many :photos, as: :target, dependent: :destroy
   has_and_belongs_to_many :rooms, -> { where active: true }, uniq: true
   has_many :items, -> { where active: true }, class_name: HotelPackageItem
 

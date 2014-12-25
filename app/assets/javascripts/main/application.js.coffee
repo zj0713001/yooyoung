@@ -7,6 +7,7 @@
 #= require jquery.validate.localization/messages_zh
 #= require 3rd/jquery.validate.methods
 #= require main/3rd/jquery.validate.default
+#= require underscore
 
 #= require main/devise/registrations
 #= require main/devise/sessions

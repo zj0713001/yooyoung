@@ -66,5 +66,6 @@ Rails.application.routes.draw do
     # (app/controllers/admin/products_controller.rb)
     root 'application#index'
     resources :users
+    resources :photos, only: [:create, :destroy]
   end
 end

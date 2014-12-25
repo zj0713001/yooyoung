@@ -1,7 +1,7 @@
 class Hotel < ActiveRecord::Base
   has_many :cities, -> { where active: true }
-  has_one :cover_photo, as: :target
-  has_many :photos, -> { where active: true }, as: :target
+  has_one :cover_photo, as: :target, dependent: :destroy
+  has_many :photos, as: :target, dependent: :destroy
   has_many :reasons, -> { where active: true }, class_name: HotelReason
   has_many :cheats, -> { where active: true }, class_name: HotelCheat
   has_and_belongs_to_many :categories, -> { where active: true }, uniq: true

@@ -1,6 +1,6 @@
 class HotelPackageItem < ActiveRecord::Base
-  has_one :cover_photo, as: :target
-  has_many :photos, -> { where active: true }, as: :target
+  has_one :cover_photo, as: :target, dependent: :destroy
+  has_many :photos, as: :target, dependent: :destroy
 
   belongs_to :package, class_name: HotelPackage
   belongs_to :editor, class_name: User

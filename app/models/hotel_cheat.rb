@@ -1,5 +1,5 @@
 class HotelCheat < ActiveRecord::Base
-  has_many :photos, -> { where active: true }, as: :target
+  has_many :photos, as: :target, dependent: :destroy
 
   belongs_to :hotel
   belongs_to :editor, class_name: User

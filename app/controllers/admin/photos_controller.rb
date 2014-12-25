@@ -1,0 +1,19 @@
+class Admin::PhotosController < Admin::ApplicationController
+  def create
+    @photo = Photo.new
+    @photo.attributes = {
+      image: params[:image],
+      editor: current_user,
+    }
+
+    if @photo.save
+      respond_to do |format|
+        format.json { render json: @photo }
+      end
+    else
+      respond_to do |format|
+        format.json { render json: { status: 'error' } }
+      end
+    end
+  end
+end

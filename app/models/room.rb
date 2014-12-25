@@ -1,5 +1,5 @@
 class Room < ActiveRecord::Base
-  has_many :photos, -> { where active: true }, as: :target
+  has_many :photos, as: :target, dependent: :destroy
   has_and_belongs_to_many :packages, -> { where active: true }, uniq: true
 
   belongs_to :hotel
