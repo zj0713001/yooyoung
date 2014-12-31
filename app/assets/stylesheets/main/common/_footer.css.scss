@@ -1,0 +1,68 @@
+.main-footer {
+  background: $dark_green;
+  text-align: center;
+  letter-spacing: .1em;
+  @include font-family-heiti;
+  .main-footer__content {
+    width: 100%;
+    height: 130px;
+  }
+  .main-footer__copyright {
+    width: 100%;
+    height: 50px;
+    font-size: 12px;
+    line-height: 50px;
+    border: 1px;
+    border-style: solid none none none;
+    border-color: $gray_green;
+    color: $light_green;
+  }
+}
+.main-footer-content {
+  padding: 40px 0;
+  .main-footer-content__nav {
+    width: 50%;
+    float: left;
+    padding: 0 40px;
+  }
+  .main-footer-content__nav-item {
+    width: 25%;
+    float: left;
+    font-size: 14px;
+    line-height: 50px;
+    a {
+      color: $lighter_green;
+      &:hover {
+        color: $white;
+      }
+    }
+  }
+  .main-footer-content__service {
+    float: left;
+    width: 30%;
+    height: 50px;
+    padding-left: 40px;
+    border: 1px;
+    border-style: none none none solid;
+    border-color: $lighter_green;
+    color: $white;
+    text-align: left;
+  }
+  .main-footer-content__service-phone {
+    line-height: 30px;
+    font-size: 28px;
+  }
+  .main-footer-content__service-time {
+    line-height: 20px;
+    font-size: 14px;
+    color: $lighter_green;
+  }
+  .main-footer-content__social {
+    width: 20%;
+    float: left;
+    text-align: left;
+    [class^="icon-"], [class*="icon-"] {
+      margin-right: 20px;
+    }
+  }
+}

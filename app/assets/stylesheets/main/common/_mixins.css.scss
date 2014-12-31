@@ -3,3 +3,19 @@
   -webkit-user-select: none;
   -ms-user-select: none;
 }
+
+@mixin font-family-heiti {
+  font-family: 'STHeiti','Helvetica Neue',Arial,sans-serif;
+}
+
+@mixin font-family-songti {
+  font-family: 'SimSun','NSimSun',serif;
+}
+
+@mixin cover_background_image($image) {
+  background-image: image-url($image);
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  @include background-size(cover);
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=#{image-path($image)},sizingMethod='scale');
+}

@@ -1,5 +1,5 @@
 source 'https://ruby.taobao.org/'
-ruby '2.1.5'
+ruby '2.2.0'
 
 # Core
 gem 'rails', '~> 4.1.0'
@@ -78,6 +78,7 @@ gem 'susy', '~> 1.0.9'
 gem 'bourbon'
 gem 'jquery-validation-rails', '~> 1.12.0'
 gem 'underscore-rails', '~> 1.7.0'
+gem 'lazyload-rails', '~> 0.3.1'
 
 # Security
 gem 'rack-attack'

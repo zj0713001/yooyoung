@@ -8,5 +8,21 @@ $sprites2x: sprite-map("main/icons-retina/*.png");
   vertical-align: middle;
 }
 
-.icon-phone { @include retina-sprite(phone); }
-.icon-password { @include retina-sprite(password); }
+.icon-phone { @include retina-sprite('phone'); }
+.icon-password { @include retina-sprite('password'); }
+.icon-location { @include retina-sprite('location'); }
+.icon-search { @include retina-sprite('search'); }
+.icon-double-arrow-small-right { @include retina-sprite('double-arrow-small-right'); }
+.icon-arrow-small-down { @include retina-sprite('arrow-small-down'); }
+.icon-arrow-normal-left {
+  @include retina-sprite('arrow-normal-left');
+}
+.icon-arrow-normal-right {
+  @include retina-sprite('arrow-normal-right');
+}
+.icon-weibo {
+  @include retina-sprite('weibo');
+}
+.icon-wechat {
+  @include retina-sprite('wechat');
+}

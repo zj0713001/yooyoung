@@ -1,11 +1,7 @@
 .sessions-new {
   width: 100%;
   height: 100%;
-  background-image: image-url("main/sessions/background.jpg");
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-  @include background-size(cover);
-  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=#{image-path('main/sessions/background.jpg')},sizingMethod='scale');
+  @include cover_background_image("main/sessions/background.jpg");
   .sessions-new__sign-in,
   .sessions-new__sign-up {
     position: relative;

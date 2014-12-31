@@ -11,3 +11,5 @@
 #= require admin/common/common
 
 #= require admin/photos
+
+#= require 3rd/jquery.browser
