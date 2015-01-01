@@ -1,0 +1,37 @@
+.ui.fixed.transparent.inverted.main.menu
+  .container
+    .title.item
+      b
+        | 后台管理系统
+.ui.thin.vertical.inverted.labeled.icon.sidebar.menu.js_admin_menu
+  .item
+    b 酒店产品管理
+    .menu
+      a.item href="#{admin_hotels_path}" 所有酒店
+      a.item href="#{admin_hotels_path(:'where[published]' => true)}" 已发布酒店
+      a.item href="#{new_admin_hotel_path}" 创建酒店
+  .item
+    b 酒店分类管理
+    .menu
+      a.item href="#{admin_categories_path}" 所有分类
+      a.item href="#{admin_categories_path(:'where[published]' => true)}" 已发布分类
+      a.item href="#{new_admin_category_path}" 创建分类
+  .item
+    b 地区管理
+    .menu
+      a.item href="#{admin_areas_path}" 区域
+      a.item href="#{admin_countries_path}" 国家
+      a.item href="#{admin_cities_path}" 城市
+  .item
+    b 用户管理
+    .menu
+      a.item href="#{admin_users_path}" 注册用户
+      a.item href="#{admin_users_path}" 后台编辑
+      a.item href="#{admin_links_path}" 用户访问量
+      a.item href="#{admin_links_path}" 用户浏览器
+  .item
+    b 权限管理
+    .menu
+      a.item href="#{admin_roles_path}" 角色
+.ui.black.right.attached.button.menu-button.js_admin_toggle_menu
+  i.icon.list.layout

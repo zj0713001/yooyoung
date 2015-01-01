@@ -5,7 +5,7 @@ class HotelReason < ActiveRecord::Base
   belongs_to :editor, class_name: User
 
   validates :content, presence: true
-  validates :content, uniqueness: { scope: :active }, if: -> { self.active }
+  validates :content, uniqueness: { scope: :active }, if: Proc.new { self.active }
   validates :hotel, existence: true
   validates :editor, existence: true
 end

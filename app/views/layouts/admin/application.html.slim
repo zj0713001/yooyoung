@@ -6,25 +6,7 @@ html
     = javascript_include_tag :'admin/application', :'data-turbolinks-track' => true
     = csrf_meta_tags
   body
-    .ui.fixed.transparent.inverted.main.menu
-      .container
-        .title.item
-          b
-            | 后台管理系统
-    .ui.thin.vertical.inverted.labeled.icon.sidebar.menu.js_admin_menu
-      .item
-        b 用户系统
-        .menu
-          a.item href="javascript:void(0);" 注册用户
-          a.item href="javascript:void(0);" vip用户
-          a.item href="javascript:void(0);" 后台编辑
-      .item
-        b 权限系统
-        .menu
-          a.item href="javascript:void(0);" 角色
-          a.item href="javascript:void(0);" 权限
-    .ui.black.right.attached.button.menu-button.js_admin_toggle_menu
-      i.icon.list.layout
+    = render partial: 'layouts/admin/nav'
     .admin
       .container
         = yield

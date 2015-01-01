@@ -10,16 +10,16 @@ class Hotel < ActiveRecord::Base
   delegate :area, :country, to: :city, allow_nil: true
   belongs_to :editor, class_name: User
 
-  accepts_nested_attributes_for :cover_photo, reject_if: -> { |attributes| attributes['id'].blank? && attributes['active'] == '0' }
-  accepts_nested_attributes_for :photos, reject_if: -> { |attributes| attributes['id'].blank? && attributes['active'] == '0' }
+  accepts_nested_attributes_for :cover_photo, reject_if: Proc.new { |attributes| attributes['id'].blank? && attributes['active'] == '0' }
+  accepts_nested_attributes_for :photos, reject_if: Proc.new { |attributes| attributes['id'].blank? && attributes['active'] == '0' }
 
   serialize :traffics, Array
   default_value_for :traffics, Array.new
 
   validates :name, presence: true
-  validates :name, uniqueness: { scope: :active }, if: -> { self.active }
+  validates :name, uniqueness: { scope: :active }, if: Proc.new { self.active }
   validates :chinese, presence: true
-  validates :chinese, uniqueness: { scope: :active }, if: -> { self.active }
+  validates :chinese, uniqueness: { scope: :active }, if: Proc.new { self.active }
   validates :address, presence: true
   validates :provision, presence: true
   validates :cover_photo, presence: true

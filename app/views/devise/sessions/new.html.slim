@@ -1,5 +1,5 @@
 .sessions-new
-  = render 'main/shared/header'
+  = render partial: 'main/shared/header'
   .sessions-new__sign-in
     .sessions-new__sign-in-form
       = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: :'sessions-new-form main-form js_main_sessions_new_form'}) do |f|
