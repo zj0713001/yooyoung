@@ -1,0 +1,6 @@
+---
+  permissions:
+    - name: role
+      title: 角色
+    - name: user
+      title: 用户
