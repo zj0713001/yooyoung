@@ -1,3 +1,28 @@
+# == Schema Information
+#
+# Table name: hotels
+#
+#  id             :integer          not null, primary key
+#  name           :string(255)      not null
+#  chinese        :string(255)      not null
+#  sequence       :integer          default(0)
+#  city_id        :integer
+#  editor_id      :integer
+#  description    :text
+#  provision      :text
+#  address        :string(255)
+#  phone          :string(255)
+#  checkin        :datetime
+#  checkout       :datetime
+#  traffics       :text
+#  cover_photo_id :integer
+#  published      :boolean          default(FALSE), not null
+#  active         :boolean          default(TRUE), not null
+#  lock_version   :integer          default(0), not null
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+
 class Hotel < ActiveRecord::Base
   has_many :cities, -> { where active: true }
   has_one :cover_photo, as: :target, dependent: :destroy

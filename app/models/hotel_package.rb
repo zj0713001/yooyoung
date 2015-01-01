@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: hotel_packages
+#
+#  id             :integer          not null, primary key
+#  name           :string(255)      not null
+#  start_day      :date
+#  end_day        :date
+#  description    :text
+#  cover_photo_id :integer
+#  hotel_id       :integer
+#  editor_id      :integer
+#  lock_version   :integer          default(0), not null
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+
 class HotelPackage < ActiveRecord::Base
   has_one :cover_photo, as: :target, dependent: :destroy
   has_many :photos, as: :target, dependent: :destroy

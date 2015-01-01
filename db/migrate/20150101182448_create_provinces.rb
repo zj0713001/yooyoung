@@ -1,8 +1,9 @@
-class CreateCites < ActiveRecord::Migration
+class CreateProvinces < ActiveRecord::Migration
   def change
-    create_table :cities do |t|
+    create_table :provinces do |t|
       t.string :name, null: false, unique: true
       t.string :chinese, null: false, unique: true
+      t.string :code
       t.integer :sequence, default: 0
       t.references :country
       t.references :editor
@@ -14,6 +15,7 @@ class CreateCites < ActiveRecord::Migration
       t.timestamps
 
       t.index :name
+      t.index :chinese
     end
   end
 end

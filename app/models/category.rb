@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: categories
+#
+#  id           :integer          not null, primary key
+#  name         :string(255)      not null
+#  chinese      :string(255)      not null
+#  sequence     :integer          default(0)
+#  editor_id    :integer
+#  description  :text
+#  published    :boolean          default(FALSE), not null
+#  active       :boolean          default(TRUE), not null
+#  lock_version :integer          default(0), not null
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+
 class Category < ActiveRecord::Base
   belongs_to :editor, class_name: User
   has_and_belongs_to_many :hotels, -> { where active: true }, uniq: true

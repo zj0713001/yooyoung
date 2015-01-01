@@ -74,5 +74,6 @@ Rails.application.routes.draw do
     resources :countries
     resources :hotels
     resources :links
+    resources :provinces
   end
 end
