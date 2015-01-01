@@ -10,7 +10,7 @@ class HotelPackage < ActiveRecord::Base
   belongs_to :editor, class_name: User
 
   validates :name, presence: true
-  validates :name, uniqueness: { scope: :active }, if: -> { self.active }
+  validates :name, uniqueness: { scope: :active }, if: Proc.new { self.active }
   validates :hotel, existence: true
   validates :editor, existence: true
 end

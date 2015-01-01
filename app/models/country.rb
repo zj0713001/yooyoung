@@ -5,9 +5,9 @@ class Country < ActiveRecord::Base
   belongs_to :editor, class_name: User
 
   validates :name, presence: true
-  validates :name, uniqueness: { scope: :active }, if: -> { self.active }
+  validates :name, uniqueness: { scope: :active }, if: Proc.new { self.active }
   validates :chinese, presence: true
-  validates :chinese, uniqueness: { scope: :active }, if: -> { self.active }
+  validates :chinese, uniqueness: { scope: :active }, if: Proc.new { self.active }
   validates :area, existence: true
   validates :editor, existence: true
 end

@@ -1,0 +1,29 @@
+zh-CN:
+  activerecord:
+    models:
+      permission:
+    attributes:
+      permission:
+        id: ID
+        name: 名称
+        resource: 资源
+        action: 动作
+        editor_id: 编辑
+        created_at: 创建时间
+        updated_at: 修改时间
+  permissions:
+    resources:
+      user: 用户
+      role: 角色
+      area: 地区
+      category: 分类
+      city: 城市
+      country: 国家
+      hotel: 酒店
+    actions:
+      index: 列表
+      show: 查看
+      create: 创建
+      update: 修改
+      destroy: 删除
+      publish: 发布

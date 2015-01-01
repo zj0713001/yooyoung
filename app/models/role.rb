@@ -19,6 +19,12 @@ class Role < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: true
 
+  SPACES = [
+    :main,
+    :admin,
+  ]
+  enum space: SPACES
+
   def deletable?
     self.users.blank?
   end
