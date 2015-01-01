@@ -67,5 +67,12 @@ Rails.application.routes.draw do
     root 'application#index'
     resources :users
     resources :photos, only: [:create, :destroy]
+    resources :roles
+    resources :areas
+    resources :categories
+    resources :cities
+    resources :countries
+    resources :hotels
+    resources :links
   end
 end

@@ -20,5 +20,19 @@ class Permission < ActiveRecord::Base
   RESOURCES = [
     :user,
     :role,
+    :area,
+    :category,
+    :city,
+    :country,
+    :hotel,
+  ]
+
+  ACTIONS = [
+    :index,
+    :show,
+    :create,
+    :update,
+    :destroy,
+    :publish,
   ]
 end

@@ -13,7 +13,7 @@ class HotelPackageItem < ActiveRecord::Base
   default_value_for :openning_hours, Array.new
 
   validates :contents, presence: true
-  validates :contents, uniqueness: { scope: :active }, if: -> { self.active }
+  validates :contents, uniqueness: { scope: :active }, if: Proc.new { self.active }
   validates :package, existence: true
   validates :editor, existence: true
 end

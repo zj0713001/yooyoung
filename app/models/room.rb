@@ -11,7 +11,7 @@ class Room < ActiveRecord::Base
   default_value_for :facilities, Hash.new
 
   validates :name, presence: true
-  validates :name, uniqueness: { scope: :active }, if: -> { self.active }
+  validates :name, uniqueness: { scope: :active }, if: Proc.new { self.active }
   validates :packages, existence: true
   validates :hotel, existence: true
   validates :editor, existence: true
