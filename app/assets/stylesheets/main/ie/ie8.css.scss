@@ -1,5 +1,20 @@
+// Sessions Page
 .sessions-new {
   .main-header {
     background: none;
+  }
+}
+
+// Components
+.main_flag_label {
+  position: relative;
+  .main_flag_label__flag {
+    border: none;
+  }
+  .main_flag_label__text {
+    padding-left: 1em;
+  }
+  .main_flag_label__shadow {
+    border: none;
   }
 }

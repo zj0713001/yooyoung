@@ -6,15 +6,15 @@
         = link_to '已有账户，去登陆', new_user_session_path, class: :'sessions-new-form__link sessions-new-form__tips'
         .main-form__group
           = f.label :phone, class: :'main-form__label' do
-            .icon-phone
+            .iconfont.icon-phone
           = f.phone_field :phone, placeholder: '手机号码', autofocus: true, class: :'sessions-new-form__input main-form__input js_main_registrations_phone_field'
         .main-form__group
           = f.label :password, class: :'main-form__label' do
-            .icon-password
+            .iconfont.icon-password
           = f.password_field :password, placeholder: '密码', class: :'sessions-new-form__input main-form__input js_main_registrations_password_field'
         .main-form__group.main-form__group--hidden.js_main_registrations_password_confirmation
           = f.label :password_confirmation, class: :'main-form__label' do
-            .icon-password
+            .iconfont.icon-password
           = f.password_field :password_confirmation, placeholder: '密码确认', class: :'sessions-new-form__input main-form__input js_main_registrations_password_confirmation_field', autocomplete: :off
         .main-form__group.main-form__group--hidden.js_main_registrations_captcha
           = text_field_tag :sms_captcha, nil, placeholder: '请输入6位验证码', class: :'main-form__input main-form__input--small sessions-new-form__input', :'data-no-error-message' => true
