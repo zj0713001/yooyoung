@@ -1,7 +1,6 @@
 // Framework
 @import "bourbon";
 @import "compass/support";
-@import "compass/reset";
 @import "compass/css3";
 @import "compass/utilities";
 @import "rgbapng";
@@ -9,6 +8,7 @@
 // Common
 @import "main/common/mixins";
 @import "main/common/variables";
+@import "main/common/reset";
 @import "main/common/icons";
 @import "main/common/common";
 @import "main/common/susy_ext";
@@ -17,6 +17,7 @@
 // Components
 @import "main/components/form";
 @import "main/components/button";
+@import "main/components/flag_label";
 
 // Pages
 @import "main/sessions"

@@ -3,7 +3,6 @@
 // Framework
 @import "bourbon";
 @import "compass/support";
-@import "compass/reset";
 @import "compass/css3";
 @import "compass/utilities";
 @import "rgbapng";
@@ -11,11 +10,15 @@
 // Common
 @import "main/common/mixins";
 @import "main/common/variables";
+@import "main/common/reset";
 @import "main/common/icons";
 @import "main/common/common";
 @import "main/common/susy_ext";
 @import "main/common/header";
 @import "main/common/footer";
+
+// Components
+@import "main/components/flag_label";
 
 // 3rd
 @import "3rd/slick";
@@ -27,8 +30,8 @@
     position: absolute;
     top: 0;
     left: 0;
-    height: 60px;
-    line-height: 60px;
+    height: 5em;
+    line-height: 5em;
     width: 100%;
     @include no-select;
     z-index: 999;
@@ -39,7 +42,7 @@
   .home-index__nav {
     position: relative;
     width: 100%;
-    height: 60px;
+    height: 5em;
   }
   .home-index__banner {
     width: 100%;
@@ -53,30 +56,30 @@
     height: 70px;
     margin: 0 20px 20px 20px;
     @include cover_background_image("main/home/more.jpg");
-  }
-  [class^="icon-"], [class*="icon-"] {
-    margin-top: -4px;
+    a {
+      display: block;
+      font-size: 2em;
+      line-height: 70px;
+      color: $white;
+      text-align: center;
+    }
   }
 }
 .home-index-nav {
   position: absolute;
   top: 0;
   right: 0;
-  line-height: 60px;
-  font-size: 14px;
+  line-height: 5em;
   letter-spacing: .1em;
   text-align: center;
   color: $white;
   .home-index-nav__item {
     float: left;
-    min-width: 85px;
+    font-size: 1.2em;
+    min-width: 6em;
     a {
       color: $white;
     }
-  }
-  .home-index-nav__search {
-    float: left;
-    min-width: 85px;
   }
 }
 .home-index-banner {
@@ -91,16 +94,17 @@
   .home-index-banner__prev, .home-index-banner__next {
     display: block;
     position: absolute;
-    width: 100px;
-    height: 100px;
-    margin-top: -50px;
+    margin-top: -4.2em;
     top: 50%;
     z-index: 999;
     &:hover {
-      @include rgba-background-inline(rgba($white, 0.3));
+      @include rgba-background-inline(rgba($white, .3));
     }
-    [class^="icon-"], [class*="icon-"] {
-      margin-top: 0;
+    .iconfont {
+      font-size: 4.2em;
+      color: $white;
+      line-height: 2em;
+      padding: 0 .5em;
     }
   }
   .home-index-banner__prev {
@@ -119,32 +123,36 @@
     background-repeat: no-repeat;
     @include background-size(cover);
   }
-  .home-index-banner-item__package, .home-index-banner-item__hotel {
+  .home-index-banner-item__hotel {
     position: absolute;
     color: $white;
-    font-size: 18px;
-    line-height: 30px;
-  }
-  .home-index-banner-item__package {
-    left: 20px;
-    bottom: 20px;
-  }
-  .home-index-banner-item__hotel {
-    right: 50px;
-    bottom: 10px;
-  }
-  .home-index-banner-item__hotel-location {
-    font-size: 14px;
-    line-height: 20px;
-  }
-  .icon-double-arrow-small-right {
-    margin-left: 10px;
-  }
-  .icon-location {
-    margin-right: 10px;
+    right: 0;
+    bottom: 0;
   }
 }
-
+.home-index-banner-item-hotel {
+  position: relative;
+  font-size: 1.5em;
+  line-height: 1em;
+  .home-index-banner-item-hotel__section {
+    @include rgba-background-inline(rgba($black, .5));
+    padding: 1em .8em;
+    margin-right: .5em;
+  }
+  .home-index-banner-item-hotel__name {
+    padding-right: 3em;
+    margin-bottom: .8em;
+  }
+  .home-index-banner-item-hotel__package-name {
+    padding-right: 9em;
+    margin-bottom: 1em;
+  }
+  .home-index-banner-item-hotel__price {
+    position: absolute;
+    right: 0;
+    bottom: 1.5em;
+  }
+}
 @function home-index-section-length(
   $style: short
 ) {
@@ -175,8 +183,62 @@
       height: home-index-section-length(short);
     }
   }
-  .home-index-section__item-iamge {
+}
+.home-index-section-item {
+  position: relative;
+  .home-index-section-item__link {
+    color: $white;
+    &:hover {
+      .home-index-section-item-area {
+        display: none;
+      }
+    }
+  }
+  .home-index-section-item__iamge {
     width: 100%;
     height: 100%;
+  }
+  .home-index-section-item__info {
+    position: absolute;
+    left: 1em;
+    bottom: 1em;
+  }
+  .home-index-section-item__area {
+    position: absolute;
+  }
+}
+.home-index-section-item-info {
+  font-size: 1.5em;
+  line-height: 1em;
+  position: relative;
+  .home-index-section-item-info__name {
+    margin-bottom: 0.5em;
+  }
+}
+.home-index-section-item-area {
+  top: 0;
+  font-size: 3em;
+  line-height: 0;
+  width: 100%;
+  height: 100%;
+  padding-top: 50%;
+  text-align: center;
+}
+.home-index-location {
+  position: relative;
+  height: 1em;
+  white-space: nowrap;
+  .home-index-location__text {
+    font-size: .8em;
+    position: absolute;
+    top: 0;
+    left: 2em;
+  }
+  .icon-location {
+    position: absolute;
+    font-size: 1.1em;
+    top: 0;
+    left: 0;
+    top: -.1em;
   }
 }

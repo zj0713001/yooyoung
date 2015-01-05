@@ -11,35 +11,64 @@
         .home-index-nav__item
           a href='#' 关于我们
         .home-index-nav__item
-          = link_to '登录', new_user_session_path
-          | |
-          = link_to '注册', new_user_registration_path
-        .home-index-nav__search
+          - if current_user
+            = link_to '登出', destroy_user_session_path, :'data-method' => :delete
+          - else
+            = link_to '登录', new_user_session_path
+            | |
+            = link_to '注册', new_user_registration_path
+        .home-index-nav__item
           a href='#'
-            span.icon-search
-  .home-index__banner.js_home_index_banner_height
+            .iconfont.icon-search
+  .home-index__banner.js_main_home_index_banner_height
     .home-index-banner
-      .js_home_index_banner_slick
+      .js_main_home_index_banner_slick
         - @banner_data.each do |data|
-          .home-index-banner__item.home-index-banner-item.js_home_index_banner_height
-            .home-index-banner-item__image.js_home_index_banner_image.js_home_index_banner_height  data-background-image="#{background_image_cover(data[:image])}" data-filter="#{background_image_cover_filter(data[:image])}"
-            .home-index-banner-item__package
-              .home-index-banner-item__package-name = data[:package_name]
-              .home-index-banner-item__package-price = "#{data[:package_price]}元起"
+          .home-index-banner__item.home-index-banner-item.js_main_home_index_banner_height
+            .home-index-banner-item__image.js_main_home_index_banner_image.js_main_home_index_banner_height  data-background-image="#{background_image_cover(data[:image])}" data-filter="#{background_image_cover_filter(data[:image])}"
             .home-index-banner-item__hotel
-              .home-index-banner-item__hotel-name
-                = data[:hotel_name]
-                span.icon-double-arrow-small-right
-              .home-index-banner-item__hotel-location
-                span.icon-location
-                = data[:hotel_location]
-      a.home-index-banner__prev.js_home_index_banner_slick_prev
-        .icon-arrow-normal-left
-      a.home-index-banner__next.js_home_index_banner_slick_next
-        .icon-arrow-normal-right
-  .home-index__section.home-index-section.js_home_index_section
+              .home-index-banner-item-hotel
+                .home-index-banner-item-hotel__section.js_main_home_index_banner_item_delay data-time=300
+                  .home-index-banner-item-hotel__name
+                    = data[:hotel_name]
+                  .home-index-banner-item-hotel__package-name
+                    = data[:package_name]
+                  .home-index-location
+                    .iconfont.icon-location
+                    .home-index-location__text
+                      = data[:hotel_location]
+                .home-index-banner-item-hotel__price.js_main_home_index_banner_item_delay data-time=300
+                  .main_flag_label
+                    .main_flag_label__flag
+                    .main_flag_label__text
+                      = "#{data[:package_price]}元/套餐起"
+                    .clear
+                    .main_flag_label__shadow
+      a.home-index-banner__prev.js_main_home_index_banner_slick_prev
+        .iconfont.icon-arrow-left
+      a.home-index-banner__next.js_main_home_index_banner_slick_next
+        .iconfont.icon-arrow-right
+  .home-index__section.home-index-section.js_main_home_index_section
     - @section_data.each do |data|
-      .home-index-section__item.js_home_index_section_item class="home-index-section__item--#{data[:view]}" data-span="#{data[:view].in?([:'big-square', :horizontal]) ? 2 : 1}" data-height="#{data[:view].in?([:'big-square', :vertical]) ? 2 : 1}"
-        = image_tag data[:image], lazy: true, class: :'home-index-section__item-iamge lazy'
+      .home-index-section__item.js_main_home_index_section_item class="home-index-section__item--#{data[:view]}" data-span="#{data[:view].in?([:'big-square', :horizontal]) ? 2 : 1}" data-height="#{data[:view].in?([:'big-square', :vertical]) ? 2 : 1}"
+        .home-index-section-item
+          - if data[:type] == :hotel
+            a.home-index-section-item__link href="#"
+              = image_tag data[:image], lazy: true, class: :'home-index-section-item__iamge lazy'
+              .home-index-section-item__info
+                .home-index-section-item-info
+                  .home-index-section-item-info__name
+                    = data[:hotel_name]
+                  .home-index-location
+                    .iconfont.icon-location
+                    .home-index-location__text
+                      = data[:hotel_location]
+          - elsif data[:type] == :area
+            a.home-index-section-item__link href="#"
+              = image_tag data[:image], lazy: true, class: :'home-index-section-item__iamge lazy'
+              .home-index-section-item__area.home-index-section-item-area
+                .home-index-section-item-area__text
+                  = data[:area_name]
   .home-index__more
+    a href='#' 查看更多
   = render 'main/shared/footer'

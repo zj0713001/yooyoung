@@ -2,7 +2,10 @@ body, html {
   width: 100%;
   height: 100%;
   @include font-family-heiti;
+  font-size: $font_standard;
   font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 label {
@@ -15,7 +18,6 @@ input[type=checkbox] {
 }
 
 a {
-  text-decoration: none;
   cursor: pointer;
   &.ajax_disabled {
     cursor: default;

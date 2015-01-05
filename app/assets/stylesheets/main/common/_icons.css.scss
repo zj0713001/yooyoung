@@ -1,28 +1,29 @@
-@import "3rd/retina-sprites";
+@font-face {font-family: "iconfont";
+  src: url('./fonts/iconfont.eot'); /* IE9*/
+  src: url('./fonts/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('./fonts/iconfont.woff') format('woff'), /* chrome、firefox */
+  url('./fonts/iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url('./fonts/iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
 
-$sprites: sprite-map("main/icons/*.png");
-$sprites2x: sprite-map("main/icons-retina/*.png");
-
-[class^="icon-"], [class*="icon-"] {
-  @include inline-block;
+.iconfont {
+  font-family:"iconfont" !important;
+  font-style: normal;
+  text-align: center;
   vertical-align: middle;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-phone { @include retina-sprite('phone'); }
-.icon-password { @include retina-sprite('password'); }
-.icon-location { @include retina-sprite('location'); }
-.icon-search { @include retina-sprite('search'); }
-.icon-double-arrow-small-right { @include retina-sprite('double-arrow-small-right'); }
-.icon-arrow-small-down { @include retina-sprite('arrow-small-down'); }
-.icon-arrow-normal-left {
-  @include retina-sprite('arrow-normal-left');
-}
-.icon-arrow-normal-right {
-  @include retina-sprite('arrow-normal-right');
-}
-.icon-weibo {
-  @include retina-sprite('weibo');
-}
-.icon-wechat {
-  @include retina-sprite('wechat');
-}
+.icon-phone:before { content: "\e60c"; }
+.icon-qq:before { content: "\e601"; }
+.icon-password:before { content: "\e60b"; }
+.icon-weibo:before { content: "\e603"; }
+.icon-search:before { content: "\e604"; }
+.icon-location:before { content: "\e605"; }
+.icon-arrow-double-right:before { content: "\e606"; }
+.icon-arrow-left:before { content: "\e607"; }
+.icon-arrow-right:before { content: "\e608"; }
+.icon-arrow-down:before { content: "\e609"; }
+.icon-wechat:before { content: "\e60a"; }

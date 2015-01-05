@@ -6,10 +6,10 @@
   .sessions-new__sign-up {
     position: relative;
     width: 100%;
-    height: auto;
-    height: calc(100% - 60px);
     min-width: 600px;
     min-height: 512px;
+    height: auto;
+    height: calc(100% - 60px);
   }
   .sessions-new__sign-in-form,
   .sessions-new__sign-up-form {
@@ -20,6 +20,9 @@
     left: 50%;
     margin: -219px 0 0 -260px;
     vertical-align: middle;
+  }
+  .icon-phone, .icon-password {
+    font-size: 26px;
   }
 }
 .sessions-new-form {
@@ -37,13 +40,13 @@
   }
   .sessions-new-form__agree-me-label,
   .sessions-new-form__remember-me-label {
-    font-size: 14px;
+    font-size: $font_h3;
     color: $gray_black;
     margin-left: 5px;
   }
   .sessions-new-form__link {
     float: right;
-    font-size: 14px;
+    font-size: $font_h3;
     color: $gray_black;
   }
   .sessions-new-form__tips {
