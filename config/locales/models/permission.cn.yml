@@ -20,6 +20,7 @@ zh-CN:
       city: 城市
       country: 国家
       hotel: 酒店
+      province: 省份
     actions:
       index: 列表
       show: 查看

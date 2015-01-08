@@ -5,7 +5,7 @@
 #  id           :integer          not null, primary key
 #  name         :string(255)      not null
 #  resource     :string(255)      not null
-#  action       :integer          not null
+#  action       :string(255)      not null
 #  editor_id    :integer
 #  active       :boolean          default(TRUE), not null
 #  lock_version :integer          default(0), not null
@@ -25,6 +25,7 @@ class Permission < ActiveRecord::Base
     :city,
     :country,
     :hotel,
+    :province,
   ]
 
   ACTIONS = [

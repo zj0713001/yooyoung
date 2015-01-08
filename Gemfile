@@ -50,6 +50,8 @@ gem 'simple_captcha2', require: 'simple_captcha'
 gem 'friendly_id', '~> 5.0.4'
 gem 'hashids', '~> 1.0.2'
 gem 'validates_existence', '~> 0.9.2'
+gem 'crack', '~> 0.4.2'
+gem 'easy_translate'
 
 # Datebase
 gem 'mysql2'
