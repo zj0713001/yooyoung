@@ -13,11 +13,19 @@
 @import "main/common/common";
 @import "main/common/susy_ext";
 @import "main/common/header";
+@import "main/common/nav";
+@import "main/common/footer";
 
 // Components
 @import "main/components/form";
 @import "main/components/button";
 @import "main/components/flag_label";
+@import "main/components/location_with_icon";
+@import "main/components/slick";
+
+// 3rd
+@import "3rd/slick";
 
 // Pages
-@import "main/sessions"
+@import "main/sessions";
+@import "main/hotels";

@@ -1,9 +1,8 @@
 $total-columns: 12;
-$gutter-width: 20px;
-$container-style: fluid;
-$grid-padding: 0;
-
-$media-layout: 12;
+$column-width: 80px;
+$gutter-width: 0px;
+$container-style: magic;
+$grid-padding: 0px;
 
 @import "susy";
 

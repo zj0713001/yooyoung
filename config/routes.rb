@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   scope module: 'main' do
     root 'home#index'
+    resources :hotels, only: [:index, :show]
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,0 +1,29 @@
+.main-location {
+  position: relative;
+  height: 1em;
+  white-space: nowrap;
+  .main-location__text {
+    font-size: .8em;
+    position: absolute;
+    top: 0;
+    left: 2em;
+  }
+  .icon-location {
+    position: absolute;
+    font-size: 1.1em;
+    top: 0;
+    left: 0;
+    top: -.1em;
+  }
+}
+
+.main-location--center {
+  text-align: center;
+  .main-location__text, .icon-location {
+    position: relative;
+    left: 0;
+  }
+  .icon-location {
+    margin-right: 1em;
+  }
+}

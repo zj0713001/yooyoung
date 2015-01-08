@@ -15,10 +15,12 @@
 @import "main/common/common";
 @import "main/common/susy_ext";
 @import "main/common/header";
+@import "main/common/nav";
 @import "main/common/footer";
 
 // Components
 @import "main/components/flag_label";
+@import "main/components/location_with_icon";
 
 // 3rd
 @import "3rd/slick";
@@ -26,24 +28,6 @@
 .home-index {
   position: relative;
   @include font-family-songti;
-  .home-index__header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 5em;
-    line-height: 5em;
-    width: 100%;
-    @include no-select;
-    z-index: 999;
-  }
-  .home-index__logo {
-    float: left;
-  }
-  .home-index__nav {
-    position: relative;
-    width: 100%;
-    height: 5em;
-  }
   .home-index__banner {
     width: 100%;
     height: auto;
@@ -62,23 +46,6 @@
       line-height: 70px;
       color: $white;
       text-align: center;
-    }
-  }
-}
-.home-index-nav {
-  position: absolute;
-  top: 0;
-  right: 0;
-  line-height: 5em;
-  letter-spacing: .1em;
-  text-align: center;
-  color: $white;
-  .home-index-nav__item {
-    float: left;
-    font-size: 1.2em;
-    min-width: 6em;
-    a {
-      color: $white;
     }
   }
 }
@@ -223,22 +190,4 @@
   height: 100%;
   padding-top: 50%;
   text-align: center;
-}
-.home-index-location {
-  position: relative;
-  height: 1em;
-  white-space: nowrap;
-  .home-index-location__text {
-    font-size: .8em;
-    position: absolute;
-    top: 0;
-    left: 2em;
-  }
-  .icon-location {
-    position: absolute;
-    font-size: 1.1em;
-    top: 0;
-    left: 0;
-    top: -.1em;
-  }
 }

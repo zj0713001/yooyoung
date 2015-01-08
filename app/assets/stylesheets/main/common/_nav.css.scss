@@ -1,0 +1,34 @@
+.main-nav {
+  position: absolute;
+  top: 0;
+  right: 0;
+  line-height: 5em;
+  letter-spacing: .1em;
+  text-align: center;
+  color: $white;
+  .main-nav__item {
+    float: left;
+    font-size: 1.2em;
+    min-width: 6em;
+    a {
+      color: $white;
+    }
+  }
+}
+ul.main-navbar {
+  padding: 0;
+  margin: 0;
+  > li {
+    float: left;
+    position: relative;
+    display: block;
+    a {
+      color: $gray_black;
+    }
+    &.active {
+      a {
+        color: $black;
+      }
+    }
+  }
+}

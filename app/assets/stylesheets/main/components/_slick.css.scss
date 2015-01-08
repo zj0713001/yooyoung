@@ -1,0 +1,38 @@
+.slick-slider {
+  margin: 0;
+  .slick-dots {
+    bottom: 10px;
+    li {
+      button:before {
+        color: $white;
+      }
+      &.slick-active {
+        button:before {
+          color: $red;
+        }
+      }
+    }
+  }
+}
+.main-slick__prev, .main-slick__next {
+  display: block;
+  position: absolute;
+  margin-top: -50px;
+  top: 50%;
+  z-index: 900;
+  &:hover {
+    @include rgba-background-inline(rgba($white, .3));
+  }
+  .iconfont {
+    font-size: 50px;
+    color: $white;
+    line-height: 100px;
+    padding: 0 25px;
+  }
+}
+.main-slick__prev {
+  left: 0;
+}
+.main-slick__next {
+  right: 0;
+}

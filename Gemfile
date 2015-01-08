@@ -9,7 +9,7 @@ gem 'redis-rails'
 
 # Upload
 gem 'carrierwave'
-gem 'dropzonejs-rails', git: "git@github.com:zj0713001/dropzonejs-rails.git"
+gem 'dropzonejs-rails', '~> 0.5.3'
 
 # Analytics
 group :production do
@@ -79,6 +79,7 @@ gem 'bourbon'
 gem 'jquery-validation-rails', '~> 1.12.0'
 gem 'underscore-rails', '~> 1.7.0'
 gem 'lazyload-rails', '~> 0.3.1'
+gem 'bootstrap-sass', '~> 3.3.1.0'
 
 # Security
 gem 'rack-attack'

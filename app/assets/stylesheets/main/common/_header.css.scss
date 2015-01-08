@@ -3,3 +3,22 @@
   height: 60px;
   @include rgba-background-inline(rgba($white, 0.3));
 }
+.main-index-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 5em;
+  line-height: 5em;
+  width: 100%;
+  @include no-select;
+  z-index: 999;
+  .main-index-header__logo {
+    float: left;
+  }
+  .main-index-header__nav {
+    position: relative;
+    width: 100%;
+    height: 5em;
+
+  }
+}

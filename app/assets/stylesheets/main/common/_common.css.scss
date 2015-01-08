@@ -23,3 +23,12 @@ a {
     cursor: default;
   }
 }
+
+.clear {
+  @include clearfix;
+}
+
+.hidden {
+  display: none !important;
+  visibility: hidden !important;
+}

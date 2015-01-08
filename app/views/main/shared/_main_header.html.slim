@@ -1,0 +1,21 @@
+.main-index-header.js_main_index_header
+  .main-index-header__logo
+    | 悠漾 yooyoung.cn
+  .main-index-header__nav
+    .main-nav
+      .main-nav__item
+        a href='#' 酒店套餐
+      .main-nav__item
+        a href='#' 私人定制
+      .main-nav__item
+        a href='#' 关于我们
+      .main-nav__item
+        - if current_user
+            = link_to '登出', destroy_user_session_path, :'data-method' => :delete
+        - else
+        = link_to '登录', new_user_session_path
+        | |
+        = link_to '注册', new_user_registration_path
+      .main-nav__item
+        a href='#'
+          .iconfont.icon-search
