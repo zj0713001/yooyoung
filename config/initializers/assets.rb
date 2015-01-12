@@ -14,3 +14,14 @@ Rails.application.config.assets.precompile += %w[
   main/ie/ie8.css
   main/ie/ie9.css
 ]
+
+Rails.application.config.assets.precompile += %w[
+  *.png
+  *.jpg
+  *.jpeg
+  *.gif
+  *.eot
+  *.svg
+  *.ttf
+  *.woff
+]
