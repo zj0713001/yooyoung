@@ -51,5 +51,5 @@ production:
   <<: *default
   database: iron_production
   username: worker
-  password: !worker
+  password: '!worker'
   host: 127.0.0.1

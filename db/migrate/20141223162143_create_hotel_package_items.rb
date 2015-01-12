@@ -12,8 +12,6 @@ class CreateHotelPackageItems < ActiveRecord::Migration
 
       t.integer :lock_version, null: false, default: 0
       t.timestamps
-
-      t.index :package_id
     end
   end
 end
