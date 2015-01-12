@@ -1,18 +1,18 @@
-.main_flag_label {
+.main-flag-label {
   position: relative;
-  .main_flag_label__flag {
+  .main-flag-label__flag {
     float: left;
     border-style: solid;
     border-width: 1em .5em;
     border-color: rgba($white, .3) rgba($white, .3) rgba($white, .3) rgba($white, 0);
   }
-  .main_flag_label__text {
+  .main-flag-label__text {
     float: left;
     line-height: 2em;
     padding-right: 1em;
     @include rgba-background-inline(rgba($white, .3));
   }
-  .main_flag_label__shadow {
+  .main-flag-label__shadow {
     float: right;
     border: .25em solid;
     border-color: rgba($white, .5) rgba($white, 0) rgba($white, 0) rgba($white, .5);
