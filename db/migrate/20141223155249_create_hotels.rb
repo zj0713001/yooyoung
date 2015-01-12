@@ -13,7 +13,6 @@ class CreateHotels < ActiveRecord::Migration
       t.datetime :checkin
       t.datetime :checkout
       t.text :traffics
-      t.references :cover_photo
 
       t.boolean :published, default: false, null: false
       t.boolean :active, default: true, null: false

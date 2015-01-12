@@ -1,0 +1,19 @@
+zh-CN:
+  activerecord:
+    models:
+      area: 区域
+    attributes:
+      area:
+        active: 有效?
+        chinese: 中文名
+        countries: 国家
+        deleted_at: 删除时间
+        description: 描述
+        editor_id: 编辑
+        hotels: 酒店
+        name: 英文名称
+        photos: 图片
+        published: 发布?
+        published_at: 发布时间
+        sequence: 排序
+        unpublished_at: 取消发布时间

@@ -2,11 +2,12 @@ doctype html
 html
   head
     title = @title
+    = include_gon init: true, namespace: :jsvar
     = stylesheet_link_tag :'admin/application', media: 'all', :'data-turbolinks-track' => true
-    = javascript_include_tag :'admin/application', :'data-turbolinks-track' => true
     = csrf_meta_tags
   body
     = render partial: 'layouts/admin/nav'
-    .admin
+    .admin.js_admin
       .container
         = yield
+    = javascript_include_tag :'admin/application', :'data-turbolinks-track' => true

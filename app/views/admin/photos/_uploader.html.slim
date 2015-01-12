@@ -1,8 +1,23 @@
-- multi ||= true
-- field ||= :'photos[]'
-- id ||= :'photo-dropzone'
-.js_admin_photos_uploader
-  = form_for [:admin, Photo.new], method: :post, html: { class: :'js_admin_photos_form dropzone', id: id, :'data-multi' => multi, :'data-field' => field, :'data-destroy-url' => admin_photo_path('#id') } do |f|
-    .fallback
-      = f.file_field :image, multiple: true
-  .js_admin_photos_fields
+ruby:
+  multiple ||= false
+  field ||= :'photos[]'
+  url ||= admin_photos_path
+  delete_url ||= admin_photo_path('#id')
+  photos = [photos].flatten.compact
+.photo-uploader.js_admin_uploader
+  .js_admin_upload_files
+    - photos.each do |photo|
+      .photo-uploader__file.field.js_admin_upload_file
+        .photo-uploader__file-preview
+          = image_tag photo.image.url
+        .photo-uploader__file-url
+          i.black.icon.url
+            = photo.image.url
+        .photo-uploader__file-description
+          i.black.icon.tag
+            = photo.description
+        = hidden_field_tag field, photo.id
+        a.ui.red.label.large.js_admin_upload_file_remove data-image-id="#{photo.id}" 删除
+  .photo-uploader__button.js_admin_upload_add.ui.label.green.button.large
+    span 选择图片
+    input name="photo" type="file" class="js_admin_upload_field" data-multiple="#{multiple}" data-url="#{url}" data-delete-url="#{delete_url}" data-field="#{field}"

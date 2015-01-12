@@ -1,0 +1,9 @@
+- fields = [] if fields.blank?
+- fields = fields.fill('', fields.length..(2)) if fields.count < 3
+.js_admin_sortable_muti_fields
+  - fields.each do |field|
+      .field.js_admin_sortable_muti_field
+        input type="text" name="#{field_name}"
+  a.js_admin_sortable_muti_add.ui.label.green.button.large href='javascript:void(0);'
+    i.icon.add
+    | 加一项

@@ -1,0 +1,4 @@
+- name = object.human_attribute_name(field)
+.inline.field
+  = label_tag 'order', '排序'
+  = select_tag 'order', options_for_select( [nil] + (%w[id] + (fields ||= []) + %w[created_at updated_at]).map { |field| [["#{name} ↑", "#{field} asc"], ["#{name} ↓", "#{field} desc"]] }.reduce(&:+), params[:order])

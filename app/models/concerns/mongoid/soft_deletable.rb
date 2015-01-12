@@ -1,7 +1,6 @@
-# coding: utf-8
 # 软删除
 module Mongoid
-  module SoftDelete
+  module SoftDeletable
     extend ActiveSupport::Concern
 
     included do

@@ -10,6 +10,7 @@
 #  lock_version :integer          default(0), not null
 #  created_at   :datetime
 #  updated_at   :datetime
+#  description  :text
 #
 
 class Photo < ActiveRecord::Base

@@ -12,6 +12,12 @@ body {
   .container {
     margin-top: 10px;
   }
+  select {
+    min-width: 100px;
+  }
+  .hidden {
+    display: none;
+  }
 }
 
 .ui.attached.right.button.menu-button {

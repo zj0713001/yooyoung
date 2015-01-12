@@ -2,7 +2,10 @@ class ApplicationController < ActionController::Base
   layout 'main/application'
   before_action :track_user
 
-  include SimpleCaptcha::ControllerHelpers
+  respond_to :html, :json
+
+  # include SimpleCaptcha::ControllerHelpers
+
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -10,6 +13,18 @@ class ApplicationController < ActionController::Base
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_url, :alert => exception.message
+  end
+
+  helper_method :model
+  def model
+    class_name = self.class.name.demodulize
+    return if class_name =~ /ApplicationController$/
+    @model ||= class_name.remove(/Controller$/).singularize.safe_constantize rescue nil
+  end
+
+  helper_method :can?
+  def can?(action, model)
+    current_user.try(:can?, action, model)
   end
 
   protected

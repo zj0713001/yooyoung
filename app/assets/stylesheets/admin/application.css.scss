@@ -3,10 +3,15 @@
 @import "compass/css3";
 @import "compass/utilities";
 @import "semantic-ui";
-// hotfix
-@import "admin/3rd/dropzone";
+@import "jquery-ui/datepicker";
+@import "jquery-ui/sortable";
+
+
+//3rd
+@import "3rd/select2";
 
 // Common
 @import "common/variables";
 @import "common/common";
 @import "common/semantic_ext";
+@import "common/photo_uploader";

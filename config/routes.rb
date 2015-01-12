@@ -63,18 +63,21 @@ Rails.application.routes.draw do
 
   # Example resource route within a namespace:
   namespace :admin do
+    concern :deletable do
+      get :delete, on: :member
+    end
     # Directs /admin/products/* to Admin::ProductsController
     # (app/controllers/admin/products_controller.rb)
     root 'application#index'
     resources :users
-    resources :photos, only: [:create, :destroy]
-    resources :roles
-    resources :areas
-    resources :categories
-    resources :cities
-    resources :countries
-    resources :hotels
+    resources :photos, only: [:create, :update, :destroy]
+    resources :roles, concerns: :deletable
+    resources :areas, concerns: :deletable
+    resources :categories, concerns: :deletable
+    resources :cities, concerns: :deletable
+    resources :countries, concerns: :deletable
+    resources :hotels, concerns: :deletable
     resources :links
-    resources :provinces
+    resources :provinces, concerns: :deletable
   end
 end

@@ -3,7 +3,19 @@
   label {
     font-size: 1em;
   }
+  &:not(.inline) label {
+    line-height: 2em;
+    text-align: right;
+  }
   input {
     padding: 0.4em 1em;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .ui.form .fields .field {
+    &:not(.inline) label {
+      line-height: 2em;
+      text-align: left;
+    }
   }
 }

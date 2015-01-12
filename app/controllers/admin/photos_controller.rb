@@ -3,6 +3,7 @@ class Admin::PhotosController < Admin::ApplicationController
     @photo = Photo.new
     @photo.attributes = {
       image: params[:image],
+      description: params[:description],
       editor: current_user,
     }
 
@@ -15,5 +16,12 @@ class Admin::PhotosController < Admin::ApplicationController
         format.json { render json: { status: 'error' } }
       end
     end
+  end
+
+  def destroy
+    @photo = Photo.find params[:id]
+    @photo.destroy
+
+    respond_with @photo
   end
 end

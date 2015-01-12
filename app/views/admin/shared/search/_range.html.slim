@@ -1,0 +1,6 @@
+- name = object.human_attribute_name(field)
+.inline.field
+  = label_tag "where[#{field}][>]", name
+  = text_field_tag "where[#{field}][>]", params[:where].try(:[], field).to_h.try(:[], :>), :class => "#{'date' if field.to_s.match(/_at$|_on$/)}"
+  = label_tag "where[#{field}][<]", '~'
+  = text_field_tag "where[#{field}][<]", params[:where].try(:[], field).to_h.try(:[], :>), :class => "#{'date' if field.to_s.match(/_at$|_on$/)}"

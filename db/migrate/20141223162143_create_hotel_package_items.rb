@@ -7,8 +7,7 @@ class CreateHotelPackageItems < ActiveRecord::Migration
       t.text :tips
       t.text :openning_hours
       t.string :phone
-      t.references :cover_photo
-      t.references :package
+      t.references :hotel_package
       t.references :editor
 
       t.integer :lock_version, null: false, default: 0

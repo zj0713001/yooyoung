@@ -5,7 +5,6 @@ class CreateHotelPackages < ActiveRecord::Migration
       t.date :start_day
       t.date :end_day
       t.text :description
-      t.references :cover_photo
       t.references :hotel
       t.references :editor
 

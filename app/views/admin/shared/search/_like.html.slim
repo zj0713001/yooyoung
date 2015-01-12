@@ -1,0 +1,4 @@
+- name = object.human_attribute_name(field)
+.inline.field
+  = label_tag "where[#{field}]", name
+  = text_field_tag "where[#{field}][like]", params[:where].try(:[], field).respond_to?(:[]) ? params[:where].try(:[], field).try(:[], :like).to_s.remove('%') : params[:where].try(:[], field), placeholder: name

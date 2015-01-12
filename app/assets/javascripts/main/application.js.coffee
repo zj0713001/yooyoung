@@ -13,6 +13,7 @@
 #= require 3rd/jquery.mousewheel
 #= require 3rd/jquery.easing
 #= require 3rd/jquery.sticky
+#= require 3rd/jquery.placeholders
 #= require 3rd/slick
 #= require main/3rd/jquery.validate.default
 #= require main/common/redraw_font_size

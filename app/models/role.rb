@@ -10,9 +10,12 @@
 #  lock_version :integer          default(0), not null
 #  created_at   :datetime
 #  updated_at   :datetime
+#  deleted_at   :datetime
 #
 
 class Role < ActiveRecord::Base
+  include ActiveRecord::SoftDeletable
+
   belongs_to :editor, class_name: User
   has_many :users
   has_and_belongs_to_many :permissions, -> { where active: true }, uniq: true

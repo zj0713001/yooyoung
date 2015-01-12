@@ -6,6 +6,11 @@ class Admin::ApplicationController < ApplicationController
   def index
   end
 
+  helper_method :jsvar
+  def jsvar
+    gon
+  end
+
   protected
 
   def authorize_admin

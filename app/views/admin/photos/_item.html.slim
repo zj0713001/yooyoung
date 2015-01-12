@@ -1,0 +1,15 @@
+
+- binding.pry
+.photo-uploader.js_admin_uploader
+  .js_admin_upload_files
+  - photos.each do |photo|
+      .photo-uploader__file.field.js_admin_upload_file
+        .photo-uploader__file-preview
+          = image_tag photo.image.url
+        .photo-uploader__file-url
+          i.black.icon.url
+            = photo.image.url
+        .photo-uploader__file-description
+          i.black.icon.tag
+            = photo.description
+        = hidden_field_tag field, photo.id

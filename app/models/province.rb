@@ -1,4 +1,29 @@
+# == Schema Information
+#
+# Table name: provinces
+#
+#  id             :integer          not null, primary key
+#  name           :string(255)      not null
+#  chinese        :string(255)      not null
+#  code           :string(255)
+#  sequence       :integer          default(0)
+#  country_id     :integer
+#  editor_id      :integer
+#  description    :text
+#  published      :boolean          default(FALSE), not null
+#  active         :boolean          default(TRUE), not null
+#  lock_version   :integer          default(0), not null
+#  created_at     :datetime
+#  updated_at     :datetime
+#  deleted_at     :datetime
+#  published_at   :datetime
+#  unpublished_at :datetime
+#
+
 class Province < ActiveRecord::Base
+  include ActiveRecord::SoftDeletable
+  include ActiveRecord::Publishable
+
   belongs_to :country
   belongs_to :editor, class_name: User
   has_many :cities, -> { where active: true }

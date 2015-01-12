@@ -1,0 +1,38 @@
+h2.ui.dividing.header
+  = model.model_name.human
+  .ui.black.pointing.left.label = @hotels.total_entries
+.ui.fluid.form.segment
+  = form_tag request.path, method: :get, class: 'js_admin_search_form' do
+    .fields
+      = search_field_tag(model, :id, :text)
+      = search_field_tag(model, :name, :like)
+      = search_field_tag(model, :chinese, :like)
+      = search_field_tag(model, :created_at, :range)
+    = search_submit_tag
+    = new_link_tag model
+table.ui.table.segment
+  thead
+    th 姓名
+    th 状态
+    th 备注
+  tbody
+    tr
+      td 张三
+      td 已接受
+      td 备注
+    tr
+      td 李四
+      td 已接受
+      td 备注
+    tr
+      td 王五
+      td 已接受
+      td 备注
+.ui.pagination.menu.floated.right
+  a.icon.item
+    i.icon.left.arrow
+  a.item 1
+  a.item 2
+  a.item 3
+  a.icon.item
+    i.icon.right.arrow

@@ -9,7 +9,7 @@ gem 'redis-rails'
 
 # Upload
 gem 'carrierwave'
-gem 'dropzonejs-rails', '~> 0.5.3'
+# gem 'dropzonejs-rails', '~> 0.5.3'
 
 # Analytics
 group :production do
@@ -34,7 +34,7 @@ gem 'rails-i18n', '~> 4.0.3'
 gem 'default_value_for'
 gem 'stamp'
 gem 'slim-rails'
-gem 'kaminari'
+gem 'will_paginate', '~> 3.0.7'
 gem 'mechanize'
 gem 'nokogiri'
 gem 'paranoia'
@@ -46,12 +46,13 @@ gem 'colored'
 gem 'settingslogic'
 gem 'china_sms', '~> 0.0.7'
 gem 'rack-cache', '~> 1.2'
-gem 'simple_captcha2', require: 'simple_captcha'
+# gem 'simple_captcha2', require: 'simple_captcha'
 gem 'friendly_id', '~> 5.0.4'
 gem 'hashids', '~> 1.0.2'
 gem 'validates_existence', '~> 0.9.2'
 gem 'crack', '~> 0.4.2'
-gem 'easy_translate'
+gem 'dynamic_form', '~> 1.1.4'
+
 
 # Datebase
 gem 'mysql2'
@@ -66,6 +67,7 @@ gem 'sass-rails', '~> 4.0.4'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
+gem 'jquery-ui-rails', '~> 5.0.3'
 gem 'turbolinks'
 gem 'jquery-turbolinks'
 gem 'facebox-rails', '~> 0.2.0'
@@ -82,6 +84,7 @@ gem 'jquery-validation-rails', '~> 1.12.0'
 gem 'underscore-rails', '~> 1.7.0'
 gem 'lazyload-rails', '~> 0.3.1'
 gem 'bootstrap-sass', '~> 3.3.1.0'
+gem 'gon'
 
 # Security
 gem 'rack-attack'
