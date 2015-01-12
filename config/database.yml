@@ -50,5 +50,5 @@ test:
 production:
   <<: *default
   database: iron_production
-  username: iron
-  password: <%= ENV['IRON_DATABASE_PASSWORD'] %>
+  username: worker
+  password: !worker
