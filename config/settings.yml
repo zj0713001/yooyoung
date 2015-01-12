@@ -16,7 +16,7 @@ test:
 
 production:
   <<: *defaults
-    sms_captcha:
-      length: 6
-      range: <%= (0..9).to_a %>
-      switch: false
+  sms_captcha:
+    length: 6
+    range: <%= (0..9).to_a %>
+    switch: false
