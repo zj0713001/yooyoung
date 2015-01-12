@@ -1,5 +1,5 @@
 body {
-  @include background(asset-url("admin/common/bg.jpg"), $gray-light);
+  background: asset-url("admin/common/bg.jpg"), $gray-light;
 }
 
 .container {
