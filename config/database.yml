@@ -52,4 +52,4 @@ production:
   database: iron_production
   username: worker
   password: !worker
-  host: localhost
+  host: 127.0.0.1
