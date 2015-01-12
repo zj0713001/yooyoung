@@ -1,3 +1,4 @@
 Lazyload::Rails.configure do |config|
-  config.placeholder = "/assets/blank.gif"
+  puts ActionController::Base.helpers.asset_path "/assets/blank.gif"
+  config.placeholder = ActionController::Base.helpers.asset_url "blank.gif"
 end
