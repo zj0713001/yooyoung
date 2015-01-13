@@ -18,7 +18,7 @@ group :production do
 end
 
 # Server
-gem 'puma'
+gem 'rainbows'
 
 # Background jobs
 gem 'sidekiq'
