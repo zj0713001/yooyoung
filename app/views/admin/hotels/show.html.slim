@@ -297,7 +297,7 @@ h2.ui.dividing.header
                   = fff.text_area :description
             .fields
               .four.wide.field.required
-                = fff.label :photo_ids
+                = fff.label :photos
               .eight.wide.field
                 - if show
                   = render partial: 'admin/photos/item', locals: { photos: [fff.object.try(:photos)] }
@@ -351,6 +351,7 @@ h2.ui.dividing.header
                 i.icon.add
                 | 加一个酒店房间
     - unless show
+      .ui.divider
       .fields
         .four.wide.field.required
         .eight.wide.field

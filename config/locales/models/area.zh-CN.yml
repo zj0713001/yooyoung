@@ -4,6 +4,7 @@ zh-CN:
       area: 区域
     attributes:
       area:
+        id: ID
         active: 有效?
         chinese: 中文名
         countries: 国家

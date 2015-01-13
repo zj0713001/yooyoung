@@ -1,0 +1,25 @@
+en:
+  admin:
+    index: index
+    list: list
+    show: show
+    new: new
+    create: create
+    edit: edit
+    update: update
+    delete: delete
+    destroy: destroy
+    copy: copy
+    public: public
+    preview: preview
+    visit: visit
+    submit: submit
+    search: search
+    actions: actions
+    successful: successful
+    failed: failed
+    completed: completed
+    published: published
+    confirm: confirm
+    cancel: cancel
+    withdraw: withdraw
