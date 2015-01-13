@@ -15,9 +15,9 @@
 /log/*.log
 /tmp
 
-# Ignore verdor bundle
-/verdor/bundle/
-/verdor/bundle/*
+# Ignore vendor bundle
+/vendor/bundle/
+/vendor/bundle/*
 
 *.DS_Store
 *.lock
