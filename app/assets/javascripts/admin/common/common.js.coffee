@@ -8,3 +8,5 @@ $ ->
       firstDay: 1
 
     $("select.js_admin_search_select").select2()
+
+    $('.ui.dropdown').dropdown();

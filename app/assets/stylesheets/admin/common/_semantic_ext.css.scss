@@ -10,6 +10,34 @@
   input {
     padding: 0.4em 1em;
   }
+  .text {
+    line-height: 2em;
+  }
+}
+.ui.form .ui.selection.dropdown {
+  padding: 0.25em 1em;
+  .item {
+    text-align: center;
+  }
+}
+.ui .link {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  vertical-align: middle;
+  line-height: 1;
+  text-decoration: none;
+  -webkit-transition: opacity 0.2s ease,
+  background 0.2s ease,
+  -webkit-box-shadow 0.2s ease;
+  transition: opacity 0.2s ease,
+  background 0.2s ease,
+  box-shadow 0.2s ease;
+  color: rgba(0, 0, 0, 0.5);
+  &:hover {
+    color: rgba(0, 0, 0, 1);
+  }
+  &.action {
+    margin-right: .5em;
+  }
 }
 @media only screen and (max-width: 768px) {
   .ui.form .fields .field {

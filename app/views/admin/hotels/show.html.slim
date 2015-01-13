@@ -1,4 +1,4 @@
-- show = @hotel.persisted? && @hotel.valid?
+- show = @hotel.persisted? && @hotel.valid? && params[:action] != 'edit'
 h2.ui.dividing.header
   = "#{t("admin.#{show ? 'show' : @hotel.new_record? ? 'new' : 'edit'}")}#{model.model_name.human}"
 - if %w[create update destroy].include?(params[:action])
@@ -16,7 +16,7 @@ h2.ui.dividing.header
         = f.label :name
       .eight.wide.field
         - if show
-          = @hotel.name
+          .text = @hotel.name
         - else
           = f.text_field :name
     .fields
@@ -24,7 +24,7 @@ h2.ui.dividing.header
         = f.label :chinese
       .eight.wide.field
         - if show
-            = @hotel.chinese
+          .text = @hotel.chinese
         - else
           = f.text_field :chinese
     .fields
@@ -32,15 +32,16 @@ h2.ui.dividing.header
         = f.label :city_id
       .eight.wide.field
         - if show
-          = link_to_if can?(:show, City), @hotel.city.chinese, [:admin, @hotel.city] if @hotel.city.present?
+          .text
+            = link_to_if can?(:show, City), @hotel.city.chinese, [:admin, @hotel.city], class: :'ui link' if @hotel.city.present?
         - else
-          = f.select :city_id, grouped_options_for_select(Country.active.includes(:cities).map{|country| { country.chinese => country.cities.map{|city| [city.chinese, city.id]}}}.inject(&:merge), @hotel.city_id), {}, class: :'js_admin_search_select'
+          = f.select :city_id, all_cities_options_for_select(@hotel.city_id), {}, class: :'js_admin_search_select'
     .fields
       .four.wide.field.required
         = f.label :address
       .eight.wide.field
         - if show
-          = @hotel.address
+          .text = @hotel.address
         - else
           = f.text_field :address
     .fields
@@ -56,7 +57,7 @@ h2.ui.dividing.header
         = f.label :description
       .eight.wide.field
         - if show
-          = simple_format @hotel.description
+          .text = simple_format @hotel.description
         - else
           = f.text_area :description
     .fields
@@ -64,7 +65,8 @@ h2.ui.dividing.header
         = f.label :traffics
       .eight.wide.field
         - if show
-          = show_muti_fields @hotel.traffics
+          .text
+            = show_muti_fields @hotel.traffics
         - else
           = sortable_muti_fields(@hotel.traffics, 'hotel[traffics][]')
     .fields
@@ -72,7 +74,8 @@ h2.ui.dividing.header
         = f.label :provisions
       .eight.wide.field
         - if show
-          = show_muti_fields @hotel.provisions
+          .text
+            = show_muti_fields @hotel.provisions
         - else
           = sortable_muti_fields(@hotel.provisions, 'hotel[provisions][]')
     .ui.divider
@@ -83,7 +86,7 @@ h2.ui.dividing.header
           = ff.label :name
         .eight.wide.field
           - if show
-            = ff.object.try(:name)
+            .text = ff.object.try(:name)
           - else
             = ff.text_field :name
       .fields
@@ -91,7 +94,8 @@ h2.ui.dividing.header
           = ff.label :description
         .eight.wide.field
           - if show
-            = simple_format ff.object.try(:description)
+            .text
+              = simple_format ff.object.try(:description)
           - else
             = ff.text_area :description
       .fields
@@ -128,7 +132,8 @@ h2.ui.dividing.header
                 = fff.label :contents
               .eight.wide.field
                 - if show
-                  = show_muti_fields fff.object.try(:contents)
+                  .text
+                    = show_muti_fields fff.object.try(:contents)
                 - else
                   = sortable_muti_fields(fff.object.try(:contents), "#{fff.object_name}[contents][]")
             .fields
@@ -136,7 +141,7 @@ h2.ui.dividing.header
                 = fff.label :description
               .eight.wide.field
                 - if show
-                  = simple_format fff.object.try(:description)
+                  .text = simple_format fff.object.try(:description)
                 - else
                   = fff.text_area :description
             .fields
@@ -144,7 +149,7 @@ h2.ui.dividing.header
                 = fff.label :address
               .eight.wide.field
                 - if show
-                  = fff.object.try(:address)
+                  .text = fff.object.try(:address)
                 - else
                   = fff.text_field :address
             .fields
@@ -152,7 +157,8 @@ h2.ui.dividing.header
                 = fff.label :tips
               .eight.wide.field
                 - if show
-                  = show_muti_fields fff.object.try(:tips)
+                  .text
+                    = show_muti_fields fff.object.try(:tips)
                 - else
                   = sortable_muti_fields(fff.object.try(:tips), "#{fff.object_name}[tips][]")
             .fields
@@ -160,7 +166,7 @@ h2.ui.dividing.header
                 = fff.label :service_day
               .eight.wide.field
                 - if show
-                  = fff.object.try(:service_day)
+                  .text = fff.object.try(:service_day)
                 - else
                   = fff.select :service_day, options_for_select(HotelPackageItem::SERVICE_DAYS.to_a), {}, class: :'js_admin_search_select'
         - unless show
@@ -178,7 +184,7 @@ h2.ui.dividing.header
           = ff.label :name
         .eight.wide.field
           - if show
-            = ff.object.try(:name)
+            .text = ff.object.try(:name)
           - else
             = ff.text_field :name
       .fields
@@ -186,7 +192,7 @@ h2.ui.dividing.header
           = ff.label :description
         .eight.wide.field
           - if show
-            = simple_format ff.object.try(:description)
+            .text = simple_format ff.object.try(:description)
           - else
             = ff.text_area :description
       .fields
@@ -223,7 +229,8 @@ h2.ui.dividing.header
                 = fff.label :contents
               .eight.wide.field
                 - if show
-                  = show_muti_fields fff.object.try(:contents)
+                  .text
+                    = show_muti_fields fff.object.try(:contents)
                 - else
                   = sortable_muti_fields(fff.object.try(:contents), "#{fff.object_name}[contents][]")
             .fields
@@ -231,7 +238,7 @@ h2.ui.dividing.header
                 = fff.label :description
               .eight.wide.field
                 - if show
-                  = simple_format fff.object.try(:description)
+                  .text = simple_format fff.object.try(:description)
                 - else
                   = fff.text_area :description
             .fields
@@ -239,7 +246,7 @@ h2.ui.dividing.header
                 = fff.label :address
               .eight.wide.field
                 - if show
-                  = fff.object.try(:address)
+                  .text = fff.object.try(:address)
                 - else
                   = fff.text_field :address
             .fields
@@ -247,7 +254,7 @@ h2.ui.dividing.header
                 = fff.label :tips
               .eight.wide.field
                 - if show
-                  = show_muti_fields fff.object.try(:tips)
+                  .text = show_muti_fields fff.object.try(:tips)
                 - else
                   = sortable_muti_fields(fff.object.try(:tips), "#{fff.object_name}[tips][]")
             .fields
@@ -255,7 +262,7 @@ h2.ui.dividing.header
                 = fff.label :service_day
               .eight.wide.field
                 - if show
-                  = fff.object.try(:service_day)
+                  .text = fff.object.try(:service_day)
                 - else
                   = fff.select :service_day, options_for_select(HotelPackageItem::SERVICE_DAYS.to_a), {}, class: :'js_admin_search_select'
         - unless show
@@ -284,7 +291,7 @@ h2.ui.dividing.header
                 = fff.label :name
               .eight.wide.field
                 - if show
-                  = fff.object.try(:name)
+                  .text = fff.object.try(:name)
                 - else
                   = fff.text_field :name
             .fields
@@ -292,7 +299,7 @@ h2.ui.dividing.header
                 = fff.label :description
               .eight.wide.field
                 - if show
-                  = simple_format fff.object.try(:description)
+                  .text = simple_format fff.object.try(:description)
                 - else
                   = fff.text_area :description
             .fields
@@ -308,7 +315,8 @@ h2.ui.dividing.header
                 = fff.label :features
               .eight.wide.field
                 - if show
-                  = show_muti_fields fff.object.try(:features)
+                  .text
+                    = show_muti_fields fff.object.try(:features)
                 - else
                   = sortable_muti_fields(fff.object.try(:features), "#{fff.object_name}[features][]")
             .fields
@@ -316,7 +324,8 @@ h2.ui.dividing.header
                 = fff.label :facilities
               .eight.wide.field
                 - if show
-                  = show_muti_fields fff.object.try(:facilities)
+                  .text
+                    = show_muti_fields fff.object.try(:facilities)
                 - else
                 = sortable_muti_fields(fff.object.try(:facilities), "#{fff.object_name}[facilities][]")
             .fields
@@ -324,7 +333,7 @@ h2.ui.dividing.header
                 = fff.label :sight
               .eight.wide.field
                 - if show
-                  = fff.object.try(:sight)
+                  .text = fff.object.try(:sight)
                 - else
                   = fff.text_field :sight
             .fields
@@ -332,7 +341,7 @@ h2.ui.dividing.header
                 = fff.label :area
               .eight.wide.field
                 - if show
-                  = fff.object.try(:area)
+                  .text = fff.object.try(:area)
                 - else
                   = fff.text_field :area
             .fields
@@ -340,7 +349,7 @@ h2.ui.dividing.header
                 = fff.label :population
               .eight.wide.field
                 - if show
-                  = fff.object.try(:population)
+                  .text = fff.object.try(:population)
                 - else
                   = fff.text_field :population
         - unless show
@@ -350,9 +359,13 @@ h2.ui.dividing.header
               .js_admin_dynamic_fields_add.ui.label.purple.button.large
                 i.icon.add
                 | 加一个酒店房间
-    - unless show
-      .ui.divider
+    .ui.divider
       .fields
         .four.wide.field.required
         .eight.wide.field
-          = f.submit t('admin.submit'), class: :'ui label teal button huge'
+          br
+          br
+          - if show
+            = link_to t('admin.edit'), [:edit, :admin, @hotel], class: :'ui label teal button huge'
+          - else
+            = f.submit t('admin.submit'), class: :'ui label teal button huge'

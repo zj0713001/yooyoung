@@ -2,10 +2,10 @@ class Admin::HotelsController < Admin::ApplicationController
   def index
     @hotels = model
     .where(params[:where].to_h.slice(*%w[id]))
-    .order((params[:order]||{'id'=>:desc}).slice(*%w[id]))
+    .order((params[:order]||{id: :desc}))
     .paginate(page: params[:page], per_page: params[:per_page])
-    @hotels = @hotels.none unless can?(:index, model) || @hotels.total_entries <= 1
-    respond_with(@users)
+    @hotels = @hotels.none unless can?(:index, model)
+    respond_with(@hotels)
   end
 
   def show
@@ -29,6 +29,7 @@ class Admin::HotelsController < Admin::ApplicationController
     @hotel.editor = current_user
 
     @hotel.package.rooms = @hotel.favorite_package.rooms if @hotel.favorite_package.try(:rooms).present?
+    @hotel.save
 
     render :show
   end
@@ -40,6 +41,22 @@ class Admin::HotelsController < Admin::ApplicationController
   end
 
   def update
+    @hotel = model.acquire params[:id]
+    if params[:published].nil?
+      @hotel.attributes = params[:hotel].permit!
+      @hotel.editor = current_user
+
+      @hotel.package.rooms = @hotel.favorite_package.rooms if @hotel.favorite_package.try(:rooms).present?
+    else
+      @hotel.attributes = { published: params[:published] }
+    end
+
+    @success = @hotel.save
+
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: { status: @success } }
+    end
   end
 
   def delete

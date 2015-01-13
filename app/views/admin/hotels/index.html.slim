@@ -7,32 +7,38 @@ h2.ui.dividing.header
       = search_field_tag(model, :id, :text)
       = search_field_tag(model, :name, :like)
       = search_field_tag(model, :chinese, :like)
+      = search_field_tag(model, :city_id, :select, { data: all_cities_options_for_select(params[:city_id]) })
       = search_field_tag(model, :created_at, :range)
+      = search_field_tag(model, :updated_at, :range)
+      = search_page_tag
     = search_submit_tag
     = new_link_tag model
 table.ui.table.segment
   thead
-    th 姓名
-    th 状态
-    th 备注
+    - %w[id chinese name country city_id editor_id updated_at published_at].each do |name|
+      th = model.human_attribute_name(name)
+    th = t('admin.actions')
+    th = t('admin.public')
   tbody
-    tr
-      td 张三
-      td 已接受
-      td 备注
-    tr
-      td 李四
-      td 已接受
-      td 备注
-    tr
-      td 王五
-      td 已接受
-      td 备注
-.ui.pagination.menu.floated.right
-  a.icon.item
-    i.icon.left.arrow
-  a.item 1
-  a.item 2
-  a.item 3
-  a.icon.item
-    i.icon.right.arrow
+    - @hotels.each do |hotel|
+      tr
+        td = hotel.id
+        td = link_to hotel.chinese, hotel, target: :_blank, class: :'ui link'
+        td = hotel.name
+        td = hotel.country.try(:chinese)
+        td = hotel.city.try(:chinese)
+        td = hotel.editor.try(:name)
+        td = hotel.updated_at.try(:localtime).try(:to_s, :db)
+        td = hotel.published_at.try(:localtime).try(:to_s, :db)
+        td
+          - if can? :show, Hotel
+            = link_to [:admin, hotel], alt: t('admin.show'), class: :'ui link action' do
+              i.search.icon
+          - if can? :edit, Hotel
+            = link_to [:edit, :admin, hotel], alt: t('admin.edit'), class: :'ui link' do
+              i.edit.icon
+        td
+          - if can? :publish, Hotel
+            = link_to [:admin, hotel], alt: t('admin.show'), class: :'ui link' do
+              i.search.icon
+= admin_paginate_tag @hotels

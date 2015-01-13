@@ -1,0 +1,4 @@
+- name = object.human_attribute_name(field)
+.inline.field
+  = label_tag "where[#{field}]", name
+  = select_tag "where[#{field}]", options[:data], class: :js_admin_search_select, include_blank: true

@@ -1,6 +1,11 @@
 .inline.field
   = label_tag 'per_page', '每页'
-  = select_tag 'per_page', options_for_select([nil, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000], params[:per_page].to_i)
+  .ui.selection.dropdown
+    = hidden_field_tag 'per_page', params[:per_page]
+    i.dropdown.icon
+    .menu
+      - [nil, 20, 50, 100, 200].each do |n|
+        .item data-value="#{n}" class="#{'active' if n.to_i == params[:per_page].to_i}" = n
 .inline.field
   = label_tag 'page', '页数'
   = text_field_tag 'page', params[:page]
