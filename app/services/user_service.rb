@@ -14,7 +14,7 @@ class UserService
       # send sms with phone and sms_captcha
       # !!! Timeout
     else
-      puts sms_captcha
+      Rails.logger.info "Sms captcha without send. captcha: #{sms_captcha}"
     end
     true
   end
