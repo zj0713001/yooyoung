@@ -15,6 +15,10 @@
 /log/*.log
 /tmp
 
+# Ignore verdor bundle
+/verdor/bundle/
+/verdor/bundle/*
+
 *.DS_Store
 *.lock
 /public/uploads
