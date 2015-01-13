@@ -1,0 +1,15 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      role: 角色
+    attributes:
+      role:
+        id: ID
+        name: 名称
+        space: 空间
+        editor_id: "编辑"
+        active: "有效？"
+        created_at: "创建时间"
+        updated_at: "修改时间"
+        deleted_at: "删除时间"

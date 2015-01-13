@@ -1,0 +1,20 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      hotel_package_item: 套餐项
+    attributes:
+      hotel_package_item:
+        id: ID
+        contents: 内容
+        description: "描述"
+        address: 地址
+        tips: Tips
+        openning_hours: 开放时间
+        phone: 电话
+        hotel_package_id:
+        editor_id: "编辑"
+        created_at: "创建时间"
+        updated_at: "修改时间"
+        service_day: 参与时间（第几天）
+        cover_photo: 封面图片

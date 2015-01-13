@@ -1,0 +1,15 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      photo: 图片
+    attributes:
+      photo:
+        id: ID
+        image: 图片地址
+        target_id: 目标
+        target_type: 目标类型
+        editor_id: "编辑"
+        created_at: "创建时间"
+        updated_at: "修改时间"
+        description: "描述"

@@ -1,0 +1,23 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      city: 城市
+    attributes:
+      city:
+        id: ID
+        name: 英文名称
+        chinese: 中文名称
+        sequence: "排序"
+        country_id: 国家
+        editor_id: "编辑"
+        description: "描述"
+        published: "已发布？"
+        active: "有效？"
+        created_at: "创建时间"
+        updated_at: "修改时间"
+        code: 城市代码
+        province_id: 省份
+        deleted_at: "删除时间"
+        published_at: "发布时间"
+        unpublished_at: "取消发布时间"

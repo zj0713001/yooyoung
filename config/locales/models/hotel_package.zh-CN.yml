@@ -1,0 +1,18 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      hotel_package: 套餐
+    attributes:
+      hotel_package:
+        id: ID
+        name: 名称
+        start_day: 开始日期
+        end_day: 结束日期
+        description: "描述"
+        hotel_id: 酒店
+        editor_id: "编辑"
+        created_at: "创建时间"
+        updated_at: "修改时间"
+        favorite: 是否为悠漾套餐
+        cover_photo: 封面图片

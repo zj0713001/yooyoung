@@ -1,0 +1,26 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      room: 房间
+    attributes:
+      room:
+        id: ID
+        name: 名称
+        description: "描述"
+        features: 特色
+        sight: 景观
+        area: 面积
+        editor_id: "编辑"
+        created_at: "创建时间"
+        updated_at: "修改时间"
+        hotel_id: 酒店
+        facilities: 设施
+        active: "有效？"
+        published: "已发布？"
+        deleted_at: "删除时间"
+        published_at: "发布时间"
+        unpublished_at: "取消发布时间"
+        population: 入住人数
+        cover_photo: 封面图片
+        photos: 房间图片

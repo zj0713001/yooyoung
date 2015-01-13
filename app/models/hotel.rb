@@ -32,7 +32,7 @@ class Hotel < ActiveRecord::Base
 
   has_many :cities, -> { where active: true }
   has_one :cover_photo, as: :target, dependent: :destroy, class_name: Photo
-  has_one :tip_photo, as: :target, dependent: :destroy
+  has_one :tip_photo, as: :target, dependent: :destroy, class_name: Photo
   has_many :photos, as: :target, dependent: :destroy
   has_one :package, class_name: HotelPackage
   has_one :favorite_package, class_name: HotelPackage
