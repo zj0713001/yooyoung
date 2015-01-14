@@ -14,4 +14,10 @@ module Admin::ApplicationHelper
   def admin_paginate_tag(collections)
     render 'admin/shared/admin_paginate', collections: collections
   end
+
+  def admin_publish_tag(object)
+    if can? :publish, object.class
+      render 'admin/shared/admin_publish', object: object
+    end
+  end
 end

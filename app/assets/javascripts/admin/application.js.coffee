@@ -2,7 +2,6 @@
 #= require jquery
 #= require jquery_ujs
 #= require jquery.turbolinks
-#= require turbolinks
 #= require semantic-ui
 #= require underscore
 #= require jquery-ui/datepicker
@@ -26,3 +25,6 @@
 #= require admin/common/dynamic_fields
 
 #= require admin/photos
+
+# Turbolinks always on the last
+#= require turbolinks

@@ -38,7 +38,5 @@ table.ui.table.segment
             = link_to [:edit, :admin, hotel], alt: t('admin.edit'), class: :'ui link' do
               i.edit.icon
         td
-          - if can? :publish, Hotel
-            = link_to [:admin, hotel], alt: t('admin.show'), class: :'ui link' do
-              i.search.icon
+          = admin_publish_tag(hotel)
 = admin_paginate_tag @hotels

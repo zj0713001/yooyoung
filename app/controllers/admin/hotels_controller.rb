@@ -9,10 +9,14 @@ class Admin::HotelsController < Admin::ApplicationController
   end
 
   def show
+    authorize! :show, model
+
     @hotel = model.acquire params[:id]
   end
 
   def new
+    authorize! :create, model
+
     @hotel = model.new
     @hotel.build_package
     @hotel.package.items.build
@@ -24,6 +28,8 @@ class Admin::HotelsController < Admin::ApplicationController
   end
 
   def create
+    authorize! :create, model
+
     @hotel = model.new
     @hotel.attributes = params[:hotel].permit!
     @hotel.editor = current_user
@@ -35,6 +41,8 @@ class Admin::HotelsController < Admin::ApplicationController
   end
 
   def edit
+    authorize! :edit, model
+
     @hotel = model.acquire params[:id]
 
     render :show
@@ -43,11 +51,13 @@ class Admin::HotelsController < Admin::ApplicationController
   def update
     @hotel = model.acquire params[:id]
     if params[:published].nil?
+      authorize! :edit, model
       @hotel.attributes = params[:hotel].permit!
       @hotel.editor = current_user
 
       @hotel.package.rooms = @hotel.favorite_package.rooms if @hotel.favorite_package.try(:rooms).present?
     else
+      authorize! :publish, model
       @hotel.attributes = { published: params[:published] }
     end
 
@@ -60,8 +70,10 @@ class Admin::HotelsController < Admin::ApplicationController
   end
 
   def delete
+    authorize! :destroy, model
   end
 
   def destroy
+    authorize! :destroy, model
   end
 end

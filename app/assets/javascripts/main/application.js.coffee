@@ -24,6 +24,9 @@
 #= require main/devise/sessions
 #= require main/hotels
 
+# Turbolinks always on the last
+#= require turbolinks
+
 $ ->
   $('img.lazy').lazyload
     threshold: 300
