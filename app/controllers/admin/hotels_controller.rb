@@ -20,9 +20,9 @@ class Admin::HotelsController < Admin::ApplicationController
     @hotel = model.new
     @hotel.build_package
     @hotel.package.items.build
+    @hotel.package.rooms.build
     @hotel.build_favorite_package(favorite: true)
     @hotel.favorite_package.items.build
-    @hotel.favorite_package.rooms.build
 
     render :show
   end
@@ -33,8 +33,8 @@ class Admin::HotelsController < Admin::ApplicationController
     @hotel = model.new
     @hotel.attributes = params[:hotel].permit!
     @hotel.editor = current_user
-
-    @hotel.package.rooms = @hotel.favorite_package.rooms if @hotel.favorite_package.try(:rooms).present?
+    rooms = @hotel.package.try(:rooms).to_a
+    @hotel.favorite_package.rooms = rooms
     @hotel.save
 
     render :show

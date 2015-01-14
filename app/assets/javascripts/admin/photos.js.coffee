@@ -11,6 +11,8 @@ $ ->
 
   # Add class .js_admin_upload to the body or form
   $('.js_admin').on 'click', '.js_admin_upload_field', ->
+    return if $(this).data('fileuploaded')
+    $(this).data('fileuploaded', true);
     $(this).prop('multiple', true) if $(this).data('multiple') == true
     $(this).fileupload
       url: $(this).data('url')

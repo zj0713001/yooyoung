@@ -1,4 +1,5 @@
 .photo-uploader {
+  line-height: 2em;
   .photo-uploader__button {
     position: relative;
     overflow: hidden;
@@ -28,5 +29,8 @@
       max-height: 500px;
       max-width: 500px;
     }
+  }
+  .label {
+    line-height: 1em;
   }
 }

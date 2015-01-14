@@ -12,19 +12,21 @@
 #  lock_version :integer          default(0), not null
 #  created_at   :datetime
 #  updated_at   :datetime
+#  favorite     :boolean          default(FALSE), not null
 #
 
 class HotelPackage < ActiveRecord::Base
-  has_one :cover_photo, as: :target, dependent: :destroy, class_name: Photo
+  include ActiveRecord::CoverPhotoable
+
   has_many :photos, as: :target, dependent: :destroy
   has_and_belongs_to_many :rooms, -> { where active: true }, uniq: true
   has_many :items, class_name: HotelPackageItem
 
-  belongs_to :hotel
+  belongs_to :hotel, touch: true
   belongs_to :editor, class_name: User
 
-  accepts_nested_attributes_for :items, allow_destroy: true
-  accepts_nested_attributes_for :rooms, allow_destroy: true
+  accepts_nested_attributes_for :items, allow_destroy: true, reject_if: Proc.new { |attributes| attributes['content'].blank? }
+  accepts_nested_attributes_for :rooms, allow_destroy: true, reject_if: Proc.new { |attributes| attributes['name'].blank? }
 
   # Todo 价格
 

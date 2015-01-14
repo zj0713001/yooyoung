@@ -11,9 +11,8 @@ $ ->
   $('.js_admin_dynamic_fields_group').on 'click', '.js_admin_dynamic_fields_add', ->
     $group = $(this).parents('.js_admin_dynamic_fields_group')
     field_html = js_admin_dynamic_field_html($group)
-    $group.find('.js_admin_dynamic_fields:last').after(field_html)
+    $group.find('.js_admin_dynamic_fields:last').after($('<div/>', class: 'js_admin_dynamic_fields').append(field_html))
 
   $('.js_admin_dynamic_fields_group').on 'click', '.js_admin_dynamic_fields_remove', ->
-    console.log 'what'
     $(this).find(':checkbox').prop('checked', true)
     $(this).closest('.js_admin_dynamic_fields').hide()

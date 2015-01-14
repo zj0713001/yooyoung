@@ -3,7 +3,7 @@
 # Table name: hotel_package_items
 #
 #  id               :integer          not null, primary key
-#  contents         :text             not null
+#  content          :string(255)      not null
 #  description      :text
 #  address          :string(255)
 #  tips             :text
@@ -18,20 +18,19 @@
 #
 
 class HotelPackageItem < ActiveRecord::Base
-  has_one :cover_photo, as: :target, dependent: :destroy, class_name: Photo
+  include ActiveRecord::CoverPhotoable
+  include ActiveRecord::Serializeable
+
   has_many :photos, as: :target, dependent: :destroy
 
-  belongs_to :hotel_package
+  belongs_to :hotel_package, touch: true
   belongs_to :editor, class_name: User
 
   SERVICE_DAYS = 1..5
 
-  serialize :contents, Array
-  default_value_for :contents, Array.new
-  serialize :tips, Array
-  default_value_for :tips, Array.new
-  serialize :openning_hours, Array
-  default_value_for :openning_hours, Array.new
+  serialize_fields [:openning_hours, :tips], Array do |variables|
+    variables.delete_if{|variable| variable.blank?}
+  end
   default_value_for :service_day, 1
 
   # validates :hotel_package, existence: true

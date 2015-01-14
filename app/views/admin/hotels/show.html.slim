@@ -1,13 +1,7 @@
 - show = @hotel.persisted? && @hotel.valid? && params[:action] != 'edit'
 h2.ui.dividing.header
   = "#{t("admin.#{show ? 'show' : @hotel.new_record? ? 'new' : 'edit'}")}#{model.model_name.human}"
-- if %w[create update destroy].include?(params[:action])
-  - if @hotel.valid?
-    .ui.ignored.success.message
-      p #{t("admin.#{params[:action]}")} #{t('admin.successful')}
-  - else
-    .ui.ignored.error.message
-      p #{t("admin.#{params[:action]}")} #{t('admin.failed')}
+= render 'admin/shared/admin_form_messages', object: @hotel
 .ui.fluid.form.segment
   h3.ui.header 酒店
   = form_for @hotel, url: [:admin, @hotel], method: @hotel.new_record? ? :post : :put, html: { multipart: true } do |f|
@@ -46,20 +40,61 @@ h2.ui.dividing.header
           = f.text_field :address
     .fields
       .four.wide.field.required
+        = f.label :phone
+      .eight.wide.field
+        - if show
+          .text = @hotel.phone
+        - else
+          = f.text_field :phone
+    .fields
+      .four.wide.field.required
+        = f.label :location
+      .eight.wide.field
+        - if show
+          .text = @hotel.location
+        - else
+          = f.text_field :location
+    .fields
+      .four.wide.field.required
+        = f.label :homepage
+      .eight.wide.field
+        - if show
+          .text = @hotel.homepage
+        - else
+          = f.text_field :homepage
+    .fields
+      .four.wide.field.required
+        = f.label :best_season
+      .eight.wide.field
+        - if show
+          .text = @hotel.best_season
+        - else
+          = f.text_field :best_season
+    .fields
+      .four.wide.field.required
+        = f.label :arounds
+      .eight.wide.field
+        - if show
+          .text
+            = show_muti_fields @hotel.arounds
+        - else
+          = sortable_muti_fields(@hotel.arounds, 'hotel[arounds][]')
+    .fields
+      .four.wide.field.required
         = f.label :cover_photo
       .eight.wide.field
         - if show
           = render partial: 'admin/photos/item', locals: { photos: [@hotel.cover_photo] }
         - else
-          = render partial: 'admin/photos/uploader', locals: { field: :'hotel[cover_photo][id]', multiple: false, photos: [@hotel.cover_photo] }
+          = render partial: 'admin/photos/uploader', locals: { field: :'hotel[cover_photo_id]', multiple: false, photos: [@hotel.cover_photo] }
     .fields
       .four.wide.field.required
-        = f.label :description
+        = f.label :photos
       .eight.wide.field
         - if show
-          .text = simple_format @hotel.description
+          = render partial: 'admin/photos/item', locals: { photos: @hotel.photos }
         - else
-          = f.text_area :description
+          = render partial: 'admin/photos/uploader', locals: { field: :"hotel[photo_ids][]", multiple: true, photos: @hotel.photos }
     .fields
       .four.wide.field.required
         = f.label :traffics
@@ -78,287 +113,26 @@ h2.ui.dividing.header
             = show_muti_fields @hotel.provisions
         - else
           = sortable_muti_fields(@hotel.provisions, 'hotel[provisions][]')
-    .ui.divider
-    h3.ui.header 酒店套餐
-    = f.fields_for :package, @hotel.package do |ff|
-      .fields
-        .four.wide.field.required
-          = ff.label :name
-        .eight.wide.field
-          - if show
-            .text = ff.object.try(:name)
-          - else
-            = ff.text_field :name
-      .fields
-        .four.wide.field.required
-          = ff.label :description
-        .eight.wide.field
-          - if show
-            .text
-              = simple_format ff.object.try(:description)
-          - else
-            = ff.text_area :description
-      .fields
-        .four.wide.field.required
-          = ff.label :cover_photo
-        .eight.wide.field
-          - if show
-            = render partial: 'admin/photos/item', locals: { photos: [ff.object.try(:cover_photo)] }
-          - else
-            = render partial: 'admin/photos/uploader', locals: { field: :"#{ff.object_name}[cover_photo][id]", multiple: false, photos: [ff.object.try(:cover_photo)] }
-      h4.ui.header 酒店套餐项
-      .js_admin_dynamic_fields_group
-        = ff.fields_for :items do |fff|
-          .js_admin_dynamic_fields
-            .fields
-              .four.wide.field.required
-              .eight.wide.field
-                .ui.divider
-                - unless show
-                  .js_admin_dynamic_fields_remove.ui.label.red.button.large
-                    i.icon.remove
-                    | 删除下面的套餐项
-                    = fff.check_box :_destroy, class: :hidden
-            .fields
-              .four.wide.field.required
-                = fff.label :cover_photo
-              .eight.wide.field
-                - if show
-                  = render partial: 'admin/photos/item', locals: { photos: [fff.object.try(:cover_photo)] }
-                - else
-                  = render partial: 'admin/photos/uploader', locals: { field: :"#{fff.object_name}[cover_photo][id]", multiple: false, photos: [fff.object.try(:cover_photo)] }
-            .fields
-              .four.wide.field.required
-                = fff.label :contents
-              .eight.wide.field
-                - if show
-                  .text
-                    = show_muti_fields fff.object.try(:contents)
-                - else
-                  = sortable_muti_fields(fff.object.try(:contents), "#{fff.object_name}[contents][]")
-            .fields
-              .four.wide.field.required
-                = fff.label :description
-              .eight.wide.field
-                - if show
-                  .text = simple_format fff.object.try(:description)
-                - else
-                  = fff.text_area :description
-            .fields
-              .four.wide.field.required
-                = fff.label :address
-              .eight.wide.field
-                - if show
-                  .text = fff.object.try(:address)
-                - else
-                  = fff.text_field :address
-            .fields
-              .four.wide.field.required
-                = fff.label :tips
-              .eight.wide.field
-                - if show
-                  .text
-                    = show_muti_fields fff.object.try(:tips)
-                - else
-                  = sortable_muti_fields(fff.object.try(:tips), "#{fff.object_name}[tips][]")
-            .fields
-              .four.wide.field.required
-                = fff.label :service_day
-              .eight.wide.field
-                - if show
-                  .text = fff.object.try(:service_day)
-                - else
-                  = fff.select :service_day, options_for_select(HotelPackageItem::SERVICE_DAYS.to_a), {}, class: :'js_admin_search_select'
-        - unless show
-          .fields
-            .four.wide.field.required
-            .eight.wide.field
-              .js_admin_dynamic_fields_add.ui.label.purple.button.large
-                i.icon.add
-                | 加一项酒店套餐项
-    .ui.divider
-    h3.ui.header 悠漾套餐
-    = f.fields_for :favorite_package, @hotel.favorite_package do |ff|
-      .fields
-        .four.wide.field.required
-          = ff.label :name
-        .eight.wide.field
-          - if show
-            .text = ff.object.try(:name)
-          - else
-            = ff.text_field :name
-      .fields
-        .four.wide.field.required
-          = ff.label :description
-        .eight.wide.field
-          - if show
-            .text = simple_format ff.object.try(:description)
-          - else
-            = ff.text_area :description
-      .fields
-        .four.wide.field.required
-          = ff.label :cover_photo
-        .eight.wide.field
-          - if show
-            = render partial: 'admin/photos/item', locals: { photos: [ff.object.try(:cover_photo)] }
-          - else
-            = render partial: 'admin/photos/uploader', locals: { field: :"#{ff.object_name}[cover_photo][id]", multiple: false, photos: [ff.object.try(:cover_photo)] }
-      h4.ui.header 悠漾套餐项
-      .js_admin_dynamic_fields_group
-        = ff.fields_for :items do |fff|
-          .js_admin_dynamic_fields
-            .fields
-              .four.wide.field.required
-              .eight.wide.field
-                .ui.divider
-                - unless show
-                  .js_admin_dynamic_fields_remove.ui.label.red.button.large
-                    i.icon.remove
-                    | 删除下面的套餐项
-                    = fff.check_box :_destroy, class: :hidden
-            .fields
-              .four.wide.field.required
-                = fff.label :cover_photo
-              .eight.wide.field
-                - if show
-                  = render partial: 'admin/photos/item', locals: { photos: [fff.object.try(:cover_photo)] }
-                - else
-                  = render partial: 'admin/photos/uploader', locals: { field: :"#{fff.object_name}[cover_photo][id]", multiple: false, photos: [fff.object.try(:cover_photo)] }
-            .fields
-              .four.wide.field.required
-                = fff.label :contents
-              .eight.wide.field
-                - if show
-                  .text
-                    = show_muti_fields fff.object.try(:contents)
-                - else
-                  = sortable_muti_fields(fff.object.try(:contents), "#{fff.object_name}[contents][]")
-            .fields
-              .four.wide.field.required
-                = fff.label :description
-              .eight.wide.field
-                - if show
-                  .text = simple_format fff.object.try(:description)
-                - else
-                  = fff.text_area :description
-            .fields
-              .four.wide.field.required
-                = fff.label :address
-              .eight.wide.field
-                - if show
-                  .text = fff.object.try(:address)
-                - else
-                  = fff.text_field :address
-            .fields
-              .four.wide.field.required
-                = fff.label :tips
-              .eight.wide.field
-                - if show
-                  .text = show_muti_fields fff.object.try(:tips)
-                - else
-                  = sortable_muti_fields(fff.object.try(:tips), "#{fff.object_name}[tips][]")
-            .fields
-              .four.wide.field.required
-                = fff.label :service_day
-              .eight.wide.field
-                - if show
-                  .text = fff.object.try(:service_day)
-                - else
-                  = fff.select :service_day, options_for_select(HotelPackageItem::SERVICE_DAYS.to_a), {}, class: :'js_admin_search_select'
-        - unless show
-          .fields
-            .four.wide.field.required
-            .eight.wide.field
-              .js_admin_dynamic_fields_add.ui.label.purple.button.large
-                i.icon.add
-                | 加一项悠漾套餐项
-      .ui.divider
-      h3.ui.header 酒店房间
-      .js_admin_dynamic_fields_group
-        = ff.fields_for :rooms do |fff|
-          .js_admin_dynamic_fields
-            .fields
-              .four.wide.field.required
-              .eight.wide.field
-                .ui.divider
-                - unless show
-                  .js_admin_dynamic_fields_remove.ui.label.red.button.large
-                    i.icon.remove
-                    | 删除下面的酒店房间
-                    = fff.check_box :_destroy, class: :hidden
-            .fields
-              .four.wide.field.required
-                = fff.label :name
-              .eight.wide.field
-                - if show
-                  .text = fff.object.try(:name)
-                - else
-                  = fff.text_field :name
-            .fields
-              .four.wide.field.required
-                = fff.label :description
-              .eight.wide.field
-                - if show
-                  .text = simple_format fff.object.try(:description)
-                - else
-                  = fff.text_area :description
-            .fields
-              .four.wide.field.required
-                = fff.label :photos
-              .eight.wide.field
-                - if show
-                  = render partial: 'admin/photos/item', locals: { photos: [fff.object.try(:photos)] }
-                - else
-                  = render partial: 'admin/photos/uploader', locals: { field: :"#{fff.object_name}[photo_ids][]", multiple: true, photos: [fff.object.try(:photos)] }
-            .fields
-              .four.wide.field.required
-                = fff.label :features
-              .eight.wide.field
-                - if show
-                  .text
-                    = show_muti_fields fff.object.try(:features)
-                - else
-                  = sortable_muti_fields(fff.object.try(:features), "#{fff.object_name}[features][]")
-            .fields
-              .four.wide.field.required
-                = fff.label :facilities
-              .eight.wide.field
-                - if show
-                  .text
-                    = show_muti_fields fff.object.try(:facilities)
-                - else
-                = sortable_muti_fields(fff.object.try(:facilities), "#{fff.object_name}[facilities][]")
-            .fields
-              .four.wide.field.required
-                = fff.label :sight
-              .eight.wide.field
-                - if show
-                  .text = fff.object.try(:sight)
-                - else
-                  = fff.text_field :sight
-            .fields
-              .four.wide.field.required
-                = fff.label :area
-              .eight.wide.field
-                - if show
-                  .text = fff.object.try(:area)
-                - else
-                  = fff.text_field :area
-            .fields
-              .four.wide.field.required
-                = fff.label :population
-              .eight.wide.field
-                - if show
-                  .text = fff.object.try(:population)
-                - else
-                  = fff.text_field :population
-        - unless show
-          .fields
-            .four.wide.field.required
-            .eight.wide.field
-              .js_admin_dynamic_fields_add.ui.label.purple.button.large
-                i.icon.add
-                | 加一个酒店房间
+    .fields
+      .four.wide.field.required
+        = f.label :tips
+      .eight.wide.field
+        - if show
+          .text
+            = show_muti_fields @hotel.tips
+        - else
+          = sortable_muti_fields(@hotel.tips, 'hotel[tips][]')
+    .fields
+      .four.wide.field.required
+        = f.label :description
+      .eight.wide.field
+        - if show
+          .text = simple_format @hotel.description
+        - else
+          = f.text_area :description
+    = render 'admin/hotels/room_form', f: f, show: show, package: @hotel.package
+    = render 'admin/hotels/package_form', title: "酒店套餐", f: f, show: show, field: :package, package: @hotel.package
+    = render 'admin/hotels/package_form', title: "悠漾套餐", f: f, show: show, field: :favorite_package, package: @hotel.favorite_package
     .ui.divider
       .fields
         .four.wide.field.required

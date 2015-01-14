@@ -25,24 +25,22 @@
 class Room < ActiveRecord::Base
   include ActiveRecord::SoftDeletable
   include ActiveRecord::Publishable
+  include ActiveRecord::CoverPhotoable
+  include ActiveRecord::Serializeable
 
-  has_one :cover_photo, as: :target, dependent: :destroy, class_name: Photo
   has_many :photos, as: :target, dependent: :destroy
   has_and_belongs_to_many :hotel_packages, uniq: true
 
   belongs_to :hotel
   belongs_to :editor, class_name: User
 
-  serialize :features, Array
-  default_value_for :features, Array.new
-  serialize :facilities, Array
-  default_value_for :facilities, Array.new
+  serialize_fields [:features, :facilities], Array do |variables|
+    variables.delete_if{|variable| variable.blank?}
+  end
   default_value_for :population, 2
 
   validates :name, presence: true
   validates :name, uniqueness: { scope: :active }, if: Proc.new { self.active }
-  # validates :hotel, existence: true
-  # validates :editor, existence: true
 
   before_save :set_hotel_and_editor
   def set_hotel_and_editor

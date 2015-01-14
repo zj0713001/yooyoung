@@ -3,15 +3,23 @@
   label {
     font-size: 1em;
   }
-  &:not(.inline) label {
-    line-height: 2em;
-    text-align: right;
+  &:not(.inline) {
+    label {
+      line-height: 2em;
+      text-align: right;
+    }
+    .field_with_errors {
+      text-align: right;
+    }
   }
   input {
     padding: 0.4em 1em;
   }
   .text {
     line-height: 2em;
+  }
+  .field_with_errors {
+    color: red;
   }
 }
 .ui.form .ui.selection.dropdown {

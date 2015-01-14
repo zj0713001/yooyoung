@@ -1,0 +1,10 @@
+- if %w[create update destroy].include?(params[:action])
+  - if object.valid?
+    .ui.ignored.success.message
+      p #{t("admin.#{params[:action]}")}#{model.model_name.human}#{t('admin.successful')}
+  - else
+    .ui.ignored.error.message
+      p #{t("admin.#{params[:action]}")}#{model.model_name.human}#{t('admin.failed')}
+      .list
+        - object.errors.messages.each do |k, v|
+          .item = "#{k} #{v.join(',')}"

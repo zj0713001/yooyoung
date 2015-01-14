@@ -21,6 +21,6 @@ zh-CN:
         deleted_at: "删除时间"
         published_at: "发布时间"
         unpublished_at: "取消发布时间"
-        population: 入住人数
+        population: 最多容纳人数
         cover_photo: 封面图片
         photos: 房间图片

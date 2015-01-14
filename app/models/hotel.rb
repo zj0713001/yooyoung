@@ -24,14 +24,19 @@
 #  published_at   :datetime
 #  unpublished_at :datetime
 #  tip_photo_id   :integer
+#  location       :string(255)
+#  arounds        :text
+#  homepage       :string(255)
+#  best_season    :string(255)
+#  tips           :text
 #
 
 class Hotel < ActiveRecord::Base
   include ActiveRecord::SoftDeletable
   include ActiveRecord::Publishable
+  include ActiveRecord::CoverPhotoable
+  include ActiveRecord::Serializeable
 
-  has_many :cities, -> { where active: true }
-  has_one :cover_photo, as: :target, dependent: :destroy, class_name: Photo
   has_one :tip_photo, as: :target, dependent: :destroy, class_name: Photo
   has_many :photos, as: :target, dependent: :destroy
   has_one :package, class_name: HotelPackage
@@ -44,20 +49,19 @@ class Hotel < ActiveRecord::Base
   delegate :area, :country, to: :city, allow_nil: true
   belongs_to :editor, class_name: User
 
-  accepts_nested_attributes_for :package, allow_destroy: true
-  accepts_nested_attributes_for :favorite_package, allow_destroy: true
-
-  serialize :traffics, Array
-  default_value_for :traffics, Array.new
-  serialize :provisions, Array
-  default_value_for :provisions, Array.new
+  accepts_nested_attributes_for :package, allow_destroy: true, reject_if: Proc.new { |attributes| attributes['name'].blank? }
+  accepts_nested_attributes_for :favorite_package, allow_destroy: true, reject_if: Proc.new { |attributes| attributes['name'].blank? }
+  serialize_fields [:traffics, :provisions, :arounds, :tips], Array do |variables|
+    variables.delete_if{|variable| variable.blank?}
+  end
 
   validates :name, presence: true
   validates :name, uniqueness: { scope: :active }, if: Proc.new { self.active }
   validates :chinese, presence: true
   validates :chinese, uniqueness: { scope: :active }, if: Proc.new { self.active }
-  validates :address, presence: true
-  validates :provisions, presence: true
+  # validates :address, presence: true
+  # validates :provisions, presence: true
   validates :city, existence: true
   validates :editor, existence: true
+
 end

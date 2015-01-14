@@ -6,7 +6,7 @@ zh-CN:
     attributes:
       hotel_package_item:
         id: ID
-        contents: 内容
+        content: 内容
         description: "描述"
         address: 地址
         tips: Tips
@@ -18,3 +18,4 @@ zh-CN:
         updated_at: "修改时间"
         service_day: 参与时间（第几天）
         cover_photo: 封面图片
+        openning_hours: 时间限定
