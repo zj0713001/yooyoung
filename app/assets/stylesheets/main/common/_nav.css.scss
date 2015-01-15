@@ -25,10 +25,12 @@ ul.main-navbar {
     a {
       color: $gray_black;
     }
+    &:hover,
     &.active {
       a {
         color: $black;
       }
     }
+    @include transition(all .05s ease-in);
   }
 }

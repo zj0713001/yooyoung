@@ -20,6 +20,8 @@ class HotelPackage < ActiveRecord::Base
   has_many :photos, as: :target, dependent: :destroy
   has_and_belongs_to_many :rooms, -> { where active: true }, uniq: true
   has_many :items, class_name: HotelPackageItem
+  has_many :items_with_out_cover_photo, -> { where "`cover_photo_id` IS NULL" }, class_name: HotelPackageItem
+  has_many :items_with_cover_photo, -> { where "`cover_photo_id` IS NOT NULL" }, class_name: HotelPackageItem
 
   belongs_to :hotel
   belongs_to :cover_photo, dependent: :destroy, class_name: Photo

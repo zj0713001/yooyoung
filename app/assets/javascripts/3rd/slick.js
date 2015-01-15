@@ -471,7 +471,7 @@
             _.options.slidesToScroll = 1;
         }
 
-        $('img[data-lazy]', _.$slider).not('[src]').addClass('slick-loading');
+        $('img[data-original]', _.$slider).not('[src]').addClass('slick-loading');
 
         _.setupInfinite();
 
@@ -1061,15 +1061,15 @@
             loadRange, cloneRange, rangeStart, rangeEnd;
 
         function loadImages(imagesScope) {
-            $('img[data-lazy]', imagesScope).each(function() {
+            $('img[data-original]', imagesScope).each(function() {
                 var image = $(this),
-                    imageSource = $(this).attr('data-lazy');
+                    imageSource = $(this).attr('data-original');
 
                 image
                   .load(function() { image.animate({ opacity: 1 }, 200); })
                   .css({ opacity: 0 })
                   .attr('src', imageSource)
-                  .removeAttr('data-lazy')
+                  .removeAttr('data-original')
                   .removeClass('slick-loading');
             });
         }
@@ -1153,16 +1153,16 @@
         var _ = this,
             imgCount, targetImage;
 
-        imgCount = $('img[data-lazy]', _.$slider).length;
+        imgCount = $('img[data-original]', _.$slider).length;
 
         if (imgCount > 0) {
-            targetImage = $('img[data-lazy]', _.$slider).first();
-            targetImage.attr('src', targetImage.attr('data-lazy')).removeClass('slick-loading').load(function() {
-                targetImage.removeAttr('data-lazy');
+            targetImage = $('img[data-original]', _.$slider).first();
+            targetImage.attr('src', targetImage.attr('data-original')).removeClass('slick-loading').load(function() {
+                targetImage.removeAttr('data-original');
                 _.progressiveLazyLoad();
             })
          .error(function () {
-          targetImage.removeAttr('data-lazy');
+          targetImage.removeAttr('data-original');
           _.progressiveLazyLoad();
          });
         }
