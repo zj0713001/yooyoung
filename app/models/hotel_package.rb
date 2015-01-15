@@ -9,7 +9,6 @@
 #  description    :text
 #  hotel_id       :integer
 #  editor_id      :integer
-#  lock_version   :integer          default(0), not null
 #  created_at     :datetime
 #  updated_at     :datetime
 #  favorite       :boolean          default(FALSE), not null

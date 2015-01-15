@@ -21,6 +21,7 @@
 #  unpublished_at :datetime
 #  population     :integer          not null
 #  cover_photo_id :integer
+#  bed_type       :string(255)
 #
 
 class Room < ActiveRecord::Base
