@@ -11,8 +11,9 @@
   .hotel-show-content-favorite__contents
     - hotel.favorite_package.items.each_with_index do |item, index|
       .hotel-show-content-favorite__content.js_hotel_show_content_favorite_item_link id="favorite_item_#{item.id}" class="#{'active' if index.zero?}"
-        .hotel-show-content-favorite__content-image
-          = image_tag item.cover_photo.image.small.url, lazy: true, class: :lazy
+        - if item.cover_photo.present?
+          .hotel-show-content-favorite__content-image
+            = image_tag item.cover_photo.image.small.url, lazy: true, class: :lazy
         .hotel-show-content-favorite__content-info
           .hotel-show-content-favorite__content-info-name = item.content
           - if item.description.present?
