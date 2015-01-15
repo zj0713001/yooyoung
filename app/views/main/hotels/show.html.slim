@@ -2,19 +2,16 @@
   = render 'main/shared/main_header'
   .hotel-show__banner.hotel-show-banner.js_main_hotel_show_banner
     .hotel-show-banner__first-half.js_main_hotel_show_banner_first_half
-      = image_tag "http://git-sipc.qiniudn.com/yooyoung-02.jpg", lazy: true, class: 'lazy'
+      = image_tag @hotel.cover_photo.image.url, lazy: true, class: 'lazy'
     .hotel-show-banner__second-half.js_main_hotel_show_banner_second_half
-      = image_tag "http://git-sipc.qiniudn.com/yooyoung-02.jpg", lazy: true, class: 'lazy'
+      = image_tag @hotel.cover_photo.image.url, lazy: true, class: 'lazy'
     .hotel-show-banner__section.js_main_hotel_show_banner_section
       .hotel-show-banner-section.js_main_hotel_show_banner_section_block
-        h1.hotel-show-banner-section__name
-            | 香格里拉台北远东大饭店
-        h2.hotel-show-banner-section__package
-            | 轻奢潜水三日游
+        h1.hotel-show-banner-section__name = @hotel.chinese
+        h2.hotel-show-banner-section__package = @hotel.package.name
         .main-location.main-location--center
           span.iconfont.icon-location
-          span.main-location__text
-            | 台湾， 台北
+          span.main-location__text #{[@hotel.city.try(:province).chinese, @hotel.city.chinese].join('，')}
     .hotel-show-banner__click-down.js_main_hotel_show_banner_down
       .iconfont.icon-arrow-down
     .clear
@@ -38,12 +35,9 @@
     .hotel-show-content__overview#overview
       .hotel-show-content-overview
         .hotel-show-content-overview__images.js_main_hotel_show_content_overview_images
-          .hotel-show-content-overview__image-item
-            = image_tag 'http://git-sipc.qiniudn.com/yooyoung-01.jpg', lazy: true, class: :lazy, :'data-info' => 'http://git-sipc.qiniudn.com/yooyoung-01.jpghttp://git-sipc.qiniudn.com/yooyoung-01.jpghttp://git-sipc.qiniudn.com/yooyoung-01.jpghttp://git-sipc.qiniudn.com/yooyoung-01.jpghttp://git-sipc.qiniudn.com/yooyoung-01.jpg'
-          .hotel-show-content-overview__image-item
-            = image_tag 'http://git-sipc.qiniudn.com/yooyoung-02.jpg', lazy: true, class: :lazy, :'data-info' => 'http://git-sipc.qiniudn.com/yooyoung-02.jpghttp://git-sipc.qiniudn.com/yooyoung-02.jpghttp://git-sipc.qiniudn.com/yooyoung-02.jpghttp://git-sipc.qiniudn.com/yooyoung-02.jpghttp://git-sipc.qiniudn.com/yooyoung-02.jpg'
-          .hotel-show-content-overview__image-item
-            = image_tag 'http://git-sipc.qiniudn.com/yooyoung-03.jpg', lazy: true, class: :lazy, :'data-info' => 'http://git-sipc.qiniudn.com/yooyoung-03.jpghttp://git-sipc.qiniudn.com/yooyoung-03.jpghttp://git-sipc.qiniudn.com/yooyoung-03.jpghttp://git-sipc.qiniudn.com/yooyoung-03.jpghttp://git-sipc.qiniudn.com/yooyoung-03.jpg'
+          - @hotel.photos.each do |photo|
+            .hotel-show-content-overview__image-item
+              = image_tag photo.image.url, lazy: true, class: :lazy, :'data-info' => photo.description
         a.main-slick__prev.js_main_hotel_show_content_overview_slick_prev
           .iconfont.icon-arrow-left
         a.main-slick__next.js_main_hotel_show_content_overview_slick_next

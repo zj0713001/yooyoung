@@ -20,18 +20,19 @@
 #  published_at   :datetime
 #  unpublished_at :datetime
 #  population     :integer          not null
+#  cover_photo_id :integer
 #
 
 class Room < ActiveRecord::Base
   include ActiveRecord::SoftDeletable
   include ActiveRecord::Publishable
-  include ActiveRecord::CoverPhotoable
   include ActiveRecord::Serializeable
 
   has_many :photos, as: :target, dependent: :destroy
   has_and_belongs_to_many :hotel_packages, uniq: true
 
   belongs_to :hotel
+  belongs_to :cover_photo, dependent: :destroy, class_name: Photo
   belongs_to :editor, class_name: User
 
   serialize_fields [:features, :facilities], Array do |variables|

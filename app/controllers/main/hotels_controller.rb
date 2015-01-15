@@ -5,5 +5,8 @@ class Main::HotelsController < Main::ApplicationController
 
   def show
     @title = '酒店详情页'
+    @hotel = model.acquire params[:id]
+
+    respond_with(@hotel)
   end
 end

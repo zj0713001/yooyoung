@@ -15,15 +15,16 @@
 #  created_at       :datetime
 #  updated_at       :datetime
 #  service_day      :integer
+#  cover_photo_id   :integer
 #
 
 class HotelPackageItem < ActiveRecord::Base
-  include ActiveRecord::CoverPhotoable
   include ActiveRecord::Serializeable
 
   has_many :photos, as: :target, dependent: :destroy
 
-  belongs_to :hotel_package, touch: true
+  belongs_to :hotel_package
+  belongs_to :cover_photo, dependent: :destroy, class_name: Photo
   belongs_to :editor, class_name: User
 
   SERVICE_DAYS = 1..5

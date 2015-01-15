@@ -29,15 +29,14 @@
 #  homepage       :string(255)
 #  best_season    :string(255)
 #  tips           :text
+#  cover_photo_id :integer
 #
 
 class Hotel < ActiveRecord::Base
   include ActiveRecord::SoftDeletable
   include ActiveRecord::Publishable
-  include ActiveRecord::CoverPhotoable
   include ActiveRecord::Serializeable
 
-  has_one :tip_photo, as: :target, dependent: :destroy, class_name: Photo
   has_many :photos, as: :target, dependent: :destroy
   has_one :package, class_name: HotelPackage
   has_one :favorite_package, class_name: HotelPackage
@@ -47,6 +46,8 @@ class Hotel < ActiveRecord::Base
 
   belongs_to :city
   delegate :area, :country, to: :city, allow_nil: true
+  belongs_to :cover_photo, dependent: :destroy, class_name: Photo
+  belongs_to :tip_photo, dependent: :destroy, class_name: Photo
   belongs_to :editor, class_name: User
 
   accepts_nested_attributes_for :package, allow_destroy: true, reject_if: Proc.new { |attributes| attributes['name'].blank? }
