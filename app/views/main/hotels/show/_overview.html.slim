@@ -1,0 +1,13 @@
+.hotel-show-content-overview
+  .hotel-show-content-overview__images.js_main_hotel_show_content_overview_images
+    - hotel.photos.each do |photo|
+      .hotel-show-content-overview__image-item
+        = image_tag photo.image.normal.url, lazy: true, :'data-info' => photo.description
+  a.main-slick__prev.js_main_hotel_show_content_overview_slick_prev
+    .iconfont.icon-arrow-left
+  a.main-slick__next.js_main_hotel_show_content_overview_slick_next
+    .iconfont.icon-arrow-right
+  .hotel-show-content-overview__info
+    table.hotel-show-content-overview__info-table
+      tr
+        td.js_main_hotel_show_content_overview_info

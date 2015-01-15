@@ -44,6 +44,11 @@ class Admin::HotelsController < Admin::ApplicationController
     authorize! :edit, model
 
     @hotel = model.acquire params[:id]
+    @hotel.build_package if @hotel.package.blank?
+    @hotel.package.items.build
+    @hotel.package.rooms.build
+    @hotel.build_favorite_package(favorite: true) if @hotel.favorite_package.blank?
+    @hotel.favorite_package.items.build
 
     render :show
   end

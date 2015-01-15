@@ -1,4 +1,5 @@
-h4.ui.header = "#{title}项"
+- title = "#{title}项"
+h4.ui.header = title
 .js_admin_dynamic_fields_group
   = f.fields_for :items, items do |ff|
     .js_admin_dynamic_fields
@@ -69,10 +70,10 @@ h4.ui.header = "#{title}项"
               .text = ff.object.try(:service_day)
             - else
               = ff.text_field :service_day
-    - unless show
-      .fields
-        .four.wide.field.required
-        .eight.wide.field
-          .js_admin_dynamic_fields_add.ui.label.purple.button.large
-            i.icon.add
-            = "加一项#{title}"
+  - unless show
+    .fields
+      .four.wide.field.required
+      .eight.wide.field
+        .js_admin_dynamic_fields_add.ui.label.purple.button.large
+          i.icon.add
+          = "加一项#{title}"

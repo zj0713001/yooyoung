@@ -1,0 +1,29 @@
+.hotel-show-content-favorite
+  .hotel-show-content-favorite__filters
+    - hotel.favorite_package.items.group_by(&:service_day).each_with_index do |(_, items), index|
+      .hotel-show-content-favorite__filter-day = "第#{t('number.index')[index]}天"
+      .hotel-show-content-favorite__filter-items
+        - items.each_with_index do |item, item_index|
+          span.hotel-show-content-favorite__filter-item
+            = "---" unless item_index.zero?
+            a.js_hotel_show_content_favorite_item_link class="#{'active' if index.zero? && item_index.zero?}" data-id="#favorite_item_#{item.id}"
+              = item.content
+  .hotel-show-content-favorite__contents
+    - hotel.favorite_package.items.each_with_index do |item, index|
+      .hotel-show-content-favorite__content.js_hotel_show_content_favorite_item_link id="favorite_item_#{item.id}" class="#{'active' if index.zero?}"
+        .hotel-show-content-favorite__content-image
+          = image_tag item.cover_photo.image.small.url, lazy: true, class: :lazy
+        .hotel-show-content-favorite__content-info
+          .hotel-show-content-favorite__content-info-name = item.content
+          - if item.description.present?
+            .hotel-show-content-favorite__content-info-item
+              = simple_format item.description
+          - if item.address.present?
+            .hotel-show-content-favorite__content-info-item
+              = "地点：#{item.address}"
+          - if item.openning_hours.present?
+            - item.openning_hours.each do |time|
+              .hotel-show-content-favorite__content-info-item.hotel-show-content-favorite__content-info-item--small = time
+          - if item.tips.present?
+            - item.tips.each do |tip|
+              .hotel-show-content-favorite__content-info-item.hotel-show-content-favorite__content-info-item--small = tip

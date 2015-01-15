@@ -19,6 +19,7 @@
 #= require main/common/redraw_font_size
 
 #= require bootstrap/scrollspy
+#= require bootstrap/tab
 
 #= require main/devise/registrations
 #= require main/devise/sessions
