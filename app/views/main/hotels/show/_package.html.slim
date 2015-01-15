@@ -1,0 +1,14 @@
+.hotel-show-content-package.js_main_hotel_show_content_package
+  - hotel.package.items_with_cover_photo.each do |item|
+    .hotel-show-content-package__section.hotel-show-content-package-section
+      = image_tag item.cover_photo.image.huge.url, lazy: true, class: :'hotel-show-content-package-section__image'
+      .hotel-show-content-package-section__opacity.js_main_hotel_show_content_package_opacity
+      .hotel-show-content-package-section__info.js_main_hotel_show_content_package_info
+        .hotel-show-content-package-section__text.js_main_hotel_show_content_package_text
+          = item.content
+          br
+          = simple_format item.description
+        .hotel-show-content-package-section__time.js_main_hotel_show_content_package_text
+          - item.openning_hours.each do |time|
+            = time
+            br

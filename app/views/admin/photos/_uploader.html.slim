@@ -9,7 +9,7 @@ ruby:
     - photos.each do |photo|
       .photo-uploader__file.field.js_admin_upload_file
         .photo-uploader__file-preview
-          = image_tag photo.image.url
+          = image_tag photo.image.small.url
         .photo-uploader__file-url
           i.black.icon.url
           = photo.image.url

@@ -2,9 +2,9 @@
   = render 'main/shared/main_header'
   .hotel-show__banner.hotel-show-banner.js_main_hotel_show_banner
     .hotel-show-banner__first-half.js_main_hotel_show_banner_first_half
-      = image_tag @hotel.cover_photo.image.url, lazy: true, class: 'lazy'
+      = image_tag @hotel.cover_photo.image.huge.url, lazy: true, class: 'lazy'
     .hotel-show-banner__second-half.js_main_hotel_show_banner_second_half
-      = image_tag @hotel.cover_photo.image.url, lazy: true, class: 'lazy'
+      = image_tag @hotel.cover_photo.image.huge.url, lazy: true, class: 'lazy'
     .hotel-show-banner__section.js_main_hotel_show_banner_section
       .hotel-show-banner-section.js_main_hotel_show_banner_section_block
         h1.hotel-show-banner-section__name = @hotel.chinese
@@ -15,69 +15,33 @@
     .hotel-show-banner__click-down.js_main_hotel_show_banner_down
       .iconfont.icon-arrow-down
     .clear
-  .hotel-show__content.hotel-show-content.js_main_hotel_show_banner_content
+  .hotel-show__content.hotel-show-content.js_main_hotel_show_content
     .hotel-show-content__nav.js_main_hotel_show_content_nav
       .hotel-show-content-nav
         ul.main-navbar.nav
           li.active
             a href='#overview' 酒店概览
           li
-            a href='#package' 酒店套餐
-          li
             a href='#rooms' 房型介绍
           li
-            a href='#yooyoung' 悠漾套餐
+            a href='#package' 酒店套餐
+          li
+            a href='#favorite' 悠漾在酒店
           li
             a href='#protocols' 协议条款
           li
             a href='#tips' 旅行贴士
         .hotel-show-content-nav__booking 立即预定
     .hotel-show-content__overview#overview
-      .hotel-show-content-overview
-        .hotel-show-content-overview__images.js_main_hotel_show_content_overview_images
-          - @hotel.photos.each do |photo|
-            .hotel-show-content-overview__image-item
-              = image_tag photo.image.url, lazy: true, class: :lazy, :'data-info' => photo.description
-        a.main-slick__prev.js_main_hotel_show_content_overview_slick_prev
-          .iconfont.icon-arrow-left
-        a.main-slick__next.js_main_hotel_show_content_overview_slick_next
-          .iconfont.icon-arrow-right
-        .hotel-show-content-overview__info
-          table.hotel-show-content-overview__info-table
-            tr
-              td.js_main_hotel_show_content_overview_info
-    .hotel-show-content__package#package
-      .hotel-show-content-package.js_main_hotel_show_content_package
-        .hotel-show-content-package__section.hotel-show-content-package-section
-          = image_tag 'http://git-sipc.qiniudn.com/yooyoung-01.jpg', lazy: true, class: :'lazy hotel-show-content-package-section__image'
-          .hotel-show-content-package-section__opacity.js_main_hotel_show_content_package_opacity
-          .hotel-show-content-package-section__info.js_main_hotel_show_content_package_info
-            .hotel-show-content-package-section__text.js_main_hotel_show_content_package_text
-              | 王家卫的新作《一代宗师》讲述的是咏春宗师叶问的传奇故事。其中曾任李小龙师傅的叶问由梁朝伟扮演。你可能知道梁朝伟有多迷人——尤其是当你看过王家卫的《花样年华》之后。
-
-            .hotel-show-content-package-section__time.js_main_hotel_show_content_package_text
-              | 营业时间： 10：00 - 14：00
-
-        .hotel-show-content-package__section.hotel-show-content-package-section
-          = image_tag 'http://git-sipc.qiniudn.com/yooyoung-02.jpg', lazy: true, class: :'lazy hotel-show-content-package-section__image'
-          .hotel-show-content-package-section__opacity.js_main_hotel_show_content_package_opacity
-          .hotel-show-content-package-section__info.js_main_hotel_show_content_package_info
-            .hotel-show-content-package-section__text.js_main_hotel_show_content_package_text
-              | 叶问在香港夜会丁连山时，丁连山为他点烟。丁连山感叹说要是倒退二十年，他一定会跟叶问过招。他说，叶问“是个大才。”他是怎么知道的呢？他观察了叶问的动态。大师们的功底一般都深藏不露，可是从别人的动态，就能够辨别出谁有真功夫。
-            .hotel-show-content-package-section__time.js_main_hotel_show_content_package_text
-              | 营业时间： 10：00 - 14：00
-
-        .hotel-show-content-package__section.hotel-show-content-package-section
-          = image_tag 'http://git-sipc.qiniudn.com/yooyoung-02.jpg', lazy: true, class: :'lazy hotel-show-content-package-section__image'
-          .hotel-show-content-package-section__opacity.js_main_hotel_show_content_package_opacity
-          .hotel-show-content-package-section__info.js_main_hotel_show_content_package_info
-            .hotel-show-content-package-section__text.js_main_hotel_show_content_package_text
-              | 为了表达一直以来对王家卫导演的喜爱，我们联手漫威（Marvel Comics） 推出一套网络动态版漫画向《一代宗师》致敬。跟随原片的情节节奏，这套多媒体漫画将呈现片中史诗般的打斗场面和时代原型。有兴趣的朋友们可以看看。
-            .hotel-show-content-package-section__time.js_main_hotel_show_content_package_text
-              | 营业时间： 10：00 - 14：00
-
+      = render 'main/hotels/show/overview', hotel: @hotel
     .hotel-show-content__rooms#rooms
-    .hotel-show-content__yooyoung#yooyoung
+      = render 'main/hotels/show/rooms', hotel: @hotel
+    .hotel-show-content__package#package
+      = render 'main/hotels/show/package', hotel: @hotel
+    .hotel-show-content__favorite#favorite
+      = render 'main/hotels/show/favorite_package', hotel: @hotel
     .hotel-show-content__protocols#protocols
+      = render 'main/hotels/show/protocols', hotel: @hotel
     .hotel-show-content__tips#tips
+      = render 'main/hotels/show/tips', hotel: @hotel
   = render 'main/shared/footer'

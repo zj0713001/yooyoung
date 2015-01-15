@@ -1,0 +1,35 @@
+.hotel-show-content-rooms
+  .hotel-show-content-rooms__tab
+    ul.js_main_hotel_show_rooms_tab
+      - hotel.package.rooms.each_with_index do |room, index|
+        li.hotel-show-content-rooms__room-tab class="#{'active' if index.zero?}" data-id="#room_#{room.id}" = room.name
+    .hotel-show-content-rooms__tab-top-white
+    .hotel-show-content-rooms__tab-middle-white
+    .hotel-show-content-rooms__tab-bottom-white
+    a.hotel-show-content-rooms__tab-info.js_main_hotel_show_rooms_info_show
+      | 查看服务与设施
+      span.iconfont.icon-arrow-double-right
+  .hotel-show-content-rooms__content
+    - hotel.package.rooms.each_with_index do |room, index|
+      .hotel-show-content-rooms__room-photos.js_main_hotel_show_room_photos class="#{'active' if index.zero?}" id="room_#{room.id}"
+        .hotel-show-content-rooms__room-photo.js_main_hotel_show_room_photo
+          - room.photos.each do |photo|
+            .hotel-show-content-rooms__room-photo
+              = image_tag photo.image.large.url, lazy: true
+        a.main-slick__prev.js_main_hotel_show_room_photos_slick_prev
+          .iconfont.icon-arrow-left
+        a.main-slick__next.js_main_hotel_show_room_photos_slick_next
+          .iconfont.icon-arrow-right
+      .hotel-show-content-rooms__room-infos.js_main_hotel_show_room_infos id="room_#{room.id}_info"
+        .hotel-show-content-rooms__room-info
+          h2.hotel-show-content-rooms__room-name = room.name
+          - if room.area.present?
+            .hotel-show-content-rooms__room-info-item #{Room.human_attribute_name(:area)}：#{room.area}
+          - if room.sight.present?
+            .hotel-show-content-rooms__room-info-item #{Room.human_attribute_name(:sight)}：#{room.sight}
+          - if room.population.present?
+            .hotel-show-content-rooms__room-info-item #{Room.human_attribute_name(:population)}：#{room.population}
+          - if room.facilities.present?
+            .hotel-show-content-rooms__room-info-item #{Room.human_attribute_name(:facilities)}：
+            - room.facilities.each do |facility|
+              .hotel-show-content-rooms__room-info-item.hotel-show-content-rooms__room-info-item--facility #{facility}
