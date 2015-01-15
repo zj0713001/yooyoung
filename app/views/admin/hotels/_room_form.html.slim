@@ -73,6 +73,14 @@
               = fff.text_field :area
         .fields
           .four.wide.field.required
+            = fff.label :bed_type
+          .eight.wide.field
+            - if show
+              .text = fff.object.try(:bed_type)
+            - else
+              = fff.text_field :bed_type
+        .fields
+          .four.wide.field.required
             = fff.label :population
           .eight.wide.field
             - if show
