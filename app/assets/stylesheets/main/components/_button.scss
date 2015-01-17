@@ -1,0 +1,18 @@
+.primary-button {
+  border: none;
+  @include border-radius(0);
+  background: $red;
+  color: $white;
+  cursor: pointer;
+  text-align: center;
+}
+.opacity-button {
+  border: solid;
+  border-width: 1px;
+  border-color: $white;
+  @include border-radius(0);
+  background: none;
+  color: $white;
+  cursor: pointer;
+  text-align: center;
+}

@@ -1,3 +1,9 @@
+ruby:
+  set_meta_tags(
+    title: "#{@hotel.chinese},#{@hotel.package.name}",
+    description: "#{@hotel.city.country.chinese}-#{@hotel.city.chinese}-#{@hotel.chinese}-#{@hotel.package.name}",
+    keywords: "#{@hotel.city.country.chinese}-#{@hotel.city.chinese}-#{@hotel.chinese}-#{@hotel.package.name}"
+  )
 .hotel-show.js_main_hotel_show
   = render 'main/shared/main_header'
   .hotel-show__banner.hotel-show-banner.js_main_hotel_show_banner
@@ -8,14 +14,14 @@
     .hotel-show-banner__section.js_main_hotel_show_banner_section
       .hotel-show-banner-section.js_main_hotel_show_banner_section_block
         h1.hotel-show-banner-section__name = @hotel.chinese
-        h2.hotel-show-banner-section__package = @hotel.package.name
         .main-location.main-location--center
           span.iconfont.icon-location
           span.main-location__text #{[@hotel.city.try(:province).chinese, @hotel.city.chinese].join('，')}
+    .hotel-show-banner__booking.opacity-button href="#" 立即预定
     .hotel-show-banner__click-down.js_main_hotel_show_banner_down
       .iconfont.icon-arrow-down
     .clear
-  .hotel-show__content.hotel-show-content.js_main_hotel_show_content
+  .hotel-show__content.hotel-show-content.js_main_hotel_show_content#overview
     .hotel-show-content__nav.js_main_hotel_show_content_nav
       .hotel-show-content-nav
         ul.main-navbar.nav
@@ -31,12 +37,14 @@
             a href='#protocols' 协议条款
           li
             a href='#tips' 旅行贴士
-        .hotel-show-content-nav__booking 立即预定
-    .hotel-show-content__overview#overview
+        a.hotel-show-content-nav__booking.primary-button href="#" 立即预定
+    .hotel-show-content__overview
       = render 'main/hotels/show/overview', hotel: @hotel
     .hotel-show-content__rooms#rooms
       = render 'main/hotels/show/rooms', hotel: @hotel
-    .hotel-show-content__package#package
+    .hotel-show-content__package-simple.js_main_hotel_show_content_package_simple#package
+      = render 'main/hotels/show/package_simple', hotel: @hotel
+    .hotel-show-content__package
       = render 'main/hotels/show/package', hotel: @hotel
     .hotel-show-content__favorite#favorite
       = render 'main/hotels/show/favorite_package', hotel: @hotel

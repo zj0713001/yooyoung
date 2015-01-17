@@ -21,6 +21,9 @@
   .field_with_errors {
     color: red;
   }
+  .ui.label {
+    margin-bottom: 1em;
+  }
 }
 .ui.form .ui.selection.dropdown {
   padding: 0.25em 1em;

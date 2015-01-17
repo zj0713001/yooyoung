@@ -25,7 +25,7 @@ zh-CN:
         deleted_at: 删除时间
         published_at: 发布时间
         unpublished_at: 取消发布时间
-        tip_photo: 提示图片
+        tip_photo: tip图片
         cover_photo: 封面图片
         country: 国家
         location: 位置
@@ -34,3 +34,4 @@ zh-CN:
         arounds: 周边
         photos: 酒店图片
         tips: Tips
+        recommends: 非去不可

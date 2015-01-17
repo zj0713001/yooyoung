@@ -1,0 +1,12 @@
+@import "3rd/retina-sprites";
+$sprites: sprite-map("shared/logo/*.png");
+$sprites2x: sprite-map("shared/logo-retina/*.png");
+
+.icon-logo {
+  @include retina-sprite(logo);
+  @include background-size(contain);
+  @include inline-block;
+  @media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {
+    @include background-size(contain);
+  }
+}

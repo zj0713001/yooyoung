@@ -10,4 +10,7 @@
   .hotel-show-content-overview__info
     table.hotel-show-content-overview__info-table
       tr
-        td.js_main_hotel_show_content_overview_info
+        td
+          ul.hotel-show-content-overview__info-ul
+            - hotel.recommends.each do |recommend|
+              li = recommend

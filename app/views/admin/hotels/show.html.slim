@@ -1,4 +1,4 @@
-- show = @hotel.persisted? && @hotel.valid? && params[:action] != 'edit'
+- show = !params[:action].in?(%w[new edit]) && @hotel.persisted? && @hotel.valid?
 h2.ui.dividing.header
   = "#{t("admin.#{show ? 'show' : @hotel.new_record? ? 'new' : 'edit'}")}#{model.model_name.human}"
 = render 'admin/shared/admin_form_messages', object: @hotel
@@ -39,7 +39,7 @@ h2.ui.dividing.header
         - else
           = f.text_field :address
     .fields
-      .four.wide.field.required
+      .four.wide.field
         = f.label :phone
       .eight.wide.field
         - if show
@@ -47,7 +47,7 @@ h2.ui.dividing.header
         - else
           = f.text_field :phone
     .fields
-      .four.wide.field.required
+      .four.wide.field
         = f.label :location
       .eight.wide.field
         - if show
@@ -55,7 +55,7 @@ h2.ui.dividing.header
         - else
           = f.text_field :location
     .fields
-      .four.wide.field.required
+      .four.wide.field
         = f.label :homepage
       .eight.wide.field
         - if show
@@ -63,7 +63,7 @@ h2.ui.dividing.header
         - else
           = f.text_field :homepage
     .fields
-      .four.wide.field.required
+      .four.wide.field
         = f.label :best_season
       .eight.wide.field
         - if show
@@ -71,7 +71,7 @@ h2.ui.dividing.header
         - else
           = f.text_field :best_season
     .fields
-      .four.wide.field.required
+      .four.wide.field
         = f.label :arounds
       .eight.wide.field
         - if show
@@ -89,20 +89,21 @@ h2.ui.dividing.header
           = render partial: 'admin/photos/uploader', locals: { field: :'hotel[cover_photo_id]', multiple: false, photos: [@hotel.cover_photo] }
     .fields
       .four.wide.field.required
-        = f.label :tip_photo
-      .eight.wide.field
-        - if show
-          = render partial: 'admin/photos/item', locals: { photos: [@hotel.tip_photo] }
-        - else
-          = render partial: 'admin/photos/uploader', locals: { field: :'hotel[tip_photo_id]', multiple: false, photos: [@hotel.tip_photo] }
-    .fields
-      .four.wide.field.required
         = f.label :photos
       .eight.wide.field
         - if show
           = render partial: 'admin/photos/item', locals: { photos: @hotel.photos }
         - else
           = render partial: 'admin/photos/uploader', locals: { field: :"hotel[photo_ids][]", multiple: true, photos: @hotel.photos }
+    .fields
+      .four.wide.field.required
+        = f.label :recommends
+      .eight.wide.field
+        - if show
+          .text
+            = show_muti_fields @hotel.recommends
+        - else
+          = sortable_muti_fields(@hotel.recommends, 'hotel[recommends][]')
     .fields
       .four.wide.field.required
         = f.label :traffics
@@ -123,6 +124,14 @@ h2.ui.dividing.header
           = sortable_muti_fields(@hotel.provisions, 'hotel[provisions][]')
     .fields
       .four.wide.field.required
+        = f.label :tip_photo
+      .eight.wide.field
+        - if show
+          = render partial: 'admin/photos/item', locals: { photos: [@hotel.tip_photo] }
+        - else
+          = render partial: 'admin/photos/uploader', locals: { field: :'hotel[tip_photo_id]', multiple: false, photos: [@hotel.tip_photo] }
+    .fields
+      .four.wide.field.required
         = f.label :tips
       .eight.wide.field
         - if show
@@ -131,7 +140,7 @@ h2.ui.dividing.header
         - else
           = sortable_muti_fields(@hotel.tips, 'hotel[tips][]')
     .fields
-      .four.wide.field.required
+      .four.wide.field
         = f.label :description
       .eight.wide.field
         - if show
@@ -143,7 +152,7 @@ h2.ui.dividing.header
     = render 'admin/hotels/package_form', title: "悠漾套餐", f: f, show: show, field: :favorite_package, package: @hotel.favorite_package
     .ui.divider
       .fields
-        .four.wide.field.required
+        .four.wide.field
         .eight.wide.field
           br
           br

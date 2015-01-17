@@ -1,5 +1,13 @@
 .hotel-show-content-favorite
-  .hotel-show-content-favorite__filters
+  h2.hotel-show-content-favorite__title
+    | 悠漾在酒店 — #{hotel.favorite_package.name}
+    span.iconfont.icon-help.js_hotel_show_content_favorite_help
+  .hotel-show-content-favorite__explain.js_hotel_show_content_favorite_explain
+    | 在酒店套餐的基础上，加入了酒店周边3公里范围内的游玩计划，详细说明了如何以酒店为中心的话应该如何玩儿转目的地。您可完全按照行程路线的安排完成您的旅行计划，也可以只将其作为参考。
+    br
+    |“悠漾在酒店”系列的总费用除了酒店套餐之外，还会包含部分景点门票、交通及活动费用，一价全包让您轻松玩儿转目的地。
+    .hotel-show-content-favorite__explain-arrow
+  .hotel-show-content-favorite__filters.js_hotel_show_content_favorite_filters
     - hotel.favorite_package.items.group_by(&:service_day).each_with_index do |(_, items), index|
       .hotel-show-content-favorite__filter-day = "第#{t('number.index')[index]}天"
       .hotel-show-content-favorite__filter-items
@@ -28,3 +36,5 @@
           - if item.tips.present?
             - item.tips.each do |tip|
               .hotel-show-content-favorite__content-info-item.hotel-show-content-favorite__content-info-item--small = tip
+    a.hotel-show-content-favorite__content-next.js_hotel_show_content_favorite_item_next
+      .iconfont.icon-fullarrow-right

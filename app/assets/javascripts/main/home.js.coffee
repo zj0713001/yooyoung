@@ -52,16 +52,16 @@ $ ->
       $('.js_main_home_index_banner_item_delay').hide()
       banner_info_fadein 0
 
+  $(window).load ->
+    $('.js_main_home_index_section').waterfall
+      colLength: 4
+      autoresize: false
 
   $('.js_main_home_index_banner_slick_prev').on 'click', ->
     $('.js_main_home_index_banner_slick').slickPrev()
 
   $('.js_main_home_index_banner_slick_next').on 'click', ->
     $('.js_main_home_index_banner_slick').slickNext()
-
-  $('.js_main_home_index_section').waterfall
-    colLength: 4
-    autoresize: false
 
   if $.browser.msie && $.browser.version < 9
     fit_height = ->
