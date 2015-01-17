@@ -27,3 +27,8 @@ body {
   padding: 8px;
   z-index: 500;
 }
+
+.select2-search input[type="search"] {
+  box-sizing: inherit;
+  box-shadow: none;
+}

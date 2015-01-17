@@ -1,13 +1,21 @@
 doctype html
 html
   head
-    title = @title
     = include_gon init: true, namespace: :jsvar
     = stylesheet_link_tag :'admin/application', media: 'all', :'data-turbolinks-track' => true
     = csrf_meta_tags
   body
     = render partial: 'layouts/admin/nav'
-    .admin.js_admin
-      .container
-        = yield
+    .pusher
+      .ui.fixed.transparent.inverted.main.menu
+        .container
+          a href="#{admin_root_path}"
+            .title.item
+              b
+                | 后台管理系统
+      .ui.black.right.attached.button.menu-button.js_admin_toggle_menu
+        i.icon.list.layout
+      .admin.js_admin
+        .container
+          = yield
     = javascript_include_tag :'admin/application', :'data-turbolinks-track' => true

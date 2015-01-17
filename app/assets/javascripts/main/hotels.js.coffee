@@ -1,7 +1,7 @@
 $ ->
   if _.isElement($('.js_main_hotel_show')[0])
     animate_time = 500
-    animate_bez = 'easeInOutCubic'
+    animate_bez = 'easeInOutQuart'
 
     cancel_scroll = ->
       $(document).mousewheel (event) ->
@@ -40,7 +40,6 @@ $ ->
         if $slick_active.data('show-info')
           if $('.js_main_hotel_show_content_package .slick-slide').length == $slick_active.index()+1
             $('.js_main_hotel_show_content_package').data('package-scroll', false)
-            $('.js_main_hotel_show_content_package').data('skip', true)
             $(document).unmousewheel()
           else
             $('.js_main_hotel_show_content_package').slickNext()
@@ -53,16 +52,14 @@ $ ->
         else
           if $slick_active.index() == 0
             $('.js_main_hotel_show_content_package').data('package-scroll', false)
-            $('.js_main_hotel_show_content_package').data('skip', true)
             $(document).unmousewheel()
           else
             $('.js_main_hotel_show_content_package').slickPrev()
 
-    lazy_package_scroll_event = _.throttle package_scroll_event, 1500, { trailing: false }
+    lazy_package_scroll_event = _.throttle package_scroll_event, 1000, { trailing: false }
 
     package_scroll = ->
       $('.js_main_hotel_show_content_package').data('package-scroll', true)
-      $('.js_main_hotel_show_content_package').slickGoTo(0)
       $(document).mousewheel (event) ->
         event.preventDefault()
         event.stopPropagation()
@@ -93,7 +90,7 @@ $ ->
       , animate_time, animate_bez
       .queue ->
         $('.js_main_hotel_show_content').animate
-          marginTop: "#{100+110-$(window).height()}"
+          marginTop: "#{180-$(window).height()}"
         , animate_time, animate_bez
         $('.js_main_hotel_show_banner').data('is_banner_sliced', true)
         $('.js_main_hotel_show_banner').data('is_banner_slicing', false)
@@ -103,17 +100,52 @@ $ ->
     $('.js_main_hotel_show_banner_down').on 'click', ->
       banner_slice()
 
+    banner_close = ->
+      return if $('.js_main_hotel_show_banner').data('is_banner_slicing')
+
+      $('.js_main_hotel_show_banner').data('is_banner_slicing', true)
+      $('.js_main_hotel_show_banner_down').removeClass('hidden')
+      $('.js_main_hotel_show_content').css('margin-top', 0)
+      $('.js_main_hotel_show_banner_section').animate
+        fontSize: "12px"
+        top: "50%"
+      , animate_time, animate_bez
+      .queue ->
+        $('.js_main_hotel_show_banner_section_block').removeClass('hotel-show-banner-section--sliced')
+        $(this).dequeue()
+      $('.js_main_hotel_show_banner_first_half').animate
+        top: "-50%"
+      , animate_time, animate_bez
+      $('.js_main_hotel_show_banner_second_half').animate
+        bottom: '-50%'
+      , animate_time, animate_bez
+      .queue ->
+        $('.js_main_hotel_show_banner').data('is_banner_sliced', false)
+        $('.js_main_hotel_show_banner').data('is_banner_slicing', false)
+        cancel_scroll()
+        $(this).dequeue()
+        true
+
+
     $(document).on 'scroll', (e) ->
       if !$('.js_main_hotel_show_banner').data('is_banner_sliced') && $(this).scrollTop() > 0
         banner_slice()
-      if $(document).scrollTop() < parseInt($('.js_main_hotel_show_content_package').offset().top - 60)
-        $('.js_main_hotel_show_content_package').data('skip', false)
-      if !$('.js_main_hotel_show_content_package').data('skip') && ($(document).scrollTop() > parseInt($('.js_main_hotel_show_content_package').offset().top - 60))
-        package_scroll()
-        $(document).scrollTop(parseInt($('.js_main_hotel_show_content_package').offset().top - 60))
-      if $('.js_main_hotel_show_content_package').data('package-scroll') && $(document).scrollTop() != parseInt($('.js_main_hotel_show_content_package').offset().top - 60)
-        $('.js_main_hotel_show_content_package').data('skip', true)
-        $(document).unmousewheel()
+      if $('.js_main_hotel_show_banner').data('is_banner_sliced')
+        if $(this).scrollTop() == 0
+          banner_close()
+        package_top = parseInt($('.js_main_hotel_show_content_package').offset().top - 60)
+        if Math.abs($(document).scrollTop() - package_top) > 50
+          $slick_active = $('.js_main_hotel_show_content_package .slick-active')
+          package_info_hide($slick_active) if $slick_active.data('show-info')
+          $('.js_main_hotel_show_content_package').data('package-scroll', false).slickGoTo(0)
+          $(document).unmousewheel()
+          $('.js_main_hotel_show_content_package').data('skip', false) if $(document).scrollTop() < package_top
+          $('.js_main_hotel_show_content_package').data('skip', true) if $(document).scrollTop() > package_top
+        if $(document).scrollTop() >= package_top && ($(document).scrollTop() - package_top) < 50 && !$('.js_main_hotel_show_content_package').data('package-scroll') && !$('.js_main_hotel_show_content_package').data('skip')
+          $('.js_main_hotel_show_content_package').data('package-scroll', true)
+          $('.js_main_hotel_show_content_package').data('skip', true)
+          $(document).scrollTo($('.js_main_hotel_show_content_package').offset().top-60)
+          package_scroll()
       true
 
     _.delay ->
@@ -126,6 +158,10 @@ $ ->
     $('body').scrollspy
       offset: 270
       target: '.js_main_hotel_show_content_nav'
+
+    $('.js_main_hotel_show_content_package_simple').sticky
+      topSpacing: -30
+      stopScroll: $(this).height()
 
     content_overview_info_fadeout = ->
       $('.js_main_hotel_show_content_overview_info').fadeOut()
@@ -212,7 +248,19 @@ $ ->
       $(this).fadeOut()
       $('.js_main_hotel_show_room_photos.active').removeClass('blur')
 
+    $('.js_hotel_show_content_favorite_help').on 'click', ->
+      $('.js_hotel_show_content_favorite_explain').slideToggle(100)
+
     $('.js_hotel_show_content_favorite_item_link').on 'click', ->
       $('.js_hotel_show_content_favorite_item_link.active').removeClass('active')
-      $($(this).data('id')).addClass('active')
-      $(this).addClass('active').siblings('.active').removeClass('active')
+      $target = $($(this).data('id'))
+      $target.addClass('active')
+      $(this).addClass('active')
+      $(document).trigger('scroll')
+
+    $('.js_hotel_show_content_favorite_item_next').on 'click', ->
+      $links = $('.js_hotel_show_content_favorite_filters .js_hotel_show_content_favorite_item_link')
+      $active_link = $links.filter('.active')
+      $target_link = $($links[($links.index($active_link[0])+1)])
+      console.log $target_link
+      $target_link.trigger('click')

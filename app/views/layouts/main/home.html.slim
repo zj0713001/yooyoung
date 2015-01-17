@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title = @title
+    = render :partial => 'main/shared/meta', :formats => :html
     = stylesheet_link_tag :'main/home', media: 'all', :'data-turbolinks-track' => true
     /[if lte IE 8]
       = stylesheet_link_tag :'main/ie/ie8', media: 'all', :'data-turbolinks-track' => true

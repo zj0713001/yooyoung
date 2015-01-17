@@ -30,6 +30,7 @@
 #  best_season    :string(255)
 #  tips           :text
 #  cover_photo_id :integer
+#  recommends     :text
 #
 
 class Hotel < ActiveRecord::Base
@@ -52,7 +53,7 @@ class Hotel < ActiveRecord::Base
 
   accepts_nested_attributes_for :package, allow_destroy: true, reject_if: Proc.new { |attributes| attributes['name'].blank? }
   accepts_nested_attributes_for :favorite_package, allow_destroy: true, reject_if: Proc.new { |attributes| attributes['name'].blank? }
-  serialize_fields [:traffics, :provisions, :arounds, :tips], Array do |variables|
+  serialize_fields [:traffics, :provisions, :arounds, :tips, :recommends], Array do |variables|
     variables.delete_if{|variable| variable.blank?}
   end
 

@@ -1,0 +1,13 @@
+$susy: (
+  columns: 10,
+  column-width: 128px,
+  gutters: 0,
+  math: magic,
+  output: float,
+  gutter-position: inside,
+);
+
+@import "susy";
+@import "breakpoint";
+
+@include border-box-sizing;

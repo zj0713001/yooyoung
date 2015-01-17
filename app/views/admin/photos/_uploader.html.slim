@@ -13,9 +13,9 @@ ruby:
         .photo-uploader__file-url
           i.black.icon.url
           = photo.image.url
-        .photo-uploader__file-description
-          i.black.icon.tag
-          = photo.description
+        / .photo-uploader__file-description
+        /   i.black.icon.tag
+        /   = photo.description
         = hidden_field_tag field, photo.id
         a.ui.red.label.large.js_admin_upload_file_remove data-image-id="#{photo.id}" 删除
   .photo-uploader__button.js_admin_upload_add.ui.label.green.button.large

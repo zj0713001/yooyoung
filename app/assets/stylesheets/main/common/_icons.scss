@@ -16,6 +16,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-heart:before { content: "\e600"; }
 .icon-phone:before { content: "\e60c"; }
 .icon-qq:before { content: "\e601"; }
 .icon-password:before { content: "\e60b"; }
@@ -27,3 +28,5 @@
 .icon-arrow-right:before { content: "\e608"; }
 .icon-arrow-down:before { content: "\e609"; }
 .icon-wechat:before { content: "\e60a"; }
+.icon-fullarrow-right:before { content: "\e602"; }
+.icon-help:before { content: "\e60d"; }

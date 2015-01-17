@@ -19,3 +19,24 @@
   @include background-size(cover);
   filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=#{image-path($image)},sizingMethod='scale');
 }
+
+@mixin main-container {
+  @include container;
+  @include breakpoint(max-width 1280px) {
+    width: 960px;
+  }
+}
+
+@mixin main-section-height {
+  height: 620px;
+  @include breakpoint(max-width 1280px) {
+    height: 460px;
+  }
+}
+
+@mixin main-section-min-height {
+  min-height: 620px;
+  @include breakpoint(max-width 1280px) {
+    min-height: 460px;
+  }
+}

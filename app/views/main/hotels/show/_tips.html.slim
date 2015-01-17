@@ -1,0 +1,11 @@
+.hotel-show-content-tips
+  .hotel-show-content-tips__content
+    .hotel-show-content-tips__title 旅行贴士
+    .hotel-show-content-tips__info
+      table
+        tr
+          td.hotel-show-content-tips__photo style="background-image: #{background_image_cover(image_path(hotel.tip_photo.image.normal.url))}"
+          td
+            ul.hotel-show-content-tips__list
+              - hotel.tips.each do |tip|
+                li.hotel-show-content-tips__item = tip
