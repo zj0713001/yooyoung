@@ -32,7 +32,7 @@ Rails.application.configure do
   # Generate digests for assets URLs.
   config.assets.digest = true
 
-  config.asset_host = 'http://yooyoung.qiniudn.com/'
+  # config.asset_host = 'http://yooyoung.qiniudn.com/'
 
   # `config.assets.precompile` has moved to config/initializers/assets.rb
 
