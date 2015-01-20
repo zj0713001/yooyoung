@@ -45,8 +45,11 @@
       display: block;
       font-size: 2em;
       line-height: 70px;
-      color: $white;
+      color: $gray_white;
       text-align: center;
+      &:hover {
+        color: $white;
+      }
     }
   }
 }
@@ -155,8 +158,9 @@
 .home-index-section-item {
   position: relative;
   .home-index-section-item__link {
-    color: $white;
+    color: $gray_white;
     &:hover {
+      color: $white;
       .home-index-section-item-area {
         display: none;
       }

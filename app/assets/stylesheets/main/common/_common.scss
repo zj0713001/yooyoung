@@ -1,7 +1,7 @@
 body, html {
   width: 100%;
   height: 100%;
-  @include font-family-heiti;
+  @include font-family-songti;
   font-size: $font_standard;
   font-weight: normal;
   -webkit-font-smoothing: antialiased;
@@ -11,6 +11,11 @@ body, html {
 label {
   cursor: pointer;
   @include no-select;
+}
+
+input {
+  @include font-family-songti;
+  -webkit-font-smoothing: antialiased;
 }
 
 input[type=checkbox] {
