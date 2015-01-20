@@ -37,7 +37,39 @@ h4.ui.header = title
               .text = simple_format ff.object.try(:description)
             - else
               = ff.text_area :description
-              = ff.hidden_field :service_day, value: 1
+        .fields
+          .four.wide.field
+            = ff.label :address
+          .eight.wide.field
+            - if show
+              .text = ff.object.try(:address)
+            - else
+              = ff.text_field :address
+        .fields
+          .four.wide.field
+            = ff.label :openning_hours
+          .eight.wide.field
+            - if show
+              .text = show_muti_fields ff.object.try(:openning_hours)
+            - else
+              = sortable_muti_fields(ff.object.try(:openning_hours), "#{ff.object_name}[openning_hours][]")
+        .fields
+          .four.wide.field
+            = ff.label :tips
+          .eight.wide.field
+            - if show
+              .text
+                = show_muti_fields ff.object.try(:tips)
+            - else
+              = sortable_muti_fields(ff.object.try(:tips), "#{ff.object_name}[tips][]")
+        .fields
+          .four.wide.field.required
+            = ff.label :service_day
+          .eight.wide.field
+            - if show
+              .text = ff.object.try(:service_day)
+            - else
+              = ff.text_field :service_day
   - unless show
     .fields
       .four.wide.field
