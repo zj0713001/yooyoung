@@ -11,7 +11,6 @@
         .hotel-show-content-protocols__label
           = "#{hotel.provisions.count+1}."
         .hotel-show-content-protocols__text 如何抵达
-      - hotel.traffics.each do |traffic|
-        .hotel-show-content-protocols__item
-          .hotel-show-content-protocols__label
-          .hotel-show-content-protocols__text = traffic
+          .hotel-show-content-protocols__item
+            .hotel-show-content-protocols__label
+            .hotel-show-content-protocols__text = hotel.traffics

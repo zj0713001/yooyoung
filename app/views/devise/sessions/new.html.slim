@@ -7,7 +7,7 @@
         .main-form__group
           = f.label :phone, class: :'main-form__label' do
             .iconfont.icon-phone
-          = f.phone_field :phone, placeholder: '手机号码', autofocus: true, class: :'sessions-new-form__input main-form__input'
+          = f.phone_field :phone, placeholder: '手机号码', autofocus: true, class: :'sessions-new-form__input main-form__input', autocomplete: 'off'
         .main-form__group
           = f.label :password, class: :'main-form__label' do
             .iconfont.icon-password
@@ -16,5 +16,5 @@
           = f.check_box :remember_me, class: 'sessions-new-form__remember-me'
           = f.label :remember_me, '记住我', class: 'sessions-new-form__remember-me-label'
           a href='#' class='sessions-new-form__link' 忘记密码
-        = f.submit "登录", class: :'primary-button main-form__submit'
+        = f.submit "登录", class: :'opacity-button main-form__submit sessions-new-form__submit'
     .clear

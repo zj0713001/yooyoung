@@ -335,7 +335,7 @@
     @media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {
       background-image: asset-url('main/hotels/room-background@2x.jpg');
     }
-    color: $white;
+    color: $gray_white;
     font-size: $font_h2;
     padding-top: 40px;
     ul {
@@ -359,6 +359,9 @@
     &:hover,
     &.active {
       border-color: $white;
+    }
+    &:active {
+      color: $light_white;
     }
   }
   .hotel-show-content-rooms__tab-top-white,

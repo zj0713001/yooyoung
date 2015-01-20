@@ -73,6 +73,7 @@ $ ->
 
       $('.js_main_hotel_show_banner').data('is_banner_slicing', true)
       $('.js_main_hotel_show_banner_down').addClass('hidden')
+      $('.js_main_hotel_show_banner_booking').addClass('hidden')
       $('.js_main_hotel_show_banner_first_half').animate
         top: "#{100-$(window).height()}"
       , animate_time, animate_bez
@@ -105,6 +106,7 @@ $ ->
 
       $('.js_main_hotel_show_banner').data('is_banner_slicing', true)
       $('.js_main_hotel_show_banner_down').removeClass('hidden')
+      $('.js_main_hotel_show_banner_booking').removeClass('hidden')
       $('.js_main_hotel_show_content').css('margin-top', 0)
       $('.js_main_hotel_show_banner_section').animate
         fontSize: "12px"

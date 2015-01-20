@@ -13,6 +13,11 @@ label {
   @include no-select;
 }
 
+input {
+  @include font-family-songti;
+  -webkit-font-smoothing: antialiased;
+}
+
 input[type=checkbox] {
   cursor: pointer;
 }
