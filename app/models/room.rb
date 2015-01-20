@@ -22,6 +22,7 @@
 #  population     :integer          not null
 #  cover_photo_id :integer
 #  bed_type       :string(255)
+#  chinese        :string(255)
 #
 
 class Room < ActiveRecord::Base
@@ -36,7 +37,7 @@ class Room < ActiveRecord::Base
   belongs_to :cover_photo, dependent: :destroy, class_name: Photo
   belongs_to :editor, class_name: User
 
-  serialize_fields [:features, :facilities], Array do |variables|
+  serialize_fields [:facilities], Array do |variables|
     variables.delete_if{|variable| variable.blank?}
   end
   default_value_for :population, 2

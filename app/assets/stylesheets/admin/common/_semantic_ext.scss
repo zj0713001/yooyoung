@@ -24,6 +24,14 @@
   .ui.label {
     margin-bottom: 1em;
   }
+  textarea {
+    height: 6em;
+    min-height: 3em;
+    margin-bottom: 1em;
+  }
+  .field {
+    margin-right: 0;
+  }
 }
 .ui.form .ui.selection.dropdown {
   padding: 0.25em 1em;
