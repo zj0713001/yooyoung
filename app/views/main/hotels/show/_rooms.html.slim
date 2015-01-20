@@ -2,7 +2,7 @@
   .hotel-show-content-rooms__tab
     ul.js_main_hotel_show_rooms_tab
       - hotel.package.rooms.each_with_index do |room, index|
-        li.hotel-show-content-rooms__room-tab class="#{'active' if index.zero?}" data-id="#room_#{room.id}" = room.name
+        li.hotel-show-content-rooms__room-tab class="#{'active' if index.zero?}" data-id="#room_#{room.id}" = room.chinese
     .hotel-show-content-rooms__tab-top-white
     .hotel-show-content-rooms__tab-middle-white
     .hotel-show-content-rooms__tab-bottom-white
@@ -22,7 +22,7 @@
           .iconfont.icon-arrow-right
       .hotel-show-content-rooms__room-infos.js_main_hotel_show_room_infos id="room_#{room.id}_info"
         .hotel-show-content-rooms__room-info
-          h2.hotel-show-content-rooms__room-name = room.name
+          h2.hotel-show-content-rooms__room-name = room.chinese
           - if room.area.present?
             .hotel-show-content-rooms__room-info-item #{Room.human_attribute_name(:area)}：#{room.area}
           - if room.sight.present?

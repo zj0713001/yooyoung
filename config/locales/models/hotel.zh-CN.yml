@@ -13,11 +13,12 @@ zh-CN:
         editor_id: 编辑
         description: 描述
         provisions: 协议条款
-        address: 地址
+        address: 中文地址
+        local_address: 当地语言地址
         phone: 电话
         checkin: 入住时间
         checkout: 退房时间
-        traffics: 出发和到达
+        traffics: 到达和离开
         published: 已发布？
         active: 有效？
         created_at: 创建时间
@@ -28,10 +29,15 @@ zh-CN:
         tip_photo: tip图片
         cover_photo: 封面图片
         country: 国家
-        location: 位置
         homepage: 网站主页
         best_season: 最佳旅行时间
-        arounds: 周边
+        arounds: 位置和周边
         photos: 酒店图片
         tips: Tips
         recommends: 非去不可
+        visa_tip: 签证
+        language_tip: 语言
+        money_tip: 货币信息
+        network_tip: 网络及通讯
+        power_tip: 电源
+        luggage_tip: 携带物品

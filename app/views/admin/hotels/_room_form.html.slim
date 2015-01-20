@@ -21,6 +21,14 @@
               .text = fff.object.try(:name)
             - else
               = fff.text_field :name
+        .fields
+          .four.wide.field.required
+            = fff.label :chinese
+          .eight.wide.field
+            - if show
+              .text = fff.object.try(:chinese)
+            - else
+              = fff.text_field :chinese
         / .fields
         /   .four.wide.field
         /     = fff.label :description
@@ -42,10 +50,9 @@
             = fff.label :features
           .eight.wide.field
             - if show
-              .text
-                = show_muti_fields fff.object.try(:features)
+              .text = simple_format fff.object.try(:features)
             - else
-              = sortable_muti_fields(fff.object.try(:features), "#{fff.object_name}[features][]")
+              = fff.text_area :features
         .fields
           .four.wide.field.required
             = fff.label :facilities

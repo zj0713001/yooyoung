@@ -6,7 +6,8 @@ zh-CN:
     attributes:
       room:
         id: ID
-        name: 名称
+        name: 英文名称
+        chinese: 中文名称
         description: "描述"
         features: 特色
         sight: 景观
