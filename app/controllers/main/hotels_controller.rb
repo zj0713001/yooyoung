@@ -4,8 +4,7 @@ class Main::HotelsController < Main::ApplicationController
   end
 
   def show
-    @title = '酒店详情页'
-    @hotel = model.acquire params[:id]
+    @hotel = model.friendly_acquire params[:id]
 
     respond_with(@hotel)
   end

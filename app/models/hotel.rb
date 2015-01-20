@@ -36,12 +36,14 @@
 #  network_tip    :text
 #  power_tip      :text
 #  luggage_tip    :text
+#  slugged        :string(255)
 #
 
 class Hotel < ActiveRecord::Base
   include ActiveRecord::SoftDeletable
   include ActiveRecord::Publishable
   include ActiveRecord::Serializeable
+  include ActiveRecord::Friendlyable
 
   has_many :photos, as: :target, dependent: :destroy
   has_one :package, class_name: HotelPackage
@@ -60,6 +62,8 @@ class Hotel < ActiveRecord::Base
   serialize_fields [:provisions, :tips, :recommends], Array do |variables|
     variables.delete_if{|variable| variable.blank?}
   end
+
+  friendlyable :name, :slugged
 
   validates :name, presence: true
   validates :name, uniqueness: { scope: :active }, if: Proc.new { self.active }

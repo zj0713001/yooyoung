@@ -5,6 +5,12 @@ class ActiveRecord::Base
     record
   end
 
+  def self.friendly_acquire(id)
+    record = self.friendly.find(id)
+    raise ActiveRecord::RecordNotFound if !record || record.respond_to?(:active) && !record.active
+    record
+  end
+
   WHERE_LAMBDA = lambda { |params|
     params = case
     when params.is_a?(String); #params
