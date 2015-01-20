@@ -1,7 +1,5 @@
 @mixin no-select {
-  -moz-user-select: -moz-none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
+  @include user-select(none);
 }
 
 @mixin font-family-heiti {

@@ -8,8 +8,7 @@
     width: 100%;
     min-width: 600px;
     min-height: 512px;
-    height: auto;
-    height: calc(100% - 60px);
+    height: 100%;
   }
   .sessions-new__sign-in-form,
   .sessions-new__sign-up-form {
@@ -29,7 +28,7 @@
   padding: 60px 67px;
   width: 100%;
   height: auto;
-  @include rgba-background-inline(rgba($white, 0.4));
+  @include rgba-background-inline(rgba($black, 0.4));
   .sessions-new-form__input {
     @include rgba-background-inline(rgba($white, 0.6));
   }
