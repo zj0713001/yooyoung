@@ -23,14 +23,19 @@
 #  deleted_at     :datetime
 #  published_at   :datetime
 #  unpublished_at :datetime
-#  tip_photo_id   :integer
-#  location       :string(255)
 #  arounds        :text
 #  homepage       :string(255)
 #  best_season    :string(255)
 #  tips           :text
 #  cover_photo_id :integer
 #  recommends     :text
+#  local_address  :string(255)
+#  visa_tip       :text
+#  language_tip   :text
+#  money_tip      :text
+#  network_tip    :text
+#  power_tip      :text
+#  luggage_tip    :text
 #
 
 class Hotel < ActiveRecord::Base
@@ -48,12 +53,11 @@ class Hotel < ActiveRecord::Base
   belongs_to :city
   delegate :area, :country, to: :city, allow_nil: true
   belongs_to :cover_photo, dependent: :destroy, class_name: Photo
-  belongs_to :tip_photo, dependent: :destroy, class_name: Photo
   belongs_to :editor, class_name: User
 
   accepts_nested_attributes_for :package, allow_destroy: true, reject_if: Proc.new { |attributes| attributes['name'].blank? }
   accepts_nested_attributes_for :favorite_package, allow_destroy: true, reject_if: Proc.new { |attributes| attributes['name'].blank? }
-  serialize_fields [:traffics, :provisions, :arounds, :tips, :recommends], Array do |variables|
+  serialize_fields [:provisions, :tips, :recommends], Array do |variables|
     variables.delete_if{|variable| variable.blank?}
   end
 
