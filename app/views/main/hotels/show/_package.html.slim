@@ -8,7 +8,4 @@
           = item.content
           br
           = simple_format item.description
-        .hotel-show-content-package-section__time.js_main_hotel_show_content_package_text
-          - item.openning_hours.each do |time|
-            = time
-            br
+        .hotel-show-content-package-section__time.js_main_hotel_show_content_package_text = item.openning_hours
