@@ -11,7 +11,7 @@ class Admin::HotelsController < Admin::ApplicationController
   def show
     authorize! :show, model
 
-    @hotel = model.acquire params[:id]
+    @hotel = model.friendly_acquire params[:id]
   end
 
   def new
@@ -43,7 +43,7 @@ class Admin::HotelsController < Admin::ApplicationController
   def edit
     authorize! :edit, model
 
-    @hotel = model.acquire params[:id]
+    @hotel = model.friendly_acquire params[:id]
     @hotel.build_package if @hotel.package.blank?
     @hotel.package.items.build
     @hotel.package.rooms.build
@@ -54,7 +54,7 @@ class Admin::HotelsController < Admin::ApplicationController
   end
 
   def update
-    @hotel = model.acquire params[:id]
+    @hotel = model.friendly_acquire params[:id]
     if params[:published].nil?
       authorize! :edit, model
       @hotel.attributes = params[:hotel].permit!

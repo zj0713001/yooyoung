@@ -2,13 +2,13 @@
 @import "compass/reset";
 @import "compass/css3";
 @import "compass/utilities";
-@import "semantic-ui";
-@import "jquery-ui/datepicker";
 @import "jquery-ui/sortable";
-
+@import "semantic-ui";
 
 //3rd
 @import "3rd/select2";
+@import "3rd/nprogress";
+@import "3rd/datepicker";
 
 // Common
 @import "common/variables";

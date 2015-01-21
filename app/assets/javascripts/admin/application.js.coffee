@@ -16,6 +16,9 @@
 #= require 3rd/fileupload/jquery.fileupload
 #= require 3rd/fileupload/jquery.fileupload-process
 #= require 3rd/fileupload/jquery.fileupload-image
+#= require 3rd/nprogress
+#= require 3rd/datepicker/bootstrap-datepicker
+#= require 3rd/datepicker/bootstrap-datepicker.zh-CN
 
 # Common
 #= require admin/common/common
