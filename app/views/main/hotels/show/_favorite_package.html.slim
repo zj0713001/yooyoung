@@ -31,8 +31,7 @@
             .hotel-show-content-favorite__content-info-item
               = "地点：#{item.address}"
           - if item.openning_hours.present?
-            - item.openning_hours.each do |time|
-              .hotel-show-content-favorite__content-info-item.hotel-show-content-favorite__content-info-item--small = time
+            .hotel-show-content-favorite__content-info-item.hotel-show-content-favorite__content-info-item--small = item.openning_hours
           - if item.tips.present?
             - item.tips.each do |tip|
               .hotel-show-content-favorite__content-info-item.hotel-show-content-favorite__content-info-item--small = tip

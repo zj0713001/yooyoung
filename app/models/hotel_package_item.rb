@@ -28,7 +28,7 @@ class HotelPackageItem < ActiveRecord::Base
 
   SERVICE_DAYS = 1..5
 
-  serialize_fields [:openning_hours, :tips], Array do |variables|
+  serialize_fields [:tips], Array do |variables|
     variables.delete_if{|variable| variable.blank?}
   end
   default_value_for :service_day, 1
