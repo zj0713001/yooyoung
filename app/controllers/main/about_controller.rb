@@ -7,4 +7,7 @@ class Main::AboutController < Main::ApplicationController
 
   def unique
   end
+
+  def protocols
+  end
 end

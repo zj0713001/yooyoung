@@ -10,9 +10,12 @@
   line-height: 5em;
   width: 100%;
   @include no-select;
-  z-index: 999;
+  z-index: 990;
   .main-index-header__logo {
-    float: left;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
     .icon-logo {
       height: 4em;
       margin-left: .5em;

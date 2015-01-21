@@ -1,17 +1,18 @@
 .main-index-header.js_main_index_header
   .main-index-header__logo
-    .icon-logo
+    a href="#{root_path}"
+      .icon-logo
   .main-index-header__nav
     .main-nav
       - if current_user
         .main-nav__item
           | 您好，#{current_user.phone}
       .main-nav__item
-        a href='#' 酒店套餐
+        a href="#{root_path}" 酒店套餐
       .main-nav__item
         a href='#' 私人定制
       .main-nav__item
-        a href='#' 关于我们
+        a href="#{yooyoung_path}" 关于我们
       .main-nav__item
         - if current_user
           = link_to '登出', destroy_user_session_path, :'data-method' => :delete
