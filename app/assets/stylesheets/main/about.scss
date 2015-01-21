@@ -1,6 +1,7 @@
 .about-index {
   color: $gray_black;
   line-height: 2em;
+  @include no-select;
   .about-index__banner {
     position: relative;
     margin: 0;

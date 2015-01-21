@@ -1,0 +1,28 @@
+ruby:
+  set_meta_tags(
+    title: "悠漾旅行私人定制，个性化定制您的旅行",
+    description: "悠漾旅行私人定制，个性化定制您的旅行。",
+    keywords: "悠漾旅行私人定制"
+  )
+.about-index
+  = render 'main/shared/main_header'
+  .about-index__banner.about-index-banner.about-index-banner--unique.js_main_about_index_banner
+    .about-index-banner__title 悠漾旅行私人定制
+  .about-index__section.about-index-section
+    .about-index-section__content
+      | 当您实在没有时间去做复杂的行前攻略准备，
+      br
+      | 当您面对繁杂的线索而不知该如何理顺N天的行程，
+      br
+      | 当您想更深入地对目的地进行探索而不知如何下手，
+      br
+      | 当您不知道到哪里才能预订性价比高的旅行产品，
+      br
+      | …………所有这些问题，都可以通过悠漾私人定制解决。
+    = image_tag "main/about/unique_service.jpg", lazy: true, class: :'lazy about-index-section__image'
+  .about-index__section.about-index-section
+    .about-index-section__content
+      | 私人定制服务将完全针对用户的个性化需求，制定用户出行规划，悠漾会寻找性价比最高的旅行产品，并且根据用户出行的时间，查询当地是否有匹配的节日及特色活动等。
+      br
+      |除此之外，悠漾会帮助用户预订所有旅行产品，所以作为用户的您，只需告诉我们您的需求并提前预付所有旅行产品的费用及私人定制服务费，即可收到详细的旅行计划书。
+  = render 'main/shared/footer'
