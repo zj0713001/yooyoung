@@ -6,6 +6,14 @@ h2.ui.dividing.header
   h3.ui.header 酒店
   = form_for @hotel, url: [:admin, @hotel], method: @hotel.new_record? ? :post : :put, html: { multipart: true } do |f|
     .fields
+      .four.wide.field
+      .eight.wide.field
+        - if show
+          = link_to t('admin.edit'), [:edit, :admin, @hotel], class: :'ui label teal button huge'
+        - else
+          = f.submit t('admin.submit'), class: :'ui label teal button huge'
+    .ui.divider
+    .fields
       .four.wide.field.required
         = f.label :city_id
       .eight.wide.field
