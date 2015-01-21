@@ -4,4 +4,7 @@ class Main::AboutController < Main::ApplicationController
 
   def business
   end
+
+  def unique
+  end
 end
