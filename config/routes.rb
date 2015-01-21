@@ -8,9 +8,15 @@ Rails.application.routes.draw do
     get 'users/send_sms_captcha' => 'main/devise/registrations#send_sms_captcha', as: :users_send_sms_captcha
   end
 
-  scope module: 'main' do
+  scope module: :main do
     root 'home#index'
     resources :hotels, only: [:index, :show]
+    scope :about, module: :about do
+      get :yooyoung
+      get :business
+      get :unique
+      get :protocols
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

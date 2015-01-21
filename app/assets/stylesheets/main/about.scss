@@ -1,0 +1,51 @@
+.about-index {
+  color: $gray_black;
+  line-height: 2em;
+  .about-index__banner {
+    position: relative;
+    margin: 0;
+  }
+  .about-index__section {
+    @include main-container;
+  }
+}
+.about-index-banner {
+  width: 100%;
+  height: 200px;
+  .about-index-banner__title {
+    font-size: 30px;
+    color: $white;
+    text-align: center;
+    padding-top: 130px;
+  }
+  &.about-index-banner--yooyoung{
+    @include cover_background_image("main/about/banner_yooyoung.jpg");
+  }
+  &.about-index-banner--business{
+    @include cover_background_image("main/about/banner_business.jpg");
+  }
+  &.about-index-banner--unique{
+    @include cover_background_image("main/about/banner_unique.jpg");
+  }
+}
+.about-index-section {
+  margin: 40px;
+  .about-index-section__title {
+    font-size: $font_h1;
+    color: $black;
+    margin-bottom: 20px;
+  }
+  .about-index-section__sub-title {
+    font-size: $font_h2;
+    color: $black;
+    font-weight: bold;
+  }
+  .about-index-section__content {
+    font-size: $font_h2;
+    margin-bottom: 20px;
+  }
+  .about-index-section__image {
+    width: 100%;
+    height: auto;
+  }
+}

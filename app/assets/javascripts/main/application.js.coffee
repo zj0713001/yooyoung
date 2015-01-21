@@ -31,6 +31,7 @@
 #= require turbolinks
 
 $ ->
-  $('img.lazy').lazyload
-    threshold: 300
-    effect: "fadeIn"
+  $(document).on 'page:change', ->
+    $('img.lazy').lazyload
+      threshold: 300
+      effect: "fadeIn"
