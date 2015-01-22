@@ -37,6 +37,6 @@ class HotelPackage < ActiveRecord::Base
 
   before_save :set_editor
   def set_editor
-    self.editor = self.hotel.editor
+    self.editor = self.hotel.try(:editor)
   end
 end
