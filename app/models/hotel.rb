@@ -47,7 +47,7 @@ class Hotel < ActiveRecord::Base
 
   has_many :photos, as: :target, dependent: :destroy
   has_one :package, class_name: HotelPackage
-  has_one :favorite_package, class_name: HotelPackage
+  has_one :favorite_package, class_name: HotelPackage, -> { where favorite: true }
   has_many :reasons, -> { where active: true }, class_name: HotelReason
   has_many :cheats, -> { where active: true }, class_name: HotelCheat
   has_and_belongs_to_many :categories, -> { where active: true }, uniq: true
