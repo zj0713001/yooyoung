@@ -31,8 +31,8 @@ class Admin::HotelsController < Admin::ApplicationController
     authorize! :create, model
 
     @hotel = model.new
-    @hotel.attributes = params[:hotel].permit!
     @hotel.editor = current_user
+    @hotel.attributes = params[:hotel].permit!
     rooms = @hotel.package.try(:rooms).to_a
     @hotel.favorite_package.rooms = rooms
     @hotel.save
@@ -57,10 +57,10 @@ class Admin::HotelsController < Admin::ApplicationController
     @hotel = model.friendly_acquire params[:id]
     if params[:published].nil?
       authorize! :edit, model
-      @hotel.attributes = params[:hotel].permit!
       @hotel.editor = current_user
-
-      @hotel.package.rooms = @hotel.favorite_package.rooms if @hotel.favorite_package.try(:rooms).present?
+      @hotel.attributes = params[:hotel].permit!
+      rooms = @hotel.package.try(:rooms).to_a
+      @hotel.favorite_package.rooms = rooms
     else
       authorize! :publish, model
       @hotel.attributes = { published: params[:published] }
