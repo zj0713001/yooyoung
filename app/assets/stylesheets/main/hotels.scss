@@ -697,7 +697,7 @@
     margin-top: 20px;
     height: 1px;
     @include background(linear-gradient(left, rgba($light_black, .1), rgba($light_black, .6), rgba($light_black, .1)));
-    &:last {
+    &:last-child {
       display: none;
     }
   }
