@@ -46,8 +46,8 @@ class Hotel < ActiveRecord::Base
   include ActiveRecord::Friendlyable
 
   has_many :photos, as: :target, dependent: :destroy
-  has_one :package, class_name: HotelPackage
-  has_one :favorite_package, class_name: HotelPackage
+  has_one :package, -> { where favorite: false }, class_name: HotelPackage
+  has_one :favorite_package, -> { where favorite: true }, class_name: HotelPackage
   has_many :reasons, -> { where active: true }, class_name: HotelReason
   has_many :cheats, -> { where active: true }, class_name: HotelCheat
   has_and_belongs_to_many :categories, -> { where active: true }, uniq: true

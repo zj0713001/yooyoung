@@ -9,6 +9,7 @@ h3.ui.header = title
         .text = ff.object.try(:name)
       - else
         = ff.text_field :name
+        = ff.hidden_field :favorite
   .fields
     .four.wide.field
       = ff.label :description

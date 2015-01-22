@@ -42,7 +42,7 @@ class Room < ActiveRecord::Base
   end
   default_value_for :population, 2
 
-  validates :name, presence: true
+  # validates :name, presence: true
 
   before_save :set_hotel_and_editor
   def set_hotel_and_editor
