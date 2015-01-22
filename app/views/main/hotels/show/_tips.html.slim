@@ -1,10 +1,73 @@
 .hotel-show-content-tips
-  .hotel-show-content-tips__content
-    .hotel-show-content-tips__title 旅行贴士
-    .hotel-show-content-tips__info
-      table
+  .hotel-show-content-tips__container
+    table.hotel-show-content-tips__list
+      - if hotel.visa_tip.present?
         tr
-          td
-            ul.hotel-show-content-tips__list
-              - hotel.tips.each do |tip|
-                li.hotel-show-content-tips__item = tip
+          td.hotel-show-content-tips__item-field 签证
+          td.hotel-show-content-tips__item-logo
+            .iconfont.icon-visa
+          td.hotel-show-content-tips__item-content
+            = simple_format hotel.visa_tip
+            hr.hotel-show-content-tips__item-hr
+      - if hotel.language_tip.present?
+        tr
+          td.hotel-show-content-tips__item-field 语言
+          td.hotel-show-content-tips__item-logo
+            .iconfont.icon-language
+          td.hotel-show-content-tips__item-content
+            = simple_format hotel.language_tip
+            hr.hotel-show-content-tips__item-hr
+      - if hotel.money_tip.present?
+        tr
+          td.hotel-show-content-tips__item-field 货币信息
+          td.hotel-show-content-tips__item-logo
+            .iconfont.icon-money
+          td.hotel-show-content-tips__item-content
+            = simple_format hotel.money_tip
+            hr.hotel-show-content-tips__item-hr
+      - if hotel.luggage_tip.present?
+        tr
+          td.hotel-show-content-tips__item-field 携带物品
+          td.hotel-show-content-tips__item-logo
+            .iconfont.icon-luggage
+          td.hotel-show-content-tips__item-content
+            = simple_format hotel.luggage_tip
+            hr.hotel-show-content-tips__item-hr
+      - if hotel.network_tip.present?
+        tr
+          td.hotel-show-content-tips__item-field
+            | 网络
+            br
+            | 及通讯
+          td.hotel-show-content-tips__item-logo
+            .iconfont.icon-network
+          td.hotel-show-content-tips__item-content
+            = simple_format hotel.network_tip
+            hr.hotel-show-content-tips__item-hr
+      - if hotel.power_tip.present?
+        tr
+          td.hotel-show-content-tips__item-field 电源
+          td.hotel-show-content-tips__item-logo
+            .iconfont.icon-power
+          td.hotel-show-content-tips__item-content
+            = simple_format hotel.power_tip
+            hr.hotel-show-content-tips__item-hr
+      - if hotel.best_season.present?
+        tr
+          td.hotel-show-content-tips__item-field
+            | 最佳
+            br
+            | 旅行季节
+          td.hotel-show-content-tips__item-logo
+            .iconfont.icon-best-season
+          td.hotel-show-content-tips__item-content
+            = simple_format hotel.best_season
+            hr.hotel-show-content-tips__item-hr
+      - if hotel.tips.present?
+        tr
+          td.hotel-show-content-tips__item-field 其他
+          td.hotel-show-content-tips__item-logo
+            .iconfont.icon-others
+          td.hotel-show-content-tips__item-content
+            - hotel.tips.each do |tip|
+              p = tip

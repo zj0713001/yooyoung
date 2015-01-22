@@ -3,6 +3,12 @@ $ ->
     animate_time = 500
     animate_bez = 'easeInOutQuart'
 
+    content_package_init_height = ->
+      $('.js_main_hotel_show_content_package_container').height(_.min([$(window).height(), $(window).width()])-60)
+    content_package_init_height()
+    lazy_content_package_init_height = _.debounce(content_package_init_height, 500)
+    $(window).resize(lazy_content_package_init_height)
+
     cancel_scroll = ->
       $(document).mousewheel (event) ->
         event.preventDefault()
@@ -30,7 +36,7 @@ $ ->
     package_info_hide = ($slick) ->
       $slick.data('show-info', false)
       $('.js_main_hotel_show_content_package_opacity').hide();
-      $('.js_main_hotel_show_content_package_info').css('left', '-60%')
+      $('.js_main_hotel_show_content_package_info').css('left', '-45%')
       $('.js_main_hotel_show_content_package_info').hide()
       $('.js_main_hotel_show_content_package_text').hide()
 
@@ -83,7 +89,7 @@ $ ->
       , animate_time, animate_bez
       .queue ->
         $('.js_main_hotel_show_banner_section').animate
-          top: "180"
+          top: "170"
         , animate_time, animate_bez
         $(this).dequeue()
       $('.js_main_hotel_show_banner_second_half').animate
@@ -137,17 +143,20 @@ $ ->
           banner_close()
         package_top = parseInt($('.js_main_hotel_show_content_package').offset().top - 60)
         if Math.abs($(document).scrollTop() - package_top) > 50
+          $(document).unmousewheel()
           $slick_active = $('.js_main_hotel_show_content_package .slick-active')
           package_info_hide($slick_active) if $slick_active.data('show-info')
-          $('.js_main_hotel_show_content_package').data('package-scroll', false).slickGoTo(0)
-          $(document).unmousewheel()
           $('.js_main_hotel_show_content_package').data('skip', false) if $(document).scrollTop() < package_top
           $('.js_main_hotel_show_content_package').data('skip', true) if $(document).scrollTop() > package_top
+          $('.js_main_hotel_show_content_package').data('package-scroll', false)
         if $(document).scrollTop() >= package_top && ($(document).scrollTop() - package_top) < 50 && !$('.js_main_hotel_show_content_package').data('package-scroll') && !$('.js_main_hotel_show_content_package').data('skip')
           $('.js_main_hotel_show_content_package').data('package-scroll', true)
           $('.js_main_hotel_show_content_package').data('skip', true)
           $(document).scrollTo($('.js_main_hotel_show_content_package').offset().top-60)
           package_scroll()
+        if $(document).scrollTop() >= package_top && ($(document).scrollTop() - package_top) > $(window).height()
+          $('.js_main_hotel_show_content_package').unslick();
+          content_package_slick_bind()
       true
 
     _.delay ->
@@ -197,15 +206,25 @@ $ ->
     $('.js_main_hotel_show_content_overview_slick_next').on 'click', ->
       $('.js_main_hotel_show_content_overview_images').slickNext()
 
-    $('.js_main_hotel_show_content_package').slick
-      accessibility: false
-      speed: animate_time
-      pauseOnHover: false
-      draggable: false
-      arrows: false
-      infinite: false
-      touchMove: false
-      lazyLoad: 'progressive'
+    $('.js_main_hotel_show_content_overview_tab_item').on 'click', ->
+      return if $(this).hasClass('active')
+      $from = $(this).siblings('.active')
+      $from.removeClass('active')
+      $(this).addClass('active')
+      $('.js_main_hotel_show_content_overview_item').eq($from.index()).hide()
+      $('.js_main_hotel_show_content_overview_item').eq($(this).index()).fadeIn()
+
+    content_package_slick_bind = ->
+      $('.js_main_hotel_show_content_package').slick
+        accessibility: false
+        speed: animate_time
+        pauseOnHover: false
+        draggable: false
+        arrows: false
+        infinite: false
+        touchMove: false
+        lazyLoad: 'progressive'
+    content_package_slick_bind()
 
     $('.js_main_hotel_show_rooms_tab li').on 'click', ->
       return if $(this).hasClass('active')
@@ -253,16 +272,15 @@ $ ->
     $('.js_hotel_show_content_favorite_help').on 'click', ->
       $('.js_hotel_show_content_favorite_explain').slideToggle(100)
 
-    $('.js_hotel_show_content_favorite_item_link').on 'click', ->
-      $('.js_hotel_show_content_favorite_item_link.active').removeClass('active')
-      $target = $($(this).data('id'))
-      $target.addClass('active')
-      $(this).addClass('active')
-      $(document).trigger('scroll')
+    $('.js_hotel_show_content_favorite_photos').slick
+      autoplay: false
+      fade: true
+      arrows: false
+      lazyLoad: 'progressive'
+      dots: true
 
-    $('.js_hotel_show_content_favorite_item_next').on 'click', ->
-      $links = $('.js_hotel_show_content_favorite_filters .js_hotel_show_content_favorite_item_link')
-      $active_link = $links.filter('.active')
-      $target_link = $($links[($links.index($active_link[0])+1)])
-      console.log $target_link
-      $target_link.trigger('click')
+    $('.js_hotel_show_content_favorite_photos_slick_prev').on 'click', ->
+      $(this).siblings('.js_hotel_show_content_favorite_photos').slickPrev()
+
+    $('.js_hotel_show_content_favorite_photos_slick_next').on 'click', ->
+      $(this).siblings('.js_hotel_show_content_favorite_photos').slickNext()

@@ -14,6 +14,7 @@ ruby:
     .hotel-show-banner__section.js_main_hotel_show_banner_section
       .hotel-show-banner-section.js_main_hotel_show_banner_section_block
         h1.hotel-show-banner-section__name = @hotel.chinese
+        hr.hotel-show-banner-section__hr
         .main-location.main-location--center
           span.iconfont.icon-location
           span.main-location__text #{[@hotel.city.try(:province).chinese, @hotel.city.chinese].join('，')}
@@ -34,8 +35,6 @@ ruby:
           li
             a href='#favorite' 悠漾在酒店
           li
-            a href='#protocols' 协议条款
-          li
             a href='#tips' 旅行贴士
         a.hotel-show-content-nav__booking.primary-button href="#" 立即预定
     .hotel-show-content__overview
@@ -44,12 +43,10 @@ ruby:
       = render 'main/hotels/show/rooms', hotel: @hotel
     .hotel-show-content__package-simple.js_main_hotel_show_content_package_simple#package
       = render 'main/hotels/show/package_simple', hotel: @hotel
-    .hotel-show-content__package
+    .hotel-show-content__package.js_main_hotel_show_content_package_container
       = render 'main/hotels/show/package', hotel: @hotel
     .hotel-show-content__favorite#favorite
       = render 'main/hotels/show/favorite_package', hotel: @hotel
-    .hotel-show-content__protocols#protocols
-      = render 'main/hotels/show/protocols', hotel: @hotel
     .hotel-show-content__tips#tips
       = render 'main/hotels/show/tips', hotel: @hotel
   = render 'main/shared/footer'

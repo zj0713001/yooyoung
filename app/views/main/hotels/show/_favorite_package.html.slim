@@ -1,39 +1,39 @@
 .hotel-show-content-favorite
-  h2.hotel-show-content-favorite__title
-    | 悠漾在酒店 — #{hotel.favorite_package.name}
-    span.iconfont.icon-help.js_hotel_show_content_favorite_help
-  .hotel-show-content-favorite__explain.js_hotel_show_content_favorite_explain
-    | 在酒店套餐的基础上，加入了酒店周边3公里范围内的游玩计划，详细说明了如何以酒店为中心的话应该如何玩儿转目的地。您可完全按照行程路线的安排完成您的旅行计划，也可以只将其作为参考。
-    br
-    |“悠漾在酒店”系列的总费用除了酒店套餐之外，还会包含部分景点门票、交通及活动费用，一价全包让您轻松玩儿转目的地。
-    .hotel-show-content-favorite__explain-arrow
-  .hotel-show-content-favorite__filters.js_hotel_show_content_favorite_filters
-    - hotel.favorite_package.items.group_by(&:service_day).each_with_index do |(_, items), index|
-      .hotel-show-content-favorite__filter-day = "第#{t('number.index')[index]}天"
-      .hotel-show-content-favorite__filter-items
-        - items.each_with_index do |item, item_index|
-          span.hotel-show-content-favorite__filter-item
-            = "---" unless item_index.zero?
-            a.js_hotel_show_content_favorite_item_link class="#{'active' if index.zero? && item_index.zero?}" data-id="#favorite_item_#{item.id}"
-              = item.content
-  .hotel-show-content-favorite__contents
-    - hotel.favorite_package.items.each_with_index do |item, index|
-      .hotel-show-content-favorite__content.js_hotel_show_content_favorite_item_link id="favorite_item_#{item.id}" class="#{'active' if index.zero?}"
-        - if item.cover_photo.present?
-          .hotel-show-content-favorite__content-image
-            = image_tag item.cover_photo.image.small.url, lazy: true, class: :lazy
-        .hotel-show-content-favorite__content-info
-          .hotel-show-content-favorite__content-info-name = item.content
-          - if item.description.present?
-            .hotel-show-content-favorite__content-info-item
-              = simple_format item.description
-          - if item.address.present?
-            .hotel-show-content-favorite__content-info-item
-              = "地点：#{item.address}"
-          - if item.openning_hours.present?
-            .hotel-show-content-favorite__content-info-item.hotel-show-content-favorite__content-info-item--small = item.openning_hours
-          - if item.tips.present?
-            - item.tips.each do |tip|
-              .hotel-show-content-favorite__content-info-item.hotel-show-content-favorite__content-info-item--small = tip
-    a.hotel-show-content-favorite__content-next.js_hotel_show_content_favorite_item_next
-      .iconfont.icon-fullarrow-right
+  .hotel-show-content-favorite__container
+    h2.hotel-show-content-favorite__title
+      | 悠漾在酒店
+      a.js_hotel_show_content_favorite_help 什么是悠漾在酒店？
+    .hotel-show-content-favorite__explain.js_hotel_show_content_favorite_explain
+      | 在酒店套餐的基础上，加入了酒店周边3公里范围内的游玩计划，详细说明了如何以酒店为中心的话应该如何玩儿转目的地。您可完全按照行程路线的安排完成您的旅行计划，也可以只将其作为参考。
+      br
+      |“悠漾在酒店”系列的总费用除了酒店套餐之外，还会包含部分景点门票、交通及活动费用，一价全包让您轻松玩儿转目的地。
+    table.hotel-show-content-favorite__list
+      - hotel.favorite_package.items.group_by(&:service_day).sort.each_with_index do |(day_index, items), index|
+        tr
+          td.hotel-show-content-favorite__day class="#{'first' if index.zero?}"
+            hr.hotel-show-content-favorite__hr.left
+            = "第#{t('number.index')[day_index-1]}天"
+            hr.hotel-show-content-favorite__hr.right
+          td.hotel-show-content-favorite__black-td
+          td.hotel-show-content-favorite__white-td class="#{'first' if index.zero?}"
+            .hotel-show-content-favorite__flag
+          td.hotel-show-content-favorite__items class="#{'first' if index.zero?}"
+            - items.each do |item|
+              .hotel-show-content-favorite__item class="#{'hotel-show-content-favorite__item--multi' if items.count > 1}"
+                .hotel-show-content-favorite__item-content = item.content
+                - if item.photos.present?
+                  .hotel-show-content-favorite__item-photos
+                    .js_hotel_show_content_favorite_photos
+                      - item.photos.each do |photo|
+                        .hotel-show-content-favorite__photo-item
+                          = image_tag photo.image.large.url, lazy: true
+                    a.main-slick__prev.js_hotel_show_content_favorite_photos_slick_prev
+                      .iconfont.icon-arrow-left
+                    a.main-slick__next.js_hotel_show_content_favorite_photos_slick_next
+                      .iconfont.icon-arrow-right
+                - if item.description.present?
+                  .hotel-show-content-favorite__item-description = simple_format item.description
+                - if item.address.present?
+                  .hotel-show-content-favorite__item-info = "地点：#{item.address}"
+                - if item.openning_hours.present?
+                  .hotel-show-content-favorite__item-info = item.openning_hours
