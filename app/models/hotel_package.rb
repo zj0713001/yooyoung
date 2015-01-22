@@ -31,7 +31,7 @@ class HotelPackage < ActiveRecord::Base
 
   # Todo 价格
 
-  validates :name, presence: true
+  # validates :name, presence: true
   # validates :hotel, existence: true
   # validates :editor, existence: true
 
