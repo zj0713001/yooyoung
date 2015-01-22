@@ -163,6 +163,9 @@
   .hotel-show-content__tips {
     padding-top: 90px;
   }
+  .hotel-show-content__tips {
+    margin-bottom: 90px;
+  }
 }
 .hotel-show-content-nav {
   @include main-container;
@@ -677,7 +680,7 @@
   .hotel-show-content-tips__list {
     tr:last-child {
       .hotel-show-content-tips__item-content {
-        padding-bottom: 10px;
+        padding-bottom: 20px;
       }
       .hotel-show-content-tips__item-hr {
         display: none;
@@ -699,7 +702,7 @@
   }
   .hotel-show-content-tips__item-content {
     width: 1000px;
-    padding: 10px 20px 0;
+    padding: 20px 20px 0;
   }
   .hotel-show-content-tips__item-hr {
     display: block;
