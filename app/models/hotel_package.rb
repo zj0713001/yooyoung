@@ -27,7 +27,7 @@ class HotelPackage < ActiveRecord::Base
   belongs_to :editor, class_name: User
 
   accepts_nested_attributes_for :items, allow_destroy: true, reject_if: Proc.new { |attributes| attributes['content'].blank? }
-  accepts_nested_attributes_for :rooms, allow_destroy: true, reject_if: Proc.new { |attributes| attributes['name'].blank? }
+  accepts_nested_attributes_for :rooms, allow_destroy: true, reject_if: Proc.new { |attributes| attributes['name'].blank? && attributes['chinese'].blank? }
 
   # Todo 价格
 
