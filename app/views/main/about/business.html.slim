@@ -1,2 +1,20 @@
+ruby:
+  set_meta_tags(
+    title: "悠漾旅行商务合作",
+    description: "悠漾旅行商务合作。",
+    keywords: "悠漾旅行商务合作"
+  )
 .about-index
-  
+  = render 'main/shared/main_header'
+  .about-index__banner.about-index-banner.about-index-banner--business
+    .about-index-banner__title 商务合作
+  .about-index__section.about-index-section
+    .about-index-section__content
+      | 电话: 010-58070160
+  .about-index__section.about-index-section
+    .about-index-section__content
+      | 酒店合作：hotels@yooyoung.cn
+  .about-index__section.about-index-section
+    .about-index-section__content
+      | 品牌合作及市场推广：bd@yooyoung.cn
+  = render 'main/shared/footer'

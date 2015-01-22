@@ -25,5 +25,6 @@
     position: relative;
     width: 100%;
     height: 5em;
+    @include background(linear-gradient(rgba($black, .6), rgba($black, 0)));
   }
 }

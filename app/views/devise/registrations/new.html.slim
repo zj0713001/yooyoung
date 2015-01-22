@@ -1,3 +1,9 @@
+ruby:
+  set_meta_tags(
+    title: "注册新用户",
+    description: "悠漾旅行注册新用户。",
+    keywords: "悠漾旅行，注册新用户"
+  )
 .sessions-new
   = render partial: 'main/shared/header'
   .sessions-new__sign-up
@@ -26,5 +32,6 @@
               |）
         .main-form__group.main-form__group--tips
           = check_box_tag :agree_me, nil, true, class: 'sessions-new-form__agree-me', :'data-no-error-message' => true
-          = label_tag :agree_me, '我同意《悠漾旅行网服务协议》', class: 'sessions-new-form__agree-me-label'
+          = label_tag :agree_me, '我同意', class: 'sessions-new-form__agree-me-label'
+          = link_to "《悠漾旅行服务协议》", protocols_path, target: :_blank
         = f.submit "注册", class: :'opacity-button main-form__submit sessions-new-form__submit'

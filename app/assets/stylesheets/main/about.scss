@@ -1,7 +1,6 @@
 .about-index {
   color: $gray_black;
   line-height: 2em;
-  @include no-select;
   .about-index__banner {
     position: relative;
     margin: 0;
@@ -27,6 +26,9 @@
   }
   &.about-index-banner--unique{
     @include cover_background_image("main/about/banner_unique.jpg");
+  }
+  &.about-index-banner--protocols{
+    @include cover_background_image("main/about/banner_protocols.jpg");
   }
 }
 .about-index-section {
