@@ -46,7 +46,8 @@ $ ->
       file = data.files[index]
       data.context.prepend($("<div/>").addClass('photo-uploader__file-preview').append(file.preview))
     .on 'fileuploadsubmit', (e, data) ->
-      data.formData = { image: data.files[0], description: data.context.find('.js_admin_upload_file_description').val() }
+      # data.formData = { image: data.files[0], description: data.context.find('.js_admin_upload_file_description').val() }
+      data.formData = { image: data.files[0] }
     .on 'fileuploaddone', (e, data) ->
       unless data.image_id
         data.context.find('.js_admin_upload_file_description').remove()

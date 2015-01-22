@@ -1,6 +1,11 @@
 .hotel-show-content-package-simple
   .hotel-show-content-package-simple__content
     h2.hotel-show-content-package-simple__title = hotel.package.name
-    ul.hotel-show-content-package-simple__list
-      - hotel.package.items.each do |item|
-        li = item.content
+    .hotel-show-content-package-simple__list
+      .hotel-show-content-package-simple__list-info 套餐包含：
+      ul
+        - hotel.package.items.each do |item|
+          li = item.content
+    .hotel-show-content-package-simple__description
+      .hotel-show-content-package-simple__list-info 备注：
+      = simple_format hotel.package.description

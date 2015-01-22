@@ -44,12 +44,12 @@
   }
   .sessions-new-form__agree-me-label,
   .sessions-new-form__remember-me-label {
-    font-size: $font_h3;
+    font-size: $font_h5;
     margin-left: 5px;
   }
   .sessions-new-form__link {
     float: right;
-    font-size: $font_h3;
+    font-size: $font_h5;
     color: $white;
     &:hover {
       @include rgba-background-inline(rgba($white, 0.2));
@@ -79,7 +79,7 @@
     border: solid;
     border-width: 1px;
     border-color: $white;
-    font-size: $font_h2;
+    font-size: $font_h4;
     color: $white;
   }
   .sessions-new-form__sending-captcha {
