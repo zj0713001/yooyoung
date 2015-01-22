@@ -17,7 +17,7 @@ ruby:
         hr.hotel-show-banner-section__hr
         .main-location.main-location--center
           span.iconfont.icon-location
-          span.main-location__text #{[@hotel.city.try(:province).chinese, @hotel.city.chinese].join('，')}
+          span.main-location__text #{hotel_location_text(@hotel)}
     .hotel-show-banner__booking.opacity-button.js_main_hotel_show_banner_booking href="#" 立即预定
     .hotel-show-banner__click-down.js_main_hotel_show_banner_down
       .iconfont.icon-arrow-down

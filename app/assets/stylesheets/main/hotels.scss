@@ -203,14 +203,15 @@
   padding: 40px 20px;
   position: relative;
   .hotel-show-content-overview__images {
+    position: relative;
     @include span(800px);
     height: 540px;
+    margin: 0;
+    overflow: hidden;
     @include breakpoint(max-width 1280px) {
       @include span(600px);
       height: 400px;
     }
-    margin: 0;
-    overflow: hidden;
   }
   .hotel-show-content-overview__image-item {
     img {
@@ -249,7 +250,12 @@
   }
   .hotel-show-content-overview__info-items {
     @include clearfix;
-    padding: 40px 20px;
+    padding: 20px;
+    height: 500px;
+    overflow-y: auto;
+    @include breakpoint(max-width 1280px) {
+      height: 360px;
+    }
   }
   .hotel-show-content-overview__info-features {
     overflow-y: auto;
@@ -266,15 +272,6 @@
   }
   .hotel-show-content-overview__info-traffics-location {
     color: $dark_black;
-  }
-  .main-slick__prev {
-    left: 40px;
-  }
-  .main-slick__next {
-    right: 440px;
-    @include breakpoint(max-width 1280px) {
-      right: 340px;
-    }
   }
 }
 .hotel-show-content-package-simple {
@@ -677,6 +674,16 @@
     @include main-container;
     padding: 20px;
   }
+  .hotel-show-content-tips__list {
+    tr:last-child {
+      .hotel-show-content-tips__item-content {
+        padding-bottom: 10px;
+      }
+      .hotel-show-content-tips__item-hr {
+        display: none;
+      }
+    }
+  }
   .hotel-show-content-tips__item-field {
     width: 160px;
     color: $dark_black;
@@ -692,7 +699,7 @@
   }
   .hotel-show-content-tips__item-content {
     width: 1000px;
-    padding: 10px 20px;
+    padding: 10px 20px 0;
   }
   .hotel-show-content-tips__item-hr {
     display: block;
