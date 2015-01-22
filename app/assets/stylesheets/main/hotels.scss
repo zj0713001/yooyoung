@@ -674,6 +674,16 @@
     @include main-container;
     padding: 20px;
   }
+  .hotel-show-content-tips__list {
+    tr:last-child {
+      .hotel-show-content-tips__item-content {
+        padding-bottom: 10px;
+      }
+      .hotel-show-content-tips__item-hr {
+        display: none;
+      }
+    }
+  }
   .hotel-show-content-tips__item-field {
     width: 160px;
     color: $dark_black;
@@ -697,9 +707,6 @@
     margin-top: 20px;
     height: 1px;
     @include background(linear-gradient(left, rgba($light_black, .1), rgba($light_black, .6), rgba($light_black, .1)));
-    &:last-child {
-      display: none;
-    }
   }
   @include breakpoint(max-width 1280px) {
     .hotel-show-content-tips__item-field {
