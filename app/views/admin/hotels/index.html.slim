@@ -7,7 +7,7 @@ h2.ui.dividing.header
       = search_field_tag(model, :id, :text)
       = search_field_tag(model, :name, :like)
       = search_field_tag(model, :chinese, :like)
-      = search_field_tag(model, :city_id, :select, { data: all_cities_options_for_select(params[:where].try(:[, :city_id])) })
+      = search_field_tag(model, :city_id, :select, { data: all_cities_options_for_select(params[:where].try(:[], :city_id)) })
       = search_field_tag(model, :created_at, :range)
       = search_field_tag(model, :updated_at, :range)
       = search_page_tag
@@ -25,8 +25,8 @@ table.ui.table.segment
         td = hotel.id
         td = link_to hotel.chinese, hotel, target: :_blank, class: :'ui link'
         td = hotel.name
-        td = hotel.country.try(:chinese)
-        td = hotel.city.try(:chinese)
+        td = link_to_if can?(:show, Country), hotel.country.chinese, [:admin, hotel.country], target: :_blank, class: :'ui link' if hotel.country
+        td = link_to_if can?(:show, City), hotel.city.chinese, [:admin, hotel.city], target: :_blank, class: :'ui link' if hotel.city
         td = hotel.editor.try(:nickname)
         td = hotel.updated_at.try(:localtime).try(:to_s, :db)
         td = hotel.published_at.try(:localtime).try(:to_s, :db)

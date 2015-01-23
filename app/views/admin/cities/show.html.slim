@@ -45,15 +45,6 @@ h2.ui.dividing.header
           = f.text_field :code
     .fields
       .four.wide.field
-        = f.label :province_id
-      .eight.wide.field
-        - if show
-          .text
-            = link_to @city.province.chinese, [:admin, @city.province], target: :_blank, class: :'ui link' if @city.province && can?(:show, Province)
-        - else
-          = f.select :province_id, all_provinces_options_for_select(@city.province_id), { include_blank: true }, class: :'js_admin_search_select'
-    .fields
-      .four.wide.field
         = f.label :country_id
       .eight.wide.field
         - if show
@@ -61,6 +52,15 @@ h2.ui.dividing.header
             = link_to @city.country.chinese, [:admin, @city.country], target: :_blank, class: :'ui link' if @city.country && can?(:show, Country)
         - else
           = f.select :country_id, all_countries_options_for_select(@city.country_id), { include_blank: true }, class: :'js_admin_search_select'
+    .fields
+      .four.wide.field
+        = f.label :province_id
+      .eight.wide.field
+        - if show
+          .text
+            = link_to @city.province.chinese, [:admin, @city.province], target: :_blank, class: :'ui link' if @city.province && can?(:show, Province)
+        - else
+          = f.select :province_id, all_provinces_options_for_select(@city.province_id), { include_blank: true }, class: :'js_admin_search_select'
     .fields
       .four.wide.field
         = f.label :description

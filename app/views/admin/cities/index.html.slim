@@ -17,7 +17,7 @@ h2.ui.dividing.header
     = new_link_tag model
 table.ui.table.segment
   thead
-    - %w[id chinese name code province_id country_id editor_id updated_at published_at].each do |name|
+    - %w[id chinese name code country_id province_id editor_id updated_at published_at].each do |name|
       th = model.human_attribute_name(name)
     th = t('admin.actions')
     th = t('admin.public')
@@ -28,8 +28,8 @@ table.ui.table.segment
         td = city.chinese
         td = city.name
         td = city.code
-        td = link_to city.province.chinese, [:admin, city.province], target: :_blank, class: :'ui link' if city.province && can?(:show, Province)
-        td = link_to city.country.chinese, [:admin, city.country], target: :_blank, class: :'ui link' if city.country && can?(:show, Country)
+        td = link_to_if can?(:show, Country), city.country.chinese, [:admin, city.country], target: :_blank, class: :'ui link' if city.country
+        td = link_to_if can?(:show, Province), city.province.chinese, [:admin, city.province], target: :_blank, class: :'ui link' if city.province
         td = city.editor.try(:nickname)
         td = city.updated_at.try(:localtime).try(:to_s, :db)
         td = city.published_at.try(:localtime).try(:to_s, :db)
