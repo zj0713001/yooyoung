@@ -27,15 +27,15 @@ table.ui.table.segment
         td = hotel.name
         td = hotel.country.try(:chinese)
         td = hotel.city.try(:chinese)
-        td = hotel.editor.try(:name)
+        td = hotel.editor.try(:nickname)
         td = hotel.updated_at.try(:localtime).try(:to_s, :db)
         td = hotel.published_at.try(:localtime).try(:to_s, :db)
         td
           - if can? :show, Hotel
-            = link_to [:admin, hotel], alt: t('admin.show'), class: :'ui link action' do
+            = link_to [:admin, hotel], alt: t('admin.show'), class: :'ui link action', target: :_blank do
               i.search.icon
           - if can? :edit, Hotel
-            = link_to [:edit, :admin, hotel], alt: t('admin.edit'), class: :'ui link' do
+            = link_to [:edit, :admin, hotel], alt: t('admin.edit'), class: :'ui link', target: :_blank do
               i.edit.icon
         td
           = admin_publish_tag(hotel)

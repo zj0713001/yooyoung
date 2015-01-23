@@ -6,8 +6,14 @@
         - if photo.try(:image)
           .photo-uploader__file-preview
             = image_tag photo.image.small.url
+          .photo-uploader__file-name
+            i.black.icon.file.image.outline
+            = photo.file_name
+          .photo-uploader__file-size
+            i.black.icon.info
+            = "#{(photo.file_size.to_f/1024).round(3)}kb"
           .photo-uploader__file-url
-            i.black.icon.url
+            i.black.icon.linkify
             = photo.image.url
           / .photo-uploader__file-description
           /   i.black.icon.tag
