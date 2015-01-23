@@ -8,8 +8,8 @@ h2.ui.dividing.header
       = search_field_tag(model, :name, :like)
       = search_field_tag(model, :chinese, :like)
       = search_field_tag(model, :code, :like)
-      = search_field_tag(model, :province_id, :select, { data: all_provinces_options_for_select(params[:where][:province_id]) })
-      = search_field_tag(model, :country_id, :select, { data: all_countries_options_for_select(params[:where][:country_id]) })
+      = search_field_tag(model, :province_id, :select, { data: all_provinces_options_for_select(params[:where].try(:[], :province_id)) })
+      = search_field_tag(model, :country_id, :select, { data: all_countries_options_for_select(params[:where].try(:[], :country_id)) })
       = search_field_tag(model, :created_at, :range)
       = search_field_tag(model, :updated_at, :range)
       = search_page_tag

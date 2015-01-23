@@ -7,7 +7,7 @@ h2.ui.dividing.header
       = search_field_tag(model, :id, :text)
       = search_field_tag(model, :name, :like)
       = search_field_tag(model, :chinese, :like)
-      = search_field_tag(model, :city_id, :select, { data: all_cities_options_for_select(params[:where][:city_id]) })
+      = search_field_tag(model, :city_id, :select, { data: all_cities_options_for_select(params[:where].try(:[, :city_id])) })
       = search_field_tag(model, :created_at, :range)
       = search_field_tag(model, :updated_at, :range)
       = search_page_tag
