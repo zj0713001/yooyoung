@@ -20,21 +20,21 @@
 
 @mixin main-container {
   @include container;
-  @include breakpoint(max-width 1280px) {
+  @include breakpoint(max-width $desktop-maxwidth) {
     width: 960px;
   }
 }
 
 @mixin main-section-height {
   height: 620px;
-  @include breakpoint(max-width 1280px) {
+  @include breakpoint(max-width $desktop-maxwidth) {
     height: 460px;
   }
 }
 
 @mixin main-section-min-height {
   min-height: 620px;
-  @include breakpoint(max-width 1280px) {
+  @include breakpoint(max-width $desktop-maxwidth) {
     min-height: 460px;
   }
 }

@@ -29,19 +29,19 @@
     img {
       position: absolute;
       width: 100%;
-      height: 100%;
+      height: auto;
     }
   }
   .hotel-show-banner__first-half {
     top: -50%;
     img {
-      top: 50%;
+      margin-top: 50vh;
     }
   }
   .hotel-show-banner__second-half {
     bottom: -50%;
     img {
-      top: -50%;
+      margin-top: -50vh;
     }
   }
   .hotel-show-banner__section {
@@ -132,6 +132,13 @@
   }
 }
 .hotel-show-content {
+  .iconfont.icon-water {
+    position: absolute;
+    left: -2px;
+    top: 0;
+    font-size: $font_h6;
+    color: $light_black;
+  }
   .hotel-show-content__nav {
     width: 100%;
     height: 60px;
@@ -162,9 +169,6 @@
   .hotel-show-content__protocols,
   .hotel-show-content__tips {
     padding-top: 90px;
-  }
-  .hotel-show-content__tips {
-    margin-bottom: 90px;
   }
 }
 .hotel-show-content-nav {
@@ -203,17 +207,17 @@
 }
 .hotel-show-content-overview {
   @include main-container;
-  padding: 40px 20px;
+  padding: 0 20px;
   position: relative;
   .hotel-show-content-overview__images {
     position: relative;
     @include span(800px);
-    height: 540px;
+    height: 600px;
     margin: 0;
     overflow: hidden;
-    @include breakpoint(max-width 1280px) {
+    @include breakpoint(max-width $desktop-maxwidth) {
       @include span(600px);
-      height: 400px;
+      height: 450px;
     }
   }
   .hotel-show-content-overview__image-item {
@@ -223,12 +227,12 @@
     }
   }
   .hotel-show-content-overview__info {
-    @include span(400px);
-    height: 540px;
-    margin-left: 40px;
-    @include breakpoint(max-width 1280px) {
-      @include span(280px);
-      height: 400px;
+    @include span(420px);
+    height: 560px;
+    margin: 20px 0 20px 20px;
+    @include breakpoint(max-width $desktop-maxwidth) {
+      @include span(300px);
+      height: 410px;
     }
     color: $gray_black;
     font-size: $font_h4;
@@ -237,18 +241,17 @@
   .hotel-show-content-overview__info-tab {
     @include clearfix;
     width: 100%;
+    background: $lighter_black;
   }
   .hotel-show-content-overview__info-tab-item {
-    @include span(1 of 2);
+    @include span(100px);
     line-height: 40px;
     color: $dark_black;
     text-align: center;
     cursor: pointer;
     &.active {
       color: $black;
-    }
-    &:not(.active) {
-      background: $lighter_black;
+      background: $white;
     }
   }
   .hotel-show-content-overview__info-items {
@@ -256,25 +259,29 @@
     padding: 20px;
     height: 500px;
     overflow-y: auto;
-    @include breakpoint(max-width 1280px) {
+    font-size: $font_h5;
+    @include breakpoint(max-width $desktop-maxwidth) {
       height: 360px;
     }
   }
   .hotel-show-content-overview__info-features {
     overflow-y: auto;
     li {
-      margin-left: 20px;
-      line-height: 2em;
-      list-style: initial;
+      position: relative;
+      margin-bottom: 10px;
+      padding-left: 20px;
+      line-height: 1.5em;
     }
   }
   .hotel-show-content-overview__info-traffics {
     @include clearfix;
-    line-height: 2em;
+    line-height: 1.5em;
     display: none;
+    color: $gray_black;
   }
-  .hotel-show-content-overview__info-traffics-location {
+  .hotel-show-content-overview__info-title {
     color: $dark_black;
+    margin: 10px 0 5px;
   }
 }
 .hotel-show-content-package-simple {
@@ -292,30 +299,28 @@
   }
   .hotel-show-content-package-simple__list {
     float: left;
-    width: 740px;
+    width: 760px;
     background: $white;
     padding: 20px;
-    ul {
-      padding-left: 20px;
-    }
     li {
+      position: relative;
       font-size: $font_h4;
       line-height: 2em;
-      list-style: initial;
+      padding-left: 20px;
     }
   }
   .hotel-show-content-package-simple__description {
     float: left;
     width: 460px;
-    margin-left: 40px;
+    margin-left: 20px;
     padding: 20px;
     font-size: $font_h5;
     background: $white;
     line-height: 2em;
   }
-  @include breakpoint(max-width 1280px) {
+  @include breakpoint(max-width $desktop-maxwidth) {
     .hotel-show-content-package-simple__list {
-      width: 560px;
+      width: 580px;
     }
     .hotel-show-content-package-simple__description {
       width: 320px;
@@ -358,24 +363,49 @@
   }
   .hotel-show-content-package-section__info {
     position: absolute;
-    width: 45%;
+    width: 450px;
     height: 100%;
     top: 0;
-    left: -45%;
+    left: -450px;
     padding: 20px 40px;
     background: $lighter_black;
     color: $gray_black;
     font-size: $font_h4;
-    line-height: 2em;
+    line-height: 1.8em;
     display: none;
+    table {
+      height: 100%;
+    }
+    td {
+      vertical-align: center;
+    }
   }
   .hotel-show-content-package-section__info-content {
-    position: relative;
-    height: 100%;
     padding: 20px;
     @include clearfix;
     overflow-y: auto;
-    background: $white;
+    color: $dark_black;
+  }
+  .hotel-show-content-package-section__info-banner {
+    font-size: $font_h6;
+  }
+  .hotel-show-content-package-section__info-hr {
+    border: 0;
+    height: 1px;
+    width: 330px;
+    @include background($dark_black);
+    &.inline {
+      @include inline-block;
+      width: 264px;
+    }
+  }
+  .hotel-show-content-package-section__info-title {
+    line-height: 1em;
+    padding: 17px 0 25px;
+  }
+  .hotel-show-content-package-section__info-description {
+    color: $gray_black;
+    margin-top: 30px;
   }
   .hotel-show-content-package-section__title {
     margin-bottom: 20px;
@@ -449,7 +479,7 @@
     border-width: 31px 20px;
     border-style: solid;
     border-color: $white $white $white transparent;
-    @include breakpoint(max-width 1280px) {
+    @include breakpoint(max-width $desktop-maxwidth) {
       top: 230px;
       margin-top: -23px;
       border-width: 23px 15px;
@@ -513,9 +543,16 @@
   }
   .hotel-show-content-rooms__room-info-item {
     margin-bottom: 20px;
-    &.hotel-show-content-rooms__room-info-item--facility {
-      margin-left: 20px;
-    }
+  }
+  .hotel-show-content-rooms__room-info-facilities {
+    @include clearfix;
+  }
+  .hotel-show-content-rooms__room-info-facility {
+    @include span(110px);
+  }
+  .hotel-show-content-rooms__room-info-facility-items {
+    float: left;
+    min-width: 200px;
   }
 }
 .hotel-show-content-favorite {
@@ -523,7 +560,6 @@
   color: $gray_black;
   font-size: $font_h4;
   line-height: 2em;
-  background: $lighter_black;
   .hotel-show-content-favorite__container {
     @include main-container;
     padding: 20px;
@@ -534,82 +570,53 @@
     color: $black;
     margin-bottom: 10px;
     a {
-      font-size: $font_h5;
-      color: blue;
-      text-decoration: underline;
+      font-size: $font_h6;
+      color: $gray_black;
       margin-left: 20px;
     }
   }
   .hotel-show-content-favorite__explain {
     position: relative;
-    background: $white;
+    background: $lighter_black;
     padding: 20px;
     display: none;
     margin-bottom: 20px;
   }
-  .hotel-show-content-favorite__list {
+  .hotel-show-content-favorite__package {
+    width: 100%;
+    position: relative;
+  }
+  .hotel-show-content-favorite__package-background {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: auto;
+    height: 100vh;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    @include background-size(cover);
+    z-index: -1;
+    @include opacity(0.6);
+  }
+  .hotel-show-content-favorite__package-container {
     @include clearfix;
-    line-height: 30px;
-    td {
-      vertical-align: top;
-      line-height: 40px;
-      margin: 10px 0;
-      padding: 10px 0;
-      &.first {
-        padding-top: 20px;
-      }
-    }
-  }
-  .hotel-show-content-favorite__day {
-    width: 240px;
-    text-align: center;
-    color: $red;
-    font-size: $font_h4;
+    width: 900px;
+    margin: auto;
+    padding: 0 50px;
+    line-height: 1.8em;
+    font-size: $font_h5;
+    color: $gray_black;
     background: $white;
-    @include breakpoint(max-width 1280px) {
-      width: 180px;
-    }
-  }
-  .hotel-show-content-favorite__hr {
-    @include inline-block;
-    width: 40px;
-    border: 0;
-    height: 1px;
-    &.left {
-      @include background(linear-gradient(left, rgba($red, 0), rgba($red,0.75), rgba($red,1)));
-    }
-    &.right {
-      @include background(linear-gradient(right, rgba($red,0), rgba($red,0.75), rgba($red,1)));
-    }
-  }
-  .hotel-show-content-favorite__black-td {
-    width: 40px;
-    background: $lighter_black;
-  }
-  .hotel-show-content-favorite__white-td {
-    width: 80px;
-    background: $white;
-    text-align: center;
-  }
-  .hotel-show-content-favorite__flag {
-    @include border-radius(4px);
-    height: 8px;
-    width: 8px;
-    background: $red;
-    margin: 15px auto;
-  }
-  .hotel-show-content-favorite__items {
-    width: 880px;
-    background: $white;
-    @include breakpoint(max-width 1280px) {
-      width: 620px;
+    @include breakpoint(max-width $desktop-maxwidth) {
+      width: 700px;
     }
   }
   .hotel-show-content-favorite__item {
-    padding-right: 30px;
     margin-bottom: 10px;
   }
   .hotel-show-content-favorite__item-content {
+    position: relative;
+    padding-left: 40px;
     color: $dark_black;
     font-weight: bold;
     line-height: 40px;
@@ -618,13 +625,13 @@
     @include clearfix;
     position: relative;
     width: 600px;
-    height: 450px;
-    margin: 10px 0;
+    height: 340px;
+    margin: 10px auto;
+    overflow: hidden;
   }
   .hotel-show-content-favorite__photo-item {
     img {
       max-width: 600px;
-      max-height: 450px;
       margin: auto;
     }
   }
@@ -638,6 +645,48 @@
     margin: 5px 0;
   }
 }
+.hotel-show-content-favorite-package-container-day-section {
+  width: 100%;
+  @include clearfix;
+  text-align: center;
+  margin: 10px auto;
+  .hotel-show-content-favorite-package-container-day-section__hr {
+    @include inline-block;
+    width: 40%;
+    border: 0;
+    height: 4px;
+    @include rgba-background-inline(rgba($light_black, .5));
+  }
+  .hotel-show-content-favorite-package-container-day-section__day {
+    @include inline-block;
+    width: 10%;
+    margin: auto 3%;
+    @include rgba-background-inline(rgba($light_black, .5));
+    color: $white;
+  }
+}
+.hotel-show-content-favorite-package-container-next-item {
+  width: 100%;
+  @include clearfix;
+  text-align: center;
+  margin: 10px 0;
+  .hotel-show-content-favorite-package-container-next-item__hr {
+    @include inline-block;
+    width: 40%;
+    border: 0;
+    height: 1px;
+    @include rgba-background-inline(rgba($light_black, .5));
+  }
+  .iconfont.icon-arrow-double-down {
+    @include inline-block;
+    margin: 10px 0;
+    width: 10%;
+    margin: auto 3%;
+    font-size: $font_h3;
+    color: rgba($light_black, .5);
+  }
+}
+
 // .hotel-show-content-protocols {
 //   width: 100%;
 //   line-height: 2em;
@@ -677,6 +726,12 @@
     @include main-container;
     padding: 20px;
   }
+  .hotel-show-content-tips__title {
+    font-size: $font_h3;
+    line-height: 2em;
+    color: $black;
+    margin-bottom: 10px;
+  }
   .hotel-show-content-tips__list {
     tr:last-child {
       .hotel-show-content-tips__item-content {
@@ -711,7 +766,7 @@
     height: 1px;
     @include background(linear-gradient(left, rgba($light_black, .1), rgba($light_black, .6), rgba($light_black, .1)));
   }
-  @include breakpoint(max-width 1280px) {
+  @include breakpoint(max-width $desktop-maxwidth) {
     .hotel-show-content-tips__item-field {
       width: 120px;
     }

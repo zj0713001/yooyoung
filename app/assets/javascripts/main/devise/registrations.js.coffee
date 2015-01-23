@@ -1,4 +1,4 @@
-$ ->
+$(document).on 'page:change', ->
   $('.js_main_registration_send_sms_captcha').on 'click', ->
     user_phone = $('.js_main_registrations_phone_field').val()
     if $(this).hasClass('ajax_disabled')

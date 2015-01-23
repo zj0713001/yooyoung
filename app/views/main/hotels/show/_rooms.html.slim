@@ -16,13 +16,16 @@
           - room.photos.each do |photo|
             .hotel-show-content-rooms__room-photo
               = image_tag photo.image.large.url, lazy: true
-        a.main-slick__prev.js_main_hotel_show_room_photos_slick_prev
-          .iconfont.icon-arrow-left
-        a.main-slick__next.js_main_hotel_show_room_photos_slick_next
-          .iconfont.icon-arrow-right
+        - if room.photos.count > 1
+          a.main-slick__prev.js_main_hotel_show_room_photos_slick_prev
+            .iconfont.icon-arrow-left
+          a.main-slick__next.js_main_hotel_show_room_photos_slick_next
+            .iconfont.icon-arrow-right
       .hotel-show-content-rooms__room-infos.js_main_hotel_show_room_infos id="room_#{room.id}_info"
         .hotel-show-content-rooms__room-info
           h2.hotel-show-content-rooms__room-name = room.chinese
+          - if room.bed_type.present?
+            .hotel-show-content-rooms__room-info-item #{Room.human_attribute_name(:bed_type)}：#{room.bed_type}
           - if room.area.present?
             .hotel-show-content-rooms__room-info-item #{Room.human_attribute_name(:area)}：#{room.area}
           - if room.sight.present?
@@ -30,6 +33,9 @@
           - if room.population.present?
             .hotel-show-content-rooms__room-info-item #{Room.human_attribute_name(:population)}：#{room.population}
           - if room.facilities.present?
-            .hotel-show-content-rooms__room-info-item #{Room.human_attribute_name(:facilities)}：
-            - room.facilities.each do |facility|
-              .hotel-show-content-rooms__room-info-item.hotel-show-content-rooms__room-info-item--facility #{facility}
+            .hotel-show-content-rooms__room-info-facilities
+              .hotel-show-content-rooms__room-info-facility #{Room.human_attribute_name(:facilities)}：
+              - room.facilities.in_groups_of(5, false).each do |facilities|
+                .hotel-show-content-rooms__room-info-facility-items
+                  - facilities.each do |facility|
+                    .hotel-show-content-rooms__room-info-item #{facility}

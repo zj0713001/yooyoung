@@ -1,7 +1,6 @@
 #= require jquery
 #= require jquery_ujs
 #= require jquery.turbolinks
-#= require turbolinks
 #= require underscore
 #= require jquery.validate
 #= require jquery.validate.additional-methods
@@ -23,15 +22,14 @@
 #= require bootstrap/scrollspy
 #= require bootstrap/tab
 
+# Turbolinks always on the freamworks last
+#= require turbolinks
+
 #= require main/devise/registrations
 #= require main/devise/sessions
 #= require main/hotels
 
-# Turbolinks always on the last
-#= require turbolinks
-
-$ ->
-  $(document).on 'page:change', ->
-    $('img.lazy').lazyload
-      threshold: 300
-      effect: "fadeIn"
+$(document).on 'page:change', ->
+  $('img.lazy').lazyload
+    threshold: 300
+    effect: "fadeIn"

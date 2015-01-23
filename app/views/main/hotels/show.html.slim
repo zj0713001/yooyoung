@@ -8,9 +8,9 @@ ruby:
   = render 'main/shared/main_header'
   .hotel-show__banner.hotel-show-banner.js_main_hotel_show_banner
     .hotel-show-banner__first-half.js_main_hotel_show_banner_first_half
-      = image_tag @hotel.cover_photo.image.huge.url, lazy: true, class: 'lazy'
+      = image_tag @hotel.cover_photo.image.huge.url
     .hotel-show-banner__second-half.js_main_hotel_show_banner_second_half
-      = image_tag @hotel.cover_photo.image.huge.url, lazy: true, class: 'lazy'
+      = image_tag @hotel.cover_photo.image.huge.url
     .hotel-show-banner__section.js_main_hotel_show_banner_section
       .hotel-show-banner-section.js_main_hotel_show_banner_section_block
         h1.hotel-show-banner-section__name = @hotel.chinese

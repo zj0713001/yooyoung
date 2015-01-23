@@ -7,33 +7,38 @@
       | 在酒店套餐的基础上，加入了酒店周边3公里范围内的游玩计划，详细说明了如何以酒店为中心的话应该如何玩儿转目的地。您可完全按照行程路线的安排完成您的旅行计划，也可以只将其作为参考。
       br
       |“悠漾在酒店”系列的总费用除了酒店套餐之外，还会包含部分景点门票、交通及活动费用，一价全包让您轻松玩儿转目的地。
-    table.hotel-show-content-favorite__list
+  .hotel-show-content-favorite__package
+    .hotel-show-content-favorite__package-background.js_hotel_show_content_favorite_background style="background-image: #{background_image_cover(image_url hotel.cover_photo.image.huge.url)}"
+    .hotel-show-content-favorite__package-container.js_hotel_show_content_favorite_package
       - hotel.favorite_package.items.group_by(&:service_day).sort.each_with_index do |(day_index, items), index|
-        tr
-          td.hotel-show-content-favorite__day class="#{'first' if index.zero?}"
-            hr.hotel-show-content-favorite__hr.left
-            = "第#{t('number.index')[day_index-1]}天"
-            hr.hotel-show-content-favorite__hr.right
-          td.hotel-show-content-favorite__black-td
-          td.hotel-show-content-favorite__white-td class="#{'first' if index.zero?}"
-            .hotel-show-content-favorite__flag
-          td.hotel-show-content-favorite__items class="#{'first' if index.zero?}"
-            - items.each do |item|
-              .hotel-show-content-favorite__item class="#{'hotel-show-content-favorite__item--multi' if items.count > 1}"
-                .hotel-show-content-favorite__item-content = item.content
-                - if item.photos.present?
-                  .hotel-show-content-favorite__item-photos
-                    .js_hotel_show_content_favorite_photos
-                      - item.photos.each do |photo|
-                        .hotel-show-content-favorite__photo-item
-                          = image_tag photo.image.large.url, lazy: true
-                    a.main-slick__prev.js_hotel_show_content_favorite_photos_slick_prev
-                      .iconfont.icon-arrow-left
-                    a.main-slick__next.js_hotel_show_content_favorite_photos_slick_next
-                      .iconfont.icon-arrow-right
-                - if item.description.present?
-                  .hotel-show-content-favorite__item-description = simple_format item.description
-                - if item.address.present?
-                  .hotel-show-content-favorite__item-info = "地点：#{item.address}"
-                - if item.openning_hours.present?
-                  .hotel-show-content-favorite__item-info = item.openning_hours
+        .hotel-show-content-favorite-package-container-day-section
+          hr.hotel-show-content-favorite-package-container-day-section__hr
+          .hotel-show-content-favorite-package-container-day-section__day Day #{day_index}
+          hr.hotel-show-content-favorite-package-container-day-section__hr
+        - items.each_with_index do |item, index|
+          .hotel-show-content-favorite__item
+            .hotel-show-content-favorite__item-content
+              span.iconfont.icon-water
+              = item.content
+            - if item.photos.present?
+              .hotel-show-content-favorite__item-photos
+                .js_hotel_show_content_favorite_photos
+                  - item.photos.each do |photo|
+                    .hotel-show-content-favorite__photo-item
+                      = image_tag photo.image.large.url, lazy: true
+                - if item.photos.count > 1
+                  a.main-slick__prev.js_hotel_show_content_favorite_photos_slick_prev
+                    .iconfont.icon-arrow-left
+                  a.main-slick__next.js_hotel_show_content_favorite_photos_slick_next
+                    .iconfont.icon-arrow-right
+            - if item.description.present?
+              .hotel-show-content-favorite__item-description = simple_format item.description
+            - if item.address.present?
+              .hotel-show-content-favorite__item-info = "#{item.class.human_attribute_name(:address)}：#{item.address}"
+            - if item.openning_hours.present?
+              .hotel-show-content-favorite__item-info = "#{item.class.human_attribute_name(:openning_hours)}：#{item.openning_hours}"
+            - if items.length != index+1
+              .hotel-show-content-favorite-package-container-next-item
+                hr.hotel-show-content-favorite-package-container-next-item__hr
+                .iconfont.icon-arrow-double-down
+                hr.hotel-show-content-favorite-package-container-next-item__hr

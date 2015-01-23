@@ -3,11 +3,12 @@ $ ->
     animate_time = 500
     animate_bez = 'easeInOutQuart'
 
-    content_package_init_height = ->
+    init_height = ->
+      $('.js_main_hotel_show_banner').height($(window).height())
       $('.js_main_hotel_show_content_package_container').height(_.min([$(window).height(), $(window).width()])-60)
-    content_package_init_height()
-    lazy_content_package_init_height = _.debounce(content_package_init_height, 500)
-    $(window).resize(lazy_content_package_init_height)
+    init_height()
+    lazy_init_height = _.debounce(init_height, 500)
+    $(window).resize(lazy_init_height)
 
     cancel_scroll = ->
       $(document).mousewheel (event) ->
@@ -36,7 +37,7 @@ $ ->
     package_info_hide = ($slick) ->
       $slick.data('show-info', false)
       $('.js_main_hotel_show_content_package_opacity').hide();
-      $('.js_main_hotel_show_content_package_info').css('left', '-45%')
+      $('.js_main_hotel_show_content_package_info').css('left', '-450px')
       $('.js_main_hotel_show_content_package_info').hide()
       $('.js_main_hotel_show_content_package_text').hide()
 
@@ -142,14 +143,14 @@ $ ->
         if $(this).scrollTop() == 0
           banner_close()
         package_top = parseInt($('.js_main_hotel_show_content_package').offset().top - 60)
-        if Math.abs($(document).scrollTop() - package_top) > 50
+        if Math.abs($(document).scrollTop() - package_top) > 100
           $(document).unmousewheel()
           $slick_active = $('.js_main_hotel_show_content_package .slick-active')
           package_info_hide($slick_active) if $slick_active.data('show-info')
           $('.js_main_hotel_show_content_package').data('skip', false) if $(document).scrollTop() < package_top
           $('.js_main_hotel_show_content_package').data('skip', true) if $(document).scrollTop() > package_top
           $('.js_main_hotel_show_content_package').data('package-scroll', false)
-        if $(document).scrollTop() >= package_top && ($(document).scrollTop() - package_top) < 50 && !$('.js_main_hotel_show_content_package').data('package-scroll') && !$('.js_main_hotel_show_content_package').data('skip')
+        if $(document).scrollTop() >= package_top && ($(document).scrollTop() - package_top) < 100 && !$('.js_main_hotel_show_content_package').data('package-scroll') && !$('.js_main_hotel_show_content_package').data('skip')
           $('.js_main_hotel_show_content_package').data('package-scroll', true)
           $('.js_main_hotel_show_content_package').data('skip', true)
           $(document).scrollTo($('.js_main_hotel_show_content_package').offset().top-60)
@@ -173,6 +174,9 @@ $ ->
     $('.js_main_hotel_show_content_package_simple').sticky
       topSpacing: -30
       stopScroll: $(this).height()
+    $('.js_hotel_show_content_favorite_background').sticky
+      topSpacing: 0
+      wrapperClassName: 'hotel-show-content-favorite__package-background'
 
     content_overview_info_fadeout = ->
       $('.js_main_hotel_show_content_overview_info').fadeOut()

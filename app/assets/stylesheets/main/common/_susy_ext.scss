@@ -7,6 +7,8 @@ $susy: (
   gutter-position: inside,
 );
 
+$desktop-maxwidth: 1280px;
+
 @import "susy";
 @import "breakpoint";
 
