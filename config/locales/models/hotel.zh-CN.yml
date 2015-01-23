@@ -6,6 +6,7 @@ zh-CN:
     attributes:
       hotel:
         id: ID
+        slug: 唯一标识
         name: 英文名称
         chinese: 中文名称
         sequence: 排序

@@ -11,6 +11,9 @@
 #  created_at   :datetime
 #  updated_at   :datetime
 #  description  :text
+#  file_name    :string(255)
+#  file_size    :string(255)
+#  content_type :string(255)
 #
 
 class Photo < ActiveRecord::Base

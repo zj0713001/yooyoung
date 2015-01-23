@@ -36,7 +36,7 @@
 #  network_tip    :text
 #  power_tip      :text
 #  luggage_tip    :text
-#  slugged        :string(255)
+#  slug           :string(255)
 #
 
 class Hotel < ActiveRecord::Base

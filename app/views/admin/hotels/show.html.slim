@@ -3,7 +3,7 @@ h2.ui.dividing.header
   = "#{t("admin.#{show ? 'show' : @hotel.new_record? ? 'new' : 'edit'}")}#{model.model_name.human}"
 = render 'admin/shared/admin_form_messages', object: @hotel
 .ui.fluid.form.segment
-  h3.ui.header 酒店
+  h3.ui.header = model.model_name.human
   = form_for @hotel, url: [:admin, @hotel], method: @hotel.new_record? ? :post : :put, html: { multipart: true } do |f|
     .fields
       .four.wide.field
@@ -13,6 +13,17 @@ h2.ui.dividing.header
         - else
           = f.submit t('admin.submit'), class: :'ui label teal button huge'
     .ui.divider
+    - if show
+      .fields
+        .four.wide.field
+          = f.label :id
+        .eight.wide.field
+          .text = @hotel.id
+      .fields
+        .four.wide.field
+          = f.label :slug
+        .eight.wide.field
+          .text = @hotel.slug
     .fields
       .four.wide.field.required
         = f.label :city_id

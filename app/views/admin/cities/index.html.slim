@@ -1,0 +1,45 @@
+h2.ui.dividing.header
+  = model.model_name.human
+  .ui.black.pointing.left.label = @cities.total_count
+.ui.fluid.form.segment
+  = form_tag request.path, method: :get, class: 'js_admin_search_form' do
+    .fields
+      = search_field_tag(model, :id, :text)
+      = search_field_tag(model, :name, :like)
+      = search_field_tag(model, :chinese, :like)
+      = search_field_tag(model, :code, :like)
+      = search_field_tag(model, :province_id, :select, { data: all_provinces_options_for_select(params[:where][:province_id]) })
+      = search_field_tag(model, :country_id, :select, { data: all_countries_options_for_select(params[:where][:country_id]) })
+      = search_field_tag(model, :created_at, :range)
+      = search_field_tag(model, :updated_at, :range)
+      = search_page_tag
+    = search_submit_tag
+    = new_link_tag model
+table.ui.table.segment
+  thead
+    - %w[id chinese name code province_id country_id editor_id updated_at published_at].each do |name|
+      th = model.human_attribute_name(name)
+    th = t('admin.actions')
+    th = t('admin.public')
+  tbody
+    - @cities.each do |city|
+      tr
+        td = city.id
+        td = city.chinese
+        td = city.name
+        td = city.code
+        td = link_to city.province.chinese, [:admin, city.province], target: :_blank, class: :'ui link' if city.province && can?(:show, Province)
+        td = link_to city.country.chinese, [:admin, city.country], target: :_blank, class: :'ui link' if city.country && can?(:show, Country)
+        td = city.editor.try(:nickname)
+        td = city.updated_at.try(:localtime).try(:to_s, :db)
+        td = city.published_at.try(:localtime).try(:to_s, :db)
+        td
+          - if can? :show, City
+            = link_to [:admin, city], alt: t('admin.show'), class: :'ui link action', target: :_blank do
+              i.search.icon
+          - if can? :edit, City
+            = link_to [:edit, :admin, city], alt: t('admin.edit'), class: :'ui link', target: :_blank do
+              i.edit.icon
+        td
+          = admin_publish_tag(city)
+= admin_paginate_tag @cities

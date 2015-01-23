@@ -1,0 +1,81 @@
+- show = !params[:action].in?(%w[new edit]) && @city.persisted? && @city.valid?
+h2.ui.dividing.header
+  = "#{t("admin.#{show ? 'show' : @city.new_record? ? 'new' : 'edit'}")}#{model.model_name.human}"
+  = render 'admin/shared/admin_form_messages', object: @city
+.ui.fluid.form.segment
+  h3.ui.header = model.model_name.human
+  = form_for @city, url: [:admin, @city], method: @city.new_record? ? :post : :put, html: { multipart: true } do |f|
+    .fields
+      .four.wide.field
+      .eight.wide.field
+        - if show
+          = link_to t('admin.edit'), [:edit, :admin, @city], class: :'ui label teal button huge'
+        - else
+          = f.submit t('admin.submit'), class: :'ui label teal button huge'
+    .ui.divider
+    - if show
+      .fields
+        .four.wide.field
+          = f.label :id
+        .eight.wide.field
+          .text = @city.id
+    .fields
+      .four.wide.field.required
+        = f.label :chinese
+      .eight.wide.field
+        - if show
+          .text = @city.chinese
+        - else
+          = f.text_field :chinese
+    .fields
+      .four.wide.field
+        = f.label :name
+      .eight.wide.field
+        - if show
+          .text = @city.name
+        - else
+          = f.text_field :name
+    .fields
+      .four.wide.field
+        = f.label :code
+      .eight.wide.field
+        - if show
+          .text = @city.code
+        - else
+          = f.text_field :code
+    .fields
+      .four.wide.field
+        = f.label :province_id
+      .eight.wide.field
+        - if show
+          .text
+            = link_to @city.province.chinese, [:admin, @city.province], target: :_blank, class: :'ui link' if @city.province && can?(:show, Province)
+        - else
+          = f.select :province_id, all_provinces_options_for_select(@city.province_id), { include_blank: true }, class: :'js_admin_search_select'
+    .fields
+      .four.wide.field
+        = f.label :country_id
+      .eight.wide.field
+        - if show
+          .text
+            = link_to @city.country.chinese, [:admin, @city.country], target: :_blank, class: :'ui link' if @city.country && can?(:show, Country)
+        - else
+          = f.select :country_id, all_countries_options_for_select(@city.country_id), { include_blank: true }, class: :'js_admin_search_select'
+    .fields
+      .four.wide.field
+        = f.label :description
+      .eight.wide.field
+        - if show
+          .text = simple_format @city.description
+        - else
+          = f.text_area :description
+    .ui.divider
+      .fields
+        .four.wide.field
+        .eight.wide.field
+          br
+          br
+          - if show
+            = link_to t('admin.edit'), [:edit, :admin, @city], class: :'ui label teal button huge'
+          - else
+            = f.submit t('admin.submit'), class: :'ui label teal button huge'

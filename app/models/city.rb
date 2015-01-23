@@ -30,9 +30,7 @@ class City < ActiveRecord::Base
   belongs_to :province
   belongs_to :editor, class_name: User
 
-  validates :name, presence: true
-  validates :name, uniqueness: { scope: [:country_id, :province_id, :active] }, if: Proc.new { self.active }
-  validates :chinese, presence: true
-  validates :chinese, uniqueness: { scope: [:country_id, :province_id, :active] }, if: Proc.new { self.active }
+  validates :name, uniqueness: { scope: [:country_id, :province_id, :active] }, if: Proc.new { self.active }, allow_blank: true
+  validates :chinese, uniqueness: { scope: [:country_id, :province_id, :active] }, if: Proc.new { self.active }, allow_blank: true
   validates :country, existence: true
 end

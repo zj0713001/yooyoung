@@ -3,7 +3,7 @@ class Admin::HotelsController < Admin::ApplicationController
     @hotels = model
     .where(params[:where].to_h.slice(*%w[id]))
     .order((params[:order]||{id: :desc}))
-    .paginate(page: params[:page], per_page: params[:per_page])
+    .page(params[:page]).per(params[:per_page])
     @hotels = @hotels.none unless can?(:index, model)
     respond_with(@hotels)
   end
