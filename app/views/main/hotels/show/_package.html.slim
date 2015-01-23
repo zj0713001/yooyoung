@@ -1,7 +1,7 @@
 .hotel-show-content-package.js_main_hotel_show_content_package
   - hotel.package.items_with_cover_photo.each do |item|
     .hotel-show-content-package__section.hotel-show-content-package-section
-      = image_tag item.cover_photo.image.huge.url, lazy: true, class: :'hotel-show-content-package-section__image'
+      .hotel-show-content-package-section__image style="background-image: #{background_image_cover(image_url item.cover_photo.image.huge.url)}"
       .hotel-show-content-package-section__opacity.js_main_hotel_show_content_package_opacity
       .hotel-show-content-package-section__info.js_main_hotel_show_content_package_info
         table

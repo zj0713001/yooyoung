@@ -4,9 +4,21 @@
       | 悠漾在酒店
       a.js_hotel_show_content_favorite_help 什么是悠漾在酒店？
     .hotel-show-content-favorite__explain.js_hotel_show_content_favorite_explain
-      | 在酒店套餐的基础上，加入了酒店周边3公里范围内的游玩计划，详细说明了如何以酒店为中心的话应该如何玩儿转目的地。您可完全按照行程路线的安排完成您的旅行计划，也可以只将其作为参考。
-      br
-      |“悠漾在酒店”系列的总费用除了酒店套餐之外，还会包含部分景点门票、交通及活动费用，一价全包让您轻松玩儿转目的地。
+      .hotel-show-content-favorite__explain-item
+        span.iconfont.icon-water
+        | 完全包含酒店的基本套餐
+      .hotel-show-content-favorite__explain-item
+        span.iconfont.icon-water
+        | 增加酒店套餐内未体现但悠漾认为酒店最值得体验的项目
+      .hotel-show-content-favorite__explain-item
+        span.iconfont.icon-water
+        | 增加酒店周边三公里内的旅行计划
+      .hotel-show-content-favorite__explain-item
+        span.iconfont.icon-water
+        | 每日详细行程安排供用户参考
+      .hotel-show-content-favorite__explain-item
+        span.iconfont.icon-water
+        | 一键下单，轻松出行
   .hotel-show-content-favorite__package
     .hotel-show-content-favorite__package-background.js_hotel_show_content_favorite_background style="background-image: #{background_image_cover(image_url hotel.cover_photo.image.huge.url)}"
     .hotel-show-content-favorite__package-container.js_hotel_show_content_favorite_package
@@ -42,3 +54,5 @@
                 hr.hotel-show-content-favorite-package-container-next-item__hr
                 .iconfont.icon-arrow-double-down
                 hr.hotel-show-content-favorite-package-container-next-item__hr
+        .hotel-show-content-favorite__unique
+          | 对以上的悠漾套餐不满意？还想得到更详细的目的地行程计划？还希望玩点儿不一样的？还需要得到更多的帮助？请拨打电话 #{Settings.yooyoung.service_phone}

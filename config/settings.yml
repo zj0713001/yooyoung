@@ -7,7 +7,10 @@ defaults: &defaults
     length: 6
     range: <%= (0..9).to_a %>
     switch: false
-
+  yooyoung:
+    service_phone: "010-58070160"
+    service_phone_with_space: "010 - 58070160"
+  china_country_code: 1
 development:
   <<: *defaults
 

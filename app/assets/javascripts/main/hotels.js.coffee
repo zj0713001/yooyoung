@@ -3,6 +3,9 @@ $ ->
     animate_time = 500
     animate_bez = 'easeInOutQuart'
 
+    $(document).on 'page:before-change', ->
+      $(document).unmousewheel()
+
     init_height = ->
       $('.js_main_hotel_show_banner').height($(window).height())
       $('.js_main_hotel_show_content_package_container').height(_.min([$(window).height(), $(window).width()])-60)
@@ -175,7 +178,7 @@ $ ->
       topSpacing: -30
       stopScroll: $(this).height()
     $('.js_hotel_show_content_favorite_background').sticky
-      topSpacing: 0
+      topSpacing: 60
       wrapperClassName: 'hotel-show-content-favorite__package-background'
 
     content_overview_info_fadeout = ->
