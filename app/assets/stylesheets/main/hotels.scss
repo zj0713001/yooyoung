@@ -516,8 +516,11 @@
       @include filter(blur(3px));
     }
   }
-  .hotel-show-content-rooms__room-photo img {
-    width: 100%;
+  .hotel-show-content-rooms__room-photo {
+    height: 100%;
+    img {
+      width: 100%;
+    }
   }
   .hotel-show-content-rooms__room-infos {
     display: none;
