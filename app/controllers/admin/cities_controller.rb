@@ -1,11 +1,12 @@
 class Admin::CitiesController < Admin::ApplicationController
   def index
     @cities = model
-    .where(params[:where].to_h.slice(*%w[id]))
+    .where(params[:where].to_h)
     .order((params[:order]||{id: :desc}))
     .includes(:country, :province)
     .page(params[:page]).per(params[:per_page])
     @cities = @cities.none unless can?(:index, model)
+
     respond_with(@cities)
   end
 

@@ -1,10 +1,11 @@
 class Admin::HotelsController < Admin::ApplicationController
   def index
     @hotels = model
-    .where(params[:where].to_h.slice(*%w[id]))
+    .where(params[:where].to_h)
     .order((params[:order]||{id: :desc}))
     .page(params[:page]).per(params[:per_page])
     @hotels = @hotels.none unless can?(:index, model)
+
     respond_with(@hotels)
   end
 
