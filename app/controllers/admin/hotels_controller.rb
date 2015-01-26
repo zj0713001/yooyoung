@@ -58,7 +58,6 @@ class Admin::HotelsController < Admin::ApplicationController
     @hotel = model.friendly_acquire params[:id]
     if params[:published].nil?
       authorize! :edit, model
-      @hotel.editor = current_user
       @hotel.attributes = params[:hotel].permit!
       rooms = @hotel.package.try(:rooms).to_a
       @hotel.favorite_package.rooms = rooms
@@ -66,7 +65,8 @@ class Admin::HotelsController < Admin::ApplicationController
       authorize! :publish, model
       @hotel.attributes = { published: params[:published] }
     end
-
+    @hotel.editor = current_user
+    
     @success = @hotel.save
 
     respond_to do |format|

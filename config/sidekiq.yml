@@ -1,0 +1,8 @@
+---
+concurrency: 5
+pidfile: tmp/pids/sidekiq.pid
+retry: 3
+staging:
+  :concurrency: 10
+production:
+  :concurrency: 20

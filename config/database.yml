@@ -50,6 +50,7 @@ test:
 production:
   <<: *default
   database: iron_production
+  pool: 25
   username: worker
   password: '!worker'
   host: 127.0.0.1

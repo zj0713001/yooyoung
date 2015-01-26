@@ -11,6 +11,11 @@ defaults: &defaults
     service_phone: "010-58070160"
     service_phone_with_space: "010 - 58070160"
   china_country_code: 1
+  sms:
+    username: "yooyoung.cn"
+    password: "yooyoung0120"
+    sms_limit: 5
+
 development:
   <<: *defaults
 

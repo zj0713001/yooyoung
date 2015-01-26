@@ -1,0 +1,41 @@
+h2.ui.dividing.header
+  = model.model_name.human
+  .ui.black.pointing.left.label = @countries.total_count
+.ui.fluid.form.segment
+  = form_tag request.path, method: :get, class: 'js_admin_search_form' do
+    .fields
+      = search_field_tag(model, :id, :text)
+      = search_field_tag(model, :name, :like)
+      = search_field_tag(model, :chinese, :like)
+      = search_field_tag(model, :code, :like)
+      = search_field_tag(model, :created_at, :range)
+      = search_field_tag(model, :updated_at, :range)
+      = search_page_tag
+    = search_submit_tag
+    = new_link_tag model
+table.ui.table.segment
+  thead
+    - %w[id chinese name code editor_id updated_at published_at].each do |name|
+      th = model.human_attribute_name(name)
+    th = t('admin.actions')
+    th = t('admin.public')
+  tbody
+    - @countries.each do |country|
+      tr
+        td = country.id
+        td = country.chinese
+        td = country.name
+        td = country.code
+        td = country.editor.try(:nickname)
+        td = country.updated_at.try(:localtime).try(:to_s, :db)
+        td = country.published_at.try(:localtime).try(:to_s, :db)
+        td
+          - if can? :show, Country
+            = link_to [:admin, country], alt: t('admin.show'), class: :'ui link action', target: :_blank do
+              i.search.icon
+          - if can? :edit, Country
+            = link_to [:edit, :admin, country], alt: t('admin.edit'), class: :'ui link', target: :_blank do
+              i.edit.icon
+        td
+          = admin_publish_tag(country)
+= admin_paginate_tag @countries

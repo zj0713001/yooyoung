@@ -1,0 +1,43 @@
+h2.ui.dividing.header
+  = model.model_name.human
+  .ui.black.pointing.left.label = @provinces.total_count
+.ui.fluid.form.segment
+  = form_tag request.path, method: :get, class: 'js_admin_search_form' do
+    .fields
+      = search_field_tag(model, :id, :text)
+      = search_field_tag(model, :name, :like)
+      = search_field_tag(model, :chinese, :like)
+      = search_field_tag(model, :code, :like)
+      = search_field_tag(model, :country_id, :select, { data: all_countries_options_for_select(params[:where].try(:[], :country_id)) })
+      = search_field_tag(model, :created_at, :range)
+      = search_field_tag(model, :updated_at, :range)
+      = search_page_tag
+    = search_submit_tag
+    = new_link_tag model
+table.ui.table.segment
+  thead
+    - %w[id chinese name code country_id editor_id updated_at published_at].each do |name|
+      th = model.human_attribute_name(name)
+    th = t('admin.actions')
+    th = t('admin.public')
+  tbody
+    - @provinces.each do |province|
+      tr
+        td = province.id
+        td = province.chinese
+        td = province.name
+        td = province.code
+        td = link_to_if can?(:show, Country), province.country.chinese, [:admin, province.country], target: :_blank, class: :'ui link' if province.country
+        td = province.editor.try(:nickname)
+        td = province.updated_at.try(:localtime).try(:to_s, :db)
+        td = province.published_at.try(:localtime).try(:to_s, :db)
+        td
+          - if can? :show, Province
+            = link_to [:admin, province], alt: t('admin.show'), class: :'ui link action', target: :_blank do
+              i.search.icon
+          - if can? :edit, Province
+            = link_to [:edit, :admin, province], alt: t('admin.edit'), class: :'ui link', target: :_blank do
+              i.edit.icon
+        td
+          = admin_publish_tag(province)
+= admin_paginate_tag @provinces

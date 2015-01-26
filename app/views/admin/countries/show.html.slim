@@ -1,0 +1,63 @@
+- show = !params[:action].in?(%w[new edit]) && @country.persisted? && @country.valid?
+h2.ui.dividing.header
+  = "#{t("admin.#{show ? 'show' : @country.new_record? ? 'new' : 'edit'}")}#{model.model_name.human}"
+  = render 'admin/shared/admin_form_messages', object: @country
+.ui.fluid.form.segment
+  h3.ui.header = model.model_name.human
+  = form_for @country, url: [:admin, @country], method: @country.new_record? ? :post : :put, html: { multipart: true } do |f|
+    .fields
+      .four.wide.field
+      .eight.wide.field
+        - if show
+          = link_to t('admin.edit'), [:edit, :admin, @country], class: :'ui label teal button huge'
+        - else
+          = f.submit t('admin.submit'), class: :'ui label teal button huge'
+    .ui.divider
+    - if show
+      .fields
+        .four.wide.field
+          = f.label :id
+        .eight.wide.field
+          .text = @country.id
+    .fields
+      .four.wide.field.required
+        = f.label :chinese
+      .eight.wide.field
+        - if show
+          .text = @country.chinese
+        - else
+          = f.text_field :chinese
+    .fields
+      .four.wide.field
+        = f.label :name
+      .eight.wide.field
+        - if show
+          .text = @country.name
+        - else
+          = f.text_field :name
+    .fields
+      .four.wide.field
+        = f.label :code
+      .eight.wide.field
+        - if show
+          .text = @country.code
+        - else
+          = f.text_field :code
+    .fields
+      .four.wide.field
+        = f.label :description
+      .eight.wide.field
+        - if show
+          .text = simple_format @country.description
+        - else
+          = f.text_area :description
+    .ui.divider
+      .fields
+        .four.wide.field
+        .eight.wide.field
+          br
+          br
+          - if show
+            = link_to t('admin.edit'), [:edit, :admin, @country], class: :'ui label teal button huge'
+          - else
+            = f.submit t('admin.submit'), class: :'ui label teal button huge'

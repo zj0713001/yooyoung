@@ -1,0 +1,4 @@
+zh-CN:
+  notification:
+    sms:
+      registration_captcha: '您的悠漾验证码：%{captcha}，30分钟内有效。'

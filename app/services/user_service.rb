@@ -11,8 +11,7 @@ class UserService
       Settings.sms_captcha.length.times.map{ Settings.sms_captcha.range.sample }.join
     end
     if Settings.sms_captcha.switch
-      # send sms with phone and sms_captcha
-      # !!! Timeout
+      NotificationService.instance.send_registration_captcha(user, sms_captcha)
     else
       Rails.logger.info "Sms captcha without send. captcha: #{sms_captcha}"
     end
