@@ -4,8 +4,8 @@ PID=`cat tmp/pids/rainbows.pid`
 
 # kill -USR2
 kill -USR2 $PID
-bundle exec rake sidekiq:stop
-bundle exec rake sidekiq:start
+# bundle exec rake sidekiq:stop
+# bundle exec rake sidekiq:start
 
 while true; do
   sleep 10
