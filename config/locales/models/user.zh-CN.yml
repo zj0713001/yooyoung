@@ -12,3 +12,12 @@ zh-CN:
         updated_at: "修改时间"
         role_id: 角色
         avatar: 头像
+        sign_in_count: 登录次数
+        current_sign_in_at: 本次登录时间
+        last_sign_in_at: 上次登录时间
+        current_sign_in_ip: 本次登录IP
+        last_sign_in_ip: 上次登录IP
+        failed_attempts: 失败次数
+        locked_at: 锁定时间
+        created_at: 注册时间
+        updated_at: 修改时间

@@ -1,0 +1,37 @@
+h2.ui.dividing.header
+  = model.model_name.human
+  .ui.black.pointing.left.label = @users.total_count
+.ui.fluid.form.segment
+  = form_tag request.fullpath, method: :get, class: 'js_admin_search_form' do
+    .fields
+      = search_field_tag(model, :id, :text)
+      = search_field_tag(model, :nickname, :like)
+      = search_field_tag(model, :phone, :like)
+      = search_field_tag(model, :email, :like)
+      = search_page_tag
+      = hidden_field_tag :space, params[:space]
+    = search_submit_tag
+table.ui.table.segment
+  thead
+    - %w[id nickname phone sign_in_count last_sign_in_at last_sign_in_ip created_at].each do |name|
+      th = model.human_attribute_name(name)
+    th = t('admin.actions')
+  tbody
+    - @users.each do |user|
+      tr
+        td = user.id
+        td = user.nickname
+        td = user.phone
+        td = user.sign_in_count
+        td = user.last_sign_in_at.try(:localtime).try(:to_s, :db)
+        td = user.last_sign_in_ip
+        td = user.created_at.try(:localtime).try(:to_s, :db)
+        td
+          - if can? :show, User
+            = link_to [:admin, user], alt: t('admin.show'), class: :'ui link action', target: :_blank do
+              i.search.icon
+          - if can? :edit, Province
+            = link_to [:edit, :admin, user], alt: t('admin.edit'), class: :'ui link', target: :_blank do
+              i.edit.icon
+
+= admin_paginate_tag @users

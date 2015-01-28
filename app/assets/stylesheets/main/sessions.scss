@@ -34,7 +34,12 @@
     color: $white;
     @include rgba-background-inline(rgba($black, 0.4));
     @include placeholder {
-      color: $white;
+      color: $gray_white;
+    }
+    &:focus {
+      @include placeholder {
+        color: $light_white;
+      }
     }
   }
   .sessions-new-form__agree-me,

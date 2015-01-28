@@ -18,6 +18,7 @@
 #= require 3rd/velocity.ui
 #= require main/3rd/jquery.validate.default
 #= require main/common/redraw_font_size
+#= require avalon
 
 #= require bootstrap/scrollspy
 #= require bootstrap/tab

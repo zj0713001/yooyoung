@@ -32,7 +32,7 @@ Rails.application.configure do
   # Generate digests for assets URLs.
   config.assets.digest = true
 
-  # config.asset_host = 'http://yooyoung.qiniudn.com/'
+  config.asset_host = 'http://7u2n2q.com1.z0.glb.clouddn.com/'
 
   # `config.assets.precompile` has moved to config/initializers/assets.rb
 
@@ -87,6 +87,6 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  # config.middleware.use Rack::GoogleAnalytics, :tracker => 'UA-58854016-1' # Master
+  config.middleware.use Rack::GoogleAnalytics, :tracker => 'UA-58854016-1' # Master
   # config.middleware.use Rack::GoogleAnalytics, :tracker => 'UA-58854016-2' # Beta
 end

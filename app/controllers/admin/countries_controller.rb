@@ -1,7 +1,7 @@
 class Admin::CountriesController < Admin::ApplicationController
   def index
     @countries = model
-    .where(params[:where].to_h)
+    .where(permited_params[:where])
     .order((params[:order]||{id: :desc}))
     .page(params[:page]).per(params[:per_page])
     @countries = @countries.none unless can?(:index, model)

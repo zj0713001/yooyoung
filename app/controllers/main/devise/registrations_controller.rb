@@ -31,7 +31,7 @@ class Main::Devise::RegistrationsController < Devise::RegistrationsController
       if @validatable
         @minimum_password_length = resource_class.password_length.min
       end
-      respond_with resource
+      respond_with resource, location: new_user_registration_path
     end
   end
 

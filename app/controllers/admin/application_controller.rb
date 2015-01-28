@@ -11,6 +11,10 @@ class Admin::ApplicationController < ApplicationController
     gon
   end
 
+  def permited_params
+    params.permit!
+  end
+
   protected
 
   def authorize_admin
