@@ -53,6 +53,7 @@ class Admin::UsersController < Admin::ApplicationController
 
     @links = @links.group_by do |link|
       user_agent = UserAgent.parse link.user_agent
+      "#{user_agent.browser} #{user_agent.version.to_s.scan(/\d+/).first}"
     end
 
     @links_data = @links.map do |link|
