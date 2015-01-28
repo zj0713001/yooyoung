@@ -1,7 +1,7 @@
 class Admin::HotelsController < Admin::ApplicationController
   def index
     @hotels = model
-    .where(params[:where].to_h)
+    .where(permited_params[:where])
     .order((params[:order]||{id: :desc}))
     .page(params[:page]).per(params[:per_page])
     @hotels = @hotels.none unless can?(:index, model)
@@ -66,7 +66,7 @@ class Admin::HotelsController < Admin::ApplicationController
       @hotel.attributes = { published: params[:published] }
     end
     @hotel.editor = current_user
-    
+
     @success = @hotel.save
 
     respond_to do |format|

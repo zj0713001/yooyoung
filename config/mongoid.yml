@@ -44,7 +44,7 @@ development:
 
     # Raise an error when performing a #find and the document is not found.
     # (default: true)
-    # raise_not_found_error: true
+    raise_not_found_error: false
 
     # Raise an error when defining a scope with the same name as an
     # existing method. (default: false)
@@ -111,13 +111,9 @@ production:
   # # in more detail next.
   options:
     # include_root_in_json: true
-    include_type_for_serialization: true
     # Note this can also be true if you want to preload everything, but this is
     # almost never necessary. Most of the time set this to false.
     # preload_models:
     #   - Canvas
     #   - Browser
     #   - Firefox
-    scope_overwrite_exception: true
-    raise_not_found_error: true
-    use_activesupport_time_zone: true

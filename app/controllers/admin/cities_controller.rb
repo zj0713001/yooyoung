@@ -1,7 +1,7 @@
 class Admin::CitiesController < Admin::ApplicationController
   def index
     @cities = model
-    .where(params[:where].to_h)
+    .where(permited_params[:where])
     .order((params[:order]||{id: :desc}))
     .includes(:country, :province)
     .page(params[:page]).per(params[:per_page])
@@ -55,7 +55,7 @@ class Admin::CitiesController < Admin::ApplicationController
       @city.attributes = { published: params[:published] }
     end
     @city.editor = current_user
-    
+
     @success = @city.save
 
     respond_to do |format|

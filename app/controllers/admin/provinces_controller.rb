@@ -1,7 +1,7 @@
 class Admin::ProvincesController < Admin::ApplicationController
   def index
     @provinces = model
-    .where(params[:where].to_h)
+    .where(permited_params[:where])
     .order((params[:order]||{id: :desc}))
     .includes(:country)
     .page(params[:page]).per(params[:per_page])

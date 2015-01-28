@@ -1,8 +1,8 @@
-source 'https://ruby.taobao.org/'
+source 'https://rubygems.org/'
 ruby '2.2.0'
 
 # Core
-gem 'rails', '~> 4.1.0'
+gem 'rails', '~> 4.2.0'
 
 # Cache
 gem 'redis-rails'
@@ -54,6 +54,7 @@ gem 'validates_existence', '~> 0.9.2'
 gem 'crack', '~> 0.4.2'
 gem 'dynamic_form', '~> 1.1.4'
 gem 'meta-tags', '~> 2.0.0'
+gem 'useragent'
 
 # Datebase
 gem 'mysql2'
@@ -87,6 +88,7 @@ gem 'lazyload-rails', '~> 0.3.1'
 gem 'bootstrap-sass', '~> 3.3.1.0'
 gem 'gon'
 gem 'breakpoint', '~> 2.5.0'
+gem 'avalon-rails', '~> 0.0.2'
 
 # Security
 gem 'rack-attack'

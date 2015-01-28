@@ -28,11 +28,20 @@
 class User < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
   include Hashid
+  after_create :generate_other_infos
+
+  def generate_other_infos
+    self.role = Role.find 1
+    # self.avatar
+    self.save
+  end
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :lockable
+
+  scope :by_space, ->(space){ joins(:role).where(Role.arel_table[:space].eq(space))}
 
   def email_required?
     false
@@ -55,4 +64,12 @@ class User < ActiveRecord::Base
     end
   end
   include AbilityInterface
+
+  # UserTrack
+  module UserTrackInterface
+    def user_track
+      UserTrack.find_by user_id: self.id
+    end
+  end
+  include UserTrackInterface
 end

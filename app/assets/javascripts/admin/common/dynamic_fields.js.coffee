@@ -3,7 +3,7 @@ $ ->
     $(group).data('field-html', $(group).find('.js_admin_dynamic_fields:last').html())
 
   js_admin_dynamic_field_html = (group) ->
-    uuid = (new Date).getTime()
+    uuid = new Date - 0
     field_html = $(group).data('field-html').replace(/\_\d+_/g, "_#{uuid}_").replace(/\[\d+\]/g, "[#{uuid}]")
     return field_html
 

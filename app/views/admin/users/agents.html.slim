@@ -1,0 +1,25 @@
+h2.ui.dividing.header
+  | 用户访问量
+  .ui.black.pointing.left.label = @links.count
+.ui.fluid.form.segment
+  = form_tag request.path, method: :get, class: 'js_admin_search_form' do
+    .fields
+      = search_field_tag(model, :id, :text)
+      = search_field_tag(model, :nickname, :like)
+      = search_field_tag(model, :phone, :like)
+      = search_field_tag(model, :email, :like)
+      = search_page_tag
+    = search_submit_tag
+table.ui.table.segment
+  thead
+    - %w[user_agent count anonymous_count user_count].each do |name|
+      th = Link.human_attribute_name(name)
+  tbody
+    - @links_data.each do |link|
+      tr
+        td = link.user_agent
+        td = link.count
+        td = "#{link.anonymous_count}（#{link.anonymous_user_count}）"
+        td = "#{link.known_count}（#{link.known_user_count}）"
+
+= admin_paginate_tag @links_data
