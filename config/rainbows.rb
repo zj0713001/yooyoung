@@ -1,8 +1,4 @@
-# rainbows config
-Rainbows! do
-  use :ThreadPool
-  worker_connections 16
-end
+working_directory `pwd -L`.chomp
 
 # paths and things
 socket_path = 'tmp/sockets/rainbows.sock'
@@ -20,7 +16,7 @@ worker_processes 2
 
 # listen on both a Unix domain socket and a TCP port,
 # we use a shorter backlog for quicker failover when busy
-listen 3000, :tcp_nopush => true
+listen File.expand_path(socket_path), backlog: 64
 
 daemonize = true
 
@@ -40,8 +36,16 @@ preload_app true
 
 before_fork do |server, worker|
   defined?(ActiveRecord::Base) and ActiveRecord::Base.connection.disconnect!
+  Redis.current.client.disconnect
 end
 
 after_fork do |server, worker|
   defined?(ActiveRecord::Base) and ActiveRecord::Base.establish_connection
+  Redis.current = Redis.new
+end
+
+# rainbows config
+Rainbows! do
+  use :ThreadPool
+  worker_connections 16
 end
