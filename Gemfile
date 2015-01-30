@@ -55,6 +55,7 @@ gem 'crack', '~> 0.4.2'
 gem 'dynamic_form', '~> 1.1.4'
 gem 'meta-tags', '~> 2.0.0'
 gem 'useragent'
+gem 'simple_calendar', '~> 1.1.9'
 
 # Datebase
 gem 'mysql2'

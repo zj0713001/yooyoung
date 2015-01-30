@@ -8,6 +8,10 @@ class Link
   field :fullpath, type: String
   belongs_to :user_track
 
+  index({ user_track_id: 1 }, { background: true })
+  index({ user_agent: 1 }, { background: true })
+  index({ fullpath: 1 }, { background: true })
+
   def request=(request)
     self.remote_ip = request.remote_ip
     self.referer = request.referer
