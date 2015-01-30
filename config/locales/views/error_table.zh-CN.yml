@@ -1,0 +1,12 @@
+zh-CN:
+  error_table:
+    record_not_found: '没有找到相应记录。'
+    timeout: '请求超时。'
+    runtime_error: '系统运行错错误。'
+    access_denied: '没有权限访问。'
+    create_error: '创建记录发生错误。'
+    duplicate_create_error: '已经存在相关记录，创建失败。'
+    update_error: '修改记录发生错误。'
+    delete_error: '删除记录发生错误。'
+    try_too_many_times: '已经超过最大重试次数。'
+    incorrect_arguments: '选项填写错误。'

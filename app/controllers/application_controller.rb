@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   layout 'main/application'
   before_action :track_user
+  around_action :handle_xhr_errors, if: ->{ request.format.js? || request.format.json? }
 
   respond_to :html, :json
 
@@ -43,5 +44,15 @@ class ApplicationController < ActionController::Base
 
   def delete_user_track_from_session
     session.delete :user_track
+  end
+
+  def handle_xhr_errors
+    begin
+      yield
+    rescue => e
+      respond_to do |format|
+        format.json { render json: ErrorTable.instance.handle(e.class) }
+      end
+    end
   end
 end
