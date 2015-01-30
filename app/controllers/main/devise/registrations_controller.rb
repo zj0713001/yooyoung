@@ -18,29 +18,29 @@ class Main::Devise::RegistrationsController < Devise::RegistrationsController
           respond_with resource, location: after_inactive_sign_up_path_for(resource)
         end
       else
-        clean_up_passwords resource
-        @validatable = devise_mapping.validatable?
-        if @validatable
-          @minimum_password_length = resource_class.password_length.min
-        end
-        respond_with resource
+        raise YooYoung::CreateError
       end
     else
-      set_flash_message :notice, :sms_captcha_not_match if is_flashing_format?
-      @validatable = devise_mapping.validatable?
-      if @validatable
-        @minimum_password_length = resource_class.password_length.min
-      end
-      respond_with resource, location: new_user_registration_path
+      raise YooYoung::IncorrectArguments
     end
   end
 
   def send_sms_captcha
+    raise YooYoung::TryTooManyTimesError
     @user = User.new(user_params)
     @success = UserService.instance.send_sms_captcha(@user)
 
     respond_to do |format|
-      format.json { render json: { status: @success } }
+      format.json { render json: { success: @success } }
+    end
+  end
+
+  def check_phone
+    @user = User.find_by_phone(user_params[:phone])
+    raise YooYoung::DuplicateCreatedError if @user.present?
+
+    respond_to do |format|
+      format.json { render json: { success: @success } }
     end
   end
 

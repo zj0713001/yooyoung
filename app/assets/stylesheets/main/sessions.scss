@@ -89,7 +89,10 @@
   .sessions-new-form__send-captcha {
     width: 155px;
     height: 42px;
-    float: right;
+    @include inline-block;
+    position: absolute;
+    top: 0;
+    right: 0;
     text-align: center;
     @include rgba-background-inline(rgba($black, 0.4));
     border: solid;

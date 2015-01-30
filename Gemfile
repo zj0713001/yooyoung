@@ -13,7 +13,7 @@ gem 'carrierwave'
 
 # Analytics
 group :production do
-  gem 'rack-google-analytics', '~> 1.2.0'
+  gem 'rack-google-analytics'
   gem 'newrelic_rpm'
 end
 
@@ -26,36 +26,36 @@ gem 'sidekiq'
 # Auth
 gem 'devise'
 gem 'devise-async'
-gem 'devise-i18n', '~> 0.11.2'
+gem 'devise-i18n'
 gem 'omniauth'
 
 # Util
-gem 'rails-i18n', '~> 4.0.3'
+gem 'rails-i18n'
 gem 'default_value_for'
 gem 'stamp'
 gem 'slim-rails'
-gem 'kaminari', '~> 0.16.2'
+gem 'kaminari'
 gem 'mechanize'
 gem 'nokogiri'
 gem 'paranoia'
-gem 'jbuilder', '~> 2.0'
+gem 'jbuilder'
 gem 'mini_magick'
 gem 'httparty'
 gem 'cancancan'
 gem 'colored'
 gem 'settingslogic'
-gem 'china_sms', '~> 0.0.7'
-gem 'rack-cache', '~> 1.2'
+gem 'china_sms'
+gem 'rack-cache'
 gem 'redis-rack-cache'
 # gem 'simple_captcha2', require: 'simple_captcha'
-gem 'friendly_id', '~> 5.1.0'
-gem 'hashids', '~> 1.0.2'
-gem 'validates_existence', '~> 0.9.2'
-gem 'crack', '~> 0.4.2'
-gem 'dynamic_form', '~> 1.1.4'
-gem 'meta-tags', '~> 2.0.0'
+gem 'friendly_id'
+gem 'hashids'
+gem 'validates_existence'
+gem 'crack'
+gem 'dynamic_form'
+gem 'meta-tags'
 gem 'useragent'
-gem 'simple_calendar', '~> 1.1.9'
+gem 'simple_calendar'
 
 # Datebase
 gem 'mysql2'
@@ -63,47 +63,47 @@ gem 'modular_migration'
 gem 'seed-fu'
 
 # MongoDB
-gem 'mongoid', '~> 4.0.0'
+gem 'mongoid'
 
 # Assets
-gem 'sass-rails', '~> 5.0.1'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.0.0'
+gem 'sass-rails'
+gem 'uglifier'
+gem 'coffee-rails'
 gem 'jquery-rails'
-gem 'jquery-ui-rails', '~> 5.0.3'
+gem 'jquery-ui-rails'
 gem 'turbolinks'
 gem 'jquery-turbolinks'
-gem 'facebox-rails', '~> 0.2.0'
+gem 'facebox-rails'
 gem 'select2-rails'
 gem 'semantic-ui-sass'
 gem 'compass'
 gem 'compass-rgbapng'
 gem 'oily_png'
 gem 'compass-rails'
-gem 'compass-import-once', '~> 1.0.5'
+gem 'compass-import-once'
 gem 'susy'
 gem 'bourbon'
 gem 'jquery-validation-rails', '~> 1.12.0'
-gem 'underscore-rails', '~> 1.7.0'
-gem 'lazyload-rails', '~> 0.3.1'
-gem 'bootstrap-sass', '~> 3.3.1.0'
+gem 'underscore-rails'
+gem 'lazyload-rails'
+gem 'bootstrap-sass'
 gem 'gon'
-gem 'breakpoint', '~> 2.5.0'
-gem 'avalon-rails', '~> 0.0.2'
+gem 'breakpoint'
+gem 'avalon-rails'
 
 # Security
 gem 'rack-attack'
 
 # Doc
-gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'sdoc', group: :doc
 
 # Dev
 group :development, :test do
   gem 'pry'
-  gem 'web-console', '~> 2.0.0'
+  gem 'web-console'
   gem 'spring'
   gem 'quiet_assets'
   gem 'thin'
   gem 'grizzled-rails-logger'
-  gem 'annotate', '~> 2.6.5'
+  gem 'annotate'
 end

@@ -13,7 +13,7 @@ ruby:
         .main-form__group
           = f.label :phone, class: :'main-form__label' do
             .iconfont.icon-phone
-          = f.phone_field :phone, placeholder: '手机号码', class: :'sessions-new-form__input main-form__input js_main_registrations_phone_field', autocomplete: 'off'
+          = f.phone_field :phone, placeholder: '手机号码', class: :'sessions-new-form__input main-form__input js_main_registrations_phone_field', autocomplete: 'off', :'data-url' => users_check_phone_path
         .main-form__group
           = f.label :password, class: :'main-form__label' do
             .iconfont.icon-password
@@ -23,8 +23,8 @@ ruby:
             .iconfont.icon-password
           = f.password_field :password_confirmation, placeholder: '密码确认', class: :'sessions-new-form__input main-form__input js_main_registrations_password_confirmation_field', autocomplete: :off
         .main-form__group.main-form__group--hidden.js_main_registrations_captcha
-          = text_field_tag :sms_captcha, nil, placeholder: '请输入6位验证码', class: :'main-form__input main-form__input--small main-form__input--center sessions-new-form__input', :'data-no-error-message' => true, autocomplete: 'off'
-          = link_to 'javascript:void(0);', class: :'sessions-new-form__send-captcha js_main_registration_send_sms_captcha', :'data-url' => users_send_sms_captcha_path do
+          = text_field_tag :sms_captcha, nil, placeholder: '请输入6位验证码', class: :'main-form__input main-form__input--small main-form__input--center sessions-new-form__input js_main_registrations_sms_captcha_field', autocomplete: 'off', disabled: true
+          = link_to 'javascript:void(0);', class: :'sessions-new-form__send-captcha js_main_registrations_send_sms_captcha', :'data-url' => users_send_sms_captcha_path do
             span.js_main_registration_sms_captcha_button 获取验证码
             span.sessions-new-form__sending-captcha.js_main_registration_sms_captcha_sending
               |重新获取（

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   }
   devise_scope :user do
     get 'users/send_sms_captcha' => 'main/devise/registrations#send_sms_captcha', as: :users_send_sms_captcha
+    post 'users/check_phone' => 'main/devise/registrations#check_phone', as: :users_check_phone
   end
 
   scope module: :main do

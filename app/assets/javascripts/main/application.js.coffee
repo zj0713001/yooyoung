@@ -4,8 +4,8 @@
 #= require underscore
 #= require jquery.validate
 #= require jquery.validate.additional-methods
-#= require jquery.validate.localization/messages_zh
 #= require 3rd/jquery.validate.methods
+#= require 3rd/jquery.validate.zh-CN
 #= require 3rd/jquery.scrollTo
 #= require 3rd/jquery.browser
 #= require 3rd/jquery.lazyload
