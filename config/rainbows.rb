@@ -1,7 +1,7 @@
 working_directory `pwd -L`.chomp
 
 # paths and things
-socket_path = 'tmp/sockets/rainbows.sock'
+socket_path = '/tmp/rainbows.sock'
 pid_path    = 'tmp/pids/rainbows.pid'
 err_path    = 'log/rainbows.error.log'
 out_path    = 'log/rainbows.out.log'
@@ -16,7 +16,7 @@ worker_processes 2
 
 # listen on both a Unix domain socket and a TCP port,
 # we use a shorter backlog for quicker failover when busy
-listen File.expand_path(socket_path), backlog: 64
+listen socket_path, backlog: 64
 listen "127.0.0.1:3000"
 
 daemonize = true
@@ -49,4 +49,5 @@ end
 Rainbows! do
   use :ThreadPool
   worker_connections 16
+  client_max_body_size nil
 end

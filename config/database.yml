@@ -53,4 +53,4 @@ production:
   pool: 25
   username: worker
   password: '!worker'
-  host: 127.0.0.1
+  socket: /var/lib/mysql/mysql.sock
