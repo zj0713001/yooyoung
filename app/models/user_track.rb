@@ -5,6 +5,8 @@ class UserTrack
   field :user_id, type: Integer
   has_many :links, dependent: :delete
 
+  index({ user_id: 1 }, { background: true, sparse: true })
+
   # UserInterface
   module UserInterface
     def user

@@ -34,6 +34,7 @@ module Iron
     config.filter_parameters += [:password]
 
     config.active_support.escape_html_entities_in_json = true
+    config.active_record.raise_in_transactional_callbacks = true
 
     config.generators do |g|
       g.orm :active_record
