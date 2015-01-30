@@ -16,6 +16,12 @@
     border-style: solid none none none;
     border-color: $gray_green;
     color: $light_green;
+    a {
+      color: $light_green;
+      &:hover {
+        color: $lighter_green;
+      }
+    }
   }
 }
 .main-footer-content {
