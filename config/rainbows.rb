@@ -17,6 +17,7 @@ worker_processes 2
 # listen on both a Unix domain socket and a TCP port,
 # we use a shorter backlog for quicker failover when busy
 listen File.expand_path(socket_path), backlog: 64
+listen "127.0.0.1:3000"
 
 daemonize = true
 
