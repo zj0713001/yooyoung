@@ -10,7 +10,7 @@
 #= require 3rd/jquery.browser
 #= require 3rd/jquery.lazyload
 #= require 3rd/jquery.mousewheel
-#= require 3rd/jquery.easing
+
 #= require 3rd/jquery.sticky
 #= require 3rd/jquery.placeholders
 #= require 3rd/slick
@@ -18,7 +18,7 @@
 #= require 3rd/velocity.ui
 #= require main/3rd/jquery.validate.default
 #= require main/common/redraw_font_size
-#= require avalon
+#= require avalon.shim
 
 #= require bootstrap/scrollspy
 #= require bootstrap/tab

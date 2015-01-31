@@ -77,6 +77,7 @@ $(document).on 'page:change', ->
   $('.js_main_registrations_phone_field').on 'blur', ->
     if !_.isEmpty(user_phone = $('.js_main_registrations_phone_field').val()) && $('.js_main_registrations_phone_field').valid()
       $('.js_main_registrations_password_field').trigger 'focus'
+      return false if $(this).hasClass('ajax_disabled')
       $.ajax
         url: $(this).data('url')
         type: 'POST'
@@ -84,12 +85,15 @@ $(document).on 'page:change', ->
         data: 'user[phone]': user_phone
         context: this
         beforeSend: ->
+          $(this).addClass('ajax_disabled')
           $(this).siblings('.js_main_form_error_duplicate').remove()
         success: (data) ->
           if data.success == false
             message = if data.error_code == 6 then '电话号码已经注册，请您登录。' else '注册出现问题，请联系网站客服处理。'
             $error_group = $('<div></div>').addClass('main-form__error-group-clearfix js_main_form_error_duplicate').append($('<div></div>').addClass('main-form__error-group').append($('<div></div>').addClass('main-form__error-arrow')).append($('<div></div>').addClass('main-form__error-message').text(message)))
             $error_group.insertAfter $(this)
+        complete: ->
+          $(this).removeClass('ajax_disabled')
     else
       $(this).trigger 'focus'
 
@@ -118,7 +122,9 @@ $(document).on 'page:change', ->
         beforeSend: ->
           $(this).addClass('ajax_disabled')
         success: (data) ->
-          if data.success == false
+          if data.id?
+            Turbolinks.visit(location.origin + jsvar.prev_page)
+          else
             message = if data.error_code == 10 then '验证码错误，请您核对，30分钟内输入有效。' else '注册出现问题，请联系网站客服处理。'
             $error_group = $('<div></div>').addClass('main-form__error-group-clearfix js_main_form_error_captcha').append($('<div></div>').addClass('main-form__error-group').append($('<div></div>').addClass('main-form__error-arrow')).append($('<div></div>').addClass('main-form__error-message').text(message)))
             $error_group.insertAfter $('.js_main_registrations_sms_captcha_field')

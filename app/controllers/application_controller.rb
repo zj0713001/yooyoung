@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   layout 'main/application'
   before_action :track_user
+  before_action :prev_page
   around_action :handle_xhr_errors, if: ->{ request.format.js? || request.format.json? }
 
   respond_to :html, :json
@@ -26,6 +27,11 @@ class ApplicationController < ActionController::Base
   helper_method :can?
   def can?(action, model)
     current_user.try(:can?, action, model)
+  end
+
+  helper_method :jsvar
+  def jsvar
+    gon
   end
 
   protected
@@ -54,5 +60,11 @@ class ApplicationController < ActionController::Base
         format.json { render json: ErrorTable.instance.handle(e.class) }
       end
     end
+  end
+
+  def prev_page
+    session[:prev_page] = session[:current_page] || root_path
+    session[:current_page] = request.fullpath
+    jsvar.prev_page = session[:prev_page]
   end
 end

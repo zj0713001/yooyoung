@@ -11,3 +11,4 @@ html
   body
     = yield
     = javascript_include_tag :'main/application', :'data-turbolinks-track' => true
+    = include_gon init: true, namespace: :jsvar

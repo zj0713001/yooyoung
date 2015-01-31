@@ -6,11 +6,6 @@ class Admin::ApplicationController < ApplicationController
   def index
   end
 
-  helper_method :jsvar
-  def jsvar
-    gon
-  end
-
   def permited_params
     params.permit!
   end

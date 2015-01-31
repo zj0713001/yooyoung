@@ -26,7 +26,6 @@ class Main::Devise::RegistrationsController < Devise::RegistrationsController
   end
 
   def send_sms_captcha
-    raise YooYoung::TryTooManyTimesError
     @user = User.new(user_params)
     @success = UserService.instance.send_sms_captcha(@user)
 
