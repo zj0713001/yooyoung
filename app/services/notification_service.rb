@@ -9,6 +9,7 @@ class NotificationService
     notification.attributes = {
       notification_type: :send_registration_captcha,
       channel: :sms,
+      title: :registration_captcha,
       identifier: user.phone,
       content: content,
     }
