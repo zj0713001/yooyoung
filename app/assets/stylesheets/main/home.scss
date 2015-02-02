@@ -127,7 +127,7 @@
 @function home-index-section-length(
   $style: short
 ) {
-  @return if($style == short, #{calc((100vw - 100px) / 4)}, #{calc((100vw - 60px) / 2)});
+  @return if($style == short, #{calc(25vw - 25px)}, #{calc(50vw - 30px)});
 }
 
 .home-index-section {
