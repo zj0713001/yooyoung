@@ -10,6 +10,7 @@
 #= require 3rd/jquery.browser
 #= require 3rd/jquery.lazyload
 #= require 3rd/jquery.mousewheel
+#= require 3rd/jquery.easing
 
 #= require 3rd/jquery.sticky
 #= require 3rd/jquery.placeholders
