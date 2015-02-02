@@ -37,10 +37,9 @@ ruby:
   .home-index__section.home-index-section.js_main_home_index_section
     - @section_data.each do |data|
       .home-index-section__item.js_main_home_index_section_item class="home-index-section__item--#{data[:view]}" data-span="#{data[:view].in?([:'big-square', :horizontal]) ? 2 : 1}" data-height="#{data[:view].in?([:'big-square', :vertical]) ? 2 : 1}"
-        .home-index-section-item
+        a.home-index-section-item__link href="#"
+          .home-index-section-item = data[:image]
           - if data[:type] == :hotel
-            a.home-index-section-item__link href="#"
-              = image_tag data[:image], lazy: true, class: :'home-index-section-item__iamge lazy'
               .home-index-section-item__info
                 .home-index-section-item-info
                   .home-index-section-item-info__name
@@ -50,8 +49,6 @@ ruby:
                     .main-location__text
                       = data[:hotel_location]
           - elsif data[:type] == :area
-            a.home-index-section-item__link href="#"
-              = image_tag data[:image], lazy: true, class: :'home-index-section-item__iamge lazy'
               .home-index-section-item__area.home-index-section-item-area
                 .home-index-section-item-area__text
                   = data[:area_name]
