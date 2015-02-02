@@ -7,6 +7,7 @@
 #= require 3rd/jquery.browser
 #= require 3rd/jquery.lazyload
 #= require 3rd/jquery.waterfall
+#= require 3rd/velocity
 
 #= require main/common/redraw_font_size
 
@@ -22,17 +23,14 @@ $(document).on 'page:change', ->
   slick_lazy_load = (index) ->
     $target = $($('.js_main_home_index_banner_image')[index])
     if !_.isBoolean($target.data('loaded'))
-      if $.browser.msie && $.browser.version < 9
-        $target.css('filter', $target.data('filter'))
-      else
-        $target.css('background-image', $target.data('background-image'))
+      $target.css('background-image', $target.data('background-image'))
       $target.data('loaded', true)
 
   banner_info_fadein = (index) ->
     $.each $($('.slick-slide')[index]).find('.js_main_home_index_banner_item_delay'), (i, item) ->
       _.delay ->
         $(item).fadeIn()
-      , $(item).data('time')
+      , resize_delay_time * 2
 
   $('.js_main_home_index_banner_slick').slick
     autoplay: true
@@ -53,40 +51,44 @@ $(document).on 'page:change', ->
       $('.js_main_home_index_banner_item_delay').hide()
       banner_info_fadein 0
 
-  $(window).load ->
-    $('.js_main_home_index_section').waterfall
-      colLength: 4
-      autoresize: false
-
   $('.js_main_home_index_banner_slick_prev').on 'click', ->
     $('.js_main_home_index_banner_slick').slickPrev()
 
   $('.js_main_home_index_banner_slick_next').on 'click', ->
     $('.js_main_home_index_banner_slick').slickNext()
 
-  if $.browser.msie && $.browser.version < 9
-    fit_height = ->
-      $('.js_main_home_index_banner_height').height($(window).height())
-    lazy_fit_height = _.debounce(fit_height, resize_delay_time)
-    $(window).resize(lazy_fit_height)
+  $('.js_main_home_index_section').waterfall
+    colLength: 4
+    autoresize: false
 
-    resize_items_height = ->
-      unit_length = ($(window).width() - 20) / 4 - 20;
-      $.each $('.js_main_home_index_section_item'), (index, item) ->
-        unit_number = parseInt($(item).data('height'))
-        item_height = unit_length * unit_number + (unit_number-1) * 20
-        $(item).height("#{item_height}px")
+  $('.js_main_home_index_section_item').on
+    mouseenter: ->
+      $(this).velocity("stop").velocity({'background-size': '105%'}, 500, 'easeOutCubic')
+    mouseleave: ->
+      $(this).velocity("stop").velocity({'background-size': '100%'}, 500, 'easeOutCubic')
+    , '.js_main_home_index_section_item_section'
 
-    reflow_home_index_section = ->
-      resize_items_height()
+  fit_height = ->
+    $('.js_main_home_index_banner_height').height($(window).height())
+  lazy_fit_height = _.debounce(fit_height, resize_delay_time)
+  $(window).resize(lazy_fit_height)
+
+  resize_items_height = ->
+    unit_length = ($(window).width() - 100) / 4
+    $.each $('.js_main_home_index_section_item'), (index, item) ->
+      span_multiple = parseInt($(item).data('span'))
+      height_multiple = parseInt($(item).data('height'))
+      item_width = unit_length * span_multiple + (span_multiple-1) * 20
+      item_height = unit_length * height_multiple + (height_multiple-1) * 20
+      $(item).css('width', item_width).css('height', item_height)
+
+  reflow_home_index_section = ->
+    resize_items_height()
+    _.delay ->
       $('.js_main_home_index_section').waterfall('reflow')
+    , resize_delay_time
 
-    lazy_reflow_home_index_section = _.debounce(reflow_home_index_section, resize_delay_time)
-    $(window).resize(lazy_reflow_home_index_section)
+  lazy_reflow_home_index_section = _.debounce(reflow_home_index_section, resize_delay_time)
+  $(window).resize(lazy_reflow_home_index_section)
 
-    $(window).trigger('resize')
-  else
-    reflow_home_index_section = ->
-      $('.js_main_home_index_section').waterfall('reflow')
-    lazy_reflow_home_index_section = _.debounce(reflow_home_index_section, resize_delay_time)
-    $(window).resize(lazy_reflow_home_index_section)
+  $(window).trigger('resize')

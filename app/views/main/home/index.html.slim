@@ -14,7 +14,7 @@ ruby:
             .home-index-banner-item__image.js_main_home_index_banner_image.js_main_home_index_banner_height  data-background-image="#{background_image_cover(data[:image])}" data-filter="#{background_image_cover_filter(data[:image])}"
             .home-index-banner-item__hotel
               .home-index-banner-item-hotel
-                .home-index-banner-item-hotel__section.js_main_home_index_banner_item_delay data-time=300
+                .home-index-banner-item-hotel__section.js_main_home_index_banner_item_delay
                   .home-index-banner-item-hotel__name
                     = data[:hotel_name]
                   .home-index-banner-item-hotel__package-name
@@ -23,7 +23,7 @@ ruby:
                     .iconfont.icon-location
                     .main-location__text
                       = data[:hotel_location]
-                .home-index-banner-item-hotel__price.js_main_home_index_banner_item_delay data-time=300
+                .home-index-banner-item-hotel__price.js_main_home_index_banner_item_delay
                   .main-flag-label
                     .main-flag-label__flag
                     .main-flag-label__text
@@ -36,22 +36,22 @@ ruby:
         .iconfont.icon-arrow-right
   .home-index__section.home-index-section.js_main_home_index_section
     - @section_data.each do |data|
-      .home-index-section__item.js_main_home_index_section_item class="home-index-section__item--#{data[:view]}" data-span="#{data[:view].in?([:'big-square', :horizontal]) ? 2 : 1}" data-height="#{data[:view].in?([:'big-square', :vertical]) ? 2 : 1}"
-        a.home-index-section-item__link href="#"
-          .home-index-section-item = data[:image]
-          - if data[:type] == :hotel
-              .home-index-section-item__info
-                .home-index-section-item-info
-                  .home-index-section-item-info__name
-                    = data[:hotel_name]
-                  .main-location
-                    .iconfont.icon-location
-                    .main-location__text
-                      = data[:hotel_location]
-          - elsif data[:type] == :area
-              .home-index-section-item__area.home-index-section-item-area
-                .home-index-section-item-area__text
-                  = data[:area_name]
+      .home-index-section__item.js_main_home_index_section_item data-span="#{data[:view].in?([:'big-square', :horizontal]) ? 2 : 1}" data-height="#{data[:view].in?([:'big-square', :vertical]) ? 2 : 1}"
+        a.home-index-section__link href="#"
+          .home-index-section-item.js_main_home_index_section_item_section style="background-image: #{background_image_cover(data[:image])}"
+            - if data[:type] == :hotel
+                .home-index-section-item__info
+                  .home-index-section-item-info
+                    .home-index-section-item-info__name
+                      = data[:hotel_name]
+                    .main-location
+                      .iconfont.icon-location
+                      .main-location__text
+                        = data[:hotel_location]
+            - elsif data[:type] == :area
+                .home-index-section-item__area.home-index-section-item-area class="home-index-section-item-area--#{data[:color]}"
+                  .home-index-section-item-area__text
+                    = data[:area_name]
   .home-index__more
     a href='#' 查看更多
   = render 'main/shared/footer'
