@@ -8,7 +8,7 @@ out_path    = 'log/rainbows.out.log'
 
 # Use at least one worker per core if you're on a dedicated server,
 # more will usually help for _short_ waits on databases/caches.
-worker_processes 2
+worker_processes 4
 
 # If running the master process as root and the workers as an unprivileged
 # user, do this to switch euid/egid in the workers (also chowns logs):
@@ -17,7 +17,7 @@ worker_processes 2
 # listen on both a Unix domain socket and a TCP port,
 # we use a shorter backlog for quicker failover when busy
 listen socket_path, backlog: 64
-listen "127.0.0.1:3000"
+# listen "127.0.0.1:3000"
 
 daemonize = true
 
