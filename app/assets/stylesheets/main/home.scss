@@ -124,12 +124,6 @@
     bottom: 1.5em;
   }
 }
-@function home-index-section-length(
-  $style: short
-) {
-  @return if($style == short, #{calc((100vw - 100px) / 4)}, #{calc((100vw - 60px) / 2)});
-}
-
 .home-index-section {
   padding: 10px;
   .home-index-section__item {
@@ -137,46 +131,28 @@
     margin: 10px;
     @include transition(.1s ease);
     @include translateZ(0);
-    &.home-index-section__item--horizontal {
-      width: home-index-section-length(long);
-      height: home-index-section-length(short);
-    }
-    &.home-index-section__item--vertical {
-      width: home-index-section-length(short);
-      height: home-index-section-length(long);
-    }
-    &.home-index-section__item--big-square {
-      width: home-index-section-length(long);
-      height: home-index-section-length(long);
-    }
-    &.home-index-section__item--small-square {
-      width: home-index-section-length(short);
-      height: home-index-section-length(short);
+  }
+  .home-index-section__link {
+    color: $gray_white;
+    &:hover {
+      color: $white;
     }
   }
 }
 .home-index-section-item {
   position: relative;
-  .home-index-section-item__link {
-    color: $gray_white;
-    &:hover {
-      color: $white;
-      .home-index-section-item-area {
-        display: none;
-      }
-    }
-  }
-  .home-index-section-item__iamge {
-    width: 100%;
-    height: 100%;
-  }
+  height: 100%;
+  width: 100%;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  @include background-size(100%);
   .home-index-section-item__info {
     position: absolute;
     left: 1em;
     bottom: 1em;
   }
   .home-index-section-item__area {
-    position: absolute;
+    position: relative;
   }
 }
 .home-index-section-item-info {
@@ -188,11 +164,27 @@
   }
 }
 .home-index-section-item-area {
-  top: 0;
+  height: 100%;
   font-size: 3em;
   line-height: 0;
-  width: 100%;
-  height: 100%;
-  padding-top: 50%;
   text-align: center;
+  .home-index-section-item-area__text {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding-top: 50%;
+  }
+  &.home-index-section-item-area--yellow {
+    @include rgba-background-inline(rgba($orange, .7));
+    &:hover {
+      @include background(none)
+    }
+  }
+  &.home-index-section-item-area--green {
+    @include rgba-background-inline(rgba($green, .7));
+    &:hover {
+      @include background(none)
+    }
+  }
 }
