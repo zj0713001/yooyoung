@@ -54,7 +54,7 @@
         timeEl.innerHTML = --time;
         if (time === 0) {
           window.clearInterval(intervalId);
-          window.location.href = "http://www.iconfont.cn/";
+          window.location.href = window.location.origin;
         }
       }, 1000);
     }
@@ -65,7 +65,7 @@
   <!-- This file lives in public/422.html -->
   <div class="dialog">
     <h1>422</h1>
-    <p>请求出错了，<span id="time">5</span> 秒后跳转回<a href="http://www.iconfont.cn/">首页</a>。</p>
+    <p>请求出错了，<span id="time">5</span> 秒后跳转回<a href="/">首页</a>。</p>
   </div>
   <p>如果您有任何疑问请发邮件给我们：<a href="mailto:service@yooyoung.cn">service@yooyoung.cn</a></p>
 </body>

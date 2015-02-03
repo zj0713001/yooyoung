@@ -54,7 +54,7 @@
         timeEl.innerHTML = --time;
         if (time === 0) {
           window.clearInterval(intervalId);
-          window.location.href = "http://www.iconfont.cn/";
+          window.location.href = window.location.origin;
         }
       }, 1000);
     }
