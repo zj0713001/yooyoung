@@ -162,7 +162,7 @@
   .hotel-show-content__package {
     width: 100%;
     height: 100vmin;
-    padding-top: 20px;
+    padding-top: 0px;
   }
   .hotel-show-content__rooms,
   .hotel-show-content__favorite,
@@ -291,6 +291,7 @@
   color: $gray_black;
   .hotel-show-content-package-simple__content {
     @include main-container;
+    height: 100vmin;
     padding: 20px;
   }
   .hotel-show-content-package-simple__title {
