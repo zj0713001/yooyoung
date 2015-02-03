@@ -48,14 +48,16 @@ $ ->
       $slick_active = $('.js_main_hotel_show_content_package .slick-active')
       if event.deltaY < 0
         if $slick_active.data('show-info')
-          if $('.js_main_hotel_show_content_package .slick-slide').length == $slick_active.index()+1
-            $('.js_main_hotel_show_content_package').data('package-scroll', false)
-            $(document).unmousewheel()
-          else
-            $('.js_main_hotel_show_content_package').slickNext()
-          package_info_hide($slick_active)
+          $('.js_main_hotel_show_content_package').slickNext()
+          unless $('.js_main_hotel_show_content_package .slick-slide').length == $slick_active.index()+1
+            package_info_hide($slick_active)
         else
           package_info_show($slick_active)
+          if $('.js_main_hotel_show_content_package .slick-slide').length == $slick_active.index()+1
+            _.delay ->
+              $('.js_main_hotel_show_content_package').data('package-scroll', false)
+              $(document).unmousewheel()
+            , animate_time*2
       else
         if $slick_active.data('show-info')
           package_info_hide($slick_active)
@@ -148,8 +150,6 @@ $ ->
         package_top = parseInt($('.js_main_hotel_show_content_package').offset().top - 60)
         if Math.abs($(document).scrollTop() - package_top) > 100
           $(document).unmousewheel()
-          $slick_active = $('.js_main_hotel_show_content_package .slick-active')
-          package_info_hide($slick_active) if $slick_active.data('show-info')
           $('.js_main_hotel_show_content_package').data('skip', false) if $(document).scrollTop() < package_top
           $('.js_main_hotel_show_content_package').data('skip', true) if $(document).scrollTop() > package_top
           $('.js_main_hotel_show_content_package').data('package-scroll', false)
@@ -159,8 +159,13 @@ $ ->
           $(document).scrollTo($('.js_main_hotel_show_content_package').offset().top-60)
           package_scroll()
         if $(document).scrollTop() >= package_top && ($(document).scrollTop() - package_top) > $(window).height()
+          $slick_active = $('.js_main_hotel_show_content_package .slick-active')
+          package_info_hide($slick_active) if $slick_active.data('show-info')
           $('.js_main_hotel_show_content_package').unslick();
           content_package_slick_bind()
+        if package_top - $(document).scrollTop() > 100
+          $slick_active = $('.js_main_hotel_show_content_package .slick-active')
+          package_info_hide($slick_active) if $slick_active.data('show-info')
       true
 
     _.delay ->

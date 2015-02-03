@@ -17,7 +17,11 @@ class FileUploader < CarrierWave::Uploader::Base
 
   def filename
     if super.present?
-      "#{secure_token}.#{extension}"
+      if model.new_record?
+        "#{secure_token}.#{extension}"
+      else
+        super
+      end
     end
   end
 
