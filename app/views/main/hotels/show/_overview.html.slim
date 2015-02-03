@@ -3,7 +3,7 @@
     .js_main_hotel_show_content_overview_images
       - hotel.photos.each do |photo|
         .hotel-show-content-overview__image-item
-          = image_tag photo.image.large.url, lazy: true
+          = image_tag photo.image.large_narrow.url, lazy: true
     - if hotel.photos.count > 1
       a.main-slick__prev.js_main_hotel_show_content_overview_slick_prev
         .iconfont.icon-arrow-left

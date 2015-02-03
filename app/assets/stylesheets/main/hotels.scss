@@ -208,17 +208,17 @@
 }
 .hotel-show-content-overview {
   @include main-container;
-  padding: 0 20px;
+  padding: 20px;
   position: relative;
   .hotel-show-content-overview__images {
     position: relative;
     @include span(800px);
-    height: 600px;
-    margin: 0;
+    height: 500px;
     overflow: hidden;
     @include breakpoint(max-width $desktop-maxwidth) {
       @include span(600px);
-      height: 450px;
+      height: 375px;
+      // height: 340px;
     }
   }
   .hotel-show-content-overview__image-item {
@@ -229,11 +229,12 @@
   }
   .hotel-show-content-overview__info {
     @include span(420px);
-    height: 560px;
-    margin: 20px 0 20px 20px;
+    height: 490px;
+    margin-left: 20px;
     @include breakpoint(max-width $desktop-maxwidth) {
       @include span(300px);
-      height: 410px;
+      height: 375px;
+      // height: 340px;
     }
     color: $gray_black;
     font-size: $font_h4;
@@ -637,7 +638,8 @@
     @include clearfix;
     position: relative;
     width: 600px;
-    height: 340px;
+    height: 375px;
+    // height: 340px;
     margin: 10px auto;
     overflow: hidden;
   }

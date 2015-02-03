@@ -37,7 +37,7 @@
                 .js_hotel_show_content_favorite_photos
                   - item.photos.each do |photo|
                     .hotel-show-content-favorite__photo-item
-                      = image_tag photo.image.normal.url, lazy: true
+                      = image_tag photo.image.normal_narrow.url, lazy: true
                 - if item.photos.count > 1
                   a.main-slick__prev.js_hotel_show_content_favorite_photos_slick_prev
                     .iconfont.icon-arrow-left
