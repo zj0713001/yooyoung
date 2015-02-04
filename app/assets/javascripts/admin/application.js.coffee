@@ -8,6 +8,7 @@
 #= require jquery-ui/datepicker-zh-CN
 #= require jquery-ui/widget
 #= require jquery-ui/sortable
+#= require avalon.shim
 
 # 3rd
 #= require 3rd/jquery.browser
@@ -28,6 +29,7 @@
 #= require admin/common/dynamic_fields
 
 #= require admin/photos
+#= require admin/prices
 
 # Turbolinks always on the last
 #= require turbolinks

@@ -15,7 +15,7 @@ h2.ui.dividing.header
     = new_link_tag model
 table.ui.table.segment
   thead
-    - %w[id chinese name country city_id editor_id updated_at published_at].each do |name|
+    - %w[id chinese city_id editor_id published_at].each do |name|
       th = model.human_attribute_name(name)
     th = t('admin.actions')
     th = t('admin.public')
@@ -23,12 +23,11 @@ table.ui.table.segment
     - @hotels.each do |hotel|
       tr
         td = hotel.id
-        td = link_to hotel.chinese, hotel, target: :_blank, class: :'ui link'
-        td = hotel.name
-        td = link_to_if can?(:show, Country), hotel.country.chinese, [:admin, hotel.country], target: :_blank, class: :'ui link' if hotel.country
+        td
+          = link_to hotel.chinese, hotel, target: :_blank, class: :'ui link'
+          p = hotel.name
         td = link_to_if can?(:show, City), hotel.city.chinese, [:admin, hotel.city], target: :_blank, class: :'ui link' if hotel.city
         td = hotel.editor.try(:nickname)
-        td = hotel.updated_at.try(:localtime).try(:to_s, :db)
         td = hotel.published_at.try(:localtime).try(:to_s, :db)
         td
           - if can? :show, Hotel
@@ -37,6 +36,8 @@ table.ui.table.segment
           - if can? :edit, Hotel
             = link_to [:edit, :admin, hotel], alt: t('admin.edit'), class: :'ui link', target: :_blank do
               i.edit.icon
+            = link_to admin_prices_path(target: Room.name, target_id: hotel.rooms.first.try(:id)), alt: t('admin.edit'), class: :'ui link', target: :_blank do
+              i.yen.icon
         td
           = admin_publish_tag(hotel)
 = admin_paginate_tag @hotels

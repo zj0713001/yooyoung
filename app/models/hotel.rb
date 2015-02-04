@@ -5,37 +5,37 @@
 #  id             :integer          not null, primary key
 #  name           :string(255)      not null
 #  chinese        :string(255)      not null
-#  sequence       :integer          default(0)
+#  sequence       :integer          default("0")
 #  city_id        :integer
 #  editor_id      :integer
-#  description    :text
-#  provisions     :text
+#  description    :text(65535)
+#  provisions     :text(65535)
 #  address        :string(255)
 #  phone          :string(255)
 #  checkin        :datetime
 #  checkout       :datetime
-#  traffics       :text
-#  published      :boolean          default(FALSE), not null
-#  active         :boolean          default(TRUE), not null
-#  lock_version   :integer          default(0), not null
+#  traffics       :text(65535)
+#  published      :boolean          default("0"), not null
+#  active         :boolean          default("1"), not null
+#  lock_version   :integer          default("0"), not null
 #  created_at     :datetime
 #  updated_at     :datetime
 #  deleted_at     :datetime
 #  published_at   :datetime
 #  unpublished_at :datetime
-#  arounds        :text
+#  arounds        :text(65535)
 #  homepage       :string(255)
 #  best_season    :string(255)
-#  tips           :text
+#  tips           :text(65535)
 #  cover_photo_id :integer
-#  recommends     :text
+#  recommends     :text(65535)
 #  local_address  :string(255)
-#  visa_tip       :text
-#  language_tip   :text
-#  money_tip      :text
-#  network_tip    :text
-#  power_tip      :text
-#  luggage_tip    :text
+#  visa_tip       :text(65535)
+#  language_tip   :text(65535)
+#  money_tip      :text(65535)
+#  network_tip    :text(65535)
+#  power_tip      :text(65535)
+#  luggage_tip    :text(65535)
 #  slug           :string(255)
 #
 
@@ -47,6 +47,7 @@ class Hotel < ActiveRecord::Base
 
   has_many :photos, as: :target, dependent: :destroy
   has_one :package, -> { where favorite: false }, class_name: HotelPackage
+  delegate :rooms, to: :package, allow_nil: true
   has_one :favorite_package, -> { where favorite: true }, class_name: HotelPackage
   has_many :reasons, -> { where active: true }, class_name: HotelReason
   has_many :cheats, -> { where active: true }, class_name: HotelCheat
