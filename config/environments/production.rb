@@ -32,7 +32,13 @@ Rails.application.configure do
   # Generate digests for assets URLs.
   config.assets.digest = true
 
-  config.asset_host = 'http://7u2r8l.com1.z0.glb.clouddn.com/'
+  config.asset_host = Proc.new { |source|
+    if source.ends_with?('.jpg') || source.ends_with?('.css')
+      'http://7u2n2q.com2.z0.glb.qiniucdn.com/'
+    else
+      'http://7u2n2q.com2.z0.glb.clouddn.com'
+    end
+  }
 
   # `config.assets.precompile` has moved to config/initializers/assets.rb
 
