@@ -36,7 +36,7 @@ Rails.application.configure do
     if source.ends_with?('.jpg') || source.ends_with?('.css')
       'http://7u2n2q.com2.z0.glb.qiniucdn.com/'
     else
-      'http://7u2n2q.com2.z0.glb.clouddn.com'
+      'http://7u2n2q.com2.z0.glb.clouddn.com/'
     end
   }
 
@@ -67,7 +67,6 @@ Rails.application.configure do
   }
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  config.action_controller.asset_host = "http://7u2r8l.com1.z0.glb.clouddn.com/"
 
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.cache_store
