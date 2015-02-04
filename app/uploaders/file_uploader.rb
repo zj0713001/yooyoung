@@ -16,13 +16,7 @@ class FileUploader < CarrierWave::Uploader::Base
   end
 
   def filename
-    if super.present?
-      if model.new_record?
-        "#{secure_token}.#{extension}"
-      else
-        super
-      end
-    end
+    "#{secure_token}.#{extension}"
   end
 
   protected
@@ -32,12 +26,14 @@ class FileUploader < CarrierWave::Uploader::Base
 
   def secure_token
     var = :"@#{mounted_as}_secure_token"
-    model.instance_variable_get(var) or model.instance_variable_set(var, SecureRandom.hex(4))
+    model.instance_variable_get(var) or model.instance_variable_set(var, Digest::MD5.hexdigest(model.file_name)[0..7])
   end
 
   def save_file_info_in_model
-    model.file_name = file.filename
-    model.file_size = file.size.to_s
-    model.content_type = file.content_type
+    if model.new_record?
+      model.file_name = file.filename
+      model.file_size = file.size.to_s
+      model.content_type = file.content_type
+    end
   end
 end
