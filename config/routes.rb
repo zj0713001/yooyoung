@@ -76,7 +76,7 @@ Rails.application.routes.draw do
     end
     # Directs /admin/products/* to Admin::ProductsController
     # (app/controllers/admin/products_controller.rb)
-    root 'application#index'
+    root 'hotels#index'
     resources :users, only: [:index, :show, :edit, :update] do
       collection do
         get :links
