@@ -6,12 +6,12 @@
 #  name           :string(255)      not null
 #  start_day      :date
 #  end_day        :date
-#  description    :text
+#  description    :text(65535)
 #  hotel_id       :integer
 #  editor_id      :integer
 #  created_at     :datetime
 #  updated_at     :datetime
-#  favorite       :boolean          default(FALSE), not null
+#  favorite       :boolean          default("0"), not null
 #  cover_photo_id :integer
 #
 

@@ -1,0 +1,83 @@
+.admin .calendar {
+  .calendar-header {
+    text-align: center;
+    font-size: 2em;
+    span,
+    a {
+      display: block;
+      float: left;
+      margin-bottom: .5em;
+    }
+    span {
+      width: 20%;
+    }
+    .previous {
+      width: 40%;
+    }
+    .next {
+      width: 40%;
+    }
+  }
+  table {
+    width: 100%;
+    th {
+      text-align: center;
+      padding: 1em 0;
+      background-color: rgba(0, 0, 0, 0.03);
+    }
+    .day {
+      border: 1px solid rgba(0, 0, 0, 0.03);
+      &.past {
+        color: rgba(0, 0, 0, .1);
+        .ui.label {
+          color: rgba(0, 0, 0, .1);
+        }
+      }
+      &.today {
+        .ui.label {
+          background-color: #5bbd72;
+          border-color: #5bbd72;
+          color: #ffffff;
+        }
+      }
+      &.future.current-month {
+        .ui.label {
+          background-color: #00b5ad;
+          border-color: #00b5ad;
+          color: #ffffff;
+        }
+      }
+      &:not(.past) {
+        cursor: pointer;
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.03);
+        }
+        .red { color: #d95c5c }
+        .green { color: #5bbd72 }
+        .gray { color: rgba(0, 0, 0, 0.3) }
+      }
+      &.wday-5,
+      &.wday-6 {
+        background-color: rgba(0, 0, 0, 0.02);
+      }
+    }
+    .day-item {
+      position: relative;
+      min-height: 8em;
+      padding: .5em;
+      &.day-item--selected {
+        background-color: rgba(#5bbd72, .5);
+      }
+      &.day-item--selected-start {
+        background-color: rgba(#5bbd72, .8);
+      }
+      .price {
+        font-size: 0.8em;
+        padding: .1em 0;
+        strong {
+          font-size: 1.2em;
+        }
+      }
+    }
+  }
+}

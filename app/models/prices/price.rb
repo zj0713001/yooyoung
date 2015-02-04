@@ -1,4 +1,4 @@
-class Price
+class Prices::Price
   include Mongoid::Document
   include Mongoid::Timestamps
 

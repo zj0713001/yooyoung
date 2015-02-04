@@ -56,6 +56,7 @@ class ApplicationController < ActionController::Base
     begin
       yield
     rescue => e
+      Rails.logger.error e.inspect
       respond_to do |format|
         format.json { render json: ErrorTable.instance.handle(e.class) }
       end

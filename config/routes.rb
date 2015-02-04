@@ -92,5 +92,7 @@ Rails.application.routes.draw do
     resources :hotels, concerns: :deletable
     resources :links
     resources :provinces, concerns: :deletable
+    resources :prices, only: [:show, :index, :create]
+    resources :rooms, only: [:update]
   end
 end

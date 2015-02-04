@@ -4,10 +4,10 @@
 #
 #  id               :integer          not null, primary key
 #  content          :string(255)      not null
-#  description      :text
+#  description      :text(65535)
 #  address          :string(255)
-#  tips             :text
-#  openning_hours   :text
+#  tips             :text(65535)
+#  openning_hours   :text(65535)
 #  phone            :string(255)
 #  hotel_package_id :integer
 #  editor_id        :integer

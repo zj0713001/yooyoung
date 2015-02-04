@@ -49,6 +49,6 @@ class ErrorTable
   }
 
   def handle(error_class)
-    (TABLE[error_class.to_s] || TABLE["RuntimeError"]).merge(success: false)
+    (TABLE[error_class.to_s] || TABLE["RuntimeError"]).merge(status: false)
   end
 end

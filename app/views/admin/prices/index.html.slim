@@ -1,0 +1,96 @@
+h2.ui.dividing.header.js_admin_price_update
+  | #{@hotel.chinese} - 修改价格
+.ui.grid
+  .three.wide.column
+    .ui.vertical.menu.pointing
+      - @hotel.package.rooms.each do |room|
+        = link_to [room.chinese, room.name].join(' '), { target: room.class.name, target_id: room.id }, class: "item #{'active' if room == @target}", :'data-no-turbolink' => true
+    .ui.vertical.menu.pointing
+      = link_to '酒店套餐', { target: @hotel.package.class.name, target_id: @hotel.package.id }, class: "item #{'active' if @hotel.package == @target}", :'data-no-turbolink' => true
+      = link_to '悠漾套餐', { target: @hotel.favorite_package.class.name, target_id: @hotel.favorite_package.id }, class: "item #{'active' if @hotel.favorite_package == @target}", :'data-no-turbolink' => true
+  .thirteen.wide.column
+    .ui.fluid.segment ms-controller='admin_prices'
+      .calendar
+        = month_calendar title: ->(start_date) { content_tag :span, "#{start_date.year} #{I18n.t("date.month_names")[start_date.month]}"}, previous_link: ->(param, date_range) { link_to raw("&laquo;"), {param => date_range.first - 1.day, target_id: params[:target_id]}, class: 'previous', :'data-no-turbolink' => true }, next_link: ->(param, date_range) { link_to raw("&raquo;"), {param => date_range.last + 1.day, target_id: params[:target_id]}, class: 'next', :'data-no-turbolink' => true } do |date|
+          - date_str = "#{date.strftime('%F')}"
+          .day-item.js_admin_calendar_day_item data-week="#{date.strftime('%U').to_i}" data-day="#{date.wday}" data-date="#{date_str}" ms-click='click_item' ms-on-mouseenter='select_item'
+            .mday.ui.circular.label.js_admin_calendar_day
+              = date.mday
+            .price
+              | 当地：
+              strong.gray
+                | {{ data | by_date('#{date_str}') | to_local_price }}
+            .price
+              | 单位：
+              strong.gray
+                | {{ data | by_date('#{date_str}') | to_price_unit }}
+            .price
+              | 协议：
+              strong.green
+                | {{ data | by_date('#{date_str}') | to_cost_price }}元
+            .price
+              | 销售：
+              strong.red
+                | {{ data | by_date('#{date_str}') | to_sale_price }}元
+      - if @target.is_a? Room
+        .ui.divider
+        .ui.form
+          = form_for @target, url: [:admin, @target], method: :put, html: { multipart: true, class: :'ui form js_admin_room_price_update' } do |f|
+            = f.fields_for :extra_bed_price, f.object.extra_bed_price do |ff|
+              .fields
+                .four.wide.field
+                  label 加床数量
+                .eight.wide.field
+                  = ff.text_field :limit
+              = ff.fields_for :items, ff.object.items do |fff|
+                .fields
+                  .four.wide.field
+                    label 加床价格
+                  .eight.wide.field
+                    = fff.text_field :price
+            = f.fields_for :child_price, f.object.child_price do |ff|
+              .fields
+                .four.wide.field
+                  label 儿童数量
+                .eight.wide.field
+                  = ff.text_field :limit
+              = ff.fields_for :items, ff.object.items do |fff|
+                .fields
+                  .four.wide.field
+                    label 儿童价格
+                  .eight.wide.field
+                    = fff.text_field :price
+            .fields
+              .four.wide.field
+              .eight.wide.field
+                .ui.message.hidden.js_admin_price_update_message
+                = f.submit t('admin.submit'), class: :'ui label teal button huge'
+      .ui.modal.standard
+        i.close.icon
+        .header
+          | 修改价格
+        .content
+          .ui.form
+            .fields
+              .four.wide.field
+                label 当地价格
+              .eight.wide.field
+                input type='text' name='local_price' ms-duplex="local_price"
+            .fields
+              .four.wide.field
+                label 货币单位
+              .eight.wide.field
+                input type='text' name='price_unit' ms-duplex="price_unit"
+            .fields
+              .four.wide.field
+                label 协议价格
+              .eight.wide.field
+                input type='text' name='cost_price' ms-duplex="cost_price"
+            .fields
+              .four.wide.field
+                label 销售价格
+              .eight.wide.field
+                input type='text' name='sale_price' ms-duplex="sale_price"
+        .actions
+          .ui.button 取消
+          .ui.button ms-click='update_price' data-url="#{admin_prices_path(target: params[:target], target_id: params[:target_id])}" 保存
