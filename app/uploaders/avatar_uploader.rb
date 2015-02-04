@@ -3,7 +3,7 @@ class AvatarUploader < FileUploader
   include CarrierWave::MiniMagick
 
   permissions 0666
-  directory_permissions 0777
+  directory_permissions 0755
   process convert: :jpg
 
   WIDTH = 100
