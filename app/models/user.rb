@@ -26,7 +26,7 @@
 #
 
 class User < ActiveRecord::Base
-  mount_uploader :avatar, AvatarUploader
+  # mount_uploader :avatar, AvatarUploader
   include Hashid
   after_create :generate_other_infos
 
