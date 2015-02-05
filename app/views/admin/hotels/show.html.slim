@@ -1,4 +1,8 @@
-- show = !params[:action].in?(%w[new edit]) && @hotel.persisted? && @hotel.valid?
+ruby:
+  set_meta_tags(
+    title: "#{ @hotel.chinese } - #{t('admin.seo.title')}"
+  )
+  show = !params[:action].in?(%w[new edit]) && @hotel.persisted? && @hotel.valid?
 h2.ui.dividing.header
   = "#{t("admin.#{show ? 'show' : @hotel.new_record? ? 'new' : 'edit'}")}#{model.model_name.human}"
 = render 'admin/shared/admin_form_messages', object: @hotel
