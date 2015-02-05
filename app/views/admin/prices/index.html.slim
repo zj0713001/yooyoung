@@ -90,7 +90,9 @@ h2.ui.dividing.header.js_admin_price_update
               .four.wide.field
                 label 销售价格
               .eight.wide.field
+                - %w[10 15 20].each do |multiple|
+                  a.ui.label ms-click='calculate_sale_price' data-multiple="#{multiple}" #{multiple}%
                 input type='text' name='sale_price' ms-duplex="sale_price"
         .actions
-          .ui.button 取消
-          .ui.button ms-click='update_price' data-url="#{admin_prices_path(target: params[:target], target_id: params[:target_id])}" 保存
+          .ui.button.red 取消
+          .ui.button.green ms-click='update_price' data-url="#{admin_prices_path(target: params[:target], target_id: params[:target_id])}" 保存

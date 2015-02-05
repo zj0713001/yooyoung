@@ -42,3 +42,8 @@ zh-CN:
         network_tip: 网络及通讯
         power_tip: 电源
         luggage_tip: 携带物品
+        contact_name: 联系人
+        contact_phone: 联系人电话
+        contact_email: 联系人邮箱
+        trade_email: 交易确认邮箱
+        trade_cc_email: 交易通知邮箱
