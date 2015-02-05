@@ -56,6 +56,7 @@ gem 'dynamic_form'
 gem 'meta-tags'
 gem 'useragent'
 gem 'simple_calendar'
+gem 'aasm'
 
 # Datebase
 gem 'mysql2'
