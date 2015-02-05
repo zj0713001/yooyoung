@@ -11,7 +11,7 @@ class PriceService
   def find_all_by_date(start_date, end_date)
     prices = Prices::Price.where(target: @target.class.name, target_id: @target.id, :date.gte => start_date, :date.lte => end_date)
     (start_date..end_date).map do |date|
-      price = prices.find_by date: date
+      price = prices.where(date: date).first_or_initialize
       price_struct(date, price)
     end
   end
