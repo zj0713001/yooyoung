@@ -1,3 +1,7 @@
+ruby:
+  set_meta_tags(
+    title: "#{ model.model_name.human } - #{t('admin.seo.title')}"
+  )
 h2.ui.dividing.header
   = model.model_name.human
   .ui.black.pointing.left.label = @hotels.total_count

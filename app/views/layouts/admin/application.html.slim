@@ -5,10 +5,10 @@ html
     meta name="renderer" content="webkit"
     meta name="force-rendering" content="webkit"
     meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"
-    title 悠漾后台管理系统
     = include_gon init: true, namespace: :jsvar
     = stylesheet_link_tag :'admin/application', media: 'all', :'data-turbolinks-track' => true
     = csrf_meta_tags
+    = display_meta_tags
   body
     = render partial: 'layouts/admin/nav'
     .pusher
