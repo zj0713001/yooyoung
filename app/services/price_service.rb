@@ -38,7 +38,7 @@ class PriceService
         cost_price: price.try(:cost_price),
         sale_price: price.try(:sale_price),
       }).marshal_dump,
-      exist: price.present?,
+      exist: price.persisted?,
     }
   end
 end
