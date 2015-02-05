@@ -2,7 +2,7 @@ class Admin::PricesController < Admin::ApplicationController
   def index
     authorize! :edit, Hotel #TODO
 
-    @target = params[:target].to_s.camelize.safe_constantize.find_by_id(params[:target_id])
+    @target = params[:target].to_s.camelize.safe_constantize.find_by(id: params[:target_id])
     @hotel = @target.try(:hotel)
 
     respond_to do |format|
