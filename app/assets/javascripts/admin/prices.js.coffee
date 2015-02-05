@@ -64,6 +64,8 @@ $(document).on 'page:change', ->
                 date_by_date = _.find vm.data, (d) ->
                   d.date == item.date
                 date_by_date.prices = item.prices
+      vm.calculate_sale_price = ->
+        vm.sale_price = parseInt(vm.cost_price) * parseInt($(this).data('multiple')) / 100 + parseInt(vm.cost_price)
 
     $.ajax
       url: location.href

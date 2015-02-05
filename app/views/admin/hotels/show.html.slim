@@ -75,6 +75,46 @@ h2.ui.dividing.header
           = f.text_field :phone
     .fields
       .four.wide.field
+        = f.label :contact_name
+      .eight.wide.field
+        - if show
+          .text = @hotel.contact_name
+        - else
+          = f.text_field :contact_name
+    .fields
+      .four.wide.field
+        = f.label :contact_phone
+      .eight.wide.field
+        - if show
+          .text = @hotel.contact_phone
+        - else
+          = f.text_field :contact_phone
+    .fields
+      .four.wide.field
+        = f.label :contact_email
+      .eight.wide.field
+        - if show
+          .text = @hotel.contact_email
+        - else
+          = f.text_field :contact_email
+    .fields
+      .four.wide.field
+        = f.label :trade_email
+      .eight.wide.field
+        - if show
+          .text = @hotel.trade_email
+        - else
+          = f.text_field :trade_email
+    .fields
+      .four.wide.field
+        = f.label :trade_cc_email
+      .eight.wide.field
+        - if show
+          .text = @hotel.trade_cc_email
+        - else
+          = f.text_field :trade_cc_email
+    .fields
+      .four.wide.field
         = f.label :homepage
       .eight.wide.field
         - if show
@@ -188,7 +228,7 @@ h2.ui.dividing.header
         - else
           = f.text_area :luggage_tip
     .fields
-      .four.wide.field.required
+      .four.wide.field
         = f.label :tips
       .eight.wide.field
         - if show
