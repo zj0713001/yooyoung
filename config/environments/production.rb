@@ -34,9 +34,9 @@ Rails.application.configure do
 
   config.asset_host = Proc.new { |source|
     if source.ends_with?('.jpg') || source.ends_with?('.css')
-      'http://7u2n2q.com2.z0.glb.qiniucdn.com/'
+      'http://s1.yooyoung.cn/'
     else
-      'http://7u2n2q.com2.z0.glb.clouddn.com/'
+      'http://s2.yooyoung.cn/'
     end
   }
 
