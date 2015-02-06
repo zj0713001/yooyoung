@@ -63,10 +63,10 @@ $(document).on 'page:change', ->
 
   $('.js_main_home_index_section_item').on
     mouseenter: ->
-      $(this).velocity("stop").velocity({'background-size': '105%'}, 500, 'easeOutCubic')
+      $(this).velocity("stop").velocity({'height': '110%', 'width': '110%', 'top': '-5%', 'left': '-5%'}, 500, 'easeOutCubic')
     mouseleave: ->
-      $(this).velocity("stop").velocity({'background-size': '100%'}, 500, 'easeOutCubic')
-    , '.js_main_home_index_section_item_section'
+      $(this).velocity("stop").velocity({'height': '100%', 'width': '100%', 'top': '0', 'left': '0'}, 500, 'easeOutCubic')
+    , '.js_main_home_index_section_item_background'
 
   fit_height = ->
     $('.js_main_home_index_banner_height').height($(window).height())

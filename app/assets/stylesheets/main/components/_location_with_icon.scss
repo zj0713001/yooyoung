@@ -4,14 +4,11 @@
   white-space: nowrap;
   .main-location__text {
     font-size: .8em;
-    position: absolute;
-    top: 0;
-    left: 2em;
+    margin-left: 2em;
   }
   .icon-location {
     position: absolute;
     font-size: 1.1em;
-    top: 0;
     left: 0;
     top: -.1em;
   }

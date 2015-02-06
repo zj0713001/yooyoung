@@ -5,13 +5,23 @@
   line-height: 5em;
   letter-spacing: .1em;
   text-align: center;
-  color: $white;
   .main-nav__item {
+    display: block;
     float: left;
     font-size: 1.2em;
-    min-width: 6em;
-    a {
+    padding: 0 1em;
+    color: $gray_white;
+    &:hover {
       color: $white;
+    }
+    &.main-nav__item--login {
+      padding: 0 .2em 0 1em;
+    }
+    &.main-nav__item--signup {
+      padding: 0 1em 0 .2em;
+    }
+    &.main-nav__item--small {
+      padding: 0;
     }
   }
 }

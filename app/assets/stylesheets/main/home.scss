@@ -96,13 +96,13 @@
   }
   .home-index-banner-item__hotel {
     position: absolute;
-    color: $white;
     right: 0;
     bottom: 0;
   }
 }
 .home-index-banner-item-hotel {
   position: relative;
+  color: $white;
   font-size: 1.5em;
   line-height: 1em;
   .home-index-banner-item-hotel__section {
@@ -141,15 +141,25 @@
 }
 .home-index-section-item {
   position: relative;
+  @include clearfix;
   height: 100%;
   width: 100%;
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-  @include background-size(100%);
+  .home-index-section-item__background {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    @include background-size(cover);
+  }
   .home-index-section-item__info {
     position: absolute;
-    left: 1em;
-    bottom: 1em;
+    @include rgba-background-inline(rgba($black, .5));
+    padding: 1em;
+    left: 0;
+    bottom: 00;
   }
   .home-index-section-item__area {
     position: relative;
