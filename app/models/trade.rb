@@ -1,4 +1,6 @@
 class Trade < ActiveRecord::Base
+  include Hashid
+
   belongs_to :user
   belongs_to :room
   belongs_to :hotel
@@ -11,7 +13,7 @@ class Trade < ActiveRecord::Base
   accepts_nested_attributes_for :attendences, allow_destroy: true, reject_if: Proc.new { |attributes| attributes['name'].blank? }
 
   include ActiveRecord::Remarkable
-  act_as_remark :user_remark, :editor_remark
+  act_as_remark [:user_remark, :editor_remark]
 
   include AASM
   aasm whiny_transitions: false, requires_new_transaction: false do

@@ -19,6 +19,10 @@ Rails.application.routes.draw do
       get :unique
       get :protocols
     end
+    resources :trades, expect: [:edit, :destroy] do
+      resource :payment, only: [:create]
+    end
+    resources :prices, only: [:index]
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

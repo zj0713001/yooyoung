@@ -28,6 +28,8 @@
 class User < ActiveRecord::Base
   # mount_uploader :avatar, AvatarUploader
   include Hashid
+
+  has_many :trades
   after_create :generate_other_infos
 
   def generate_other_infos

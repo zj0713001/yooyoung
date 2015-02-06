@@ -7,6 +7,7 @@ class CreatePayments < ActiveRecord::Migration
       t.string :trade_type
       t.integer :service_type
       t.text :response_data
+      t.integer :status
 
       # state_machine
       t.string :aasm_state
