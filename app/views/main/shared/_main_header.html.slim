@@ -4,22 +4,15 @@
       .icon-logo
   .main-index-header__nav
     .main-nav
+      a.main-nav__item href="#{root_path}" 酒店套餐
+      a.main-nav__item href="#{unique_path}" 私人定制
+      a.main-nav__item href="#{yooyoung_path}" 关于我们
       - if current_user
-        .main-nav__item
-          | 您好，#{current_user.phone}
-      .main-nav__item
-        a href="#{root_path}" 酒店套餐
-      .main-nav__item
-        a href="#{unique_path}" 私人定制
-      .main-nav__item
-        a href="#{yooyoung_path}" 关于我们
-      .main-nav__item
-        - if current_user
-          = link_to '登出', destroy_user_session_path, :'data-method' => :delete
-        - else
-          = link_to '登录', new_user_session_path
-          | |
-          = link_to '注册', new_user_registration_path
-      .main-nav__item.hidden
-        a href='#'
-          .iconfont.icon-search
+        a.main-nav__item 我的账户
+        / a.main-nav__item href="#{my_path}" 我的账户
+      - else
+        a.main-nav__item.main-nav__item--login href="#{new_user_session_path}" 登录
+        .main-nav__item.main-nav__item--small |
+        a.main-nav__item.main-nav__item--signup href="#{new_user_registration_path}" 注册
+      a.main-nav__item.hidden
+        .iconfont.icon-search

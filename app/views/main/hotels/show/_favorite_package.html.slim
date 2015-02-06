@@ -20,7 +20,7 @@
         span.iconfont.icon-water
         | 一键下单，轻松出行
   .hotel-show-content-favorite__package
-    .hotel-show-content-favorite__package-background.js_hotel_show_content_favorite_background style="background-image: #{background_image_cover(image_url hotel.cover_photo.image.huge.url)}"
+    .hotel-show-content-favorite__package-background.js_hotel_show_content_favorite_background style="background-image: #{background_image_cover(image_url hotel.cover_photo.try(:image).try(:huge).try(:url))}"
     .hotel-show-content-favorite__package-container.js_hotel_show_content_favorite_package
       - hotel.favorite_package.items.group_by(&:service_day).sort.each_with_index do |(day_index, items), index|
         .hotel-show-content-favorite-package-container-day-section

@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   end
 
   scope module: :main do
-    # root 'home#index'
-    root 'about#yooyoung'
+    root 'home#index'
+    get 'my' => 'home#my', as: :my
     resources :hotels, only: [:index, :show]
     scope :about, module: :about do
       get :yooyoung
