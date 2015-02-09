@@ -20,10 +20,10 @@ class Admin::HotelsController < Admin::ApplicationController
 
     @hotel = model.new
     @hotel.build_package
-    @hotel.package.items.build
+    @hotel.package.items.build(sequence: @hotel.package.items.count+1)
     @hotel.package.rooms.build
     @hotel.build_favorite_package(favorite: true)
-    @hotel.favorite_package.items.build
+    @hotel.favorite_package.items.build(sequence: @hotel.favorite_package.items.count+1)
 
     render :show
   end
@@ -46,10 +46,10 @@ class Admin::HotelsController < Admin::ApplicationController
 
     @hotel = model.friendly_acquire params[:id]
     @hotel.build_package if @hotel.package.blank?
-    @hotel.package.items.build
+    @hotel.package.items.build(sequence: @hotel.package.items.count+1)
     @hotel.package.rooms.build
     @hotel.build_favorite_package(favorite: true) if @hotel.favorite_package.blank?
-    @hotel.favorite_package.items.build
+    @hotel.favorite_package.items.build(sequence: @hotel.favorite_package.items.count+1)
 
     render :show
   end
