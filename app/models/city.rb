@@ -24,6 +24,7 @@
 class City < ActiveRecord::Base
   include ActiveRecord::SoftDeletable
   include ActiveRecord::Publishable
+  include Iron::Condition
 
   has_many :hotels, -> { where active: true }
   belongs_to :country

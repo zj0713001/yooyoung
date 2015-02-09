@@ -1,0 +1,43 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      trade: 订单
+    attributes:
+      trade:
+        id: ID
+        trade_no: 订单编号
+        prices: 价格
+        total_price: 订单总价
+        changed_price: 订单调整价
+        preferential_price: 优惠价
+        payment_price: 订单实价
+        cost_price: 同业价
+        user_id: 用户
+        room_id: 选择房间
+        hotel_id: 酒店名称
+        package_id: 选择套餐
+        communicate_id: 联系人
+        start_day: 入住日期
+        end_day: 退房日期
+        people_num: 入住人数
+        extra_bed_num: 需加床
+        child_num: 儿童
+        book_email: 预订email
+        book_cc_email: 预订通知email
+        aasm_state: 订单状态
+        created_at: 创建时间
+        updated_at: 修改时间
+        payments: 用户付款记录
+        attendences: 入住人
+        user_remark: 用户备注
+        editor_remark: 编辑备注
+        extra_remark: 附加备注
+        aasm_states/sms_submitted: 订单待确认
+        aasm_states/sms_confirmed: 订单已确认
+        aasm_states/sms_valid: 订单已付款
+        aasm_states/sms_traveled: 用户已入住
+        aasm_states/sms_over_success: 订单已成功
+        aasm_states/sms_over_drawback_done: 订单已退款
+        aasm_states/sms_over_failure: 订单已失败
+        aasm_states/sms_over_canceled: 订单已取消

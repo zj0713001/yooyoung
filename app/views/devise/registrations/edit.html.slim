@@ -1,0 +1,44 @@
+ruby:
+  set_meta_tags(
+    title: "我的资料_悠漾旅行",
+  )
+.my-index.js_main_my_index
+  = render 'main/shared/main_header'
+  .my-index__banner
+  .my-index__container
+    .my-index-container
+      .my-index-container__menu
+        = render partial: 'main/shared/main_my_menu', locals: { trade: @trade, active: :user }
+      .my-index-container__content
+        .my-index-container__data.my-index-container-data
+          = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+              .detail-container
+                = render 'main/shared/container_message'
+                .detail-container__group
+                  .detail-container__label
+                    = User.human_attribute_name(:phone)
+                  .detail-container__content
+                    = resource.phone
+                    = link_to '修改密码', edit_user_password_path(reset_password_token: resource.reset_password_token), class: :'detail-container__update-password'
+                .detail-container__group
+                  .detail-container__label
+                    = User.human_attribute_name(:nickname)
+                  .detail-container__content
+                    = f.text_field :nickname, class: :'detail-container__input'
+                .detail-container__group
+                  .detail-container__label
+                    = User.human_attribute_name(:email)
+                  .detail-container__content
+                    = f.text_field :email, class: :'detail-container__input'
+                .detail-container__group
+                  .detail-container__label
+                    = User.human_attribute_name(:avatar)
+                  .detail-container__content
+                    .js_main_file_upload_preview.filepicker
+                      .filepicker__preview
+                        = image_tag resource.avatar.x2.url
+                    .detail-container__filepicker
+                      = f.file_field :avatar, class: :'js_main_file_upload filepicker-input', :'data-label' => '选择图片'
+                .detail-container__group
+                  = f.submit '保存', class: :'detail-container__submit primary-button normal-button'
+  = render 'main/shared/footer'

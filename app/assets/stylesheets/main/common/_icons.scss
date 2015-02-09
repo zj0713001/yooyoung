@@ -10,16 +10,15 @@
   font-family:"iconfont" !important;
   font-style: normal;
   text-align: center;
-  vertical-align: middle;
+  vertical-align: bottom;
   -webkit-font-smoothing: antialiased;
   -webkit-text-stroke-width: 0.2px;
   -moz-osx-font-smoothing: grayscale;
 }
 
 .icon-heart:before { content: "\e600"; }
-.icon-phone:before { content: "\e60c"; }
 .icon-qq:before { content: "\e601"; }
-.icon-password:before { content: "\e60b"; }
+.icon-fullarrow-right:before { content: "\e602"; }
 .icon-weibo:before { content: "\e603"; }
 .icon-search:before { content: "\e604"; }
 .icon-location:before { content: "\e605"; }
@@ -28,15 +27,27 @@
 .icon-arrow-right:before { content: "\e608"; }
 .icon-arrow-down:before { content: "\e609"; }
 .icon-wechat:before { content: "\e60a"; }
-.icon-fullarrow-right:before { content: "\e602"; }
+.icon-password:before { content: "\e60b"; }
+.icon-phone:before { content: "\e60c"; }
 .icon-help:before { content: "\e60d"; }
-.icon-best-season:before { content: "\e615"; }
-.icon-network:before { content: "\e613"; }
 .icon-luggage:before { content: "\e60e"; }
-.icon-others:before { content: "\e616"; }
+.icon-water:before { content: "\e60f"; }
 .icon-visa:before { content: "\e610"; }
 .icon-power:before { content: "\e611"; }
-.icon-language:before { content: "\e614"; }
 .icon-money:before { content: "\e612"; }
-.icon-water:before { content: "\e60f"; }
+.icon-network:before { content: "\e613"; }
+.icon-language:before { content: "\e614"; }
+.icon-best-season:before { content: "\e615"; }
+.icon-others:before { content: "\e616"; }
 .icon-arrow-double-down:before { content: "\e617"; }
+.icon-yes:before { content: "\e618"; }
+.icon-people:before { content: "\e619"; }
+.icon-gouwuche:before { content: "\e61a"; }
+.icon-calender:before { content: "\e61b"; }
+.icon-cancel:before { content: "\e61c"; }
+.icon-trades:before { content: "\e61d"; }
+.icon-logout:before { content: "\e61e"; }
+.icon-pay:before { content: "\e61f"; }
+.icon-processing:before { content: "\e620"; }
+.icon-valid:before { content: "\e621"; }
+.icon-attention:before { content: "\e622"; }

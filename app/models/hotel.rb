@@ -37,6 +37,11 @@
 #  power_tip      :text(65535)
 #  luggage_tip    :text(65535)
 #  slug           :string(255)
+#  contact_name   :string(255)
+#  contact_phone  :string(255)
+#  contact_email  :string(255)
+#  trade_email    :string(255)
+#  trade_cc_email :string(255)
 #
 
 class Hotel < ActiveRecord::Base
@@ -44,6 +49,7 @@ class Hotel < ActiveRecord::Base
   include ActiveRecord::Publishable
   include ActiveRecord::Serializeable
   include ActiveRecord::Friendlyable
+  include Iron::Condition
 
   has_many :photos, as: :target, dependent: :destroy
   has_one :package, -> { where favorite: false }, class_name: HotelPackage
@@ -75,4 +81,52 @@ class Hotel < ActiveRecord::Base
   validates :city, existence: true
   validates :editor, existence: true
 
+  def as_json(options = nil)
+  super({
+    only: [:name, :chinese, :description, :provisions, :address, :phone, :checkin, :checkout, :traffics, :arounds, :best_season, :tips, :recommends, :local_address, :visa_tip, :language_tip, :money_tip, :network_tip, :power_tip, :luggage_tip],
+    include: {
+      cover_photo: {
+        only: [:image],
+      },
+      photos: {
+        only: [:image],
+      },
+      package: {
+        only: [:id, :name, :description, :days],
+        include: {
+          items: {
+            only: [:id, :content, :description, :address, :tips, :openning_hours, :phone, :service_day],
+            include: {
+              cover_photo: {
+                only: [:image],
+              },
+            },
+          },
+        },
+      },
+      favorite_package: {
+        only: [:id, :name, :description, :days],
+        include: {
+          items: {
+            only: [:id, :content, :description, :address, :tips, :openning_hours, :phone, :service_day],
+            include: {
+              photos: {
+                only: [:image],
+              },
+            },
+          },
+        },
+      },
+      rooms: {
+        only: [:id, :name, :description, :features, :sight, :area, :facilities, :population, :bed_type, :chinese],
+        include: {
+          photos: {
+            only: [:image],
+          },
+        },
+      },
+    },
+    methods: :to_param,
+  }.merge(options.to_h))
+end
 end

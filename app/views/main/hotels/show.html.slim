@@ -1,8 +1,8 @@
 ruby:
   set_meta_tags(
-    title: "#{@hotel.chinese},#{@hotel.package.name}",
-    description: "#{@hotel.city.country.chinese}-#{@hotel.city.chinese}-#{@hotel.chinese}-#{@hotel.package.name}",
-    keywords: "#{@hotel.city.country.chinese}-#{@hotel.city.chinese}-#{@hotel.chinese}-#{@hotel.package.name}"
+    title: "#{@hotel.chinese}_#{@hotel.package.name}",
+    description: "#{@hotel.city.country.chinese}_#{@hotel.city.chinese}_#{@hotel.chinese}_#{@hotel.package.name}",
+    keywords: "#{@hotel.city.country.chinese},#{@hotel.city.chinese},#{@hotel.chinese},#{@hotel.package.name}"
   )
 .hotel-show.js_main_hotel_show
   = render 'main/shared/main_header'
@@ -18,7 +18,7 @@ ruby:
         .main-location.main-location--center
           span.iconfont.icon-location
           span.main-location__text #{hotel_location_text(@hotel)}
-    .hotel-show-banner__booking.opacity-button.js_main_hotel_show_banner_booking href="#" 立即预定
+    a.hotel-show-banner__booking.opacity-button.js_main_hotel_show_banner_booking href="#{new_trade_path(hotel_id: @hotel.to_param)}" 立即预定
     .hotel-show-banner__click-down.js_main_hotel_show_banner_down
       .iconfont.icon-arrow-down
     .clear
@@ -36,7 +36,11 @@ ruby:
             a href='#favorite' 悠漾专属套餐
           li
             a href='#tips' 旅行贴士
-        a.hotel-show-content-nav__booking.primary-button href="#" 立即预定
+        .hotel-show-content-nav__price
+          | 套餐价：
+          em = show_currency PackageService.new(@hotel.package).min_price_by_date
+          | 元起
+        a.hotel-show-content-nav__booking.primary-button href="#{new_trade_path(hotel_id: @hotel.to_param)}" 立即预定
     .hotel-show-content__overview
       = render 'main/hotels/show/overview', hotel: @hotel
     .hotel-show-content__rooms#rooms

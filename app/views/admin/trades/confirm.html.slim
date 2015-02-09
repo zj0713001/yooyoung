@@ -1,0 +1,46 @@
+ruby:
+  set_meta_tags(
+    title: "订单编号#{ @trade.trade_no } - #{t('admin.seo.title')}"
+  )
+h2.ui.dividing.header
+  | 确认订单
+= render 'admin/shared/admin_form_messages', object: @trade
+.ui.fluid.form.segment
+  h3.ui.header = model.model_name.human
+  = form_for @trade, url: [:admin, @trade], method: :put, html: { multipart: true } do |f|
+    = hidden_field_tag :command, :confirm
+    = render partial: 'summary', locals: { f: f, trade: @trade }
+    .fields
+      .four.wide.field
+        = f.label :editor_remark
+      .eight.wide.field
+        .text = @trade.editor_remark.try(:content)
+    .ui.divider
+    .fields
+      .four.wide.field
+        = f.label :total_price
+      .eight.wide.field
+        .text = @trade.total_price
+    .fields
+      .four.wide.field
+        = f.label :cost_price
+      .eight.wide.field
+        = f.text_field :cost_price
+    .fields
+      .four.wide.field
+        = f.label :changed_price
+      .eight.wide.field
+        = f.text_field :changed_price
+    .fields
+      .four.wide.field
+        = f.label :extra_remark
+      .eight.wide.field
+        = f.fields_for :extra_remark, @trade.extra_remark do |ff|
+          = ff.text_area :content
+    .ui.divider
+    .fields
+      .four.wide.field
+      .eight.wide.field
+        br
+        br
+        = f.submit '确认订单', class: :'ui label teal button huge'

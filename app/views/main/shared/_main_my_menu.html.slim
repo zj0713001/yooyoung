@@ -1,0 +1,12 @@
+.my-index-container-menu.js_main_my_index_menu
+  = link_to my_path, class: :"my-index-container-menu__item#{' my-index-container-menu__item--active' if active == :trades}" do
+    .iconfont.icon-trades
+    | 我的订单
+  hr.my-index-container-menu__item-hr
+  = link_to edit_user_registration_path, class: :"my-index-container-menu__item#{' my-index-container-menu__item--active' if active == :user}" do
+    .iconfont.icon-people
+    | 我的资料
+  hr.my-index-container-menu__item-hr
+  = link_to destroy_user_session_path, class: :'my-index-container-menu__item', :'data-method' => :delete do
+    .iconfont.icon-logout
+    | 退出登录

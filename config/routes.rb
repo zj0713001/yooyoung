@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'main/devise/registrations',
     sessions: 'main/devise/sessions',
+    passwords: 'main/devise/passwords',
   }
   devise_scope :user do
     get 'users/send_sms_captcha' => 'main/devise/registrations#send_sms_captcha', as: :users_send_sms_captcha
@@ -11,7 +12,7 @@ Rails.application.routes.draw do
 
   scope module: :main do
     root 'home#index'
-    get 'my' => 'home#my', as: :my
+    get 'my' => 'trades#index', as: :my
     resources :hotels, only: [:index, :show]
     scope :about, module: :about do
       get :yooyoung
@@ -19,8 +20,18 @@ Rails.application.routes.draw do
       get :unique
       get :protocols
     end
-    resources :trades, expect: [:edit, :destroy] do
-      resource :payment, only: [:create]
+    resources :trades, except: [:edit] do
+      resources :payments, path: :pay, only: [:new] do
+        member do
+          get :notify
+          post :notify
+          get :done
+          post :done
+        end
+      end
+      member do
+        get :pay_success
+      end
     end
     resources :prices, only: [:index]
   end
@@ -98,5 +109,6 @@ Rails.application.routes.draw do
     resources :provinces, concerns: :deletable
     resources :prices, only: [:show, :index, :create]
     resources :rooms, only: [:update]
+    resources :trades, only: [:show, :index, :edit, :update]
   end
 end

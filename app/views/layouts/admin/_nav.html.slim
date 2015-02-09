@@ -6,6 +6,12 @@
       a.item href="#{admin_hotels_path(:'where[published]' => true)}" 已发布酒店
       a.item href="#{new_admin_hotel_path}" 创建酒店
   .item
+    .ui.small.inverted.header 订单管理
+    .menu
+      a.item href="#{admin_trades_path}" 所有订单
+      - Trade.aasm.states.map(&:name).each do |state|
+        a.item href="#{admin_trades_path(:'where[aasm_state]' => state)}" = Trade.human_attribute_name("aasm_states/#{state}")
+  .item
     .ui.small.inverted.header 酒店分类管理
     .menu
       a.item href="#{admin_categories_path}" 所有分类

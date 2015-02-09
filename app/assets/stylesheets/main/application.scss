@@ -15,6 +15,13 @@
 @import "main/common/header";
 @import "main/common/nav";
 @import "main/common/footer";
+@import "main/common/datepicker";
+@import "main/common/filepicker";
+
+// 3rd
+@import "3rd/slick";
+@import "3rd/datepicker";
+@import "3rd/avalon";
 
 // Components
 @import "main/components/form";
@@ -23,11 +30,13 @@
 @import "main/components/location_with_icon";
 @import "main/components/logo";
 @import "main/components/slick";
-
-// 3rd
-@import "3rd/slick";
+@import "main/components/my";
+@import "main/components/detail_container";
+@import "main/components/container_message";
 
 // Pages
 @import "main/sessions";
 @import "main/hotels";
 @import "main/about";
+@import "main/trades";
+@import "main/payments";

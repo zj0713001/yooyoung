@@ -37,11 +37,31 @@
     &.main-form__input--center {
       text-align: center;
     }
+    &.main-form__input--smallest {
+      width: 50px;
+      padding: 0 10px;
+      text-align: center;
+    }
+  }
+  .main-form__textarea {
+    resize: vertical;
+  }
+  hr.main-form__hr {
+    display: block;
+    border: 0;
+    height: 1px;
+    margin: 40px 0;
+    @include background(linear-gradient(left, rgba($light_black, .1), rgba($light_black, 1), rgba($light_black, .1)));
   }
   .main-form__submit {
-    width: 100%;
-    height: 42px;
-    font-size: 24px;
+    height: 36px;
+    width: 120px;
+    font-size: $font_h4;
+    &.main-form__submit--widely {
+      width: 100%;
+      height: 42px;
+      font-size: $font_h3;
+    }
   }
   //Error
   .main-form__error-group-clearfix {

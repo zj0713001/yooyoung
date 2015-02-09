@@ -1,0 +1,55 @@
+ruby:
+  set_meta_tags(
+    title: "订单编号#{ @trade.trade_no } - #{t('admin.seo.title')}"
+  )
+  show = !params[:action].in?(%w[edit])
+h2.ui.dividing.header
+  = "#{t("admin.#{show ? 'show' : 'edit'}")}#{model.model_name.human}"
+= render 'admin/shared/admin_form_messages', object: @trade
+.ui.fluid.form.segment
+  h3.ui.header = model.model_name.human
+  = form_for @trade, url: [:admin, @trade], method: :put, html: { multipart: true } do |f|
+    = render partial: 'summary', locals: { f: f, trade: @trade }
+    .ui.divider
+    .fields
+      .four.wide.field
+        = f.label :cost_price
+      .eight.wide.field
+        .text = @trade.cost_price
+    .fields
+      .four.wide.field
+        = f.label :total_price
+      .eight.wide.field
+        .text = @trade.total_price
+    - if @trade.price_changed?
+      .fields
+        .four.wide.field
+          = f.label :changed_price
+        .eight.wide.field
+          .text = @trade.changed_price
+    .fields
+      .four.wide.field
+        = f.label :payment_price
+      .eight.wide.field
+        .text = @trade.payment_price
+    .fields
+      .four.wide.field
+        = f.label :extra_remark
+      .eight.wide.field
+        .text = @trade.extra_remark.try(:content)
+    .ui.divider
+    .fields
+      .four.wide.field
+        = f.label :editor_remark
+      .eight.wide.field
+        .text = @trade.editor_remark.try(:content)
+    .ui.divider
+    .fields
+      .four.wide.field
+      .eight.wide.field
+        br
+        br
+        - if show
+          = link_to t('admin.edit'), [:edit, :admin, @trade], class: :'ui label teal button huge'
+        - else
+          = f.submit t('admin.submit'), class: :'ui label teal button huge'

@@ -63,6 +63,10 @@ gem 'mysql2'
 gem 'modular_migration'
 gem 'seed-fu'
 
+# Sunspot
+gem 'sunspot_rails'
+gem 'sunspot_solr'
+
 # MongoDB
 gem 'mongoid'
 
@@ -74,7 +78,6 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'turbolinks'
 gem 'jquery-turbolinks'
-gem 'facebox-rails'
 gem 'select2-rails'
 gem 'semantic-ui-sass', github: 'zj0713001/semantic-ui-sass', branch: 'v1.0beta'
 gem 'compass'
@@ -84,13 +87,14 @@ gem 'compass-rails'
 gem 'compass-import-once'
 gem 'susy'
 gem 'bourbon'
-gem 'jquery-validation-rails', '~> 1.12.0'
+gem 'jquery-validation-rails'
 gem 'underscore-rails'
 gem 'lazyload-rails'
 gem 'bootstrap-sass'
 gem 'gon'
 gem 'breakpoint'
 gem 'avalon-rails'
+gem 'facebox-rails'
 
 # Security
 gem 'rack-attack'
@@ -102,9 +106,9 @@ gem 'sdoc', group: :doc
 group :development, :test do
   gem 'pry'
   gem 'web-console'
-  gem 'spring'
   gem 'quiet_assets'
   gem 'thin'
   gem 'grizzled-rails-logger'
   gem 'annotate'
+  gem 'rack-mini-profiler', require: false
 end

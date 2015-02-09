@@ -1,4 +1,4 @@
-$(document).on 'page:change', ->
+$ ->
   $('.js_main_registrations_send_sms_captcha').on 'click', ->
     user_phone = $('.js_main_registrations_phone_field').val()
     if $(this).hasClass('ajax_disabled')
@@ -14,7 +14,7 @@ $(document).on 'page:change', ->
           $(this).addClass('ajax_disabled')
           $('.js_main_form_error_captcha').remove()
         success: (data) ->
-          if data.success == true
+          if data.status == true
             $('.js_main_registration_sms_captcha_button').hide()
             $('.js_main_registration_sms_captcha_sending').show()
             count_down()
@@ -88,7 +88,7 @@ $(document).on 'page:change', ->
           $(this).addClass('ajax_disabled')
           $(this).siblings('.js_main_form_error_duplicate').remove()
         success: (data) ->
-          if data.success == false
+          if data.status == false
             message = if data.error_code == 6 then '电话号码已经注册，请您登录。' else '注册出现问题，请联系网站客服处理。'
             $error_group = $('<div></div>').addClass('main-form__error-group-clearfix js_main_form_error_duplicate').append($('<div></div>').addClass('main-form__error-group').append($('<div></div>').addClass('main-form__error-arrow')).append($('<div></div>').addClass('main-form__error-message').text(message)))
             $error_group.insertAfter $(this)
@@ -112,6 +112,7 @@ $(document).on 'page:change', ->
   $('.js_main_registrations_new_form').on 'submit', ->
     return false if $(this).hasClass('ajax_disabled')
     $('.js_main_form_error_captcha').remove()
+    $('.js_main_registrations_sms_captcha_field').prop('disabled', false)
     if $(this).valid()
       $.ajax
         url: $(this).attr('action')
@@ -123,7 +124,7 @@ $(document).on 'page:change', ->
           $(this).addClass('ajax_disabled')
         success: (data) ->
           if data.id?
-            Turbolinks.visit(location.origin + jsvar.prev_page)
+            location.href = location.origin + jsvar.prev_page
           else
             message = if data.error_code == 10 then '验证码错误，请您核对，30分钟内输入有效。' else '注册出现问题，请联系网站客服处理。'
             $error_group = $('<div></div>').addClass('main-form__error-group-clearfix js_main_form_error_captcha').append($('<div></div>').addClass('main-form__error-group').append($('<div></div>').addClass('main-form__error-arrow')).append($('<div></div>').addClass('main-form__error-message').text(message)))

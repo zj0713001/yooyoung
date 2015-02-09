@@ -11,6 +11,14 @@ h3.ui.header = title
         = ff.text_field :name
         = ff.hidden_field :favorite
   .fields
+    .four.wide.field.required
+      = ff.label :days
+    .eight.wide.field
+      - if show
+        .text = ff.object.try(:days)
+      - else
+        = ff.text_field :days
+  .fields
     .four.wide.field
       = ff.label :description
     .eight.wide.field

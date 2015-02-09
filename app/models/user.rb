@@ -23,11 +23,15 @@
 #  role_id                :integer
 #  avatar                 :string(255)
 #  lock_version           :integer          default("0"), not null
+#  file_name              :string(255)
+#  file_size              :string(255)
+#  content_type           :string(255)
 #
 
 class User < ActiveRecord::Base
-  # mount_uploader :avatar, AvatarUploader
+  mount_uploader :avatar, AvatarUploader
   include Hashid
+  include Iron::Condition
 
   has_many :trades
   after_create :generate_other_infos
@@ -74,4 +78,10 @@ class User < ActiveRecord::Base
     end
   end
   include UserTrackInterface
+
+  def as_json(options = nil)
+    super({
+      only: [:nickname, :phone, :email],
+    }.merge(options.to_h))
+  end
 end

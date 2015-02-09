@@ -1,8 +1,8 @@
 class Admin::HotelsController < Admin::ApplicationController
   def index
     @hotels = model
-    .where(permited_params[:where])
-    .order((params[:order]||{id: :desc}))
+    ._where(permited_params[:where])
+    ._order((params[:order]||{id: :desc}))
     .page(params[:page]).per(params[:per_page])
     @hotels = @hotels.none unless can?(:index, model)
 

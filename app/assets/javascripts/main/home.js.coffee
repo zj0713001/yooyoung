@@ -1,6 +1,5 @@
 #= require jquery
 #= require jquery_ujs
-#= require jquery.turbolinks
 #= require underscore
 
 #= require 3rd/slick
@@ -11,9 +10,7 @@
 
 #= require main/common/redraw_font_size
 
-#= require turbolinks
-
-$(document).on 'page:change', ->
+$ ->
   resize_delay_time = 100
 
   $('img.lazy').lazyload
@@ -63,9 +60,9 @@ $(document).on 'page:change', ->
 
   $('.js_main_home_index_section_item').on
     mouseenter: ->
-      $(this).velocity("stop").velocity({'height': '110%', 'width': '110%', 'top': '-5%', 'left': '-5%'}, 500, 'easeOutCubic')
+      $(this).velocity("stop").velocity({'height': '110%', 'width': '110%', 'top': '-5%', 'left': '-5%'}, 500, 'easeIn')
     mouseleave: ->
-      $(this).velocity("stop").velocity({'height': '100%', 'width': '100%', 'top': '0', 'left': '0'}, 500, 'easeOutCubic')
+      $(this).velocity("stop").velocity({'height': '100%', 'width': '100%', 'top': '0', 'left': '0'}, 500, 'easeIn')
     , '.js_main_home_index_section_item_background'
 
   fit_height = ->

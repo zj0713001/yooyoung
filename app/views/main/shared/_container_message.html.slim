@@ -1,0 +1,8 @@
+- if flash[:notice_message]
+  .container-message
+    - if flash[:notice_message][:type] == :notice
+      .container-message__notice
+        .container-message__text = flash[:notice_message][:message]
+    - else
+      .container-message__error
+        .container-message__text = flash[:notice_message][:message]

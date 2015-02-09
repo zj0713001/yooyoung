@@ -1,0 +1,105 @@
+@import "3rd/retina-sprites";
+$sprites: sprite-map("main/payments/*.png");
+$sprites2x: sprite-map("main/payments-retina/*.png");
+
+.main-payment-services {
+  display: none;
+  margin-top: 10px;
+  .main-payment-services__hr {
+    display: block;
+    border: 0;
+    height: 1px;
+    margin: 0 20px;
+    @include background(linear-gradient(left, rgba($light_black, .1), rgba($light_black, 1), rgba($light_black, .1)));
+  }
+  .main-payment-services__text {
+    margin-top: 10px;
+    font-size: $font_h6;
+  }
+  .main-payment-services__platforms,
+  .main-payment-services__banks {
+    @include clearfix;
+  }
+  .main-payment-services__item {
+    display: block;
+    @include float(left);
+    @include opacity(0.9);
+    width: 150px;
+    height: 40px;
+    margin: 0 10px 10px 0;
+    border: 1px solid $light_black;
+    $services: ('alipay', 'BOCB2C', 'ICBCB2C', 'CMB', 'CCB', 'ABC', 'SPDB', 'CIB', 'GDB', 'FDB', 'HZCBB2C', 'SHBANK', 'NBBANK', 'SPABANK', 'POSTGC', 'abc1003', 'abc1004');
+    @each $service in $services {
+      &.main-payment-services__item--#{$service} {
+        @include retina-sprite($service);
+        @include background-size(contain);
+      }
+    }
+    &:hover {
+      @include opacity(1);
+      border-color: $dark_black;
+    }
+    &:nth-child(5n) {
+      margin-right: 0;
+    }
+    @include breakpoint(max-width $desktop-maxwidth) {
+      &:nth-child(5n) {
+        margin-right: 10px;
+      }
+      &:nth-child(4n) {
+        margin-right: 0;
+      }
+    }
+  }
+  .main-payment-services__paying {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    @include rgba-background-inline(rgba($black, .7));
+  }
+  .main-payment-services__modal {
+    width: 550px;
+    height: 260px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -150px 0 0 -250px;
+    background: $white;
+    font-size: $font_h5;
+  }
+  .main-payment-services__modal-content {
+    position: relative;
+    height: 100%;
+    padding: 30px;
+    .iconfont.icon-attention {
+      @include float(left);
+      font-size: 48px;
+      line-height: 92px;
+    }
+  }
+  .main-payment-services__modal-text {
+    @include float(left);
+    margin: 10px 0 0 20px;
+    line-height: $font_h1;
+  }
+  .main-payment-services__modal-error {
+    display: none;
+    color: $red;
+    font-size: $font_h6;
+    margin: 100px 0 0 68px;
+  }
+  .main-payment-services__modal-success {
+    position: absolute;
+    left: 100px;
+    bottom: 60px;
+  }
+  .main-payment-services__modal-failure {
+    position: absolute;
+    right: 100px;
+    bottom: 60px;
+  }
+}

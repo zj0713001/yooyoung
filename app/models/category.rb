@@ -21,6 +21,7 @@
 class Category < ActiveRecord::Base
   include ActiveRecord::SoftDeletable
   include ActiveRecord::Publishable
+  include Iron::Condition
 
   belongs_to :editor, class_name: User
   has_and_belongs_to_many :hotels, -> { where active: true }, uniq: true
