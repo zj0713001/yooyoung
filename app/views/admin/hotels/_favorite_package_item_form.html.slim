@@ -22,6 +22,14 @@ h4.ui.header = title
             - else
               = ff.text_field :content
         .fields
+          .four.wide.field.required
+            = ff.label :sequence
+          .eight.wide.field
+            - if show
+              .text = ff.object.try(:sequence)
+            - else
+              = ff.text_field :sequence
+        .fields
           .four.wide.field
             = ff.label :photos
           .eight.wide.field
