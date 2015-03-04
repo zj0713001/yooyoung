@@ -1,0 +1,20 @@
+.container-message {
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  font-size: $font_h6;
+  .container-message__notice {
+    border: 1px solid $grass_green;
+    background: $lightest_green;
+    .container-message__text {
+      color: $grass_green;
+    }
+  }
+  .container-message__error {
+    border: 1px solid $dark_red;
+    background: $lightest_red;
+    .container-message__text {
+      color: $dark_red;
+    }
+  }
+}

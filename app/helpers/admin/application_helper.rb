@@ -32,4 +32,10 @@ module Admin::ApplicationHelper
       render 'admin/shared/admin_publish', object: object
     end
   end
+
+  def default_meta_tags
+    {
+      title: [model && model.model_name.human, I18n.t('admin.seo.title')].join("_")
+    }
+  end
 end

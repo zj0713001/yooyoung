@@ -23,6 +23,7 @@
 class Country < ActiveRecord::Base
   include ActiveRecord::SoftDeletable
   include ActiveRecord::Publishable
+  include Iron::Condition
 
   has_many :cities, -> { where active: true }
   has_many :provinces, -> { where active: true }

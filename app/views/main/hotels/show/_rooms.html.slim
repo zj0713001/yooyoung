@@ -10,7 +10,7 @@
       | 查看服务与设施
       span.iconfont.icon-arrow-double-right
   .hotel-show-content-rooms__content
-    - hotel.package.rooms.each_with_index do |room, index|
+    - hotel.rooms.each_with_index do |room, index|
       .hotel-show-content-rooms__room-photos.js_main_hotel_show_room_photos class="#{'active' if index.zero?}" id="room_#{room.id}"
         .hotel-show-content-rooms__room-photo.js_main_hotel_show_room_photo
           - room.photos.each do |photo|

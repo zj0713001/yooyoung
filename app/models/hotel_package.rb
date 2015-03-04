@@ -13,6 +13,7 @@
 #  updated_at     :datetime
 #  favorite       :boolean          default("0"), not null
 #  cover_photo_id :integer
+#  days           :integer          default("1"), not null
 #
 
 class HotelPackage < ActiveRecord::Base

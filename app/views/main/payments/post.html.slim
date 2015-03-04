@@ -1,0 +1,8 @@
+= form_tag @payment_options[:gateway], method: :post do
+  - @payment_options[:options].each do |k, v|
+    = hidden_field_tag k, v
+= javascript_include_tag :'main/application'
+
+coffee:
+  $ ->
+    $('form').submit()

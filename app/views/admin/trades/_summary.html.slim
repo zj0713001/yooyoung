@@ -1,0 +1,65 @@
+.ui.divider
+.fields
+  .four.wide.field
+    = f.label :trade_no
+  .eight.wide.field
+    .text = @trade.trade_no
+.fields
+  .four.wide.field
+    = f.label :user_id
+  .eight.wide.field
+    .text
+      = link_to_if can?(:show, User), @trade.user.phone, [:admin, @trade.user], alt: t('admin.show'), class: :'ui link action', target: :_blank
+.fields
+  .four.wide.field
+    = f.label :communicate_id
+  .eight.wide.field
+    .text = @trade.communicate.name
+    .text = @trade.communicate.phone
+    .text = @trade.communicate.email
+.fields
+  .four.wide.field
+    = f.label :hotel_id
+  .eight.wide.field
+    .text
+      = link_to_if can?(:show, Hotel), @trade.hotel.chinese, [:admin, @trade.hotel], alt: t('admin.show'), class: :'ui link action', target: :_blank
+    .text = @trade.room.chinese
+    .text = @trade.package.name
+.fields
+  .four.wide.field
+    = f.label :start_day
+  .eight.wide.field
+    .text = @trade.start_day.try(:to_s, :db)
+.fields
+  .four.wide.field
+    = f.label :end_day
+  .eight.wide.field
+    .text = @trade.end_day.try(:to_s, :db)
+.fields
+  .four.wide.field
+    = f.label :attendences
+  .eight.wide.field
+    - @trade.attendences.each do |attendence|
+      .text = "#{attendence.name} - #{attendence.phone}"
+- unless @trade.child_num.zero?
+  .fields
+    .four.wide.field
+      = f.label :child_num
+    .eight.wide.field
+      .text = @trade.child_num
+- unless @trade.extra_bed_num.zero?
+  .fields
+    .four.wide.field
+      = f.label :extra_bed_num
+    .eight.wide.field
+      .text = @trade.extra_bed_num
+.fields
+  .four.wide.field
+    = f.label :user_remark
+  .eight.wide.field
+    .text = @trade.user_remark.try(:content)
+.fields
+  .four.wide.field
+    = f.label :created_at
+  .eight.wide.field
+    .text = @trade.created_at.try(:localtime).try(:to_s, :db)

@@ -1,0 +1,20 @@
+.main-payment-services.js_main_payment_services
+  hr.main-payment-services__hr
+  .main-payment-services__text 选择支付平台：
+  .main-payment-services__platforms
+    a.main-payment-services__item.main-payment-services__item--alipay.js_main_payment_pay href="#{new_trade_payment_path(trade, service: :alipay)}" target='_blank'
+  .main-payment-services__text 选择网上银行：
+  .main-payment-services__banks
+    - PaymentService::Alipay::BANKS.each do |service, _|
+      a.main-payment-services__item.js_main_payment_pay class="main-payment-services__item--#{service}" href="#{new_trade_payment_path(trade, service: "alipay_bank_#{service}")}" target='_blank'
+  .main-payment-services__paying.js_main_payment_paying
+    .main-payment-services__modal
+      .main-payment-services__modal-content
+        .iconfont.icon-attention
+        .main-payment-services__modal-text
+          | 请您在新打开的窗口中完成付款。
+          br
+          | 如您在付款中遇到了问题请咨询客服电话：#{Settings.yooyoung.service_phone}。
+        .main-payment-services__modal-error.js_main_payment_error 悠漾还没有收到您的付款，请核对支付信息稍后重试。
+        = link_to '付款成功', 'javascript:void(0)', class: :'primary-button normal-button main-payment-services__modal-success js_main_payment_success', :'data-url' => pay_success_trade_path(trade)
+        = link_to '付款失败', 'javascript:void(0)', class: :'minor-button normal-button main-payment-services__modal-failure js_main_payment_failure', :'data-url' => pay_success_trade_path(trade)

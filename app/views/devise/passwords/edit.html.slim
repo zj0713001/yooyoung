@@ -1,0 +1,31 @@
+ruby:
+  set_meta_tags(
+    title: "我的资料_悠漾旅行",
+  )
+.my-index.js_main_my_index
+  = render 'main/shared/main_header'
+  .my-index__banner
+  .my-index__container
+    .my-index-container
+      .my-index-container__menu
+        = render partial: 'main/shared/main_my_menu', locals: { trade: @trade, active: :user }
+      .my-index-container__content
+        .my-index-container__data.my-index-container-data
+          = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+              .detail-container
+                = render 'main/shared/container_message'
+                .detail-container__group
+                  .detail-container__label 原密码
+                  .detail-container__content
+                    = f.password_field :current_password, class: :'detail-container__input'
+                .detail-container__group
+                  .detail-container__label 新密码
+                  .detail-container__content
+                    = f.password_field :password, class: :'detail-container__input'
+                .detail-container__group
+                  .detail-container__label 新密码确认
+                  .detail-container__content
+                    = f.password_field :password_confirmation, class: :'detail-container__input'
+                .detail-container__group
+                  = f.submit '修改密码', class: :'detail-container__submit primary-button normal-button'
+  = render 'main/shared/footer'

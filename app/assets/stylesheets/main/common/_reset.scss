@@ -34,7 +34,10 @@ small { font-size: $font_h6; } /* 小于 12px 的中文很难阅读，让 small 
 ul, ol { list-style: none; }
 
 /** 重置文本格式元素 **/
-a { text-decoration: none; }
+a {
+  text-decoration: none;
+  color: inherit;
+}
 // a:hover { text-decoration: underline; }
 
 
@@ -54,4 +57,23 @@ table { border-collapse: collapse; border-spacing: 0; }
 }
 .clear {
   *zoom: 1;
+}
+
+/* 清除outline */
+
+input, textarea { outline: none; }
+a {
+  outline: none;
+  cursor: pointer;
+  &.ajax_disabled {
+    cursor: default;
+  }
+  &:focus { outline: 0; }
+  &:active { star: "expression_r(this.onFocus=this.blur())"; }
+}
+input[type=submit],
+button {
+  outline: none;
+  &:focus { outline: 0; }
+  &:active { star: "expression_r(this.onFocus=this.blur())"; }
 }

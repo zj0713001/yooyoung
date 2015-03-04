@@ -46,6 +46,10 @@ class ErrorTable
       error_code: 10,
       message: I18n.t('error_table.incorrect_arguments')
     },
+    "YooYoung::VerificationFailure" => {
+      error_code: 11,
+      message: I18n.t('error_table.verification_failure')
+    },
   }
 
   def handle(error_class)

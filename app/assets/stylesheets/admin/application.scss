@@ -4,7 +4,7 @@
 @import "compass/utilities";
 @import "jquery-ui/sortable";
 @import "semantic-ui";
-
+@import "jquery.facebox";
 //3rd
 @import "3rd/select2";
 @import "3rd/nprogress";
@@ -18,3 +18,4 @@
 @import "common/photo_uploader";
 @import "common/logo";
 @import "common/calendar";
+@import "common/facebox_ext";

@@ -4,13 +4,26 @@ $(document).on 'page:change', ->
       _.find data, (d) ->
         d.date == date
     avalon.filters.to_local_price = (data) ->
-      data.prices.local_price || '-'
+      if _.isNull(data.prices.local_price)
+        '-'
+      else
+        data.prices.local_price
     avalon.filters.to_price_unit = (data) ->
-      data.prices.price_unit || '-'
+      if _.isNull(data.prices.price_unit)
+        '-'
+      else
+        data.prices.price_unit
     avalon.filters.to_cost_price = (data) ->
-      data.prices.cost_price || '-'
+      if _.isNull(data.prices.cost_price)
+        '-'
+      else
+        data.prices.cost_price
     avalon.filters.to_sale_price = (data) ->
-      data.prices.sale_price || '-'
+      if _.isNull(data.prices.sale_price)
+        '-'
+      else
+        data.prices.sale_price
+
     avalon.filters.to_date = (data) ->
       data.date
 
@@ -30,7 +43,7 @@ $(document).on 'page:change', ->
           vm.start_date = $(this)
         else
           $('.js_admin_calendar_day_item').removeClass('day-item--selected day-item--selected-start')
-          $('.ui.modal').modal('show')
+          $('.js_admin_price_update_modal').modal('show')
       vm.select_item = ->
         if vm.selecting
           start_week = _.min([$(vm.start_date).data('week'), $(this).data('week')])

@@ -3,8 +3,8 @@ class Admin::UsersController < Admin::ApplicationController
     @users = model.by_space(params[:space])
 
     @users = @users
-    .where(permited_params[:where])
-    .order((params[:order]||{id: :desc}))
+    ._where(permited_params[:where])
+    ._order((params[:order]||{id: :desc}))
     .page(params[:page]).per(params[:per_page])
 
     @users = @users.none unless can?(:index, model)

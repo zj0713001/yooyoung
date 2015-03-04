@@ -1,0 +1,74 @@
+.detail-container {
+  @include can-select;
+  padding: 20px;
+  width: 100%;
+  font-size: $font_h5;
+  line-height: $font_h1;
+  background: $white;
+  .detail-container__group {
+    @include clearfix;
+    width: 100%;
+    margin-bottom: 18px;
+  }
+  .detail-container__label {
+    @include span(3 of 10);
+    text-align: center;
+  }
+  .detail-container__content {
+    @include span(7 of 10);
+    &.detail-container__content--error {
+      display: none;
+      @include pre(3 of 10);
+      font-size: $font_h6;
+      color: $red;
+    }
+  }
+  .detail-container__remark {
+    color: $gray_black;
+    font-size: $font_h6;
+    line-height: $font_h5;
+  }
+  .detail-container__package-content {
+    background: $lighter_black;
+    padding: 20px;
+    margin: 10px 0;
+  }
+  .detail-container__package-day {
+    color: $dark_black;
+    font-weight: bold;
+  }
+  .detail-container__package-item {
+    position: relative;
+    padding-left: 20px;
+    font-size: $font_h6;
+    line-height: $font_h3;
+    color: $gray_black;
+    .iconfont.icon-water {
+      position: absolute;
+      left: -2px;
+      top: 0;
+      color: $light_black;
+    }
+  }
+  .detail-container__input {
+    width: 400px;
+    padding: 0 20px;
+    border: 1px solid $darker_white;
+    height: $font_h1;
+    line-height: $font_h1;
+    font-size: $font_h5;
+    color: $dark_black;
+    &:hover, :focus {
+      border: 1px solid $gray_black;
+    }
+  }
+  .detail-container__update-password {
+    display: block;
+    text-decoration: underline;
+    color: blue;
+  }
+  .detail-container__submit {
+    @include inline-block;
+    @include pre(3 of 10);
+  }
+}

@@ -1,0 +1,97 @@
+- show_package ||= false
+- no_cancel ||= false
+.detail-container
+  .detail-container__group
+    .detail-container__label
+      = Trade.human_attribute_name(:trade_no)
+    .detail-container__content
+      = trade.trade_no
+  .detail-container__group
+    .detail-container__label
+      = Trade.human_attribute_name(:total_price)
+    .detail-container__content
+      = "#{trade.total_price}元"
+  - if @trade.price_changed?
+    .detail-container__group
+      .detail-container__label
+        = Trade.human_attribute_name(:changed_price)
+      .detail-container__content
+        = "#{trade.changed_price}元"
+  - if @trade.extra_remark.try(:content).present?
+      .detail-container__group
+        .detail-container__label
+          = Trade.human_attribute_name(:extra_remark)
+        .detail-container__content
+          = simple_format @trade.extra_remark.content
+  .detail-container__group
+    .detail-container__label
+      = Trade.human_attribute_name(:payment_price)
+    .detail-container__content
+      = "#{trade.payment_price}元"
+  .detail-container__group
+    .detail-container__label
+      = Trade.human_attribute_name("aasm_state")
+    .detail-container__content
+      = render partial: 'main/trades/state', locals: { trade: trade }
+  .detail-container__group
+    .detail-container__label
+      = Trade.human_attribute_name(:hotel_id)
+    = link_to trade.hotel do
+      .detail-container__content
+        = trade.hotel.chinese
+        .detail-container__remark
+          = trade.hotel.name
+  .detail-container__group
+    .detail-container__label
+      = Trade.human_attribute_name(:start_day)
+    .detail-container__content
+      = trade.start_day.to_s(:db)
+  .detail-container__group
+    .detail-container__label
+      = Trade.human_attribute_name(:end_day)
+    .detail-container__content
+      = trade.end_day.to_s(:db)
+  .detail-container__group
+    .detail-container__label
+      = Trade.human_attribute_name(:package_id)
+    .detail-container__content
+      = trade.package.name
+      - if show_package
+        .detail-container__package-content
+          - if trade.package.favorite
+            - trade.package.items.group_by(&:service_day).sort.each_with_index do |(day_index, items), index|
+              .detail-container__package-day Day #{day_index}
+              - items.each_with_index do |item, index|
+                .detail-container__package-item
+                  .iconfont.icon-water
+                  = item.content
+          - else
+            - trade.package.items.each do |item|
+              .detail-container__package-item
+                .iconfont.icon-water
+                = item.content
+  .detail-container__group
+    .detail-container__label
+      = Trade.human_attribute_name(:room_id)
+    .detail-container__content
+      = trade.room.chinese
+      .detail-container__remark
+        = trade.room.name
+  .detail-container__group
+    .detail-container__label
+      = Trade.human_attribute_name(:people_num)
+    .detail-container__content
+      = "#{trade.people_num}位成人"
+      - unless trade.child_num.zero?
+        = "，#{trade.child_num}位儿童"
+      - unless trade.extra_bed_num.zero?
+        = "，需加床#{trade.extra_bed_num}张"
+  .detail-container__group
+    .detail-container__label
+      = Remark.human_attribute_name(:content)
+    .detail-container__content
+      = simple_format trade.user_remark.try(:content)
+  - if trade.can_cancel? && !no_cancel
+    .detail-container__group
+      = link_to '取消订单', 'javascript:void(0);', class: :'detail-container__submit minor-button normal-button js_main_trade_cancel', :'data-url' => trade_path(trade)
+      .detail-container__content.detail-container__content--error.js_main_trade_cancel_message 您的订单已经生效，如需退款请联系客服：#{Settings.yooyoung.service_phone}。

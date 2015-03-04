@@ -1,0 +1,15 @@
+ruby:
+  set_meta_tags(
+    title: "订单编号#{@trade.to_param}_悠漾旅行",
+  )
+.my-index.js_main_my_index
+  = render 'main/shared/main_header'
+  .my-index__banner
+  .my-index__container
+    .my-index-container
+      .my-index-container__menu
+        = render partial: 'main/shared/main_my_menu', locals: { active: :trades }
+      .my-index-container__content
+        .my-index-container__trade
+          = render partial: 'detail', locals: { trade: @trade, show_package: true }
+  = render 'main/shared/footer'

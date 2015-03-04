@@ -1,4 +1,4 @@
-$(document).on 'page:change', ->
+$ ->
   $('.js_main_sessions_new_form').validate
     rules:
       'user[phone]':

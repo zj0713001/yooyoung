@@ -1,0 +1,53 @@
+ruby:
+  set_meta_tags(
+    title: "我的账户_悠漾旅行",
+  )
+.my-index.js_main_my_index
+  = render 'main/shared/main_header'
+  .my-index__banner
+  .my-index__container
+    .my-index-container
+      .my-index-container__menu
+        = render partial: 'main/shared/main_my_menu', locals: { trade: @trade, active: :trades}
+      .my-index-container__content
+        .my-index-container__trades.my-index-container-trades
+          .my-index-container-trades__filter
+            .my-index-container-trades__filter-start-day
+              | 下单时间：
+              = link_to '全部', params.except(:start_day), class: "#{'active' if params[:start_day] == nil}"
+              = link_to '最近三个月', params.merge(start_day: :months), class: "#{'active' if params[:start_day] == 'months'}"
+            .my-index-container-trades__filter-state
+              | 订单状态：
+              = link_to '全部', params.except(:state), class: "#{'active' if params[:state] == nil}"
+              = link_to '待确认', params.merge(state: :process), class: "#{'active' if params[:state] == 'process'}"
+              = link_to '待支付', params.merge(state: :valid), class: "#{'active' if params[:state] == 'valid'}"
+              = link_to '已支付', params.merge(state: :paid), class: "#{'active' if params[:state] == 'paid'}"
+          - @trades.each do |trade|
+            .my-index-container-trades__item.js_main_my_index_trades_item
+              = link_to trade, class: :'my-index-container-trades__item-title' do
+                .my-index-container-trades__item-no
+                  | 订单编号：#{trade.trade_no}
+                .my-index-container-trades__item-start-day
+                  | 入住日期：#{trade.start_day.to_s(:db)}
+                .iconfont.icon-fullarrow-right
+              .my-index-container-trades__item-detail
+                .my-index-container-trades__item-name
+                  = link_to trade.hotel.chinese, trade.hotel, class: :'my-index-container-trades__item-hotel'
+                  - if trade.hotel.name
+                    .my-index-container-trades__item-hotel-local = trade.hotel.name
+                  .my-index-container-trades__item-package
+                    = trade.package.name
+                  .my-index-container-trades__item-room
+                    = trade.room.chinese
+                    - if trade.room.name.present?
+                      | (#{trade.room.name})
+                .my-index-container-trades__item-price
+                  - if trade.price_changed?
+                    .my-index-container-trades__item-changed-price #{trade.total_price}元
+                  = "#{trade.payment_price}元"
+                .my-index-container-trades__item-actions
+                  .my-index-container-trades__item-action
+                    = render partial: 'state', locals: { trade: trade }
+                - if trade.confirmed?
+                  = render partial: 'main/payments/services', locals: { trade: trade }
+  = render 'main/shared/footer'

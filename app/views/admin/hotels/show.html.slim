@@ -14,6 +14,7 @@ h2.ui.dividing.header
       .eight.wide.field
         - if show
           = link_to t('admin.edit'), [:edit, :admin, @hotel], class: :'ui label teal button huge'
+          = link_to '编辑价格', admin_prices_path(target: Room.name, target_id: @hotel.rooms.first.try(:id)), alt: t('admin.edit'), class: :'ui label teal button huge', target: :_blank
         - else
           = f.submit t('admin.submit'), class: :'ui label teal button huge'
     .ui.divider

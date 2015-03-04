@@ -23,6 +23,7 @@
 class Province < ActiveRecord::Base
   include ActiveRecord::SoftDeletable
   include ActiveRecord::Publishable
+  include Iron::Condition
 
   belongs_to :country
   belongs_to :editor, class_name: User

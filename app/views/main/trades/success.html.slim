@@ -1,0 +1,19 @@
+ruby:
+  set_meta_tags(
+    title: "预订成功！#{@trade.hotel.chinese}_#{@trade.hotel.package.name}",
+  )
+.trade-new
+  = render 'main/shared/main_header'
+  .trade-new__banner.trade-new-banner
+    .trade-new-banner__baclground style="background-image: #{background_image_cover(image_url @trade.hotel.cover_photo.try(:image).try(:huge_narrow).try(:url))}"
+  .trade-new__title.trade-new-title
+    h1.trade-new-title__name 预定成功！
+    hr.trade-new-title__hr
+  .trade-new__container
+    .trade-new__success-container
+      .trade-new__success-notice
+        | 您的订单将在24小时内确认，请注意查收短信及邮件通知。
+        br
+        | 如您有其他疑问请咨询客服电话：#{Settings.yooyoung.service_phone}。
+      = render partial: 'detail', locals: { trade: @trade, no_cancel: true }
+  = render 'main/shared/footer'

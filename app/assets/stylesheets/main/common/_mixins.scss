@@ -1,6 +1,9 @@
 @mixin no-select {
   @include user-select(none);
 }
+@mixin can-select {
+  @include user-select(all);
+}
 
 @mixin font-family-heiti {
   font-family: 'STHeiti','Helvetica Neue',Arial,sans-serif;

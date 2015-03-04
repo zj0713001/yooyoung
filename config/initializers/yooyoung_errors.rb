@@ -5,4 +5,5 @@ class YooYoung
   class DeleteError < StandardError; end
   class TryTooManyTimesError < StandardError; end
   class IncorrectArguments < StandardError; end
+  class VerificationFailure < StandardError; end
 end
