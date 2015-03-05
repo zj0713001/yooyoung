@@ -34,6 +34,23 @@ Rails.application.routes.draw do
       end
     end
     resources :prices, only: [:index]
+
+    namespace :mobile do
+      root 'home#index'
+      get 'my' => 'trades#index', as: :my
+      resources :hotels, only: [:index, :show]
+      scope :about, module: :about do
+        get :yooyoung
+        get :business
+        get :unique
+        get :protocols
+      end
+      resources :trades, except: [:edit] do
+        member do
+          get :pay_success
+        end
+      end
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,0 +1,10 @@
+doctype html
+html
+  head
+    = render :partial => 'main/mobile/shared/meta', :formats => :html
+    = stylesheet_link_tag :'main/mobile/application', media: 'all'
+    = csrf_meta_tags
+  body
+    = yield
+    = javascript_include_tag :'main/mobile/application'
+    = include_gon init: true, namespace: :jsvar
