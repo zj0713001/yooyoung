@@ -24,7 +24,7 @@ ruby:
                       .iconfont.icon-location
                       .main-location__text
                         = data[:location]
-                  .home-index-banner-item-hotel__price.js_main_home_index_banner_item_delay.hidden
+                  .home-index-banner-item-hotel__price.js_main_home_index_banner_item_delay class="#{'hidden' if data[:package_price].blank?}"
                     .main-flag-label
                       .main-flag-label__flag
                       .main-flag-label__text
@@ -56,4 +56,3 @@ ruby:
                     = data[:area_name]
   .home-index__more
     a href='#' 查看更多
-  = render 'main/shared/footer'

@@ -17,21 +17,14 @@ ruby:
           = f.hidden_field :package_id, :'ms-duplex' => 'selected_package.id'
           .trade-new-form__package-select.trade-new-form__select ms-hover='trade-new-form__select--hover' ms-class='trade-new-form__select--selected:!is_favorite' ms-click='select_package' data-is-favorite='false'
             .trade-new-form__package-name = @hotel.package.name
-            .trade-new-form__package-pricde
-              | 套餐价：
-              em #{PackageService.new(@hotel.package).min_price_by_date}
-              | 元起
+            .trade-new-form__package-warning
+              | 包含#{@hotel.package.days}晚住宿
             .iconfont.icon-yes
           .trade-new-form__select.trade-new-form__favorite-package-select ms-hover='trade-new-form__select--hover' ms-class='trade-new-form__select--selected:is_favorite' ms-click='select_package' data-is-favorite='true' data-package-id="#{@hotel.favorite_package.id}"
             .trade-new-form__package-name
               | 悠漾专属套餐
-              - if @hotel.favorite_package.days > @hotel.package.days
-                span.trade-new-form__package-warning
-                  |*需入住#{@hotel.favorite_package.days}晚
-            .trade-new-form__package-pricde
-              | 套餐价：
-              em #{PackageService.new(@hotel.favorite_package).min_price_by_date}
-              | 元起
+            .trade-new-form__package-warning
+              | 包含#{@hotel.favorite_package.days}晚住宿
             .iconfont.icon-yes
           .trade-new-form__package-section ms-class='trade-new-form__package-section--selected:!is_favorite'
             .trade-new-form__package-array
@@ -55,21 +48,22 @@ ruby:
           = f.label :end_day, class: :'trade-new-form__label main-form__label'
           = f.text_field :end_day, class: :'trade-new-form__input main-form__input', readonly: true, :'ms-duplex' => :"end_day", placeholder: :'退房日期自动计算'
           span.weekday.weekday--disable ms-text='end_day_weekday'
+          .trade-new-form__hint ms-visible='end_day'
+            | 如您对出行时间及套餐内容有更多要求，欢迎您选择专属于您的
+            = link_to '私人定制', unique_path, target: :'_blank'
+            | 服务
         .main-form__group
           = f.label :room_id, class: :'trade-new-form__label main-form__label'
           .trade-new-form__rooms
             .trade-new-form__room ms-repeat-room='hotel.rooms'
               .trade-new-form__room-select.trade-new-form__select ms-hover-1='trade-new-form__select--hover:start_day && !room.disabled' ms-hover-2='trade-new-form__select--hover-no-start-day:!start_day' ms-click='select_room(room)' ms-class-1='trade-new-form__room-select--even:$index % 2' ms-class-2='trade-new-form__select--selected:selected_room == room && !room.disabled'
                 .trade-new-form__room-name ms-text='room.chinese'
-                .trade-new-form__room-locate-name  ms-text='room.name'
                 .trade-new-form__room-warning ms-visible='!start_day'
                   | 请选择入住日期
                 .trade-new-form__room-error ms-visible='start_day && room.disabled'
                   | 无法预订
                 .trade-new-form__room-pricde ms-visible='room.is_price_loaded && !room.disabled'
-                  | 套餐价：
-                  em ms-text='room.prices.sale_price'
-                  | 元
+                  | 可以预订
                 .iconfont.icon-yes
           = f.hidden_field :room_id, :'ms-duplex' => 'selected_room.id'
           .trade-new-form__room-content.trade-new-form-room-content
@@ -103,23 +97,15 @@ ruby:
           span.trade-new-form__minus-button ms-click='people_num_minus' -
           = f.text_field :people_num, class: :'trade-new-form__input trade-new-form__input--smallest main-form__input main-form__input--smallest', :'ms-duplex' => :"people_num", readonly: true
           span.trade-new-form__plus-button ms-click='people_num_plus' +
-          = f.label :child_num, class: :'trade-new-form__label main-form__label trade-new-form__label--smallest'
-          span.trade-new-form__minus-button ms-click='child_num_minus' -
-          = f.text_field :child_num, class: :'trade-new-form__input trade-new-form__input--smallest main-form__input main-form__input--smallest', :'ms-duplex' => :"child_num", readonly: true
-          span.trade-new-form__plus-button ms-click='child_num_plus' +
           = f.label :extra_bed_num, class: :'trade-new-form__label main-form__label trade-new-form__label--smallest', :'ms-visible' => 'extra_bed_num > 0'
           = f.hidden_field :extra_bed_num, :'ms-duplex' => :"extra_bed_num"
           .trade-new-form__span ms-visible='extra_bed_num > 0'
             | {{ extra_bed_num }}张
-        .main-form__group ms-visible='package_price'
-          label.trade-new-form__label.main-form__label 套餐价格
-          .trade-new-form__price ms-text="package_price+'元（共'+days+'晚）'"
-        .main-form__group ms-visible='extra_bed_num > 0'
-          label.trade-new-form__label.main-form__label 加床价格
-          .trade-new-form__price ms-text="extra_bed_price+'元 × '+extra_bed_num+'张 × '+days+'晚 = '+(extra_bed_price*extra_bed_num*days)+'元'"
-        .main-form__group ms-visible='package_price'
-          label.trade-new-form__label.main-form__label 订单总价
-          .trade-new-form__totle-price ms-text="package_price+(extra_bed_price*extra_bed_num*days)+'元'"
+
+          = f.label :child_num, class: :'trade-new-form__label main-form__label trade-new-form__label--smallest'
+          span.trade-new-form__minus-button ms-click='child_num_minus' -
+          = f.text_field :child_num, class: :'trade-new-form__input trade-new-form__input--smallest main-form__input main-form__input--smallest', :'ms-duplex' => :"child_num", readonly: true
+          span.trade-new-form__plus-button ms-click='child_num_plus' +
         hr.main-form__hr
         = f.fields_for :communicate, @trade.communicate do |ff|
           .main-form__group
@@ -147,4 +133,40 @@ ruby:
               input.trade-new-form__input.main-form__input.js_main_trade_new_attendences_phone type="text" ms-attr-name="trade[attendences_attributes][{{$index}}][phone]" ms-attr-id="trade_attendences_attributes_{{$index}}_phone" ms-duplex="attendence.phone"
         .main-form__group
           = f.submit '立即预定', class: :'trade-new-form__submit main-form__submit primary-button'
-  = render 'main/shared/footer'
+        hr.main-form__hr
+        .main-form__group
+          .trade-new-form__provisions
+            .trade-new-form__provisions-box
+              - if @hotel.provisions.present?
+                .trade-new-form__provisions-title = Hotel.human_attribute_name(:provisions)
+                .trade-new-form__provisions-content = simple_format(@hotel.provisions)
+              - if @hotel.children_provisions.present?
+                .trade-new-form__provisions-title = Hotel.human_attribute_name(:children_provisions)
+                .trade-new-form__provisions-content = simple_format(@hotel.children_provisions)
+              - if @hotel.drawback_provisions.present?
+                .trade-new-form__provisions-title = Hotel.human_attribute_name(:drawback_provisions)
+                .trade-new-form__provisions-content = simple_format(@hotel.drawback_provisions)
+      .trade-new-bill
+        .trade-new-bill__content.js_main_trade_new_bill
+          .trade-new-bill__group
+            .trade-new-bill__price ms-visible='!package_price'
+              | 套餐价格：
+              em = PackageService.new(@hotel.package).min_price_by_date
+              | 元起
+          .trade-new-bill__group ms-visible='package_price'
+            .trade-new-bill__price
+              | 套餐价格：
+              em ms-text="package_price"
+              | 元
+              span ms-text="'（共'+days+'晚）'"
+          .trade-new-bill__group ms-visible='extra_bed_num > 0'
+            .trade-new-bill__price
+              | 加床价格：
+              span ms-text="extra_bed_price*days+'元×'+extra_bed_num+'张 ='"
+              em ms-text='extra_bed_price*extra_bed_num*days'
+              | 元
+          .trade-new-bill__group ms-visible='package_price'
+            .trade-new-bill__total-price
+              | 订单总价：
+              em ms-text="package_price+(extra_bed_price*extra_bed_num*days)"
+            | 元

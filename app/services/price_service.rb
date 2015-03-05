@@ -3,6 +3,16 @@ class PriceService
     @target = target
   end
 
+  def has_prices?(start_date=Time.now.to_date, end_date=nil)
+    options = {
+      target: @target.class.name,
+      target_id: @target.id,
+      :date.gte => start_date,
+    }
+    options.merge!(:date.lte => end_date) if end_date.present?
+    Prices::Price.where(options).exists?
+  end
+
   def find_by_date(date, price_type: nil)
     price_struct(date, find_price(date), price_type)
   end
@@ -37,6 +47,7 @@ class PriceService
     }
     options.merge!(:date.lte => end_date) if end_date.present?
     prices = Prices::Price.where(options)
+
     end_date = prices.pluck(:date).max.to_date unless end_date.present?
 
     (start_date..end_date).map do |date|
@@ -46,7 +57,7 @@ class PriceService
   end
 
 
-  def price_struct(date, price, price_type)
+  def price_struct(date, price, price_type=nil)
     struct = {
       local_price: price.try(:local_price),
       price_unit: price.try(:price_unit),
