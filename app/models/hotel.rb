@@ -2,46 +2,49 @@
 #
 # Table name: hotels
 #
-#  id             :integer          not null, primary key
-#  name           :string(255)      not null
-#  chinese        :string(255)      not null
-#  sequence       :integer          default("0")
-#  city_id        :integer
-#  editor_id      :integer
-#  description    :text(65535)
-#  provisions     :text(65535)
-#  address        :string(255)
-#  phone          :string(255)
-#  checkin        :datetime
-#  checkout       :datetime
-#  traffics       :text(65535)
-#  published      :boolean          default("0"), not null
-#  active         :boolean          default("1"), not null
-#  lock_version   :integer          default("0"), not null
-#  created_at     :datetime
-#  updated_at     :datetime
-#  deleted_at     :datetime
-#  published_at   :datetime
-#  unpublished_at :datetime
-#  arounds        :text(65535)
-#  homepage       :string(255)
-#  best_season    :string(255)
-#  tips           :text(65535)
-#  cover_photo_id :integer
-#  recommends     :text(65535)
-#  local_address  :string(255)
-#  visa_tip       :text(65535)
-#  language_tip   :text(65535)
-#  money_tip      :text(65535)
-#  network_tip    :text(65535)
-#  power_tip      :text(65535)
-#  luggage_tip    :text(65535)
-#  slug           :string(255)
-#  contact_name   :string(255)
-#  contact_phone  :string(255)
-#  contact_email  :string(255)
-#  trade_email    :string(255)
-#  trade_cc_email :string(255)
+#  id                  :integer          not null, primary key
+#  name                :string(255)      not null
+#  chinese             :string(255)      not null
+#  sequence            :integer          default("0")
+#  city_id             :integer
+#  editor_id           :integer
+#  description         :text(65535)
+#  provisions          :text(65535)
+#  address             :string(255)
+#  phone               :string(255)
+#  checkin             :datetime
+#  checkout            :datetime
+#  traffics            :text(65535)
+#  published           :boolean          default("0"), not null
+#  active              :boolean          default("1"), not null
+#  lock_version        :integer          default("0"), not null
+#  created_at          :datetime
+#  updated_at          :datetime
+#  deleted_at          :datetime
+#  published_at        :datetime
+#  unpublished_at      :datetime
+#  arounds             :text(65535)
+#  homepage            :string(255)
+#  best_season         :string(255)
+#  tips                :text(65535)
+#  cover_photo_id      :integer
+#  recommends          :text(65535)
+#  local_address       :string(255)
+#  visa_tip            :text(65535)
+#  language_tip        :text(65535)
+#  money_tip           :text(65535)
+#  network_tip         :text(65535)
+#  power_tip           :text(65535)
+#  luggage_tip         :text(65535)
+#  slug                :string(255)
+#  contact_name        :string(255)
+#  contact_phone       :string(255)
+#  contact_email       :string(255)
+#  trade_email         :string(255)
+#  trade_cc_email      :string(255)
+#  children_provisions :text(65535)
+#  drawback_provisions :text(65535)
+#  identification      :string(255)
 #
 
 class Hotel < ActiveRecord::Base
@@ -66,7 +69,8 @@ class Hotel < ActiveRecord::Base
 
   accepts_nested_attributes_for :package, allow_destroy: true, reject_if: Proc.new { |attributes| attributes['name'].blank? }
   accepts_nested_attributes_for :favorite_package, allow_destroy: true, reject_if: Proc.new { |attributes| attributes['name'].blank? }
-  serialize_fields [:provisions, :tips, :recommends], Array do |variables|
+
+  serialize_fields [:tips, :recommends], Array do |variables|
     variables.delete_if{|variable| variable.blank?}
   end
 
@@ -83,7 +87,7 @@ class Hotel < ActiveRecord::Base
 
   def as_json(options = nil)
   super({
-    only: [:name, :chinese, :description, :provisions, :address, :phone, :checkin, :checkout, :traffics, :arounds, :best_season, :tips, :recommends, :local_address, :visa_tip, :language_tip, :money_tip, :network_tip, :power_tip, :luggage_tip],
+    only: [:name, :chinese, :description, :provisions, :children_provisions, :drawback_provisions, :address, :phone, :checkin, :checkout, :traffics, :arounds, :best_season, :tips, :recommends, :local_address, :visa_tip, :language_tip, :money_tip, :network_tip, :power_tip, :luggage_tip],
     include: {
       cover_photo: {
         only: [:image],

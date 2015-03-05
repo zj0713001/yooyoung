@@ -57,6 +57,7 @@
 .my-index-container-trades {
   min-height: 500px;
   background: $white;
+  @include clearfix;
   .my-index-container-trades__filter {
     @include clearfix;
     line-height: $font_h6;

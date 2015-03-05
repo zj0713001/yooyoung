@@ -4,13 +4,12 @@ class PriceService
   end
 
   def has_prices?(start_date=Time.now.to_date, end_date=nil)
-    end_date ||= start_date
     options = {
       target: @target.class.name,
       target_id: @target.id,
       :date.gte => start_date,
-      :date.lte => end_date,
     }
+    options.merge!(:date.lte => end_date) if end_date.present?
     Prices::Price.where(options).exists?
   end
 

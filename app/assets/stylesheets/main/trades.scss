@@ -52,13 +52,45 @@
   }
 }
 .trade-new-container {
-  @include main-container;
-  background: $white;
-  padding: 20px;
+  @include container;
+  width: 960px;
+}
+.trade-new-bill {
+  @include float(left);
+  position: relative;
+  margin-left: 20px;
+  font-size: $font_h6;
+  .trade-new-bill__content {
+    width: 260px;
+    padding: 10px 20px;
+    background: $white;
+  }
+  .trade-new-bill__group {
+    @include clearfix;
+  }
+  .trade-new-bill__price {
+    margin: 10px 0;
+    line-height: $font_h4;
+    em {
+      font-weight: bold;
+      margin: 0 5px;
+    }
+  }
+  .trade-new-bill__total-price {
+    margin: 20px 0;
+    line-height: $font_h3;
+    em {
+      font-weight: bold;
+      font-size: $font_h3;
+      margin: 0 5px;
+    }
+  }
 }
 .trade-new-form {
-  width: 640px;
-  margin: 0 auto;
+  @include float(left);
+  width: 680px;
+  background: $white;
+  padding: 20px;
   .main-form__group {
     @include clearfix;
     min-height: $font_h1;
@@ -136,11 +168,12 @@
     position: relative;
     float: left;
     width: 240px;
-    height: 100px;
+    height: 80px;
     padding: 10px 0;
     border: 2px solid $darker_white;
     text-align: center;
     cursor: pointer;
+    line-height: $font_h2;
     .icon-yes {
       display: none;
       position: absolute;
@@ -175,20 +208,19 @@
   }
   .trade-new-form__favorite-package-select {
     font-size: 1.1em;
-    margin-left: 50px;
+    margin-left: 30px;
   }
   .trade-new-form__package-warning {
     font-size: $font_h6;
-    margin-left: 10px;
     color: $red;
   }
   .trade-new-form__package-section {
     position: relative;
     display: none;
     background: $lighter_black;
-    margin: 120px 0 0 110px;
+    margin: 100px 20px 0 110px;
     padding: 10px 20px;
-    color: $light_black;
+    color: $gray_black;
     font-size: $font_h6;
     &.trade-new-form__package-section--selected {
       display: block;
@@ -203,7 +235,7 @@
       position: absolute;
       left: -2px;
       top: 0;
-      color: $light_black;
+      color: $gray_black;
     }
   }
   .trade-new-form__package-pricde,
@@ -211,11 +243,7 @@
     font-size: $font_h6;
     width: 100%;
     text-align: center;
-    em {
-      font-weight: bold;
-      font-size: $font_h4;
-      margin-right: 5px;
-    }
+    color: $red;
   }
   .trade-new-form__favorite-package-day {
     color: $dark_black;
@@ -248,7 +276,7 @@
     margin-bottom: 20px;
     padding: 5px 0;
     &.trade-new-form__room-select--even {
-      margin-left: 50px;
+      margin-left: 30px;
     }
   }
   .trade-new-form__room-locate-name {
@@ -260,6 +288,7 @@
     color: transparent;
   }
   .trade-new-form__room-error {
+    font-size: $font_h6;
     color: $gray_black;
   }
   .trade-new-form__span {
@@ -267,7 +296,8 @@
   }
   .trade-new-form__price,
   .trade-new-form__totle-price,
-  .trade-new-form__text {
+  .trade-new-form__text,
+  .trade-new-form__hint {
     margin-left: 110px;
   }
   .trade-new-form__totle-price,
@@ -275,13 +305,21 @@
     font-size: $font_h4;
     font-weight: bold;
   }
+  .trade-new-form__hint {
+    font-size: $font_h6;
+    color: $gray_black;
+    a {
+      color: $red;
+      margin: 0 5px;
+    }
+  }
   .trade-new-form__attendence-index {
     text-align: center;
     margin: 20px 0;
     font-weight: bold;
   }
   .trade-new-form__submit {
-    margin: 40px 0 0 250px;
+    margin: 20px 0 0 250px;
   }
   .date {
     cursor: pointer;
@@ -293,6 +331,24 @@
     &.weekday--disable {
       cursor: default;
     }
+  }
+  .trade-new-form__provisions {
+    margin: 0 20px;
+    background: $lighter_black;
+    padding: 20px;
+    color: $gray_black;
+    font-size: $font_h6;
+    line-height: $font_h3;
+  }
+  .trade-new-form__provisions-box {
+    height: 300px;
+    overflow-y: auto;
+  }
+  .trade-new-form__provisions-title {
+    font-size: $font_h5;
+    color: $dark_black;
+    margin: 20px;
+    text-align: center;
   }
 }
 .trade-new-form-room-content {

@@ -72,6 +72,14 @@ h2.ui.dividing.header
           = f.text_field :local_address
     .fields
       .four.wide.field
+        = f.label :identification
+      .eight.wide.field
+        - if show
+          .text = @hotel.identification
+        - else
+          = f.text_field :identification
+    .fields
+      .four.wide.field
         = f.label :phone
       .eight.wide.field
         - if show
@@ -180,10 +188,25 @@ h2.ui.dividing.header
         = f.label :provisions
       .eight.wide.field
         - if show
-          .text
-            = show_muti_fields @hotel.provisions
+          .text = simple_format @hotel.provisions
         - else
-          = sortable_muti_fields(@hotel.provisions, 'hotel[provisions][]')
+          = f.text_area :provisions
+    .fields
+      .four.wide.field.required
+        = f.label :children_provisions
+      .eight.wide.field
+        - if show
+          .text = simple_format @hotel.children_provisions
+        - else
+          = f.text_area :children_provisions
+    .fields
+      .four.wide.field.required
+        = f.label :drawback_provisions
+      .eight.wide.field
+        - if show
+          .text = simple_format @hotel.drawback_provisions
+        - else
+          = f.text_area :drawback_provisions
     .fields
       .four.wide.field
         = f.label :visa_tip
