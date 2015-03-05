@@ -1,6 +1,5 @@
 #= require jquery
 #= require jquery_ujs
-#= require jquery.turbolinks
 #= require underscore
 
 #= require 3rd/slick
@@ -11,9 +10,7 @@
 
 #= require main/common/redraw_font_size
 
-#= require turbolinks
-
-$(document).on 'page:change', ->
+$ ->
   resize_delay_time = 100
 
   $('img.lazy').lazyload

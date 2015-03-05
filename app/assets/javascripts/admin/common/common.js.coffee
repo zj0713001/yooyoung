@@ -14,6 +14,7 @@ $ ->
       calendarWeeks: true
       autoclose: true
       todayHighlight: true
+      todayBtn: true,
     $("input.datetime, input[name$='_at]']").datepicker
       format: "yyyy-mm-dd"
       weekStart: 1
@@ -22,4 +23,5 @@ $ ->
       calendarWeeks: true
       autoclose: true
       todayHighlight: true
+      todayBtn: true,
     $("select.js_admin_search_select").select2()

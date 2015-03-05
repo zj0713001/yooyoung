@@ -1,0 +1,13 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      contacts/communicate: 联系人
+    attributes:
+      contacts/communicate:
+        id: ID
+        name: 联系人姓名
+        phone: 联系人电话
+        email: 联系人邮箱
+        created_at: "创建时间"
+        updated_at: "修改时间"

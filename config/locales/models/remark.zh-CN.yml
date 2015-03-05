@@ -1,0 +1,10 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      remark: 备注
+    attributes:
+      remark:
+        id: ID
+        content: 备注信息
+        user_id: 用户ID

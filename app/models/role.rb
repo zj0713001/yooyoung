@@ -15,6 +15,7 @@
 
 class Role < ActiveRecord::Base
   include ActiveRecord::SoftDeletable
+  include Iron::Condition
 
   belongs_to :editor, class_name: User
   has_many :users

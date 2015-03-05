@@ -1,0 +1,150 @@
+ruby:
+  set_meta_tags(
+    title: "填写订单信息_#{@hotel.chinese}_#{@hotel.package.name}",
+  )
+.trade-new.js_main_trade_new
+  = render 'main/shared/main_header'
+  .trade-new__banner.trade-new-banner
+    .trade-new-banner__baclground style="background-image: #{background_image_cover(image_url @hotel.cover_photo.try(:image).try(:huge_narrow).try(:url))}"
+  .trade-new__title.trade-new-title
+    h1.trade-new-title__name = @hotel.chinese
+    hr.trade-new-title__hr
+  .trade-new__container
+    .trade-new-container ms-controller='main_trade_new'
+      = form_for @trade, html: { class: :'trade-new-form main-form js_main_trade_new_form', :'data-price-url' => prices_path } do |f|
+        .main-form__group
+          = f.label :package_id, class: :'trade-new-form__label main-form__label'
+          = f.hidden_field :package_id, :'ms-duplex' => 'selected_package.id'
+          .trade-new-form__package-select.trade-new-form__select ms-hover='trade-new-form__select--hover' ms-class='trade-new-form__select--selected:!is_favorite' ms-click='select_package' data-is-favorite='false'
+            .trade-new-form__package-name = @hotel.package.name
+            .trade-new-form__package-pricde
+              | 套餐价：
+              em #{PackageService.new(@hotel.package).min_price_by_date}
+              | 元起
+            .iconfont.icon-yes
+          .trade-new-form__select.trade-new-form__favorite-package-select ms-hover='trade-new-form__select--hover' ms-class='trade-new-form__select--selected:is_favorite' ms-click='select_package' data-is-favorite='true' data-package-id="#{@hotel.favorite_package.id}"
+            .trade-new-form__package-name
+              | 悠漾专属套餐
+              - if @hotel.favorite_package.days > @hotel.package.days
+                span.trade-new-form__package-warning
+                  |*需入住#{@hotel.favorite_package.days}晚
+            .trade-new-form__package-pricde
+              | 套餐价：
+              em #{PackageService.new(@hotel.favorite_package).min_price_by_date}
+              | 元起
+            .iconfont.icon-yes
+          .trade-new-form__package-section ms-class='trade-new-form__package-section--selected:!is_favorite'
+            .trade-new-form__package-array
+            - @hotel.package.items.each do |item|
+              .trade-new-form__package-content
+                .iconfont.icon-water
+                = item.content
+          .trade-new-form__package-section ms-class='trade-new-form__package-section--selected:is_favorite'
+            .trade-new-form__favorite-array
+            - @hotel.favorite_package.items.group_by(&:service_day).sort.each_with_index do |(day_index, items), index|
+              .trade-new-form__favorite-package-day Day #{day_index}
+              - items.each_with_index do |item, index|
+                .trade-new-form__favorite-package-content
+                  .iconfont.icon-water
+                  = item.content
+        .main-form__group
+          = f.label :start_day, class: :'trade-new-form__label main-form__label'
+          = f.text_field :start_day, class: :'trade-new-form__input main-form__input js_main_date date', readonly: true, :'ms-duplex' => :"start_day", placeholder: :'请选择入住日期'
+          span.weekday.js_main_weekday
+        .main-form__group
+          = f.label :end_day, class: :'trade-new-form__label main-form__label'
+          = f.text_field :end_day, class: :'trade-new-form__input main-form__input', readonly: true, :'ms-duplex' => :"end_day", placeholder: :'退房日期自动计算'
+          span.weekday.weekday--disable ms-text='end_day_weekday'
+        .main-form__group
+          = f.label :room_id, class: :'trade-new-form__label main-form__label'
+          .trade-new-form__rooms
+            .trade-new-form__room ms-repeat-room='hotel.rooms'
+              .trade-new-form__room-select.trade-new-form__select ms-hover-1='trade-new-form__select--hover:start_day && !room.disabled' ms-hover-2='trade-new-form__select--hover-no-start-day:!start_day' ms-click='select_room(room)' ms-class-1='trade-new-form__room-select--even:$index % 2' ms-class-2='trade-new-form__select--selected:selected_room == room && !room.disabled'
+                .trade-new-form__room-name ms-text='room.chinese'
+                .trade-new-form__room-locate-name  ms-text='room.name'
+                .trade-new-form__room-warning ms-visible='!start_day'
+                  | 请选择入住日期
+                .trade-new-form__room-error ms-visible='start_day && room.disabled'
+                  | 无法预订
+                .trade-new-form__room-pricde ms-visible='room.is_price_loaded && !room.disabled'
+                  | 套餐价：
+                  em ms-text='room.prices.sale_price'
+                  | 元
+                .iconfont.icon-yes
+          = f.hidden_field :room_id, :'ms-duplex' => 'selected_room.id'
+          .trade-new-form__room-content.trade-new-form-room-content
+            .trade-new-form-room-content__room ms-repeat-room='hotel.rooms' ms-visible='selected_room == room'
+              .trade-new-form-room-content__photos
+                .js_main_trade_new_room_photos
+                  .trade-new-form-room-content__room-photo ms-repeat-photo='room.photos'
+                    img ms-src='photo.image.normal_narrow.url'
+                a.main-slick__prev.js_main_trade_new_room_photo_slick_prev ms-visible='room.photos.size() > 1'
+                  .iconfont.icon-arrow-left
+                a.main-slick__next.js_main_trade_new_room_photo_slick_next ms-visible='room.photos.size() > 1'
+                  .iconfont.icon-arrow-right
+              .trade-new-form-room-content__infos
+                .trade-new-form-room-content__info ms-visible='room.bed_type'
+                  | #{Room.human_attribute_name(:bed_type)}：{{ room.bed_type }}
+                .trade-new-form-room-content__info ms-visible='room.area'
+                  | #{Room.human_attribute_name(:area)}：{{ room.area }}
+                .trade-new-form-room-content__info ms-visible='room.sight'
+                  | #{Room.human_attribute_name(:sight)}：{{ room.sight }}
+                .trade-new-form-room-content__info ms-visible='room.population'
+                  | #{Room.human_attribute_name(:population)}：{{ room.population }}
+                .trade-new-form-room-content__info ms-visible='room.prices.extra_bed_price.limit'
+                  | #{Prices::ExtraBed.human_attribute_name(:limit)}：{{ room.prices.extra_bed_price.limit }}
+                .trade-new-form-room-content__info ms-visible='room.facilities'
+                  .trade-new-form-room-content__info-label #{Room.human_attribute_name(:facilities)}：
+                  .trade-new-form-room-content__info-items
+                    p ms-repeat-facility='room.facilities'
+                      | {{ facility }}
+        .main-form__group ms-visible='selected_room'
+          = f.label :people_num, class: :'trade-new-form__label main-form__label trade-new-form__label--smallest'
+          span.trade-new-form__minus-button ms-click='people_num_minus' -
+          = f.text_field :people_num, class: :'trade-new-form__input trade-new-form__input--smallest main-form__input main-form__input--smallest', :'ms-duplex' => :"people_num", readonly: true
+          span.trade-new-form__plus-button ms-click='people_num_plus' +
+          = f.label :child_num, class: :'trade-new-form__label main-form__label trade-new-form__label--smallest'
+          span.trade-new-form__minus-button ms-click='child_num_minus' -
+          = f.text_field :child_num, class: :'trade-new-form__input trade-new-form__input--smallest main-form__input main-form__input--smallest', :'ms-duplex' => :"child_num", readonly: true
+          span.trade-new-form__plus-button ms-click='child_num_plus' +
+          = f.label :extra_bed_num, class: :'trade-new-form__label main-form__label trade-new-form__label--smallest', :'ms-visible' => 'extra_bed_num > 0'
+          = f.hidden_field :extra_bed_num, :'ms-duplex' => :"extra_bed_num"
+          .trade-new-form__span ms-visible='extra_bed_num > 0'
+            | {{ extra_bed_num }}张
+        .main-form__group ms-visible='package_price'
+          label.trade-new-form__label.main-form__label 套餐价格
+          .trade-new-form__price ms-text="package_price+'元（共'+days+'晚）'"
+        .main-form__group ms-visible='extra_bed_num > 0'
+          label.trade-new-form__label.main-form__label 加床价格
+          .trade-new-form__price ms-text="extra_bed_price+'元 × '+extra_bed_num+'张 × '+days+'晚 = '+(extra_bed_price*extra_bed_num*days)+'元'"
+        .main-form__group ms-visible='package_price'
+          label.trade-new-form__label.main-form__label 订单总价
+          .trade-new-form__totle-price ms-text="package_price+(extra_bed_price*extra_bed_num*days)+'元'"
+        hr.main-form__hr
+        = f.fields_for :communicate, @trade.communicate do |ff|
+          .main-form__group
+            = ff.label :name, class: :'trade-new-form__label main-form__label'
+            = ff.text_field :name, class: :'trade-new-form__input main-form__input', :'ms-duplex' => :"communicate.name", :'ms-blur' => 'copy_communicate_name'
+          .main-form__group
+            = ff.label :phone, class: :'trade-new-form__label main-form__label'
+            = ff.text_field :phone, class: :'trade-new-form__input main-form__input', :'ms-duplex' => :"communicate.phone", :'ms-blur' => 'copy_communicate_phone'
+          .main-form__group
+            = ff.label :email, class: :'trade-new-form__label main-form__label'
+            = ff.text_field :email, class: :'trade-new-form__input main-form__input', :'ms-duplex' => :"communicate.email"
+        = f.fields_for :user_remark, @trade.user_remark do |ff|
+          .main-form__group
+            = ff.label :content, class: :'trade-new-form__label main-form__label'
+            = ff.text_area :content, class: 'trade-new-form__textarea main-form__textarea', rows: 3
+        hr.main-form__hr
+          .trade-new-form__group ms-repeat-attendence='attendences'
+            .trade-new-form__attendence-index
+              | 第{{$index+1}}位入住人
+            .main-form__group
+              label.trade-new-form__label.main-form__label ms-attr-for="trade_attendences_attributes_{{$index}}_name" #{Contacts::Attendence.human_attribute_name(:name)}
+              input.trade-new-form__input.main-form__input.js_main_trade_new_attendences_name type="text" ms-attr-name="trade[attendences_attributes][{{$index}}][name]" ms-attr-id="trade_attendences_attributes_{{$index}}_name" ms-duplex="attendence.name"
+            .main-form__group
+              label.trade-new-form__label.main-form__label ms-attr-for="trade_attendences_attributes_{{$index}}_phone" #{Contacts::Attendence.human_attribute_name(:phone)}
+              input.trade-new-form__input.main-form__input.js_main_trade_new_attendences_phone type="text" ms-attr-name="trade[attendences_attributes][{{$index}}][phone]" ms-attr-id="trade_attendences_attributes_{{$index}}_phone" ms-duplex="attendence.phone"
+        .main-form__group
+          = f.submit '立即预定', class: :'trade-new-form__submit main-form__submit primary-button'
+  = render 'main/shared/footer'

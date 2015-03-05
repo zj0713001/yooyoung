@@ -1,0 +1,26 @@
+.filepicker-input {
+  position: absolute;
+  visibility: hidden;
+}
+.filepicker {
+  .filepicker__button {
+    @include font-family-songti;
+    background-color: $white;
+    padding: 0 20px;
+    border: 1px solid $darker_white;
+    height: $font_h1;
+    line-height: $font_h1;
+    font-size: $font_h5;
+    color: $dark_black;
+    cursor: pointer;
+    &:hover, :focus {
+      border: 1px solid $gray_black;
+    }
+  }
+  .filepicker__preview {
+    img {
+      height: 100px;
+      width: 100px;
+    }
+  }
+}

@@ -1,0 +1,325 @@
+.trade-new {
+  @include no-select;
+  color: $dark_black;
+  .trade-new__banner {
+    width: 100%;
+    height: 100px;
+  }
+  .trade-new__title {
+    width: 540px;
+    margin: 0 auto 10px;
+  }
+  .trade-new__container {
+    width: 100%;
+    padding: 20px;
+    background: $lighter_black;
+    font-size: $font_h5;
+  }
+  .trade-new__success-container {
+    width: 640px;
+    margin: auto;
+    background: $white;
+  }
+  .trade-new__success-notice {
+    padding: 20px 80px 0;
+    line-height: $font_h2;
+  }
+}
+.trade-new-banner {
+  @include clearfix;
+  .trade-new-banner__baclground {
+    width: 100%;
+    height: 100vh;
+    margin-top: -20%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    @include background-size(cover);
+  }
+}
+.trade-new-title {
+  padding: 10px;
+  text-align: center;
+  .trade-new-title__name {
+    font-size: 32px;
+    line-height: 45px;
+    margin: 10px;
+  }
+  .trade-new-title__hr {
+    display: block;
+    border: 0;
+    height: 1px;
+    @include background(linear-gradient(left, rgba($light_black, .1), rgba($light_black, 1), rgba($light_black, .1)));
+  }
+}
+.trade-new-container {
+  @include main-container;
+  background: $white;
+  padding: 20px;
+}
+.trade-new-form {
+  width: 640px;
+  margin: 0 auto;
+  .main-form__group {
+    @include clearfix;
+    min-height: $font_h1;
+    line-height: $font_h1;
+  }
+  .trade-new-form__label {
+    width: 110px;
+    text-align: right;
+    left: 0px;
+    padding-right: 20px;
+    &.trade-new-form__label--smallest {
+      @include inline-block;
+      position: relative;
+    }
+  }
+  .trade-new-form__input {
+    width: 400px;
+    padding: 0 20px;
+    border: 1px solid $darker_white;
+    margin-left: 110px;
+    height: $font_h1;
+    line-height: $font_h1;
+    font-size: $font_h5;
+    color: $dark_black;
+    &:hover, :focus {
+      border: 1px solid $gray_black;
+    }
+    &.trade-new-form__input--smallest {
+      margin: 0;
+      @include inline-block;
+      border-style: solid none;
+      &:hover, :focus {
+        border-color: $darker_white;
+      }
+    }
+    &.trade-new-form__error {
+      border-color: $red;
+    }
+  }
+  .trade-new-form__plus-button,
+  .trade-new-form__minus-button {
+    @include inline-block;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    border: 1px solid $darker_white;
+    font-size: $font_h4;
+    cursor: pointer;
+    &:hover, :focus {
+      background: $lighter_black;
+      border-color: $gray_black;
+    }
+    &:active {
+      background: $light_white;
+    }
+  }
+  .trade-new-form__textarea {
+    width: 400px;
+    padding: 0 20px;
+    border: 1px solid $darker_white;
+    margin-left: 110px;
+    line-height: $font_h1;
+    font-size: $font_h5;
+    &:hover, :focus, :active {
+      border: 1px solid $gray_black;
+    }
+  }
+  div.trade-new-form__error {
+    margin-left: 110px;
+    color: $red;
+    font-size: $font_h6;
+  }
+  .trade-new-form__select {
+    position: relative;
+    float: left;
+    width: 240px;
+    height: 100px;
+    padding: 10px 0;
+    border: 2px solid $darker_white;
+    text-align: center;
+    cursor: pointer;
+    .icon-yes {
+      display: none;
+      position: absolute;
+      right: 10px;
+      bottom: 0;
+    }
+    &.trade-new-form__select--hover {
+      color: rgba($red, .8);
+      border-color: rgba($red, .8);
+      .icon-yes {
+        display: block;
+      }
+      .trade-new-form__room-warning {
+        color: $red;
+      }
+    }
+    &.trade-new-form__select--hover-no-start-day {
+      .trade-new-form__room-warning {
+        color: $red;
+      }
+    }
+    &.trade-new-form__select--selected {
+      color: $red;
+      border-color: $red;
+      .icon-yes {
+        display: block;
+      }
+    }
+  }
+  .trade-new-form__package-select {
+    margin-left: 110px;
+  }
+  .trade-new-form__favorite-package-select {
+    font-size: 1.1em;
+    margin-left: 50px;
+  }
+  .trade-new-form__package-warning {
+    font-size: $font_h6;
+    margin-left: 10px;
+    color: $red;
+  }
+  .trade-new-form__package-section {
+    position: relative;
+    display: none;
+    background: $lighter_black;
+    margin: 120px 0 0 110px;
+    padding: 10px 20px;
+    color: $light_black;
+    font-size: $font_h6;
+    &.trade-new-form__package-section--selected {
+      display: block;
+    }
+  }
+  .trade-new-form__package-content,
+  .trade-new-form__favorite-package-content {
+    position: relative;
+    padding-left: 20px;
+    line-height: $font_h3;
+    .iconfont.icon-water {
+      position: absolute;
+      left: -2px;
+      top: 0;
+      color: $light_black;
+    }
+  }
+  .trade-new-form__package-pricde,
+  .trade-new-form__room-pricde {
+    font-size: $font_h6;
+    width: 100%;
+    text-align: center;
+    em {
+      font-weight: bold;
+      font-size: $font_h4;
+      margin-right: 5px;
+    }
+  }
+  .trade-new-form__favorite-package-day {
+    color: $dark_black;
+    font-weight: bold;
+  }
+  .trade-new-form__package-array,
+  .trade-new-form__favorite-array {
+    position: absolute;
+    top: -32px;
+    border-width: 16px 30px;
+    border-style: solid;
+    border-color: transparent transparent $lighter_black;
+  }
+  .trade-new-form__package-array {
+    left: 90px;
+  }
+  .trade-new-form__favorite-array {
+    right: 90px;
+  }
+  .trade-new-form__rooms,
+  .trade-new-form__room-content {
+    margin-left: 110px;
+    @include clearfix;
+  }
+  .trade-new-form__room {
+    float: left;
+    @include clearfix;
+  }
+  .trade-new-form__room-select {
+    margin-bottom: 20px;
+    padding: 5px 0;
+    &.trade-new-form__room-select--even {
+      margin-left: 50px;
+    }
+  }
+  .trade-new-form__room-locate-name {
+    font-size: $font_h6;
+    line-height: $font_h5;
+  }
+  .trade-new-form__room-warning {
+    font-size: $font_h6;
+    color: transparent;
+  }
+  .trade-new-form__room-error {
+    color: $gray_black;
+  }
+  .trade-new-form__span {
+    @include inline-block;
+  }
+  .trade-new-form__price,
+  .trade-new-form__totle-price,
+  .trade-new-form__text {
+    margin-left: 110px;
+  }
+  .trade-new-form__totle-price,
+  .trade-new-form__text {
+    font-size: $font_h4;
+    font-weight: bold;
+  }
+  .trade-new-form__attendence-index {
+    text-align: center;
+    margin: 20px 0;
+    font-weight: bold;
+  }
+  .trade-new-form__submit {
+    margin: 40px 0 0 250px;
+  }
+  .date {
+    cursor: pointer;
+  }
+  .weekday {
+    position: absolute;
+    left: 230px;
+    cursor: pointer;
+    &.weekday--disable {
+      cursor: default;
+    }
+  }
+}
+.trade-new-form-room-content {
+  .trade-new-form-room-content__room {
+    position: relative;
+  }
+  .trade-new-form-room-content__photos {
+    position: relative;
+  }
+  .trade-new-form-room-content__room-photo {
+    img {
+      width: 530px;
+    }
+  }
+  .trade-new-form-room-content__infos {
+    background: $lighter_black;
+    padding: 20px;
+    color: $gray_black;
+    font-size: $font_h6;
+    line-height: $font_h3;
+  }
+  .trade-new-form-room-content__info {
+    position: relative;
+    @include clearfix;
+  }
+  .trade-new-form-room-content__info-label,
+  .trade-new-form-room-content__info-items {
+    float: left;
+  }
+}

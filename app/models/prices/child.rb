@@ -3,6 +3,7 @@
 # Table name: price_groups
 #
 #  id           :integer          not null, primary key
+#  type         :string(255)
 #  name         :string(255)
 #  limit        :integer
 #  target_id    :integer

@@ -1,7 +1,3 @@
-ruby:
-  set_meta_tags(
-    title: "#{ model.model_name.human } - #{t('admin.seo.title')}"
-  )
 h2.ui.dividing.header
   = model.model_name.human
   .ui.black.pointing.left.label = @hotels.total_count
@@ -40,8 +36,9 @@ table.ui.table.segment
           - if can? :edit, Hotel
             = link_to [:edit, :admin, hotel], alt: t('admin.edit'), class: :'ui link', target: :_blank do
               i.edit.icon
-            = link_to admin_prices_path(target: Room.name, target_id: hotel.rooms.first.try(:id)), alt: t('admin.edit'), class: :'ui link', target: :_blank do
-              i.yen.icon
+            - if hotel.rooms.first.present? && can?(:edit, Hotel)
+              = link_to admin_prices_path(target: Room.name, target_id: hotel.rooms.first.try(:id)), alt: t('admin.edit'), class: :'ui link', target: :_blank do
+                i.yen.icon
         td
           = admin_publish_tag(hotel)
 = admin_paginate_tag @hotels

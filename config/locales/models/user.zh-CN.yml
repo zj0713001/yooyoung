@@ -8,6 +8,9 @@ zh-CN:
         id: ID
         nickname: 昵称
         phone: 电话
+        email: 邮箱
+        password: 密码
+        password_confirmation: 二次输入密码
         created_at: "创建时间"
         updated_at: "修改时间"
         role_id: 角色

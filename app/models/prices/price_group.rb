@@ -3,6 +3,7 @@
 # Table name: price_groups
 #
 #  id           :integer          not null, primary key
+#  type         :string(255)
 #  name         :string(255)
 #  limit        :integer
 #  target_id    :integer
@@ -22,5 +23,16 @@ class Prices::PriceGroup < ActiveRecord::Base
   before_create :build_item
   def build_item
     self.items.build price: 0
+  end
+
+  def as_json(options = nil)
+    super({
+      only: [:id, :limit],
+      include: {
+        items: {
+          only: [:id, :name, :price],
+        },
+      },
+    }.merge(options.to_h))
   end
 end

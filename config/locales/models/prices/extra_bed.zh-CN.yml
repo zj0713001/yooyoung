@@ -1,0 +1,12 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      prices/extra_bed: 加床
+    attributes:
+      prices/extra_bed:
+        id: ID
+        name: 加床
+        limit: 可加床数量
+        created_at: "创建时间"
+        updated_at: "修改时间"

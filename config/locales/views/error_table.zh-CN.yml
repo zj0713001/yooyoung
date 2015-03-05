@@ -10,3 +10,4 @@ zh-CN:
     delete_error: '删除记录发生错误。'
     try_too_many_times: '已经超过最大重试次数。'
     incorrect_arguments: '选项填写错误。'
+    verification_failure: '验证失败。'

@@ -8,6 +8,8 @@ defaults: &defaults
     range: <%= (0..9).to_a %>
     switch: false
   yooyoung:
+    name: 悠漾旅行
+    homepage: "www.yooyoung.cn"
     service_phone: "010-58070160"
     service_phone_with_space: "010 - 58070160"
   china_country_code: 1
@@ -18,6 +20,12 @@ defaults: &defaults
   home:
     banner: <%= %w[9 5 3] %>
     section: <%= %w[2 7 4 3 9 5] %>
+  payment:
+    alipay:
+      gateway: https://mapi.alipay.com/gateway.do
+      account: 2088811054686737
+      email: 2495363351@qq.com
+      key: kvvq2f6ks5siat7ecvqka8wu3z5b8x8i
 
 development:
   <<: *defaults

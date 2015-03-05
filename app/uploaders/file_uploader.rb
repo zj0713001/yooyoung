@@ -30,10 +30,8 @@ class FileUploader < CarrierWave::Uploader::Base
   end
 
   def save_file_info_in_model
-    if model.new_record?
-      model.file_name = file.filename
-      model.file_size = file.size.to_s
-      model.content_type = file.content_type
-    end
+    model.file_name = file.filename
+    model.file_size = file.size.to_s
+    model.content_type = file.content_type
   end
 end

@@ -25,7 +25,7 @@ namespace :i18n do
   end
 
   task generate: :environment do
-    model = ENV['MODEL'].to_s.camelize.safe_constantize
+    model = ENV['MODEL'].to_s.classify.safe_constantize
     yml_options = {
       'zh-CN' => {
         'activerecord' => {

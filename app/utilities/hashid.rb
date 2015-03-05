@@ -3,7 +3,7 @@ require 'hashids'
 module Hashid
   module ClassMethods
     def hashids
-      @hashids ||= Hashids.new(self.class.name, 8)
+      @hashids ||= Hashids.new(self.class.name, 10)
     end
 
     def encrypt_id(id)

@@ -4,11 +4,10 @@
 #= require jquery.turbolinks
 #= require semantic-ui
 #= require underscore
-#= require jquery-ui/datepicker
-#= require jquery-ui/datepicker-zh-CN
 #= require jquery-ui/widget
 #= require jquery-ui/sortable
 #= require avalon.shim
+#= require jquery.facebox
 
 # 3rd
 #= require 3rd/jquery.browser
@@ -27,6 +26,7 @@
 #= require admin/common/semantic_ui_ext
 #= require admin/common/sortable_muti_field
 #= require admin/common/dynamic_fields
+#= require admin/common/facebox_ext
 
 #= require admin/photos
 #= require admin/prices

@@ -1,0 +1,52 @@
+h2.ui.dividing.header
+  = model.model_name.human
+  .ui.black.pointing.left.label = @trades.total_count
+.ui.fluid.form.segment
+  = form_tag request.path, method: :get, class: 'js_admin_search_form' do
+    .fields
+      = search_field_tag(model, :trade_no, :text)
+      = search_field_tag(model, :created_at, :range)
+      = search_field_tag(model, :updated_at, :range)
+      = search_page_tag
+    = search_submit_tag
+table.ui.table.segment
+  thead
+    - %w[trade_no user_id communicate_id hotel_id start_day end_day prices created_at].each do |name|
+      th = model.human_attribute_name(name)
+    th = t('admin.actions')
+  tbody
+    - @trades.each do |trade|
+      tr
+        td
+          p = trade.trade_no
+        td
+          = link_to_if can?(:show, User), trade.user.phone, [:admin, trade.user], alt: t('admin.show'), class: :'ui link action', target: :_blank
+        td
+          p = trade.communicate.name
+          p = trade.communicate.phone
+          p = trade.communicate.email
+        td
+          = link_to_if can?(:show, Hotel), trade.hotel.chinese, [:admin, trade.hotel], alt: t('admin.show'), class: :'ui link action', target: :_blank
+          p = trade.room.chinese
+          p = trade.package.name
+        td = trade.start_day.try(:to_s, :db)
+        td = trade.end_day.try(:to_s, :db)
+        td
+          = "#{Trade.human_attribute_name(:total_price)}：#{trade.total_price}"
+          - if trade.price_changed?
+            .red = "#{Trade.human_attribute_name(:changed_price)}：#{trade.changed_price}"
+        td = trade.created_at.try(:localtime).try(:to_s, :db)
+        td
+          .state = Trade.human_attribute_name("aasm_states/#{trade.aasm_state}")
+          - if can? :show, Trade
+            = link_to [:admin, trade], alt: t('admin.show'), class: :'ui link action', target: :_blank do
+              i.search.icon
+          - if can? :edit, Trade
+            = link_to [:edit, :admin, trade], alt: t('admin.edit'), class: :'ui link', target: :_blank do
+              i.edit.icon
+            - if trade.sms_submitted?
+              = link_to edit_admin_trade_path(trade, render: :confirm), alt: t('admin.edit'), class: :'ui link', rel: :facebox do
+                i.check.circle.icon.outline.green
+              = link_to edit_admin_trade_path(trade, render: :reject), alt: t('admin.edit'), class: :'ui link', rel: :facebox do
+                i.remove.circle.icon.outline.red
+= admin_paginate_tag @trades

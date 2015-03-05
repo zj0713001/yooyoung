@@ -8,8 +8,7 @@
       a.main-nav__item href="#{unique_path}" 私人定制
       a.main-nav__item href="#{yooyoung_path}" 关于我们
       - if current_user
-        a.main-nav__item 我的账户
-        / a.main-nav__item href="#{my_path}" 我的账户
+        a.main-nav__item href="#{my_path}" 我的账户
       - else
         a.main-nav__item.main-nav__item--login href="#{new_user_session_path}" 登录
         .main-nav__item.main-nav__item--small |

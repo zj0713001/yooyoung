@@ -1,4 +1,16 @@
 class Main::Devise::RegistrationsController < Devise::RegistrationsController
+  def update
+    current_user.attributes = params.require(:user).permit(:nickname, :email, :avatar)
+    if current_user.save
+      flash_message I18n.t('main.users.save_success')
+    else
+      flash_message I18n.t('main.users.save_failed'), type: :error
+    end
+    respond_to do |format|
+      format.html { redirect_to action: :edit }
+    end
+  end
+
   def create
     build_resource(sign_up_params)
 
@@ -13,7 +25,7 @@ class Main::Devise::RegistrationsController < Devise::RegistrationsController
           delete_user_track_from_session
           respond_with resource, location: after_sign_up_path_for(resource)
         else
-          set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_flashing_format?
+          set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}", now: true if is_flashing_format?
           expire_data_after_sign_in!
           respond_with resource, location: after_inactive_sign_up_path_for(resource)
         end

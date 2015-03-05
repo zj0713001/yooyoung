@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, :alert => exception.message
+    redirect_to root_url, notice: exception.message
   end
 
   helper_method :model
@@ -67,5 +67,13 @@ class ApplicationController < ActionController::Base
     session[:prev_page] = session[:current_page] || root_path
     session[:current_page] = request.fullpath
     jsvar.prev_page = session[:prev_page]
+  end
+
+  def flash_message(message, now: false, type: :notice)
+    if now
+      flash.now[:notice_message] = { type: type, message: message }
+    else
+      flash[:notice_message] = { type: type, message: message }
+    end
   end
 end
