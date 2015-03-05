@@ -26,7 +26,7 @@ class FileUploader < CarrierWave::Uploader::Base
 
   def secure_token
     var = :"@#{mounted_as}_secure_token"
-    model.instance_variable_get(var) or model.instance_variable_set(var, Digest::MD5.hexdigest(model.file_name)[0..7])
+    model.instance_variable_get(var) or model.instance_variable_set(var, Digest::MD5.hexdigest(model.file_name.to_s)[0..7])
   end
 
   def save_file_info_in_model
