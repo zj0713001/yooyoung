@@ -20,6 +20,7 @@ class UserTrackService
     cookies[:user_track_id] = {
       value: user_track._id,
       httponly: true,
+      domain: Settings.yooyoung.domain,
     }
     user_track
   end
