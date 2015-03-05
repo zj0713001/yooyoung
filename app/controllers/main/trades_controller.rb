@@ -25,6 +25,10 @@ class Main::TradesController < Main::ApplicationController
     authorize! :create, model
 
     @hotel = Hotel.friendly_acquire params[:hotel_id]
+    unless PriceService.new(@hotel.package).has_prices?
+      redirect_to @hotel and return
+    end
+
     @trade = model.new
     jsvar.hotel = @hotel.as_json
   end
