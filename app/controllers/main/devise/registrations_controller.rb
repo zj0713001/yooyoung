@@ -42,7 +42,7 @@ class Main::Devise::RegistrationsController < Devise::RegistrationsController
     @success = UserService.instance.send_sms_captcha(@user)
 
     respond_to do |format|
-      format.json { render json: { success: @success } }
+      format.json { render json: { status: @success } }
     end
   end
 
@@ -51,7 +51,7 @@ class Main::Devise::RegistrationsController < Devise::RegistrationsController
     raise YooYoung::DuplicateCreatedError if @user.present?
 
     respond_to do |format|
-      format.json { render json: { success: @success } }
+      format.json { render json: { status: @success } }
     end
   end
 
