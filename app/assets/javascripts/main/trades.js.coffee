@@ -149,7 +149,8 @@ $ ->
       $(element).rules 'add',
         required: true
         isMobile: true
-
+    $('.js_main_trade_new_bill').sticky
+      topSpacing: 20
   # Trade Cancel
   $('.js_main_trade_cancel').on 'click', ->
     $.ajax
