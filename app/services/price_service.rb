@@ -58,7 +58,7 @@ class PriceService
   end
 
 
-  def price_struct(date, price, price_type)
+  def price_struct(date, price, price_type=nil)
     struct = {
       local_price: price.try(:local_price),
       price_unit: price.try(:price_unit),
