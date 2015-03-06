@@ -5,6 +5,7 @@ html
     = stylesheet_link_tag :'main/mobile/application', media: 'all'
     = csrf_meta_tags
   body
+    = render 'main/mobile/shared/header'
     = yield
+    = render 'main/mobile/shared/footer'
     = javascript_include_tag :'main/mobile/application'
-    = include_gon init: true, namespace: :jsvar
