@@ -123,12 +123,12 @@ $ ->
         beforeSend: ->
           $(this).addClass('ajax_disabled')
         success: (data) ->
-          if data.id?
-            location.href = location.origin + jsvar.prev_page
-          else
+          if data.status == false
             message = if data.error_code == 10 then '验证码错误，请您核对，30分钟内输入有效。' else '注册出现问题，请联系网站客服处理。'
             $error_group = $('<div></div>').addClass('main-form__error-group-clearfix js_main_form_error_captcha').append($('<div></div>').addClass('main-form__error-group').append($('<div></div>').addClass('main-form__error-arrow')).append($('<div></div>').addClass('main-form__error-message').text(message)))
             $error_group.insertAfter $('.js_main_registrations_sms_captcha_field')
+          else
+            location.href = location.origin + jsvar.prev_page
         complete: ->
           $(this).removeClass('ajax_disabled')
     false
