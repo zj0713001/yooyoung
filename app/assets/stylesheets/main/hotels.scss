@@ -576,7 +576,9 @@
   }
   .hotel-show-content-rooms__room-info-facility-items {
     float: left;
-    min-width: 200px;
+    width: 450px;
+    height: 220px;
+    overflow-y: auto;
   }
 }
 .hotel-show-content-favorite {
