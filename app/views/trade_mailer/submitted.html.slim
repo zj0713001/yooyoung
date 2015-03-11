@@ -1,0 +1,12 @@
+.container
+  .container__title = @subject
+  .container__text 亲爱的#{@trade.communicate.name}：
+  .container__text
+    | 悠漾已经收到您的订单
+    = link_to @trade.to_param, trade_url(@trade)
+    | ，悠漾专属旅行顾问将在24小时内为您确认订单，请您注意查收短信及邮件通知。
+  hr.container__hr
+  = render partial: 'main/trades/detail', locals: { trade: @trade, no_cancel: true, show_button: false }
+  hr.container__hr
+  .container__text
+    = render partial: 'trade_mailer/footer', locals: { trade: @trade }

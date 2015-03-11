@@ -6,7 +6,6 @@ defaults: &defaults
   sms_captcha:
     length: 6
     range: <%= (0..9).to_a %>
-    switch: false
   yooyoung:
     name: 悠漾旅行
     homepage: "www.yooyoung.cn"
@@ -14,7 +13,11 @@ defaults: &defaults
     service_phone_with_space: "010 - 58070160"
     domain: '.yooyoung.cn'
   china_country_code: 1
+  mailer:
+    from: 'no-reply@yooyoung.cn'
+    bcc: 'trades_notification@yooyoung.cn'
   sms:
+    switch: false
     username: "yooyoung.cn"
     password: "yooyoung0120"
     sms_limit: 5

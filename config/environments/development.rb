@@ -35,6 +35,9 @@ Rails.application.configure do
 
   config.cache_store = :redis_store, 'redis://localhost:6379/0/cache_store', { compress: true,  expires_in: 8.hours, compress_threshold: 32.kilobytes }
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = { address: 'local.yooyoung.cn', port: 1025 }
+  config.action_mailer.default_url_options = { host: 'local.yooyoung.cn', protocol: 'http' }
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end

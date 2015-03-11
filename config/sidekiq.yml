@@ -2,7 +2,13 @@
 concurrency: 5
 pidfile: tmp/pids/sidekiq.pid
 retry: 3
+development:
+  :concurrency: 2
 staging:
   :concurrency: 10
 production:
   :concurrency: 20
+:queues:
+  - default
+  - mailers
+  - smses
