@@ -17,6 +17,9 @@ body {
     font-size: $font_h6;
     line-height: $font_h3;
     margin-bottom: 10px;
+    a {
+      color: blue;
+    }
   }
   .container__hr {
     display: block;
