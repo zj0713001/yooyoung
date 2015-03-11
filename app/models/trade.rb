@@ -71,7 +71,7 @@ class Trade < ActiveRecord::Base
 
   include AASM
   aasm whiny_transitions: false, requires_new_transaction: false do
-    state :sms_submitted, initial: true
+    state :sms_submitted, initial: true, after_enter: :notification_submitted
     state :sms_confirmed
     state :sms_valid
     state :sms_traveled
@@ -86,19 +86,44 @@ class Trade < ActiveRecord::Base
           if self.changed_price_changed?
             self.payment_price = self.changed_price
           end
+          TradeTimeoutJob.set(wait: 1.day).perform_later(self.to_param)
+          notification_confirmed
         end
       end
     end
     event :reject do
-      transitions from: :sms_submitted, to: :sms_over_failure
+      transitions from: :sms_submitted, to: :sms_over_failure do
+        after do
+          notification_rejected
+        end
+      end
     end
     event :cancel do
-      transitions from: :sms_submitted, to: :sms_over_canceled
-      transitions from: :sms_confirmed, to: :sms_over_canceled
+      transitions from: :sms_submitted, to: :sms_over_canceled do
+        after do
+          notification_canceled
+        end
+      end
+      transitions from: :sms_confirmed, to: :sms_over_canceled do
+        after do
+          notification_canceled
+        end
+      end
       # transitions from: :sms_valid, to: :sms_over_canceled
     end
+    event :timeout do
+      transitions from: :sms_confirmed, to: :sms_over_failure do
+        after do
+          notification_timeouted
+        end
+      end
+    end
     event :pay do
-      transitions from: :sms_confirmed, to: :sms_valid
+      transitions from: :sms_confirmed, to: :sms_valid do
+        after do
+          notification_paied
+        end
+      end
     end
     event :travel do
       transitions from: :sms_valid, to: :sms_traveled
@@ -133,6 +158,33 @@ class Trade < ActiveRecord::Base
 
   def price_changed?
     self.total_price != self.changed_price
+  end
+
+  def notification_submitted
+    NotificationService.instance.send_trade_submitted_email(self)
+  end
+
+  def notification_confirmed
+    NotificationService.instance.send_trade_confirmed_sms(self)
+    NotificationService.instance.send_trade_confirmed_email(self)
+  end
+
+  def notification_rejected
+    NotificationService.instance.send_trade_rejected_sms(self)
+    NotificationService.instance.send_trade_rejected_email(self)
+  end
+
+  def notification_canceled
+    NotificationService.instance.send_trade_canceled_email(self)
+  end
+
+  def notification_timeouted
+    NotificationService.instance.send_trade_timeouted_email(self)
+  end
+
+  def notification_paied
+    NotificationService.instance.send_trade_paied_sms(self)
+    NotificationService.instance.send_trade_paied_email(self)
   end
 
   # for hidden id

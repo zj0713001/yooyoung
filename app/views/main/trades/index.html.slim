@@ -23,7 +23,7 @@ ruby:
               = link_to '待支付', params.merge(state: :valid), class: "#{'active' if params[:state] == 'valid'}"
               = link_to '已支付', params.merge(state: :paid), class: "#{'active' if params[:state] == 'paid'}"
           - @trades.each do |trade|
-            .my-index-container-trades__item.js_main_my_index_trades_item
+            .my-index-container-trades__item.js_main_payment_group
               = link_to trade, class: :'my-index-container-trades__item-title' do
                 .my-index-container-trades__item-no
                   | 订单编号：#{trade.trade_no}

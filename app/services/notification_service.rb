@@ -50,6 +50,17 @@ class NotificationService
     TradeMailer.canceled(trade).deliver_later
   end
 
+  def send_trade_timeouted_email(trade)
+    notification = build_notification(
+      notification_type: :send_trade_timeouted_email,
+      channel: :email,
+      title: :trade_timeouted_email,
+      identifier: trade.communicate.email
+    )
+
+    TradeMailer.timeouted(trade).deliver_later
+  end
+
   def send_trade_paied_sms(trade)
     content = I18n.t('notification.sms.trade_paied', trade_id: trade.to_param, hotel_name: trade.hotel.chinese)
     notification = build_notification(

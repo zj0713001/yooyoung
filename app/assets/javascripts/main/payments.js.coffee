@@ -1,6 +1,6 @@
 $ ->
   $('.js_main_payment_new').on 'click', ->
-    $(this).parents('.js_main_my_index_trades_item').find('.js_main_payment_services').slideDown()
+    $(this).parents('.js_main_payment_group').find('.js_main_payment_services').slideDown()
 
   $('.js_main_payment_pay').on 'click', ->
     $(this).parents('.js_main_payment_services').find('.js_main_payment_paying').show()

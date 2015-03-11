@@ -14,5 +14,7 @@ zh-CN:
         subject: "很抱歉的通知您，您的悠漾订单【%{trade_id}】%{hotel_name}被酒店拒绝。"
       canceled:
         subject: "您的悠漾订单【%{trade_id}】%{hotel_name}已经取消，欢迎您再次选择悠漾。"
+      timeouted:
+        subject: "您的悠漾订单【%{trade_id}】%{hotel_name}由于付款超时，已经自动取消，欢迎您再次选择悠漾。"
       paied:
         subject: "您的悠漾订单【%{trade_id}】%{hotel_name}已经付款成功，请您注意安排出行时间。"
