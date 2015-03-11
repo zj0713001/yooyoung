@@ -1,5 +1,6 @@
 - show_package ||= false
 - no_cancel ||= false
+- show_button ||= true
 .detail-container
   .detail-container__group
     .detail-container__label
@@ -32,7 +33,7 @@
     .detail-container__label
       = Trade.human_attribute_name("aasm_state")
     .detail-container__content
-      = render partial: 'main/trades/state', locals: { trade: trade }
+      = render partial: 'main/trades/state', locals: { trade: trade, show_button: show_button }
   .detail-container__group
     .detail-container__label
       = Trade.human_attribute_name(:hotel_id)

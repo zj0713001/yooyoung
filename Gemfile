@@ -57,6 +57,8 @@ gem 'meta-tags'
 gem 'useragent'
 gem 'simple_calendar'
 gem 'aasm'
+gem 'roadie'
+gem 'roadie-rails'
 
 # Datebase
 gem 'mysql2'

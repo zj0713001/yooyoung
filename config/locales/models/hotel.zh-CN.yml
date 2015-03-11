@@ -15,7 +15,7 @@ zh-CN:
         description: 描述
         provisions: 协议条款
         address: 中文地址
-        local_address: 当地语言地址
+        local_address: 当地语言地址（国内不填）
         phone: 电话
         checkin: 入住时间
         checkout: 退房时间

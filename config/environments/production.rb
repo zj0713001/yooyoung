@@ -66,6 +66,17 @@ Rails.application.configure do
     entitystore: 'redis://localhost:6379/1/entity_store',
   }
 
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.ym.163.com',
+    port: 994,
+    user_name: 'no-reply@yooyoung.cn',
+    password: 'yooyoung0310&',
+    tls: true,
+  }
+  config.action_mailer.default_url_options = { host: :'www.yooyoung.cn' }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
 
   # Precompile additional assets.

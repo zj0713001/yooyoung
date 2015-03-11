@@ -13,6 +13,7 @@ Rails.application.config.assets.precompile += %w[
   main/home.css
   main/ie/ie8.css
   main/ie/ie9.css
+  mailer/application.css
 ]
 
 Rails.application.config.assets.precompile += %w[
