@@ -12,6 +12,7 @@ defaults: &defaults
     service_phone: "010-58070160"
     service_phone_with_space: "010 - 58070160"
     domain: '.yooyoung.cn'
+    weibo_url: 'http://weibo.com/u/5454372745'
   china_country_code: 1
   mailer:
     from: 'no-reply@yooyoung.cn'
@@ -39,7 +40,8 @@ test:
 
 production:
   <<: *defaults
+  sms:
+    switch: true
   sms_captcha:
     length: 6
     range: <%= (0..9).to_a %>
-    switch: true

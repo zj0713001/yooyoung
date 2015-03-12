@@ -11,20 +11,23 @@
   width: 100%;
   @include no-select;
   z-index: 990;
+  @include background(linear-gradient(top, rgba($black, .3), rgba($black, 0)));
   .main-index-header__logo {
     position: absolute;
     top: 0;
     left: 0;
     z-index: 999;
+    a {
+      position: relative;
+    }
     .icon-logo {
-      height: 4em;
-      margin-left: .5em;
+      height: 5em;
+      width: 8.3em;
     }
   }
   .main-index-header__nav {
     position: relative;
     width: 100%;
     height: 5em;
-    @include background(linear-gradient(top, rgba($black, .3), rgba($black, 0)));
   }
 }

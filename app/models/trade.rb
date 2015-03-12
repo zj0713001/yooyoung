@@ -65,13 +65,14 @@ class Trade < ActiveRecord::Base
     now = Time.now
     self.trade_no = now.to_date.strftime('%Y%m%d') << (now - now.midnight).to_i.to_s.rjust(8, '0')
   end
+  after_create :notification_submitted
 
   scope :last_three_months, ->{ where(created_at: [3.months.ago..Time.now]) }
   scope :paid, ->{ where(aasm_state: %w[sms_valid sms_traveled sms_over_success]) }
 
   include AASM
   aasm whiny_transitions: false, requires_new_transaction: false do
-    state :sms_submitted, initial: true, after_enter: :notification_submitted
+    state :sms_submitted, initial: true
     state :sms_confirmed
     state :sms_valid
     state :sms_traveled
