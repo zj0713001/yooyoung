@@ -61,6 +61,9 @@
     margin-right: .5em;
   }
 }
+.admin .ui.header .ui.label {
+  font-size: 0.8571rem;
+}
 @media only screen and (max-width: 768px) {
   .ui.form .fields .field {
     &:not(.inline) label {
