@@ -41,7 +41,7 @@ test:
 production:
   <<: *defaults
   sms:
-    switch: false
+    switch: true
     username: "yooyoung.cn"
     password: "yooyoung0120"
     sms_limit: 5
