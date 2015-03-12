@@ -41,7 +41,7 @@ test:
 production:
   <<: *defaults
   sms:
-    switch: true
-  sms_captcha:
-    length: 6
-    range: <%= (0..9).to_a %>
+    switch: false
+    username: "yooyoung.cn"
+    password: "yooyoung0120"
+    sms_limit: 5
