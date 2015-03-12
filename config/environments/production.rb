@@ -73,7 +73,7 @@ Rails.application.configure do
     password: 'yooyoung0310&',
     tls: true,
   }
-  config.action_mailer.default_url_options = { host: :'www.yooyoung.cn' }
+  config.action_mailer.default_url_options = { host: :'www.yooyoung.cn', protocol: 'http' }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
 
