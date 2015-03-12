@@ -20,11 +20,13 @@
 #= require 3rd/moment
 #= require 3rd/moment.zh-cn
 #= require 3rd/jquery.filepicker
+#= require 3rd/jquery.tooltipster
 
 #= require main/3rd/jquery.validate.default
 #= require main/common/redraw_font_size
 #= require main/common/datepocker_ext
 #= require main/common/filepicker_ext
+#= require main/common/footer
 #= require avalon.shim
 
 #= require bootstrap/scrollspy
