@@ -13,7 +13,7 @@ Rails.application.configure do
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
-
+  config.action_controller.default_url_options = { host: :'http://www.yooyoung.cn/' }
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
   # For large-scale production use, consider using a caching reverse proxy like nginx, varnish or squid.
@@ -66,6 +66,8 @@ Rails.application.configure do
     entitystore: 'redis://localhost:6379/1/entity_store',
   }
 
+  config.roadie.url_options = { host: 'www.yooyoung.cn', scheme: 'http' }
+
   config.action_mailer.smtp_settings = {
     address: 'smtp.ym.163.com',
     port: 994,
@@ -73,9 +75,10 @@ Rails.application.configure do
     password: 'yooyoung0310&',
     tls: true,
   }
-  config.action_mailer.default_url_options = { host: :'www.yooyoung.cn', protocol: 'http' }
+  config.action_mailer.default_url_options = { host: 'http://www.yooyoung.cn/' }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
 
