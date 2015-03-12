@@ -13,7 +13,7 @@ Rails.application.configure do
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
-  config.action_controller.default_url_options = { host: :'http://www.yooyoung.cn/' }
+
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
   # For large-scale production use, consider using a caching reverse proxy like nginx, varnish or squid.
@@ -27,7 +27,7 @@ Rails.application.configure do
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
+  config.assets.compile = true
 
   # Generate digests for assets URLs.
   config.assets.digest = true
@@ -109,3 +109,6 @@ Rails.application.configure do
   config.middleware.use Rack::GoogleAnalytics, :tracker => 'UA-58854016-1' # Master
   # config.middleware.use Rack::GoogleAnalytics, :tracker => 'UA-58854016-2' # Beta
 end
+Rails.application.default_url_options = {
+  host: 'www.yooyoung.cn',
+}
