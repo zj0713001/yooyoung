@@ -2,3 +2,19 @@ zh-CN:
   notification:
     sms:
       registration_captcha: '您的悠漾验证码：%{captcha}，30分钟内有效。'
+      trade_confirmed: '您的悠漾订单【%{trade_id}】%{hotel_name}已经确认，请于24小时内付款。'
+      trade_paied: '您的悠漾订单【%{trade_id}】%{hotel_name}已经付款成功，请您注意安排出行时间。'
+      trade_rejected: '很抱歉的通知您，您的悠漾订单【%{trade_id}】%{hotel_name}被酒店拒绝，拒绝原因：%{reject_remark}。'
+    email:
+      submitted:
+        subject: "您的悠漾订单【%{trade_id}】%{hotel_name}已经提交，酒店将于24小时内确认。"
+      confirmed:
+        subject: "您的悠漾订单【%{trade_id}】%{hotel_name}已经确认，请于24小时内付款。"
+      rejected:
+        subject: "很抱歉的通知您，您的悠漾订单【%{trade_id}】%{hotel_name}被酒店拒绝。"
+      canceled:
+        subject: "您的悠漾订单【%{trade_id}】%{hotel_name}已经取消，欢迎您再次选择悠漾。"
+      timeouted:
+        subject: "您的悠漾订单【%{trade_id}】%{hotel_name}由于付款超时，已经自动取消，欢迎您再次选择悠漾。"
+      paied:
+        subject: "您的悠漾订单【%{trade_id}】%{hotel_name}已经付款成功，请您注意安排出行时间。"

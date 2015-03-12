@@ -27,7 +27,7 @@ Rails.application.configure do
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
+  config.assets.compile = true
 
   # Generate digests for assets URLs.
   config.assets.digest = true
@@ -66,6 +66,20 @@ Rails.application.configure do
     entitystore: 'redis://localhost:6379/1/entity_store',
   }
 
+  config.roadie.url_options = { host: 'www.yooyoung.cn', scheme: 'http' }
+
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.ym.163.com',
+    port: 994,
+    user_name: 'no-reply@yooyoung.cn',
+    password: 'yooyoung0310&',
+    tls: true,
+  }
+  config.action_mailer.default_url_options = { host: 'http://www.yooyoung.cn/' }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
 
   # Precompile additional assets.
@@ -95,3 +109,6 @@ Rails.application.configure do
   config.middleware.use Rack::GoogleAnalytics, :tracker => 'UA-58854016-1' # Master
   # config.middleware.use Rack::GoogleAnalytics, :tracker => 'UA-58854016-2' # Beta
 end
+Rails.application.default_url_options = {
+  host: 'www.yooyoung.cn',
+}

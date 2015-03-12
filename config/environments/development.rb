@@ -11,7 +11,9 @@ Rails.application.configure do
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
-
+  config.action_controller.default_url_options = {
+    host: 'http://local.yooyoung.cn/'
+  }
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
@@ -35,6 +37,9 @@ Rails.application.configure do
 
   config.cache_store = :redis_store, 'redis://localhost:6379/0/cache_store', { compress: true,  expires_in: 8.hours, compress_threshold: 32.kilobytes }
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = { address: 'local.yooyoung.cn', port: 1025 }
+  config.action_mailer.default_url_options = { host: 'http://local.yooyoung.cn' }
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end

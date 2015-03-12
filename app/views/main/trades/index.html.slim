@@ -23,7 +23,7 @@ ruby:
               = link_to '待支付', params.merge(state: :valid), class: "#{'active' if params[:state] == 'valid'}"
               = link_to '已支付', params.merge(state: :paid), class: "#{'active' if params[:state] == 'paid'}"
           - @trades.each do |trade|
-            .my-index-container-trades__item.js_main_my_index_trades_item
+            .my-index-container-trades__item.js_main_payment_group
               = link_to trade, class: :'my-index-container-trades__item-title' do
                 .my-index-container-trades__item-no
                   | 订单编号：#{trade.trade_no}
@@ -47,6 +47,6 @@ ruby:
                   = "#{trade.payment_price}元"
                 .my-index-container-trades__item-actions
                   .my-index-container-trades__item-action
-                    = render partial: 'state', locals: { trade: trade }
+                    = render partial: 'main/trades/state', locals: { trade: trade, show_button: true }
                 - if trade.confirmed?
                   = render partial: 'main/payments/services', locals: { trade: trade }

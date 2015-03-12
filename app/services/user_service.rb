@@ -5,11 +5,7 @@ class UserService
     sms_captcha = Rails.cache.fetch sms_captcha_key(user), expires_in: 30.minutes do
       Settings.sms_captcha.length.times.map{ Settings.sms_captcha.range.sample }.join
     end
-    if Settings.sms_captcha.switch
-      NotificationService.instance.send_registration_captcha(user, sms_captcha)
-    else
-      Rails.logger.info "Sms captcha without send. captcha: #{sms_captcha}"
-    end
+    NotificationService.instance.send_registration_captcha(user, sms_captcha)
     true
   end
 

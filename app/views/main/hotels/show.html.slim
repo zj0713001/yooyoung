@@ -5,6 +5,8 @@ ruby:
     keywords: "#{@hotel.city.country.chinese},#{@hotel.city.chinese},#{@hotel.chinese},#{@hotel.package.name}"
   )
   has_price = PriceService.new(@hotel.package).has_prices?
+  min_price = has_price && PackageService.new(@hotel.package).min_price_by_date
+  can_buy = has_price && !min_price.to_i.zero?
 .hotel-show.js_main_hotel_show
   = render 'main/shared/main_header'
   .hotel-show__banner.hotel-show-banner.js_main_hotel_show_banner
@@ -19,7 +21,7 @@ ruby:
         .main-location.main-location--center
           span.iconfont.icon-location
           span.main-location__text #{hotel_location_text(@hotel)}
-    - if has_price
+    - if can_buy
       a.hotel-show-banner__booking.opacity-button.js_main_hotel_show_banner_booking href="#{new_trade_path(hotel_id: @hotel.to_param)}" 立即预定
     - else
       a.hotel-show-banner__booking.opacity-button.js_main_hotel_show_banner_booking href="javasctipt:void(0);" 已售罄
@@ -40,7 +42,7 @@ ruby:
             a href='#favorite' 悠漾专属套餐
           li
             a href='#tips' 旅行贴士
-        - if has_price
+        - if can_buy
           .hotel-show-content-nav__price
             | 套餐价：
             em = show_currency PackageService.new(@hotel.package).min_price_by_date

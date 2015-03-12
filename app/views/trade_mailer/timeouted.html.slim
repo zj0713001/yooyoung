@@ -1,0 +1,12 @@
+.container
+  .container__title = @subject
+  .container__text 亲爱的#{@trade.communicate.name}：
+  .container__text
+    | 您的订单
+    = link_to @trade.to_param, trade_url(@trade)
+    | 由于付款超时，已经自动取消，欢迎您再次选择悠漾。
+  hr.container__hr
+  = render partial: 'main/trades/detail', locals: { trade: @trade, no_cancel: true, show_button: false }
+  hr.container__hr
+  .container__text
+    = render partial: 'trade_mailer/footer', locals: { trade: @trade }

@@ -32,7 +32,6 @@ $sprites2x: sprite-map("main/payments-retina/*.png");
     @each $service in $services {
       &.main-payment-services__item--#{$service} {
         @include retina-sprite($service);
-        @include background-size(contain);
       }
     }
     &:hover {

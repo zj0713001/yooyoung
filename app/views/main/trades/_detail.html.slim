@@ -1,5 +1,6 @@
 - show_package ||= false
 - no_cancel ||= false
+- show_button ||= false
 .detail-container
   .detail-container__group
     .detail-container__label
@@ -28,11 +29,13 @@
       = Trade.human_attribute_name(:payment_price)
     .detail-container__content
       = "#{trade.payment_price}元"
-  .detail-container__group
+  .detail-container__group.js_main_payment_group
     .detail-container__label
       = Trade.human_attribute_name("aasm_state")
     .detail-container__content
-      = render partial: 'main/trades/state', locals: { trade: trade }
+      = render partial: 'main/trades/state', locals: { trade: trade, show_button: show_button }
+    - if trade.confirmed? && show_button
+      = render partial: 'main/payments/services', locals: { trade: trade }
   .detail-container__group
     .detail-container__label
       = Trade.human_attribute_name(:hotel_id)

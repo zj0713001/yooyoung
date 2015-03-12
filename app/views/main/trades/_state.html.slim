@@ -9,6 +9,6 @@
     - elsif trade.failed?
       .iconfont.icon-cancel
     = Trade.human_attribute_name("aasm_states/#{trade.aasm_state}")
-  - if trade.confirmed?
+  - if trade.confirmed? && show_button
     .main-trade-state__action
     = link_to '立即付款', 'javascript:void(0)', class: :'primary-button main-trade-state__button js_main_payment_new'
