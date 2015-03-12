@@ -47,6 +47,6 @@ ruby:
                   = "#{trade.payment_price}元"
                 .my-index-container-trades__item-actions
                   .my-index-container-trades__item-action
-                    = render partial: 'state', locals: { trade: trade }
+                    = render partial: 'main/trades/state', locals: { trade: trade, show_button: true }
                 - if trade.confirmed?
                   = render partial: 'main/payments/services', locals: { trade: trade }
