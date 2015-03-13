@@ -1,0 +1,71 @@
+.main-mobile-home {
+  .main-mobile-home__banner {
+    @include size(100% 100vw);
+    position: relative;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    @include background-size(cover);
+    color: $white;
+    @include font-family-songti;
+  }
+  .main-mobile-home__banner-title {
+    font-size: rem($font_h4);
+    @include position(absolute, null null rem(60) rem(30));
+  }
+  .main-mobile-home__banner-subtitle {
+    font-size: rem($font_h5);
+    @include position(absolute, null null rem(25) rem(30));
+  }
+  .main-mobile-home__container {
+    width: 100%;
+    height: 100%;
+  }
+  .main-mobile-home__title {
+    @include position(relative);
+    @include margin(rem(30) null rem(20) null);
+    font-size: rem($font_h4);
+  }
+  .main-mobile-home__title-icon {
+    @include float(left);
+    @include size(rem(18) rem(12));
+    @include margin(rem(3) rem(10) rem(3) 0);
+    @include background-size(rem(18), rem(6));
+    @include background-image(linear-gradient(rgba($red, .3) 50%, $red 50%));
+  }
+  .main-mobile-home__hotel {
+    color: $white;
+  }
+  .main-mobile-home__hotel-name {
+    @include margin(rem(6) null null rem(10));
+    font-size: rem($font_h4);
+    line-height: rem($font_h2);
+  }
+  .main-mobile-home__hotel-location {
+    @include margin(null null rem(6) rem(10));
+    font-size: rem($font_h6);
+    line-height: rem($font_h4);
+    .icon-location {
+      @include float(left);
+      @include margin(null rem(5) null null);
+    }
+  }
+  .main-mobile-home__more-hotel {
+    @include size(100% rem(40));
+    @include margin(rem(20) 0);
+    background: $light_green;
+    color: $dark_green;
+    font-size: rem($font_h5);
+    line-height: rem(40);
+    text-align: center;
+    .icon-arrow-double-right {
+      @include inline-block;
+    }
+  }
+  .main-mobile-home__unique {
+    @include padding(rem(20) rem(10));
+    background: $lighter_green;
+    color: $dark_green;
+    font-size: rem($font_standard);
+    line-height: rem($font_h3);
+  }
+}

@@ -1,1 +1,24 @@
-| moblie
+.main-mobile-home
+  .main-mobile-home__banner style="background-image: #{background_image_cover(image_url Hotel.find_by(id: Settings.home.section.first).cover_photo.try(:image).try(:large).try(:url))}"
+    h1.main-mobile-home__banner-title 悠漾旅行
+    .main-mobile-home__banner-subtitle 悠选酒店套餐，打造非凡旅行
+  .main-mobile-home__container
+    .main-mobile-home__title
+      .main-mobile-home__title-icon
+      | 酒店套餐
+    - @section_data.each do |data|
+      = link_to data[:link] do
+        .main-mobile-home__hotel.single-section style="background-image: #{background_image_cover(data[:image])}"
+          .single-section__sticky
+            .main-mobile-home__hotel-name = data[:name]
+            .main-mobile-home__hotel-location
+              .iconfont.icon-location
+              = data[:location]
+            .iconfont.icon-arrow-right
+    .main-mobile-home__more-hotel
+      | 查看更多酒店
+      .iconfont.icon-arrow-double-right
+    .main-mobile-home__title
+      .main-mobile-home__title-icon
+      | 私人定制
+    .main-mobile-home__unique 有想探索世界的好奇心但没有做功课的耐心和决心，没关系，给悠漾一点儿信心，悠漾会用真心为您制定一份详细的旅行计划，用细心为您预订所有的旅行产品，用爱心回答您所有的问题！

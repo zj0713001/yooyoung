@@ -1,4 +1,13 @@
+@import "3rd/retina-sprites";
+
 $em-base: 10px;
+html {
+  font-size: 10px;
+  font-weight: normal;
+  @include font-family-heiti;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 body {
   min-height: 100vh;
 }

@@ -177,7 +177,7 @@ $ ->
       target: '.js_main_hotel_show_content_nav'
 
     $('.js_main_hotel_show_content_package_simple').sticky
-      topSpacing: -30
+      topSpacing: 30
       stopScroll: $('.js_main_hotel_show_content_package_simple').height()
     $('.js_hotel_show_content_favorite_background').sticky
       topSpacing: 60

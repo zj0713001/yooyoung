@@ -1,0 +1,39 @@
+.main-mobile-footer {
+  @include size(100% rem(100));
+  background: $dark_green;
+  color: $gray_green;
+  text-align: center;
+  .main-mobile-footer__content {
+    @include padding(rem(15) 0);
+    @include clearfix;
+  }
+  .main-mobile-footer__service {
+    color: $white;
+    @include span(35 of 64);
+    @include border-color($gray_green);
+    @include border-width(rem(1));
+    @include border-style(null solid null null);
+  }
+  .main-mobile-footer__service-phone {
+    font-size: rem($font_h4);
+    line-height: rem($font_h2);
+  }
+  .main-mobile-footer__service-time {
+    line-height: rem(15);
+  }
+  .main-mobile-footer__social {
+    @include span(29 of 64);
+    font-size: rem($font_h1);
+    line-height: rem($font_h2);
+    a {
+      @include inline-block;
+      @include margin(0 rem(10));
+    }
+  }
+  .main-mobile-footer__copyright {
+    @include border-color($gray_green);
+    @include border-width(rem(1));
+    @include border-style(solid null null null);
+    @include padding(rem(5) null null null)
+  }
+}
