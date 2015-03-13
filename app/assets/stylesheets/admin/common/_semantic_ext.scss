@@ -64,10 +64,6 @@
 .admin .ui.header .ui.label {
   font-size: 0.8571rem;
 }
-.ui table td {
-  word-wrap: break-word;
-  word-break: normal;
-}
 @media only screen and (max-width: 768px) {
   .ui.form .fields .field {
     &:not(.inline) label {
