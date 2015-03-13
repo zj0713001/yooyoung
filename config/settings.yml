@@ -31,6 +31,10 @@ defaults: &defaults
       account: 2088811054686737
       email: 2495363351@qq.com
       key: kvvq2f6ks5siat7ecvqka8wu3z5b8x8i
+  seo:
+    title: "悠漾旅行，旅行是可以改变人生的大事，臻选全球奢华酒店预订，私人定制，酒店套餐，度假旅行，蜜月旅行预订"
+    description: "悠漾旅行，最贴心的奢华酒店预订平台，全程服务，品质保证。精选全球奢华酒店预订，第一家专注酒店套餐设计、专注度假游及预订的在线平台。"
+    keywords: <%= %w[悠漾 yooyoung 悠漾旅行 奢华酒店预订 臻选酒店预订 酒店套餐预订 私人定制 度假游 蜜月游].join(',') %>
 
 development:
   <<: *defaults
