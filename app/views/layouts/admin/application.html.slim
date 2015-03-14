@@ -8,7 +8,7 @@ html
     = include_gon init: true, namespace: :jsvar
     = stylesheet_link_tag :'admin/application', media: 'all', :'data-turbolinks-track' => true
     = csrf_meta_tags
-    = display_meta_tags(default_meta_tags)
+    = display_meta_tags(admin_default_meta_tags)
   body
     = render partial: 'layouts/admin/nav'
     .pusher

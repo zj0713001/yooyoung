@@ -1,8 +1,8 @@
 ruby:
   set_meta_tags(
-    title: "#{@hotel.chinese}_#{@hotel.package.name}",
-    description: "#{@hotel.city.country.chinese}_#{@hotel.city.chinese}_#{@hotel.chinese}_#{@hotel.package.name}",
-    keywords: "#{@hotel.city.country.chinese},#{@hotel.city.chinese},#{@hotel.chinese},#{@hotel.package.name}"
+    title: "#{@hotel.chinese}_#{@hotel.package.name}_#{@hotel.city.country.chinese}_#{@hotel.city.chinese} - 悠漾旅行",
+    description: "#{@hotel.city.country.chinese}，#{@hotel.city.chinese}，#{@hotel.chinese}，#{@hotel.package.name}。特色：#{@hotel.recommends.join('，')}",
+    keywords: "#{@hotel.city.country.chinese}酒店,#{@hotel.city.chinese}酒店,#{@hotel.chinese}推荐,#{@hotel.chinese}介绍,#{@hotel.chinese}房间,#{@hotel.chinese}特惠,#{@hotel.package.name}预订"
   )
   has_price = PriceService.new(@hotel.package).has_prices?
   min_price = has_price && PackageService.new(@hotel.package).min_price_by_date

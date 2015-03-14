@@ -1,0 +1,9 @@
+- if Rails.env == 'production'
+  coffee:
+    _hmt = _hmt or []
+    do ->
+      hm = document.createElement('script')
+      hm.src = '//hm.baidu.com/hm.js?45c08947584eaeda98cf141860b036f4'
+      s = document.getElementsByTagName('script')[0]
+      s.parentNode.insertBefore hm, s
+      return

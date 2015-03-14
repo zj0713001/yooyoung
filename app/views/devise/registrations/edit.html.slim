@@ -30,15 +30,14 @@ ruby:
                     = User.human_attribute_name(:email)
                   .detail-container__content
                     = f.text_field :email, class: :'detail-container__input'
-                .detail-container__group
-                  .detail-container__label
-                    = User.human_attribute_name(:avatar)
-                  .detail-container__content
-                    .js_main_file_upload_preview.filepicker
-                      .filepicker__preview
-                        = image_tag resource.avatar.x2.url
-                    .detail-container__filepicker
-                      = f.file_field :avatar, class: :'js_main_file_upload filepicker-input', :'data-label' => '选择图片'
+                / .detail-container__group
+                /   .detail-container__label
+                /     = User.human_attribute_name(:avatar)
+                /   .detail-container__content
+                /     .js_main_file_upload_preview.filepicker
+                /       .filepicker__preview
+                /         = image_tag resource.avatar.x2.url
+                /     .detail-container__filepicker
+                /       = f.file_field :avatar, class: :'js_main_file_upload filepicker-input', :'data-label' => '选择图片'
                 .detail-container__group
                   = f.submit '保存', class: :'detail-container__submit primary-button normal-button'
-  

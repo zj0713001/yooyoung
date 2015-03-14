@@ -33,7 +33,7 @@ module Admin::ApplicationHelper
     end
   end
 
-  def default_meta_tags
+  def admin_default_meta_tags
     {
       title: [model && model.model_name.human, I18n.t('admin.seo.title')].join("_")
     }

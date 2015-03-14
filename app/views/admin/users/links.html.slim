@@ -17,7 +17,7 @@ table.ui.table.segment
   tbody
     - @links_data.each do |link|
       tr
-        td = link.fullpath
+        td = truncate(link.fullpath, length: 100)
         td = link.count
         td = "#{link.anonymous_count}（#{link.anonymous_user_count}）"
         td = "#{link.known_count}（#{link.known_user_count}）"
