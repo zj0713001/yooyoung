@@ -46,9 +46,9 @@ class Admin::UsersController < Admin::ApplicationController
     @users = model.where(permited_params[:where])
     @users = @users.none if @users.where_values_hash.blank?
 
-    @admin_users = model.by_space(Role.spaces[:main])
+    @admin_users = model.by_space(Role.spaces[:admin])
 
-    @links = Link.not_in(user_track_id: @admin_users.map(&:user_track).compact.uniq.map(&:_id)).includes(:user_track)
+    @links = Link.not_in(user_track_id: @admin_users.map{|user| user.user_track rescue nil}.compact.uniq.map(&:_id)).includes(:user_track)
     @links = @links.where(user_track_id: @users.map(&:user_track).map(&:_id)) if @users.present?
 
     @links = @links.group_by do |link|
