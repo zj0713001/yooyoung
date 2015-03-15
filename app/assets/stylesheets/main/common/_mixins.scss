@@ -9,6 +9,10 @@
   font-family: 'STHeiti','Helvetica Neue',Arial,sans-serif;
 }
 
+@mixin font-family-mobile-heiti {
+  font-family: "Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","华文细黑","STHeiti","微软雅黑","Microsoft YaHei",SimHei,sans-serif;
+}
+
 @mixin font-family-songti {
   font-family: 'SimSun','NSimSun',serif;
 }

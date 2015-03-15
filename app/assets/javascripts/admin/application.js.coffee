@@ -26,7 +26,6 @@
 #= require admin/common/semantic_ui_ext
 #= require admin/common/sortable_muti_field
 #= require admin/common/dynamic_fields
-#= require admin/common/facebox_ext
 
 #= require admin/photos
 #= require admin/prices

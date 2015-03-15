@@ -40,10 +40,10 @@ Rails.application.routes.draw do
       get 'my' => 'trades#index', as: :my
       resources :hotels, only: [:index, :show]
       scope :about, module: :about do
-        get :yooyoung
-        get :business
+        # get :yooyoung
+        # get :business
         get :unique
-        get :protocols
+        # get :protocols
       end
       resources :trades, except: [:edit] do
         member do

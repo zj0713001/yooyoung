@@ -4,7 +4,7 @@ $em-base: 10px;
 html {
   font-size: 10px;
   font-weight: normal;
-  @include font-family-heiti;
+  @include font-family-mobile-heiti;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

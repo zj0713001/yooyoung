@@ -6,7 +6,7 @@
     @include size(100% rem(40));
     @include position(relative);
     @include background(rgba($white, .1));
-    @include box-shadow(rgba($black, .1) 0 rem(2) 0);
+    @include box-shadow(0 0 rem(3) rgba($black, .1));
   }
   .main-mobile-header__logo {
     @include position(absolute, 0 null null 0);
@@ -16,6 +16,6 @@
     @include position(absolute, 0 rem(10) null null);
     line-height: rem(40);
     font-size: rem(24);
-    color: $light_gray;
+    color: $white;
   }
 }

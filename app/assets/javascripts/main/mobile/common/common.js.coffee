@@ -1,5 +1,5 @@
 $(document).on 'page:fetch', ->
-  NProgress.inc()
+  NProgress.start()
 $(document).on 'page:restore', ->
   NProgress.remove()
 $(document).on 'page:change', ->

@@ -1,0 +1,26 @@
+%main-title
+  +position(relative)
+  font-size: rem($font_h4)
+  line-height: rem($font_h4)
+%main-title-icon
+  +float(left)
+  +size(rem(18) rem(12))
+  +margin(rem(3) rem(10) rem(3) 0)
+  +background-size(rem(18), rem(6))
+  +background(linear-gradient(rgba($red, 0.3) 50%, $red 50%))
+
+%main-list-section
+  +container
+  +padding(rem(10))
+  font-size: rem($font_standard)
+  line-height: rem(20)
+%main-list-section-item
+  +position(relative)
+  +margin(null null rem(10) null)
+  +padding(null null null rem(15))
+  &:nth-last-child(1)
+    +margin(null null 0 null)
+%main-list-section-item-icon
+  +position(absolute, rem(6) null null 0)
+  +size(rem(6))
+  +background(rgba($red, 0.3))

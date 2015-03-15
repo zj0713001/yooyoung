@@ -10,7 +10,10 @@
     @include position(relative);
     @include margin(rem(170) null null null);
     @include float(left);
-    background: rgba($black, .6);
+    background: rgba($black, .3);
+    &:active {
+      background: rgba($black, .6);
+    }
   }
   .icon-arrow-right {
     @include position(absolute, null rem(5) 0 null);

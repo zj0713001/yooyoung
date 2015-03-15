@@ -1,0 +1,37 @@
+%button
+  cursor: pointer
+  text-align: center
+
+.primary-button
+  border: none
+  +border-radius(0)
+  background: $red
+  color: $white
+  @extend %button
+  &:hover
+    background: rgba($red, .8)
+
+.opacity-button
+  border: solid
+  border-width: rem(1)
+  border-color: $white
+  +border-radius(0)
+  background: none
+  color: $white
+  @extend %button
+
+.minor-button
+  border: 1px solid $black
+  +border-radius(0)
+  background: $white
+  color: $black
+  @extend %button
+  &:hover
+    color: $black
+    border-color: $black
+
+.normal-button
+  font-size: rem($font_h5)
+  line-height: rem($font_h5)
+  +padding(rem(10) rem(15))
+  @extend %button

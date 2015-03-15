@@ -1,0 +1,65 @@
+.main-mobile-home
+  color: $dark
+  .main-mobile-home__banner
+    +size(100% 100vw)
+    position: relative
+    +background(asset-url("main/mobile/common/banner.jpg") center no-repeat)
+    +background-size(cover)
+    color: $white
+  .main-mobile-home__banner-title
+    font-size: rem($font_h4)
+    +position(absolute, null null rem(60) rem(30))
+  .main-mobile-home__banner-subtitle
+    font-size: rem($font_h5)
+    +position(absolute, null null rem(25) rem(30))
+  .main-mobile-home__container
+    width: 100%
+    height: 100%
+  .main-mobile-home__title
+    @extend %main-title
+    +margin(rem(30) null rem(20) null)
+  .main-mobile-home__title-icon
+    @extend %main-title-icon
+  .main-mobile-home__hotel
+    color: rgba($white, .9)
+  .main-mobile-home__hotel-name
+    +margin(rem(3) rem(10))
+    font-size: rem($font_h4)
+    line-height: rem($font_h2)
+  .main-mobile-home__hotel-location
+    +margin(rem(3) rem(10))
+    font-size: rem($font_h6)
+    line-height: rem($font_h4)
+    .icon-location
+      +float(left)
+      +margin(null rem(5) null null)
+  .main-mobile-home__more-hotel
+    +size(100% rem(40))
+    +margin(rem(20) 0)
+    background: $lighter_green
+    color: $dark_green
+    font-size: rem($font_h5)
+    line-height: rem(40)
+    text-align: center
+    &:active
+      background: $light_green
+    .icon-arrow-double-right
+      +inline-block
+  .main-mobile-home__unique
+    +padding(rem(20) rem(10))
+    background: $light_cyan
+    font-size: rem($font_standard)
+    line-height: rem($font_h3)
+  .main-mobile-home__unique-image
+    +size(100% rem(210))
+    +margin(null null rem(20) null)
+    +background(asset-url("main/mobile/common/unique.jpg"), rgba($black, 0.1))
+    +background-size(cover)
+    +position(relative)
+    background-blend-mode: multiply
+  .main-mobile-home__unique-more
+    +size(rem(130) null)
+    +margin(null null null rem(-65))
+    +position(absolute, null null rem(35) 50%)
+    &:active
+      +background(rgba($black, .3))

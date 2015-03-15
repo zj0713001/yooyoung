@@ -1,0 +1,108 @@
+ruby:
+  set_meta_tags(
+    title: "#{@hotel.chinese}_#{@hotel.package.name}_#{@hotel.city.country.chinese}_#{@hotel.city.chinese} - 悠漾旅行",
+    description: "#{@hotel.city.country.chinese}，#{@hotel.city.chinese}，#{@hotel.chinese}，#{@hotel.package.name}。特色：#{@hotel.recommends.join('，')}",
+    keywords: "#{@hotel.city.country.chinese}酒店,#{@hotel.city.chinese}酒店,#{@hotel.chinese}推荐,#{@hotel.chinese}介绍,#{@hotel.chinese}房间,#{@hotel.chinese}特惠,#{@hotel.package.name}预订"
+  )
+  has_price = PriceService.new(@hotel.package).has_prices?
+  min_price = has_price && PackageService.new(@hotel.package).min_price_by_date
+  can_buy = has_price && !min_price.to_i.zero?
+.main-mobile-hotels-show.js_main_mobile_hotels_show
+  .main-mobile-hotels-show__banner
+    .main-mobile-hotels-show-banner
+      .main-mobile-hotels-show-banner__background style="background-image: #{background_image_cover(@hotel.cover_photo.try(:image).try(:normal_narrow).try(:url))}"
+      h1.main-mobile-hotels-show-banner__title = @hotel.chinese
+      hr.main-mobile-hotels-show-banner__hr
+      .main-mobile-hotels-show-banner__location
+        span.iconfont.icon-location
+        = hotel_location_text(@hotel)
+  .main-mobile-hotels-show__photos.main-mobile-hotels-show-photos
+    .main-mobile-hotels-show-photos__cover class="#{'js_main_mobile_hotels_photo' if @hotel.photos.to_a.count > 0}"
+      = image_tag @hotel.photos.first.try(:image).try(:normal).try(:url), lazy: true, class: :lazy
+      - if @hotel.photos.to_a.count > 0
+        .main-mobile-hotels-show-photos__multi.opacity-button.js_main_mobile_hotels_photo 图集
+    - if can_buy
+      .main-mobile-hotels-show-photos__price-flag
+        span.main-mobile-hotels-show-photos__price-unite ￥
+        span.main-mobile-hotels-show-photos__price-money = show_currency PackageService.new(@hotel.package).min_price_by_date
+        | 元/套餐起
+    - else
+      .main-mobile-hotels-show-photos__price-flag.main-mobile-hotels-show-photos__price-flag--soldout 已售罄
+    #main_mobile_hotels_album style="display: none"
+      .main-mobile-hotels-show-facebox-photos.main-mobile-hotels-show-facebox-photos--center.js_main_mobile_hotels_album
+        - @hotel.photos.each do |photo|
+          .main-mobile-hotels-show-facebox-photos__item
+            = image_tag photo.image.normal.url, lazy: true
+  h2.main-mobile-hotels-show__title
+    .main-mobile-hotels-show__title-icon
+    | 非去不可
+  .main-mobile-hotels-show__list-section.main-mobile-hotels-show-list-section.main-mobile-hotels-show-list-section--recommends
+    - @hotel.recommends.each do |recommend|
+      .main-mobile-hotels-show-list-section__item
+        .main-mobile-hotels-show-list-section__item-icon
+        = recommend
+  h2.main-mobile-hotels-show__title
+    .main-mobile-hotels-show__title-icon
+    | 交通信息
+  .main-mobile-hotels-show__list-section.main-mobile-hotels-show-list-section.main-mobile-hotels-show-list-section--arounds
+    - if @hotel.arounds.present?
+      .main-mobile-hotels-show-list-section__item
+        .main-mobile-hotels-show-list-section__item-icon
+        p 位置和周边：
+        = simple_format @hotel.arounds
+    .main-mobile-hotels-show-list-section__item
+      .main-mobile-hotels-show-list-section__item-icon
+      p 地址：
+      - if @hotel.address.present?
+        p = @hotel.address
+      - if @hotel.local_address.present?
+        p = @hotel.local_address
+    - if @hotel.traffics.present?
+      .main-mobile-hotels-show-list-section__item
+        .main-mobile-hotels-show-list-section__item-icon
+        p 到达和离开：
+        = simple_format @hotel.traffics
+  h2.main-mobile-hotels-show__title
+    .main-mobile-hotels-show__title-icon
+    = @hotel.package.name
+  .main-mobile-hotels-show__list-section.main-mobile-hotels-show-list-section.main-mobile-hotels-show-list-section--package
+    .main-mobile-hotels-show-list-section__tips 套餐内容：
+    - @hotel.package.items.each do |item|
+      .main-mobile-hotels-show-list-section__item
+        .main-mobile-hotels-show-list-section__item-icon
+        = item.content
+  .main-mobile-hotels-show__list-section.main-mobile-hotels-show-list-section.main-mobile-hotels-show-list-section--package-detail.main-mobile-hotels-show-package-detail
+    .main-mobile-hotels-show-package-detail__title 套餐亮点
+    .main-mobile-hotels-show-package-detail__container
+      - items = @hotel.package.items_with_cover_photo
+      .main-mobile-hotels-show-package-detail__cover class="#{'js_main_mobile_package_photo' if items.count > 0}"
+        = image_tag items.first.try(:cover_photo).try(:image).try(:normal).try(:url), lazy: true, class: :lazy
+        - if items.count > 0
+          .main-mobile-hotels-show-package-detail__multi.opacity-button.js_main_mobile_package_photo 图集
+      .main-mobile-hotels-show-package-detail__description
+        = simple_format items.first.try(:description)
+    #main_mobile_photo_album style="display: none"
+      .main-mobile-hotels-show-facebook-package
+        .main-mobile-hotels-show-facebook-package__title = @hotel.package.name
+        .main-mobile-hotels-show-facebox-photos.js_main_mobile_photo_album
+          - items.each do |item|
+            .main-mobile-hotels-show-facebox-photos__item data-description="#{simple_format item.try(:description)}"
+              = image_tag item.try(:cover_photo).try(:image).try(:normal).try(:url), lazy: true, class: :lazy
+        .main-mobile-hotels-show-facebook-package__description.js_main_mobile_photo_album_description
+  h2.main-mobile-hotels-show__title
+    .main-mobile-hotels-show__title-icon
+    | 悠漾专属套餐
+  .main-mobile-hotels-show__favorite.main-mobile-hotels-show-favorite
+    .main-mobile-hotels-show-favorite__border
+      .main-mobile-hotels-show-favorite__border-background
+    - @hotel.favorite_package.items.group_by(&:service_day).sort.each_with_index do |(day_index, items), index|
+      .main-mobile-hotels-show-favorite__day-group
+        .main-mobile-hotels-show-favorite__day
+          .main-mobile-hotels-show-favorite__day-border
+          .main-mobile-hotels-show-favorite__day-number
+            | Day
+            p = day_index
+        .main-mobile-hotels-show-favorite__day-list
+          - items.each do |item|
+            .main-mobile-hotels-show-favorite__day-item = item.content
+        .iconfont.icon-arrow-right
