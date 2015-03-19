@@ -35,7 +35,10 @@ class Room < ActiveRecord::Base
   has_one :child_price, as: :target, class_name: Prices::Child
   has_one :extra_bed_price, as: :target, class_name: Prices::ExtraBed
 
-  belongs_to :hotel
+  # belongs_to :hotel
+  def hotel
+    self.hotel_packages.first.try(:hotel)
+  end
   belongs_to :cover_photo, dependent: :destroy, class_name: Photo
   belongs_to :editor, class_name: User
 
@@ -49,12 +52,13 @@ class Room < ActiveRecord::Base
 
   # validates :name, presence: true
 
-  after_save :set_hotel_and_editor
-  def set_hotel_and_editor
-    self.hotel = self.hotel_packages.first.try(:hotel)
-    self.editor = self.hotel.try(:editor)
-    self.save
-  end
+  # wait Rails 4.2.1 fix the #https://github.com/rails/rails/issues/8328
+  # after_save :set_hotel_and_editor
+  # def set_hotel_and_editor
+  #   self.hotel = self.hotel_packages.first.try(:hotel)
+  #   self.editor = self.hotel.try(:editor)
+  #   self.save
+  # end
 
   before_create :build_prices
   def build_prices
