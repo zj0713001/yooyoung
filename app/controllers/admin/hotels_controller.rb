@@ -38,6 +38,11 @@ class Admin::HotelsController < Admin::ApplicationController
     @hotel.favorite_package.rooms = rooms
     @hotel.save
 
+    # TODO
+    @hotel.package.try(:rooms).to_a.each do |room|
+      room.try(:save)
+    end
+
     render :show
   end
 
@@ -68,6 +73,11 @@ class Admin::HotelsController < Admin::ApplicationController
     @hotel.editor = current_user
 
     @success = @hotel.save
+
+    # TODO
+    @hotel.package.try(:rooms).to_a.each do |room|
+      room.try(:save)
+    end
 
     respond_to do |format|
       format.html { render :show }
