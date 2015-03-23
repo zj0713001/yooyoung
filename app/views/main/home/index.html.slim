@@ -7,7 +7,7 @@
           .home-index-banner__item.home-index-banner-item.js_main_home_index_banner_height
             .home-index-banner-item__image.js_main_home_index_banner_image.js_main_home_index_banner_height  data-background-image="#{background_image_cover(data[:image])}" data-filter="#{background_image_cover_filter(data[:image])}"
             .home-index-banner-item__hotel
-              a href="#{data[:link]}"
+              a href="#{data[:link]}" rel="next" rev="prev" target="_blank"
                 .home-index-banner-item-hotel
                   .home-index-banner-item-hotel__section.js_main_home_index_banner_item_delay
                     .home-index-banner-item-hotel__name
@@ -32,7 +32,7 @@
   .home-index__section.home-index-section.js_main_home_index_section
     - @section_data.each do |data|
       .home-index-section__item.js_main_home_index_section_item data-span="#{data[:view].in?([:'big-square', :horizontal]) ? 2 : 1}" data-height="#{data[:view].in?([:'big-square', :vertical]) ? 2 : 1}"
-        a.home-index-section__link href="#{data[:link]}"
+        a.home-index-section__link href="#{data[:link]}" rel="next" rev="prev" target="_blank"
           .home-index-section-item
             .home-index-section-item__background.js_main_home_index_section_item_background style="background-image: #{background_image_cover(data[:image])}"
             - if data[:type] == :hotel
