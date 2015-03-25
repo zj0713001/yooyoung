@@ -30,6 +30,17 @@ $ ->
       _.delay ->
         $(item).fadeIn()
       , resize_delay_time * 2
+  $('.js_main_home_index_banner_slick').on 'beforeChange', (slick, currentSlide, targetIndex) ->
+    slick_lazy_load targetIndex+1
+    $('.js_main_home_index_banner_item_delay').hide()
+
+  $('.js_main_home_index_banner_slick').on 'afterChange', (slick, _, currentIndex) ->
+    banner_info_fadein currentIndex
+
+  $('.js_main_home_index_banner_slick').on 'init', ->
+    slick_lazy_load 0
+    $('.js_main_home_index_banner_item_delay').hide()
+    banner_info_fadein 0
 
   $('.js_main_home_index_banner_slick').slick
     autoplay: true
@@ -40,21 +51,12 @@ $ ->
     cssEase: 'linear'
     pauseOnHover: false
     arrows: false
-    onBeforeChange: (slick, currentIndex, targetIndex) ->
-      slick_lazy_load targetIndex
-      $('.js_main_home_index_banner_item_delay').hide()
-    onAfterChange: (slick, currentIndex) ->
-      banner_info_fadein currentIndex
-    onInit: ->
-      slick_lazy_load 0
-      $('.js_main_home_index_banner_item_delay').hide()
-      banner_info_fadein 0
 
   $('.js_main_home_index_banner_slick_prev').on 'click', ->
-    $('.js_main_home_index_banner_slick').slickPrev()
+    $('.js_main_home_index_banner_slick').slick('slickPrev')
 
   $('.js_main_home_index_banner_slick_next').on 'click', ->
-    $('.js_main_home_index_banner_slick').slickNext()
+    $('.js_main_home_index_banner_slick').slick('slickNext')
 
   $('.js_main_home_index_section').waterfall
     colLength: 4

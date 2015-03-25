@@ -45,7 +45,7 @@ $ ->
       $slick_active = $('.js_main_hotel_show_content_package .slick-active')
       if event.deltaY < 0
         if $slick_active.data('show-info')
-          $('.js_main_hotel_show_content_package').slickNext()
+          $('.js_main_hotel_show_content_package').slick('slickNext')
           unless $('.js_main_hotel_show_content_package .slick-slide').length == $slick_active.index()+1
             package_info_hide($slick_active)
         else
@@ -63,7 +63,7 @@ $ ->
             $('.js_main_hotel_show_content_package').data('package-scroll', false)
             $(document).unmousewheel()
           else
-            $('.js_main_hotel_show_content_package').slickPrev()
+            $('.js_main_hotel_show_content_package').slick('slickPrev')
 
     lazy_package_scroll_event = _.throttle package_scroll_event, 1000, { trailing: false }
 
@@ -210,10 +210,10 @@ $ ->
         content_overview_info_fadein 0
 
     $('.js_main_hotel_show_content_overview_slick_prev').on 'click', ->
-      $('.js_main_hotel_show_content_overview_images').slickPrev()
+      $('.js_main_hotel_show_content_overview_images').slick('slickPrev')
 
     $('.js_main_hotel_show_content_overview_slick_next').on 'click', ->
-      $('.js_main_hotel_show_content_overview_images').slickNext()
+      $('.js_main_hotel_show_content_overview_images').slick('slickNext')
 
     $('.js_main_hotel_show_content_overview_tab_item').on 'click', ->
       return if $(this).hasClass('active')
@@ -265,10 +265,10 @@ $ ->
       dots: true
 
     $('.js_main_hotel_show_room_photos_slick_prev').on 'click', ->
-      $(this).parents('.js_main_hotel_show_room_photos').find('.js_main_hotel_show_room_photo').slickPrev()
+      $(this).parents('.js_main_hotel_show_room_photos').find('.js_main_hotel_show_room_photo').slick('slickPrev')
 
     $('.js_main_hotel_show_room_photos_slick_next').on 'click', ->
-      $(this).parents('.js_main_hotel_show_room_photos').find('.js_main_hotel_show_room_photo').slickNext()
+      $(this).parents('.js_main_hotel_show_room_photos').find('.js_main_hotel_show_room_photo').slick('slickNext')
 
     $('.js_main_hotel_show_rooms_info_show').on 'click', ->
       $target = $('.js_main_hotel_show_room_photos.active')
@@ -289,7 +289,7 @@ $ ->
       dots: true
 
     $('.js_hotel_show_content_favorite_photos_slick_prev').on 'click', ->
-      $(this).siblings('.js_hotel_show_content_favorite_photos').slickPrev()
+      $(this).siblings('.js_hotel_show_content_favorite_photos').slick('slickPrev')
 
     $('.js_hotel_show_content_favorite_photos_slick_next').on 'click', ->
-      $(this).siblings('.js_hotel_show_content_favorite_photos').slickNext()
+      $(this).siblings('.js_hotel_show_content_favorite_photos').slick('slickNext')

@@ -2,7 +2,7 @@
 
 $em-base: 10px;
 html {
-  font-size: 10px;
+  font-size: 10px !important;
   font-weight: normal;
   @include font-family-mobile-heiti;
   -webkit-font-smoothing: antialiased;
@@ -10,4 +10,7 @@ html {
 }
 body {
   min-height: 100vh;
+  font-size: 10px !important;
+  background: $white !important;
+  line-height: initial !important;
 }

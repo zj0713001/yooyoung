@@ -43,9 +43,9 @@ $ ->
                 pauseOnHover: true
                 dots: true
               $('.js_main_trade_new_room_photo_slick_prev').on 'click', ->
-                $(this).siblings('.js_main_trade_new_room_photos').slickPrev()
+                $(this).siblings('.js_main_trade_new_room_photos').slick('slickPrev')
               $('.js_main_trade_new_room_photo_slick_next').on 'click', ->
-                $(this).siblings('.js_main_trade_new_room_photos').slickNext()
+                $(this).siblings('.js_main_trade_new_room_photos').slick('slickNext')
       vm.is_favorite = false
       vm.$watch 'is_favorite', ->
         _.each vm.hotel.rooms, (room) ->

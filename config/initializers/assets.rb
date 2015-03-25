@@ -26,3 +26,5 @@ Rails.application.config.assets.precompile += %w[
   *.ttf
   *.woff
 ]
+
+Rails.application.config.assets.precompile += %w( bx_loader.gif controls.png )

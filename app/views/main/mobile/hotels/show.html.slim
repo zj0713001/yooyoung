@@ -17,8 +17,7 @@ ruby:
         span.iconfont.icon-location
         = hotel_location_text(@hotel)
   .main-mobile-hotels-show__photos.main-mobile-hotels-show-photos
-    .main-mobile-hotels-show-photos__cover class="#{'js_main_mobile_hotels_photo' if @hotel.photos.to_a.count > 0}"
-      = image_tag @hotel.photos.first.try(:image).try(:normal).try(:url), lazy: true, class: :lazy
+    .main-mobile-hotels-show-photos__cover style="background-image: #{background_image_cover(@hotel.photos.first.try(:image).try(:normal).try(:url))}" class="#{'js_main_mobile_hotels_photo' if @hotel.photos.to_a.count > 0}"
       - if @hotel.photos.to_a.count > 0
         .main-mobile-hotels-show-photos__multi.opacity-button.js_main_mobile_hotels_photo 图集
     - if can_buy
@@ -28,10 +27,10 @@ ruby:
         | 元/套餐起
     - else
       .main-mobile-hotels-show-photos__price-flag.main-mobile-hotels-show-photos__price-flag--soldout 已售罄
-    #main_mobile_hotels_album style="display: none"
-      .main-mobile-hotels-show-facebox-photos.main-mobile-hotels-show-facebox-photos--center.js_main_mobile_hotels_album
-        - @hotel.photos.each do |photo|
-          .main-mobile-hotels-show-facebox-photos__item
+    .ui.page.dimmer.main-mobile-hotels-show-modal.js_main_mobile_hotels_photos_modal
+      .main-mobile-hotels-show-modal-photos.main-mobile-hotels-show-modal-photos--center.js_main_mobile_hotels_album
+        - @hotel.photos[0..2].each do |photo|
+          .main-mobile-hotels-show-modal-photos__item
             = image_tag photo.image.normal.url, lazy: true
   h2.main-mobile-hotels-show__title
     .main-mobile-hotels-show__title-icon
@@ -76,19 +75,19 @@ ruby:
     .main-mobile-hotels-show-package-detail__container
       - items = @hotel.package.items_with_cover_photo
       .main-mobile-hotels-show-package-detail__cover class="#{'js_main_mobile_package_photo' if items.count > 0}"
-        = image_tag items.first.try(:cover_photo).try(:image).try(:normal).try(:url), lazy: true, class: :lazy
+        = image_tag items.first.try(:cover_photo).try(:image).try(:normal).try(:url)
         - if items.count > 0
           .main-mobile-hotels-show-package-detail__multi.opacity-button.js_main_mobile_package_photo 图集
       .main-mobile-hotels-show-package-detail__description
         = simple_format items.first.try(:description)
-    #main_mobile_photo_album style="display: none"
-      .main-mobile-hotels-show-facebook-package
-        .main-mobile-hotels-show-facebook-package__title = @hotel.package.name
-        .main-mobile-hotels-show-facebox-photos.js_main_mobile_photo_album
+    .ui.page.dimmer.main-mobile-hotels-show-modal.js_main_mobile_hotels_package_modal
+      .main-mobile-hotels-show-modal-package
+        .main-mobile-hotels-show-modal-package__title = @hotel.package.name
+        .main-mobile-hotels-show-modal-photos.js_main_mobile_photo_album
           - items.each do |item|
-            .main-mobile-hotels-show-facebox-photos__item data-description="#{simple_format item.try(:description)}"
+            .main-mobile-hotels-show-modal-photos__item data-description="#{simple_format item.try(:description)}"
               = image_tag item.try(:cover_photo).try(:image).try(:normal).try(:url), lazy: true, class: :lazy
-        .main-mobile-hotels-show-facebook-package__description.js_main_mobile_photo_album_description
+        .main-mobile-hotels-show-modal-package__description.js_main_mobile_photo_album_description
   h2.main-mobile-hotels-show__title
     .main-mobile-hotels-show__title-icon
     | 悠漾专属套餐
@@ -96,7 +95,7 @@ ruby:
     .main-mobile-hotels-show-favorite__border
       .main-mobile-hotels-show-favorite__border-background
     - @hotel.favorite_package.items.group_by(&:service_day).sort.each_with_index do |(day_index, items), index|
-      .main-mobile-hotels-show-favorite__day-group
+      .main-mobile-hotels-show-favorite__day-group.js_main_mobile_hotels_favorite_day
         .main-mobile-hotels-show-favorite__day
           .main-mobile-hotels-show-favorite__day-border
           .main-mobile-hotels-show-favorite__day-number
@@ -106,3 +105,17 @@ ruby:
           - items.each do |item|
             .main-mobile-hotels-show-favorite__day-item = item.content
         .iconfont.icon-arrow-right
+        .ui.page.dimmer.main-mobile-hotels-show-modal.js_main_mobile_hotels_favorite_day_modal
+          .main-mobile-hotels-show-modal-favorite-day
+            .main-mobile-hotels-show-modal-favorite-day__title = "Day #{day_index}"
+            - items.each_with_index do |item, index|
+              .main-mobile-hotels-show-modal-favorite-day__content = item.content
+              - if item.photos.present?
+                .main-mobile-hotels-show-modal-photos.js_main_mobile_favorite_photo
+                  - item.photos.each do |photo|
+                    .main-mobile-hotels-show-modal-photos__item
+                      = image_tag photo.image.normal.url, lazy: true
+              - if item.description.present?
+                .main-mobile-hotels-show-modal-favorite-day__description = simple_format item.description
+              - if items.length != index+1
+                .iconfont.icon-arrow-double-down

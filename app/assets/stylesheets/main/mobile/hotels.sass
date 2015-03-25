@@ -78,26 +78,27 @@
       &:after
         +border-color(rgba($black, .6) transparent transparent transparent)
   .main-mobile-hotels-show-photos__cover
-    +size(100% null)
+    +size(100%)
+    +background-size(cover)
     +position(relative)
-    img
-      +size(100% auto)
   .main-mobile-hotels-show-photos__multi
     +position(absolute, null rem(10) rem(10) nul)
     +padding(rem(5) rem(10))
     +background(rgba($black, .6))
     font-size: $font_standard
     line-height: $font_standard
-.main-mobile-hotels-show-facebox-photos
-  display: none
+.main-mobile-hotels-show-modal.ui.dimmer
+  +background(rgba($black, .9))
+.main-mobile-hotels-show-modal-photos
   +size(100vw null)
   +position(relative)
-  .main-mobile-hotels-show-facebox-photos__item
+  +margin(rem(10) null)
+  .main-mobile-hotels-show-modal-photos__item
     +size(100vw null)
     img
       +size(100% auto)
-  &.main-mobile-hotels-show-facebox-photos--center
-    +margin(25vw null null null)
+  &.main-mobile-hotels-show-modal-photos--center
+    +margin(25% null null null)
 .main-mobile-hotels-show-list-section
   @extend %main-list-section
   +position(relative)
@@ -150,20 +151,20 @@
     line-height: $font_standard
   .main-mobile-hotels-show-package-detail__description
     +margin(rem(10) null null null)
-.main-mobile-hotels-show-facebook-package
+.main-mobile-hotels-show-modal-package
   +position(relative)
   +size(100%)
   color: $white
-  .main-mobile-hotels-show-facebook-package__title
+  .main-mobile-hotels-show-modal-package__title
     font-size: $font_h4
-    +margin(rem(10))
-  .main-mobile-hotels-show-facebook-package__description
-    +background(rgba($white, .1))
+    +margin(rem(20))
+  .main-mobile-hotels-show-modal-package__description
+    +background(rgba($black, .95))
     +padding(rem(10))
     font-size: $font_h6
-    height: 100%
     display: none
     overflow-y: auto
+    text-align: left
 .main-mobile-hotels-show-favorite
   +padding(null rem(10))
   +position(relative)
@@ -214,3 +215,25 @@
   .main-mobile-hotels-show-favorite__border-background
     +size(100%)
     +background($light_dark)
+.main-mobile-hotels-show-modal-favorite-day
+  +position(relative)
+  +size(100%)
+  color: $white
+  text-align: left
+  +background(rgba($black, .95))
+  overflow-y: auto
+  +padding(null null rem(50))
+  .main-mobile-hotels-show-modal-favorite-day__title
+    font-size: $font_h4
+    +margin(rem(20))
+  .main-mobile-hotels-show-modal-favorite-day__content
+    font-size: $font_h5
+    font-weight: bold
+    +margin(rem(10))
+  .main-mobile-hotels-show-modal-favorite-day__description
+    +margin(rem(10))
+    font-size: $font_h6
+    overflow-y: auto
+  .icon-arrow-double-down
+    font-size: $font_h3
+    +margin(rem(20))
