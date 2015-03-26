@@ -1,0 +1,11 @@
+- status ||= :hotel
+.ui.steps
+  a.step class="#{'active' if status == :hotel}"
+    .content
+      .title 酒店信息
+  a.step class="#{'active' if status == :room}" class="#{'disabled' if hotel.new_record?}"
+    .content
+      .title 房间信息
+  a.step class="#{'active' if status == :package}" class="#{'disabled' if hotel.new_record?}"
+    .content
+      .title 套餐信息

@@ -121,11 +121,13 @@ Rails.application.routes.draw do
     resources :categories, concerns: :deletable
     resources :cities, concerns: :deletable
     resources :countries, concerns: :deletable
-    resources :hotels, concerns: :deletable
+    resources :hotels, concerns: :deletable do
+      resources :rooms, except: [:index], concerns: :deletable
+      resources :hotel_packages, except: [:index], concerns: :deletable
+    end
     resources :links
     resources :provinces, concerns: :deletable
     resources :prices, only: [:show, :index, :create]
-    resources :rooms, only: [:update]
     resources :trades, only: [:show, :index, :edit, :update]
   end
 end

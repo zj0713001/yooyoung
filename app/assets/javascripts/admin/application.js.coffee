@@ -1,7 +1,7 @@
 # Framework
 #= require jquery
-#= require jquery_ujs
 #= require jquery.turbolinks
+#= require jquery_ujs
 #= require semantic-ui
 #= require underscore
 #= require jquery-ui/widget
@@ -10,6 +10,7 @@
 #= require jquery.facebox
 
 # 3rd
+#= require 3rd/jquery.sticky
 #= require 3rd/jquery.browser
 #= require 3rd/select2
 #= require 3rd/fileupload/load-image.all.min
