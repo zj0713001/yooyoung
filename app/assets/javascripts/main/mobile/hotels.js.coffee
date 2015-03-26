@@ -36,8 +36,9 @@ $ ->
       $('.js_main_mobile_hotels_package_modal').dimmer('setting', 'transition', 'fade up').dimmer('show')
       package_item_description_fadein()
 
-    $('.js_main_mobile_photo_album_description').on 'click', ->
-      $('.js_main_mobile_hotels_package_modal').dimmer('hide')
+    $('.js_main_mobile_hotels_package_modal').on 'click', (e) ->
+      $(this).dimmer('hide')
+      e.stopPropagation()
 
     $('.js_main_mobile_favorite_photo').slick
       autoplay: false
