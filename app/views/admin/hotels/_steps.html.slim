@@ -1,11 +1,13 @@
 - status ||= :hotel
+- room = hotel.rooms.first
+- package = hotel.package
 .ui.steps
-  a.step class="#{'active' if status == :hotel}"
+  a.step class="#{'active' if status == :hotel}" href="#{show ? admin_hotel_path(hotel) : edit_admin_hotel_path(hotel) if hotel.try(:persisted?)}"
     .content
       .title 酒店信息
-  a.step class="#{'active' if status == :room}" class="#{'disabled' if hotel.new_record?}"
+  a.step class="#{'active' if status == :room}" class="#{'disabled' if hotel.new_record?}" href="#{show ? admin_hotel_room_path(hotel, room) : edit_admin_hotel_room_path(hotel, room) if room.try(:persisted?)}"
     .content
       .title 房间信息
-  a.step class="#{'active' if status == :package}" class="#{'disabled' if hotel.new_record?}"
+  a.step class="#{'active' if status == :package}" class="#{'disabled' if hotel.new_record?}" href="#{show ? admin_hotel_hotel_package_path(hotel, package) : edit_admin_hotel_hotel_package_path(hotel, package) if package.try(:persisted?)}"
     .content
       .title 套餐信息

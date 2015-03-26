@@ -35,7 +35,7 @@ h2.ui.dividing.header.js_admin_price_update
       - if @target.is_a? Room
         .ui.divider
         .ui.form
-          = form_for @target, url: [:admin, @target], method: :put, html: { multipart: true, class: :'ui form js_admin_room_price_update' } do |f|
+          = form_for @target, url: [:admin, @hotel, @target], method: :put, html: { multipart: true, class: :'ui form js_admin_room_price_update' } do |f|
             = f.fields_for :extra_bed_price, f.object.extra_bed_price do |ff|
               .fields
                 .four.wide.field

@@ -5,21 +5,21 @@ ruby:
   show = !params[:action].in?(%w[new edit]) && @hotel.persisted? && @hotel.valid?
 h2.ui.dividing.header
   = "#{t("admin.#{show ? 'show' : @hotel.new_record? ? 'new' : 'edit'}")}#{model.model_name.human}"
-= render partial: 'admin/hotels/steps', locals: { show: show, status: :hotel, hotel: @hotel }
 = render 'admin/shared/admin_form_messages', object: @hotel
-.ui.fluid.form.segment
-  = form_for @hotel, url: [:admin, @hotel], method: @hotel.new_record? ? :post : :put, html: { multipart: true } do |f|
-    .ui.grid
-      .three.wide.column
+= form_for @hotel, url: [:admin, @hotel], method: @hotel.new_record? ? :post : :put, html: { multipart: true } do |f|
+  .ui.grid
+    .three.wide.column
+      .js_admin_sticky
         .ui.aligned.basic.segment
-          .js_admin_sticky
-            - if show
-              = link_to t('admin.edit'), [:edit, :admin, @hotel], class: :'ui label teal button huge'
-              .ui.horizontal.divider OR
-              = link_to '编辑价格', admin_prices_path(target: Room.name, target_id: @hotel.rooms.first.try(:id)), alt: t('admin.edit'), class: :'ui label teal button huge', target: :_blank
-            - else
-              = f.submit t('admin.submit'), class: :'ui label teal button huge'
-      .thirteen.wide.column
+          - if show
+            = link_to t('admin.edit'), [:edit, :admin, @hotel], class: :'ui label teal button huge'
+            .ui.horizontal.divider OR
+            = link_to '编辑价格', admin_prices_path(target: Room.name, target_id: @hotel.rooms.first.try(:id)), alt: t('admin.edit'), class: :'ui label teal button huge', target: :_blank
+          - else
+            = f.submit t('admin.submit'), class: :'ui label teal button huge'
+    .thirteen.wide.column
+      = render partial: 'admin/hotels/steps', locals: { show: show, status: :hotel, hotel: @hotel }
+      .ui.fluid.form.segment
         - if show
           .fields
             .four.wide.field
@@ -274,9 +274,6 @@ h2.ui.dividing.header
               .text = simple_format @hotel.description
             - else
               = f.text_area :description
-        = render 'admin/hotels/room_form', f: f, show: show, package: @hotel.package
-        = render 'admin/hotels/package_form', title: "酒店套餐", f: f, show: show, field: :package, package: @hotel.package
-        = render 'admin/hotels/favorite_package_form', title: "悠漾套餐", f: f, show: show, field: :favorite_package, package: @hotel.favorite_package
         .ui.divider
           .fields
             .four.wide.field

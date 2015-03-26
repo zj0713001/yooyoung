@@ -49,12 +49,6 @@ class Room < ActiveRecord::Base
 
   # validates :name, presence: true
 
-  before_save :set_hotel_and_editor
-  def set_hotel_and_editor
-    self.hotel = self.hotel_packages.first.try(:hotel)
-    self.editor = self.hotel.try(:editor)
-  end
-
   before_create :build_prices
   def build_prices
     self.build_child_price
