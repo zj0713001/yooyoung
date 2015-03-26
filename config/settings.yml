@@ -25,7 +25,7 @@ defaults: &defaults
     password: "yooyoung0120"
     sms_limit: 5
   home:
-    banner: <%= %w[9 18 20] %>
+    banner: <%= %w[20 18 9] %>
     section: <%= %w[13 7 12 20 9 18] %>
   payment:
     alipay:
