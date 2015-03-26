@@ -87,7 +87,7 @@ ruby:
           - items.each do |item|
             .main-mobile-hotels-show-modal-photos__item data-description="#{simple_format item.try(:description)}"
               = image_tag item.try(:cover_photo).try(:image).try(:normal).try(:url), lazy: true, class: :lazy
-        .main-mobile-hotels-show-modal-package__description.js_main_mobile_photo_album_description
+        .main-mobile-hotels-show-modal-package__description
   h2.main-mobile-hotels-show__title
     .main-mobile-hotels-show__title-icon
     | 悠漾专属套餐
