@@ -23,7 +23,7 @@ ruby:
     - if can_buy
       .main-mobile-hotels-show-photos__price-flag
         span.main-mobile-hotels-show-photos__price-unite ￥
-        span.main-mobile-hotels-show-photos__price-money = show_currency PackageService.new(@hotel.package).min_price_by_date
+        span.main-mobile-hotels-show-photos__price-money = show_currency min_price
         | 元/套餐起
     - else
       .main-mobile-hotels-show-photos__price-flag.main-mobile-hotels-show-photos__price-flag--soldout 已售罄
