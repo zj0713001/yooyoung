@@ -45,7 +45,7 @@ ruby:
         - if can_buy
           .hotel-show-content-nav__price
             | 套餐价：
-            em = show_currency PackageService.new(@hotel.package).min_price_by_date
+            em = show_currency min_price
             | 元起
           a.hotel-show-content-nav__booking.primary-button href="#{new_trade_path(hotel_id: @hotel.to_param)}" 立即预定
         - else
