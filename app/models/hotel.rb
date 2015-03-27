@@ -89,22 +89,22 @@ class Hotel < ActiveRecord::Base
   super({
     only: [:name, :chinese, :description, :provisions, :children_provisions, :drawback_provisions, :address, :phone, :checkin, :checkout, :traffics, :arounds, :best_season, :tips, :recommends, :local_address, :visa_tip, :language_tip, :money_tip, :network_tip, :power_tip, :luggage_tip],
     include: {
-      cover_photo: {
-        only: [:image],
-      },
-      photos: {
-        only: [:image],
-      },
+      # cover_photo: {
+      #   only: [:image],
+      # },
+      # photos: {
+      #   only: [:image],
+      # },
       package: {
         only: [:id, :name, :description, :days],
         include: {
           items: {
             only: [:id, :content, :description, :address, :tips, :openning_hours, :phone, :service_day],
-            include: {
-              cover_photo: {
-                only: [:image],
-              },
-            },
+            # include: {
+            #   cover_photo: {
+            #     only: [:image],
+            #   },
+            # },
           },
         },
       },
@@ -113,21 +113,21 @@ class Hotel < ActiveRecord::Base
         include: {
           items: {
             only: [:id, :content, :description, :address, :tips, :openning_hours, :phone, :service_day],
-            include: {
-              photos: {
-                only: [:image],
-              },
-            },
+            # include: {
+            #   photos: {
+            #     only: [:image],
+            #   },
+            # },
           },
         },
       },
       rooms: {
         only: [:id, :name, :description, :features, :sight, :area, :facilities, :population, :bed_type, :chinese],
-        include: {
-          photos: {
-            only: [:image],
-          },
-        },
+        # include: {
+        #   photos: {
+        #     only: [:image],
+        #   },
+        # },
       },
     },
     methods: :to_param,
