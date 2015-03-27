@@ -48,6 +48,8 @@ class Admin::RoomsController < Admin::ApplicationController
   end
 
   def destroy
+    @room.destroy
+    render :show
   end
 
   private

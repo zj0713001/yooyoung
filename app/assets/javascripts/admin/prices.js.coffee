@@ -41,6 +41,7 @@ $(document).on 'page:change', ->
           $('.js_admin_calendar_day_item').removeClass('day-item--selected day-item--selected-start')
           $(this).addClass('day-item--selected-start')
           vm.start_date = $(this)
+          vm.select_item()
         else
           $('.js_admin_calendar_day_item').removeClass('day-item--selected day-item--selected-start')
           $('.js_admin_price_update_modal').modal('show')

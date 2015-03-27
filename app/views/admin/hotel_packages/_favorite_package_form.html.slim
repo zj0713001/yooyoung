@@ -1,0 +1,34 @@
+.fields
+  .four.wide.field.required
+    = f.label :name
+  .eight.wide.field
+    - if show
+      .text = f.object.try(:name)
+    - else
+      = f.text_field :name
+      = f.hidden_field :favorite
+.fields
+  .four.wide.field.required
+    = f.label :days
+  .eight.wide.field
+    - if show
+      .text = f.object.try(:days)
+    - else
+      = f.text_field :days
+.fields
+  .four.wide.field
+    = f.label :description
+  .eight.wide.field
+    - if show
+      .text = simple_format f.object.try(:description)
+    - else
+      = f.text_area :description
+/ .fields
+/   .four.wide.field
+/     = f.label :cover_photo
+/   .eight.wide.field
+/     - if show
+/       = render partial: 'admin/photos/item', locals: { photos: f.object.try(:cover_photo) }
+/     - else
+/       = render partial: 'admin/photos/uploader', locals: { field: :"#{f.object_name}[cover_photo_id]", multiple: false, photos: f.object.try(:cover_photo) }
+= render 'admin/hotel_packages/favorite_package_item_form', title: '悠漾套餐项', f: f, show: show, items: f.object.try(:items)

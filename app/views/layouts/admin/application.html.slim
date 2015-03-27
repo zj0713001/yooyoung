@@ -9,6 +9,7 @@ html
     = stylesheet_link_tag :'admin/application', media: 'all', :'data-turbolinks-track' => true
     = csrf_meta_tags
     = display_meta_tags(admin_default_meta_tags)
+    = javascript_include_tag :'admin/application', :'data-turbolinks-track' => true
   body
     = render partial: 'layouts/admin/nav'
     .pusher
@@ -23,4 +24,3 @@ html
       .admin.js_admin
         .container
           = yield
-    = javascript_include_tag :'admin/application', :'data-turbolinks-track' => true

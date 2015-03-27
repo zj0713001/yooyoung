@@ -3,15 +3,15 @@ h2.ui.dividing.header.js_admin_price_update
 .ui.grid
   .three.wide.column
     .ui.vertical.menu.pointing
-      - @hotel.package.rooms.each do |room|
-        = link_to [room.chinese, room.name].join(' '), { target: room.class.name, target_id: room.id }, class: "item #{'active' if room == @target}", :'data-no-turbolink' => true
+      - @hotel.rooms.each do |room|
+        = link_to [room.chinese, room.name].join(' '), { target: room.class.name, target_id: room.id }, class: "item #{'active' if room == @target}"
     .ui.vertical.menu.pointing
-      = link_to '酒店套餐', { target: @hotel.package.class.name, target_id: @hotel.package.id }, class: "item #{'active' if @hotel.package == @target}", :'data-no-turbolink' => true
-      = link_to '悠漾套餐', { target: @hotel.favorite_package.class.name, target_id: @hotel.favorite_package.id }, class: "item #{'active' if @hotel.favorite_package == @target}", :'data-no-turbolink' => true
+      = link_to '酒店套餐', { target: @hotel.package.class.name, target_id: @hotel.package.id }, class: "item #{'active' if @hotel.package == @target}"
+      = link_to '悠漾套餐', { target: @hotel.favorite_package.class.name, target_id: @hotel.favorite_package.id }, class: "item #{'active' if @hotel.favorite_package == @target}"
   .thirteen.wide.column
     .ui.fluid.segment ms-controller='admin_prices'
       .calendar
-        = month_calendar title: ->(start_date) { content_tag :span, "#{start_date.year} #{I18n.t("date.month_names")[start_date.month]}"}, previous_link: ->(param, date_range) { link_to raw("&laquo;"), {param => date_range.first - 1.day, target: params[:target], target_id: params[:target_id]}, class: 'previous', :'data-no-turbolink' => true }, next_link: ->(param, date_range) { link_to raw("&raquo;"), {param => date_range.last + 1.day, target: params[:target], target_id: params[:target_id]}, class: 'next', :'data-no-turbolink' => true } do |date|
+        = month_calendar title: ->(start_date) { content_tag :span, "#{start_date.year} #{I18n.t("date.month_names")[start_date.month]}"}, previous_link: ->(param, date_range) { link_to raw("&laquo;"), {param => date_range.first - 1.day, target: params[:target], target_id: params[:target_id]}, class: 'previous' }, next_link: ->(param, date_range) { link_to raw("&raquo;"), {param => date_range.last + 1.day, target: params[:target], target_id: params[:target_id]}, class: 'next' } do |date|
           - date_str = "#{date.strftime('%F')}"
           .day-item.js_admin_calendar_day_item data-week="#{date.strftime('%U').to_i}" data-day="#{date.wday}" data-date="#{date_str}" ms-click='click_item' ms-on-mouseenter='select_item'
             .mday.ui.circular.label.js_admin_calendar_day

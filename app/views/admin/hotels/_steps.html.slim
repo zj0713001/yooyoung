@@ -1,13 +1,30 @@
-- status ||= :hotel
-- room = hotel.rooms.first
-- package = hotel.package
+ruby:
+  status ||= :hotel
+  room = hotel.rooms.first
+  package = hotel.package
+
+  room_href = if room.blank?
+    new_admin_hotel_room_path(hotel)
+  elsif show
+    admin_hotel_room_path(hotel, room)
+  else
+    edit_admin_hotel_room_path(hotel, room)
+  end
+
+  package_href = if package.blank?
+    new_admin_hotel_hotel_package_path(hotel)
+  elsif show
+    admin_hotel_hotel_package_path(hotel, package)
+  else
+    edit_admin_hotel_hotel_package_path(hotel, package)
+  end
 .ui.steps
   a.step class="#{'active' if status == :hotel}" href="#{show ? admin_hotel_path(hotel) : edit_admin_hotel_path(hotel) if hotel.try(:persisted?)}"
     .content
       .title 酒店信息
-  a.step class="#{'active' if status == :room}" class="#{'disabled' if hotel.new_record?}" href="#{show ? admin_hotel_room_path(hotel, room) : edit_admin_hotel_room_path(hotel, room) if room.try(:persisted?)}"
+  a.step class="#{'active' if status == :room}" class="#{'disabled' if hotel.new_record?}" href="#{room_href}"
     .content
       .title 房间信息
-  a.step class="#{'active' if status == :package}" class="#{'disabled' if hotel.new_record?}" href="#{show ? admin_hotel_hotel_package_path(hotel, package) : edit_admin_hotel_hotel_package_path(hotel, package) if package.try(:persisted?)}"
+  a.step class="#{'active' if status == :package}" class="#{'disabled' if hotel.new_record?}" href="#{package_href}"
     .content
       .title 套餐信息

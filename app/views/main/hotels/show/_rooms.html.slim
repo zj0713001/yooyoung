@@ -1,7 +1,7 @@
 .hotel-show-content-rooms
   .hotel-show-content-rooms__tab
     ul.js_main_hotel_show_rooms_tab
-      - hotel.package.rooms.each_with_index do |room, index|
+      - hotel.rooms.each_with_index do |room, index|
         li.hotel-show-content-rooms__room-tab class="#{'active' if index.zero?}" data-id="#room_#{room.id}" = room.chinese
     .hotel-show-content-rooms__tab-top-white
     .hotel-show-content-rooms__tab-middle-white

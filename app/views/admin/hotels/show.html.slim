@@ -13,8 +13,9 @@ h2.ui.dividing.header
         .ui.aligned.basic.segment
           - if show
             = link_to t('admin.edit'), [:edit, :admin, @hotel], class: :'ui label teal button huge'
-            .ui.horizontal.divider OR
-            = link_to '编辑价格', admin_prices_path(target: Room.name, target_id: @hotel.rooms.first.try(:id)), alt: t('admin.edit'), class: :'ui label teal button huge', target: :_blank
+            - if @hotel.rooms.first.present?
+              .ui.horizontal.divider OR
+              = link_to '编辑价格', admin_prices_path(target: Room.name, target_id: @hotel.rooms.first.try(:id)), alt: t('admin.edit'), class: :'ui label teal button huge', target: :_blank
           - else
             = f.submit t('admin.submit'), class: :'ui label teal button huge'
     .thirteen.wide.column
