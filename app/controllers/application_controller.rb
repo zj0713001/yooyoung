@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   rescue_from CanCan::AccessDenied do |exception|
+    set_redirect_page
     redirect_to new_user_session_path, notice: exception.message
   end
 
@@ -32,6 +33,10 @@ class ApplicationController < ActionController::Base
   helper_method :jsvar
   def jsvar
     gon
+  end
+
+  def set_redirect_page
+    session[:redirect_page] = session[:current_page]
   end
 
   protected
@@ -64,7 +69,9 @@ class ApplicationController < ActionController::Base
   end
 
   def prev_page
-    session[:prev_page] = session[:current_page] || root_path
+    session.delete(:redirect_page) if session[:redirect_page] == request.fullpath
+
+    session[:prev_page] = session[:redirect_page] || session[:current_page] || root_path
     session[:current_page] = request.fullpath
     jsvar.prev_page = session[:prev_page]
   end
