@@ -158,7 +158,7 @@ $ ->
         if $(document).scrollTop() >= package_top && ($(document).scrollTop() - package_top) > $(window).height()
           $slick_active = $('.js_main_hotel_show_content_package .slick-active')
           package_info_hide($slick_active) if $slick_active.data('show-info')
-          $('.js_main_hotel_show_content_package').unslick();
+          $('.js_main_hotel_show_content_package').slick('unslick');
           content_package_slick_bind()
         if package_top - $(document).scrollTop() > 100
           $slick_active = $('.js_main_hotel_show_content_package .slick-active')
@@ -239,7 +239,7 @@ $ ->
       return if $(this).hasClass('active')
       $target = $(".js_main_hotel_show_room_photos#{$(this).data('id')}")
       $active_target = $target.siblings('.active')
-      $active_target.find('.js_main_hotel_show_room_photo').unslick()
+      $active_target.find('.js_main_hotel_show_room_photo').slick('unslick')
       $active_target.removeClass('active blur')
       $("##{$active_target.attr('id')}_info").hide()
       $(this).siblings('.active').removeClass('active')
