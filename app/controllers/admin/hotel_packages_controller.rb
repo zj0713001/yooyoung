@@ -1,4 +1,4 @@
-class Admin::RoomsController < Admin::ApplicationController
+class Admin::HotelPackagesController < Admin::ApplicationController
   before_action :init_hotel
 
   def show
@@ -7,7 +7,8 @@ class Admin::RoomsController < Admin::ApplicationController
   def new
     authorize! :create, @hotel
 
-    @room = model.new
+    @package = model.new(favorite: params[:favorite])
+    @package.items.build(sequence: 1)
 
     render :show
   end
@@ -15,11 +16,12 @@ class Admin::RoomsController < Admin::ApplicationController
   def create
     authorize! :create, @hotel
 
-    @room = model.new
-    @room.attributes = params[:room].permit!
-    @room.editor = current_user
+    @package = model.new
+    @package.attributes = params[:hotel_package].permit!
+    @package.rooms = @hotel.rooms
+    @package.editor = current_user
 
-    @room.save
+    @package.save
 
     render :show
   end
@@ -33,10 +35,11 @@ class Admin::RoomsController < Admin::ApplicationController
   def update
     authorize! :edit, @hotel
 
-    @room.attributes = params[:room].permit!
-    @room.editor = current_user
+    @package.attributes = params[:hotel_package].permit!
+    @package.rooms = @hotel.rooms
+    @package.editor = current_user
 
-    @success = @room.save
+    @success = @package.save
 
     respond_to do |format|
       format.html { render :show  }
@@ -48,14 +51,12 @@ class Admin::RoomsController < Admin::ApplicationController
   end
 
   def destroy
-    @room.destroy
-    render :show
   end
 
   private
 
   def init_hotel
     @hotel = Hotel.friendly_acquire params[:hotel_id]
-    @room = model.find params[:id] if params[:id]
+    @package = model.find params[:id] if params[:id]
   end
 end

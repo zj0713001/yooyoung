@@ -19,11 +19,11 @@ class Admin::HotelsController < Admin::ApplicationController
     authorize! :create, model
 
     @hotel = model.new
-    @hotel.build_package
-    @hotel.package.items.build(sequence: @hotel.package.items.count+1)
-    @hotel.package.rooms.build
-    @hotel.build_favorite_package(favorite: true)
-    @hotel.favorite_package.items.build(sequence: @hotel.favorite_package.items.count+1)
+    # @hotel.build_package
+    # @hotel.package.items.build(sequence: @hotel.package.items.count+1)
+    # @hotel.package.rooms.build
+    # @hotel.build_favorite_package(favorite: true)
+    # @hotel.favorite_package.items.build(sequence: @hotel.favorite_package.items.count+1)
 
     render :show
   end
@@ -34,14 +34,14 @@ class Admin::HotelsController < Admin::ApplicationController
     @hotel = model.new
     @hotel.editor = current_user
     @hotel.attributes = params[:hotel].permit!
-    rooms = @hotel.package.try(:rooms).to_a
-    @hotel.favorite_package.rooms = rooms
+    # rooms = @hotel.package.try(:rooms).to_a
+    # @hotel.favorite_package.rooms = rooms
     @hotel.save
 
-    # TODO
-    @hotel.package.try(:rooms).to_a.each do |room|
-      room.try(:save)
-    end
+    # # TODO
+    # @hotel.package.try(:rooms).to_a.each do |room|
+    #   room.try(:save)
+    # end
 
     render :show
   end
@@ -50,11 +50,11 @@ class Admin::HotelsController < Admin::ApplicationController
     authorize! :edit, model
 
     @hotel = model.friendly_acquire params[:id]
-    @hotel.build_package if @hotel.package.blank?
-    @hotel.package.items.build(sequence: @hotel.package.items.count+1)
-    @hotel.package.rooms.build
-    @hotel.build_favorite_package(favorite: true) if @hotel.favorite_package.blank?
-    @hotel.favorite_package.items.build(sequence: @hotel.favorite_package.items.count+1)
+    # @hotel.build_package if @hotel.package.blank?
+    # @hotel.package.items.build(sequence: @hotel.package.items.count+1)
+    # @hotel.package.rooms.build
+    # @hotel.build_favorite_package(favorite: true) if @hotel.favorite_package.blank?
+    # @hotel.favorite_package.items.build(sequence: @hotel.favorite_package.items.count+1)
 
     render :show
   end
@@ -64,8 +64,8 @@ class Admin::HotelsController < Admin::ApplicationController
     if params[:published].nil?
       authorize! :edit, model
       @hotel.attributes = params[:hotel].permit!
-      rooms = @hotel.package.try(:rooms).to_a
-      @hotel.favorite_package.rooms = rooms
+      # rooms = @hotel.package.try(:rooms).to_a
+      # @hotel.favorite_package.rooms = rooms
     else
       authorize! :publish, model
       @hotel.attributes = { published: params[:published] }
@@ -74,10 +74,10 @@ class Admin::HotelsController < Admin::ApplicationController
 
     @success = @hotel.save
 
-    # TODO
-    @hotel.package.try(:rooms).to_a.each do |room|
-      room.try(:save)
-    end
+    # # TODO
+    # @hotel.package.try(:rooms).to_a.each do |room|
+    #   room.try(:save)
+    # end
 
     respond_to do |format|
       format.html { render :show }
