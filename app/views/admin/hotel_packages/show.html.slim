@@ -1,0 +1,49 @@
+ruby:
+  set_meta_tags(
+    title: "#{ @hotel.chinese } - #{t('admin.seo.title')}"
+  )
+  show = !params[:action].in?(%w[new edit]) && @package.persisted? && @package.valid?
+h2.ui.dividing.header
+  = "#{t("admin.#{show ? 'show' : @package.new_record? ? 'new' : 'edit'}")}#{model.model_name.human} - #{@hotel.chinese}"
+= render 'admin/shared/admin_form_messages', object: @hotel
+= form_for @package, url: [:admin, @hotel, @package], method: @package.new_record? ? :post : :put, html: { multipart: true } do |f|
+  .ui.grid
+    .three.wide.column
+      .js_admin_sticky
+        .ui.vertical.menu.pointing
+          - if @hotel.package.try(:persisted?)
+            = link_to @hotel.package.name, show ? admin_hotel_hotel_package_path(@hotel, @hotel.package) : edit_admin_hotel_hotel_package_path(@hotel, @hotel.package), class: "item #{'active' if @package == @hotel.package}"
+          - else
+            = link_to new_admin_hotel_hotel_package_path(@hotel, favorite: false), class: "item #{'active' if @package.new_record? && !@package.favorite?}" do
+              i.icon.add.circle
+              = "#{t("admin.new")}酒店套餐"
+        .ui.vertical.menu.pointing
+          - if @hotel.favorite_package.try(:persisted?)
+            = link_to @hotel.favorite_package.name, show ? admin_hotel_hotel_package_path(@hotel, @hotel.favorite_package) : edit_admin_hotel_hotel_package_path(@hotel, @hotel.favorite_package), class: "item #{'active' if @package == @hotel.favorite_package}"
+          - else
+            = link_to new_admin_hotel_hotel_package_path(@hotel, favorite: true), class: "item #{'active' if @package.new_record? && @package.favorite?}" do
+              i.icon.add.circle
+              = "#{t("admin.new")}悠漾套餐"
+        .ui.aligned.basic.segment
+          - if show
+            = link_to t('admin.edit'), [:edit, :admin, @hotel, @package], class: :'ui label teal button huge'
+          - else
+            = f.submit t('admin.submit'), class: :'ui label teal button huge'
+    .thirteen.wide.column
+      = render partial: 'admin/hotels/steps', locals: { show: show, status: :package, hotel: @hotel }
+      .ui.fluid.form.segment
+        = f.hidden_field :hotel_id, value: @hotel.id
+        - if @package.favorite?
+          = render partial: 'admin/hotel_packages/favorite_package_form', locals: { f: f, show: show }
+        - else
+          = render partial: 'admin/hotel_packages/package_form', locals: { f: f, show: show }
+        .ui.divider
+          .fields
+            .four.wide.field
+            .eight.wide.field
+              br
+              br
+              - if show
+                = link_to t('admin.edit'), [:edit, :admin, @hotel, @package], class: :'ui label teal button huge'
+              - else
+                = f.submit t('admin.submit'), class: :'ui label teal button huge'

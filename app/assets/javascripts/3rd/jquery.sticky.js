@@ -17,7 +17,7 @@
       className: 'is-sticky',
       wrapperClassName: 'sticky-wrapper',
       center: false,
-      getWidthFrom: '',
+      getWidthFrom: undefined,
       responsiveWidth: false,
       stopScroll: 0
     },
@@ -62,9 +62,14 @@
               .css('position', 'fixed')
               .css('top', newTop);
 
+            var elementWidth;
             if (typeof s.getWidthFrom !== 'undefined') {
-              s.stickyElement.css('width', $(s.getWidthFrom).width());
+              elementWidth = $(s.getWidthFrom).width()
+            } else {
+              elementWidth = s.stickyElement.parent().width()
             }
+
+            s.stickyElement.css('width', elementWidth);
 
             s.stickyElement.trigger('sticky-start', [s]).parent().addClass(s.className);
             s.currentTop = newTop;

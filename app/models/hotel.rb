@@ -56,7 +56,7 @@ class Hotel < ActiveRecord::Base
 
   has_many :photos, as: :target, dependent: :destroy
   has_one :package, -> { where favorite: false }, class_name: HotelPackage
-  delegate :rooms, to: :package, allow_nil: true
+  has_many :rooms, -> { where active: true }, dependent: :destroy
   has_one :favorite_package, -> { where favorite: true }, class_name: HotelPackage
   has_many :reasons, -> { where active: true }, class_name: HotelReason
   has_many :cheats, -> { where active: true }, class_name: HotelCheat
