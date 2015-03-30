@@ -11,7 +11,7 @@ defaults: &defaults
     homepage: "www.yooyoung.cn"
     service_phone: "010-58070160"
     service_phone_with_space: "010 - 58070160"
-    service_time: '客服时间 10：00 - 22：00'
+    service_time: '客服时间 10:00 - 22:00'
     domain: '.yooyoung.cn'
     weibo_url: 'http://weibo.com/u/5454372745'
     weixin_url: 'http://mp.weixin.qq.com/s?__biz=MzA3MDM0Njc4Mg==&mid=204746563&idx=1&sn=8ce1651074be83106c61a26bf9c80572#rd'

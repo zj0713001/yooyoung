@@ -25,7 +25,7 @@ class Payment < ActiveRecord::Base
     manual: 0,
     alipay: 1,
     # unionpay: 2,
-    # alipay_wap: 3, #TODO
+    alipay_wap: 3, #TODO
     # alipay_wallet: 4, #TODO
     # unionpay_wap: 5, #TODO
   }

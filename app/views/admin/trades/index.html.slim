@@ -27,7 +27,7 @@ table.ui.table.segment
           p = trade.communicate.email
         td
           = link_to_if can?(:show, Hotel), trade.hotel.chinese, [:admin, trade.hotel], alt: t('admin.show'), class: :'ui link action', target: :_blank
-          p = trade.room.chinese
+          p = trade.room.try :chinese
           p = trade.package.name
         td = trade.start_day.try(:to_s, :db)
         td = trade.end_day.try(:to_s, :db)

@@ -3,6 +3,20 @@
     = link_to mobile_root_path do
       .main-mobile-header__logo
         .icon-logo
-    / .main-mobile-header__nav-button
-    /   .iconfont.icon-list
-/ .main-mobile-nav
+    .main-mobile-header__nav-button.js_main_mobile_nav_open
+      .iconfont.icon-list
+.main-mobile-nav.js_main_mobile_nav
+  .main-mobile-nav__logo
+    .icon-logo
+    .main-mobile-nav__close.js_main_mobile_nav_close 关闭
+  .main-mobile-nav__list
+    a.main-mobile-nav__item 注册
+    a.main-mobile-nav__item 登录
+    a.main-mobile-nav__item 回到首页
+    a.main-mobile-nav__item 私人定制
+    a.main-mobile-nav__item 关于悠漾
+  .main-mobile-nav__service
+    .main-mobile-nav__service-box
+      .iconfont.icon-phone-receiver
+      .main-mobile-nav__service-phone = Settings.yooyoung.service_phone
+      .main-mobile-nav__service-time = Settings.yooyoung.service_time

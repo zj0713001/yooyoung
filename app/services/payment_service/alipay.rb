@@ -48,7 +48,7 @@ module PaymentService
       options = {
         service: :create_direct_pay_by_user,
         out_trade_no: @payment.payment_no,
-        subject: "#{Settings.yooyoung.name} - #{@trade.hotel.chinese}",
+        subject: "#{Settings.yooyoung.name} - #{@trade.hotel.chinese}#{@trade.package.name}",
         body: [@trade.hotel.chinese, @trade.room.chinese, @trade.package.name].join(' - '),
         # total_fee: '0.01', # For Test
         total_fee: @trade.payment_price.to_i,
@@ -74,7 +74,7 @@ module PaymentService
       options = PaymentUtilities::Alipay.instance.common_options(options)
 
       {
-        gateway: @config[:gateway],
+        gateway: @config.gateway,
         method: :get,
         options: options,
       }

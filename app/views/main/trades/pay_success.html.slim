@@ -7,12 +7,15 @@ ruby:
   .trade-new__banner.trade-new-banner
     .trade-new-banner__baclground style="background-image: #{background_image_cover(image_url @trade.hotel.cover_photo.try(:image).try(:huge_narrow).try(:url))}"
   .trade-new__title.trade-new-title
-    h1.trade-new-title__name 付款成功！
+    h1.trade-new-title__name 付款#{@trade.successed? ? "成功" : "失败"}！
     hr.trade-new-title__hr
   .trade-new__container
     .trade-new__success-container
       .trade-new__success-notice
-        | 您的订单已经付款成功，请您及时安排出行计划。
+        - if @trade.successed?
+          | 您的订单已经付款成功，请您及时安排出行计划。
+        - else
+          | 您的订单付款失败，如您已经付款，请联系客服查询付款信息。
         br
         | 如您有其他疑问请咨询客服电话：#{Settings.yooyoung.service_phone}。
       = render partial: 'main/trades/detail', locals: { trade: @trade, no_cancel: true }

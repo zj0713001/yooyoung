@@ -42,7 +42,11 @@ h2.ui.dividing.header
       .four.wide.field
         = f.label :editor_remark
       .eight.wide.field
-        .text = @trade.editor_remark.try(:content)
+        - if show
+          .text = @trade.editor_remark.try(:content)
+        - else
+          = f.fields_for :editor_remark, @trade.editor_remark do |ff|
+            = ff.text_area :content
     .ui.divider
     .fields
       .four.wide.field

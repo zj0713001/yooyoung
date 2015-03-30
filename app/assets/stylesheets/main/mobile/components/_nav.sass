@@ -1,0 +1,44 @@
+.main-mobile-nav
+  +display(none)
+  +position(absolute, 0 null null 0)
+  +size(100% null)
+  +background(rgba($deeper_green, .96))
+  z-index: 999
+  font-size: $font_h5
+  color: rgba($white, .6)
+  .main-mobile-nav__logo
+    +clearfix
+  .icon-logo
+    +float(left)
+  .main-mobile-nav__close
+    +float(right)
+    +padding(null rem(10))
+    line-height: rem(40)
+  .main-mobile-nav__list
+    +margin(rem(20) null)
+    line-height: 3em
+    .main-mobile-nav__item
+      font-weight: bold
+      +padding(null rem(20))
+      display: block
+  .main-mobile-nav__service
+    +border-style(solid null null null)
+    +border-width(rem(1))
+    +display(flex)
+    +align-items(center)
+    +justify-content(center)
+    +clearfix
+    +padding(rem(15) null rem(20) null)
+    .main-mobile-nav__service-box
+      +position(relative)
+    .icon-phone-receiver
+      +position(absolute, 0 null null 0)
+      font-size: $font_h2
+      line-height: rem($font_h1)
+    .main-mobile-nav__service-phone
+      +margin(null null null rem(40))
+      font-size: $font_h4
+      color: $white
+    .main-mobile-nav__service-time
+      +margin(null null null rem(40))
+      font-size: $font_standard

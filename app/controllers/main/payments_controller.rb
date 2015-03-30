@@ -32,6 +32,16 @@ class Main::PaymentsController < Main::ApplicationController
         bank: @payment.channel,
       })
       @payment_options = @payment_service.payment_options build_params
+    when 'alipay_wap'
+      @payment_service = PaymentService::AlipayWap.new @trade
+      @payment = @payment_service.find_or_init_payment
+      @payment.update_attributes channel: params[:service].to_s
+      build_params.merge!({
+        notify_url: notify_trade_payment_url(@trade, @payment),
+        return_url: done_trade_payment_url(@trade, @payment),
+        show_url: polymorphic_url(@trade.hotel),
+      })
+      @payment_options = @payment_service.payment_options build_params
     else
       redirect_to :back and return
     end
@@ -52,8 +62,14 @@ class Main::PaymentsController < Main::ApplicationController
     process_params = params.except(:controller, :action, :trade_id, :id)
     @payment = Payment.find_by payment_no: params[:id]
 
-    @payment_service = PaymentService::Alipay.new @payment.trade, @payment
-    notify_response = @payment_service.handle_notify(process_params)
+    notify_response = case
+    when @payment.alipay?
+      @payment_service = PaymentService::Alipay.new @payment.trade, @payment
+      @payment_service.handle_notify(process_params)
+    when @payment.alipay_wap?
+      @payment_service = PaymentService::AlipayWap.new @payment.trade, @payment
+      @payment_service.handle_notify(process_params, from: :post)
+    end
 
     render text: notify_response, layout: false
   end
@@ -64,8 +80,15 @@ class Main::PaymentsController < Main::ApplicationController
     process_params = params.except(:controller, :action, :trade_id, :id)
     @payment = Payment.find_by payment_no: params[:id]
     @trade = @payment.trade
-    @payment_service = PaymentService::Alipay.new @trade, @payment
-    notify_response = @payment_service.handle_notify(process_params)
+
+    case
+    when @payment.alipay?
+      @payment_service = PaymentService::Alipay.new @payment.trade, @payment
+      @payment_service.handle_notify(process_params)
+    when @payment.alipay_wap?
+      @payment_service = PaymentService::AlipayWap.new @payment.trade, @payment
+      @payment_service.handle_notify(process_params, from: :get)
+    end
 
     render 'main/trades/pay_success'
   end

@@ -4,3 +4,4 @@ $(document).on 'page:restore', ->
   NProgress.remove()
 $(document).on 'page:change', ->
   NProgress.done()
+  FastClick.attach(document.body)

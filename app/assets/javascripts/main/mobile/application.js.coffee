@@ -8,10 +8,13 @@
 #= require 3rd/jquery.sticky
 #= require 3rd/slick
 #= require 3rd/nprogress
+#= require 3rd/velocity
+#= require 3rd/velocity.ui
 #= require main/mobile/3rd/fastclick
 
 
 #= require main/mobile/common/common
+#= require main/mobile/common/nav
 
 #= require main/mobile/home
 #= require main/mobile/hotels
