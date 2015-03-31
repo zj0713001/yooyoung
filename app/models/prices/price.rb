@@ -12,6 +12,7 @@ class Prices::Price
 
   index({ target: 1, target_id: 1 }, { background: true })
   index({ target: 1, target_id: 1, date: 1 }, { background: true })
+  index({ target: 1, target_id: 1, date: 1, sale_price: 1 }, { background: true })
 
   def profit
     self.sale_price - self.cost_price
