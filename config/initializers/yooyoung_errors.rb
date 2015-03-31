@@ -6,4 +6,5 @@ class YooYoung
   class TryTooManyTimesError < StandardError; end
   class IncorrectArguments < StandardError; end
   class VerificationFailure < StandardError; end
+  class BrowserTooLow < StandardError; end
 end

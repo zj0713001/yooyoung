@@ -11,3 +11,4 @@ zh-CN:
     try_too_many_times: '已经超过最大重试次数。'
     incorrect_arguments: '选项填写错误。'
     verification_failure: '验证失败。'
+    browser_too_low: '浏览器版本过低'

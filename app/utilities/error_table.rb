@@ -50,6 +50,10 @@ class ErrorTable
       error_code: 11,
       message: I18n.t('error_table.verification_failure')
     },
+    "YooYoung::BrowserTooLow" => {
+      error_code: 12,
+      message: I18n.t('error_table.browser_too_low')
+    },
   }
 
   def handle(error_class)
