@@ -10,6 +10,10 @@ Rails.application.routes.draw do
     post 'users/check_phone' => 'main/devise/registrations#check_phone', as: :users_check_phone
   end
 
+  %w(404 422 500 503).each do |code|
+    match code, to: "application#errors", via: :all, code: code
+  end
+
   scope module: :main do
     root 'home#index'
     get 'my' => 'trades#index', as: :my
