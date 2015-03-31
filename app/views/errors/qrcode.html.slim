@@ -1,12 +1,9 @@
 doctype html
 html
   head
-    = render :partial => 'main/shared/meta', :formats => :html
-    = stylesheet_link_tag :'main/error', media: 'all'
-    = csrf_meta_tags
-    = render 'shared/baidu_statistics'
+    = render :partial => 'errors/header'
   body
-    .error-index
+    .error-index.error-index--ie8
       = render 'main/shared/header'
       .error-index__title 请使用手机扫描二维码，查看悠漾旅行
       hr.error-index__hr

@@ -51,6 +51,11 @@ class ApplicationController < ActionController::Base
     session[:redirect_page] = session[:current_page]
   end
 
+  def errors
+    status_code = params[:code] || 500
+    render template: "errors/#{status_code}", layout: false
+  end
+
   protected
 
   def configure_permitted_parameters

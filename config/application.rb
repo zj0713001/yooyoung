@@ -45,5 +45,7 @@ module Iron
     # Compass Config
     config.compass.require 'susy'
     config.compass.require 'rgbapng'
+
+    config.exceptions_app = self.routes
   end
 end
