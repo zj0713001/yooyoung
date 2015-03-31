@@ -34,4 +34,22 @@ class Main::PricesController < Main::ApplicationController
       }
     end
   end
+
+  def package_min_price
+    @hotel = Hotel.friendly_acquire params[:id]
+    @prices = {
+      package_price: PriceService.new(hotel.package).has_prices? ? PackageService.new(hotel.package).min_price_by_date : nil
+      favorite_price: PriceService.new(hotel.favorite_package).has_prices? ? PackageService.new(hotel.favorite_package).min_price_by_date : nil
+    }
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          status: true,
+          data: @prices,
+        }
+      }
+    end
+
+  end
 end

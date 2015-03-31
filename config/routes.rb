@@ -37,7 +37,11 @@ Rails.application.routes.draw do
         get :pay_success
       end
     end
-    resources :prices, only: [:index]
+    resources :prices, only: [:index] do
+      member do
+        get :package_min_price
+      end
+    end
 
     namespace :mobile do
       root 'home#index'
