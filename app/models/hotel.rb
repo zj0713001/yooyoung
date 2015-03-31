@@ -74,7 +74,7 @@ class Hotel < ActiveRecord::Base
     variables.delete_if{|variable| variable.blank?}
   end
 
-  friendlyable :name, :slugged
+  friendlyable :name
 
   validates :name, presence: true
   validates :name, uniqueness: { scope: :active }, if: Proc.new { self.active }

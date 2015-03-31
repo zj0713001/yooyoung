@@ -3,16 +3,13 @@ module ActiveRecord
     extend ActiveSupport::Concern
 
     module ClassMethods
-      def friendlyable(field = :name, slugged = :slugged)
-        reflash_method_name = "reflash_#{field}_#{slugged}"
-        define_method reflash_method_name do
-          self[slugged] = nil if self.changes.keys.include?(field)
-        end
-
+      def friendlyable(field = :name)
         class_exec do
           extend FriendlyId
-          friendly_id field, use: slugged
-          before_save reflash_method_name
+          friendly_id field, use: :slugged
+          def should_generate_new_friendly_id?
+            true
+          end
         end
       end
     end
