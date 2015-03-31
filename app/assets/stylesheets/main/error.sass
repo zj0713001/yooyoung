@@ -1,0 +1,38 @@
+@import "bourbon"
+@import "compass/css3"
+@import "main/common/mixins"
+@import "main/common/variables"
+@import "main/common/common"
+@import "main/common/header"
+@import "main/common/reset"
+@import "main/components/logo"
+body, html
+  font-size: $font_standard
+
+.error-index
+  +size(100%)
+  +cover_background_image('main/errors/background.jpg')
+  color: $white
+  text-align: center
+  .error-index__title
+    +padding(100px null null null)
+    +margin(null null 10px null)
+    font-size: $font_h5
+  .error-index__hr
+    +inline-block
+    width: 360px
+    +margin(null null 10px null)
+  .error-index__explain
+    font-size: 10px
+    +margin(null null 20px null)
+  .error-index__qrcode
+    +size(150px auto)
+    +margin(null null 10px null)
+  .error-index__service-phone
+    font-size: $font_h3
+  .error-index__service-time
+    font-size: $font_standard
+  .main-index-header
+    .icon-logo
+      background: none
+      filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=#{image-path('shared/logo/logo.png')},sizingMethod='scale')

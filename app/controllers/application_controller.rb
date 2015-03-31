@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   layout 'main/application'
   before_action :track_user
+  before_action :check_browser
   before_action :prev_page
   around_action :handle_xhr_errors, if: ->{ request.format.js? || request.format.json? }
 
@@ -16,6 +17,17 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |exception|
     set_redirect_page
     redirect_to new_user_session_path, notice: exception.message
+  end
+
+  def check_browser
+    user_agent = UserAgent.parse request.user_agent.to_s
+    if user_agent.browser == "Internet Explorer" && user_agent.version.to_s.to_i < 9
+      raise YooYoung::BrowserTooLow
+    end
+  end
+
+  rescue_from YooYoung::BrowserTooLow do |exception|
+    render template: 'errors/qrcode', layout: false
   end
 
   helper_method :model
