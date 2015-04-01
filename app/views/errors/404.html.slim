@@ -1,0 +1,16 @@
+- title = '没有找到页面！'
+doctype html
+html
+  head
+    = render :partial => 'errors/header'
+    title = title
+  body
+    .error-index
+      = render 'main/shared/header'
+      .error-index__title = title
+      hr.error-index__hr
+      .error-index__explain 页面可能被移除，或者输入了错误的网址。
+      .error-index__action
+        = link_to '回到首页', root_path, class: :'error-index__link opacity-button normal-button'
+        .error-index__action-and 或者
+        = link_to '返回上一页', "javascript:history.go(-1);", class: :'error-index__link opacity-button normal-button'

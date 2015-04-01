@@ -4,8 +4,9 @@ class PackageService
   end
 
   def min_price_by_date(start_date = Time.now.to_date)
-    package_prices = PriceService.new(@package).find_all_by_date(start_date, price_type: :sale_price)
-    end_date = package_prices.max{|d| d[:date]}[:date].to_date
+    end_date = start_date + 1.month
+    package_prices = PriceService.new(@package).find_all_by_date(start_date, end_day, price_type: :sale_price)
+    # end_date = package_prices.max{|d| d[:date]}[:date].to_date
     @package.rooms.map do |room|
       room_price = PriceService.new(room).find_all_by_date(start_date, (end_date+@package.days), price_type: :sale_price)
       package_prices.map do |data|

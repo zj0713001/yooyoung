@@ -3,7 +3,9 @@ ruby:
   room = hotel.rooms.first
   package = hotel.package
 
-  room_href = if room.blank?
+  room_href = if hotel.new_record?
+    nil
+  elsif room.blank?
     new_admin_hotel_room_path(hotel)
   elsif show
     admin_hotel_room_path(hotel, room)
@@ -11,7 +13,9 @@ ruby:
     edit_admin_hotel_room_path(hotel, room)
   end
 
-  package_href = if package.blank?
+  package_href = if hotel.new_record?
+    nil
+  elsif package.blank?
     new_admin_hotel_hotel_package_path(hotel)
   elsif show
     admin_hotel_hotel_package_path(hotel, package)

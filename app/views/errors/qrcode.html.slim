@@ -1,0 +1,13 @@
+doctype html
+html
+  head
+    = render :partial => 'errors/header'
+  body
+    .error-index.error-index--ie8
+      = render 'main/shared/header'
+      .error-index__title 请使用手机扫描二维码，查看悠漾旅行
+      hr.error-index__hr
+      .error-index__explain 很抱歉，由于您的浏览器版本过低，不能支持本页面，给您带来的不便请您谅解。
+      = image_tag 'main/errors/qrcode.png', class: :'error-index__qrcode'
+      .error-index__service-phone = Settings.yooyoung.service_phone
+      .error-index__service-time = Settings.yooyoung.service_time
