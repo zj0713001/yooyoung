@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include ApplicationHelper
+
   layout 'main/application'
   before_action :track_user
   before_action :check_browser
@@ -17,6 +19,24 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |exception|
     set_redirect_page
     redirect_to new_user_session_path, notice: exception.message
+  end
+
+  before_action :device_change
+  def device_change
+    return unless request.get?
+
+    routes = Rails.application.routes.routes
+
+    browser_checker = BrowserChecker.new(request)
+    if browser_checker.mobile?
+      if !params[:controller].match(/^main\/mobile/) && routes.any?{|route| params[:controller].gsub(/^main/, 'main/mobile') == route.defaults[:controller] && params[:action] == route.defaults[:action]}
+        redirect_to "/mobile#{request.fullpath}"
+      end
+    else
+      if params[:controller].match(/^main\/mobile/) && routes.any?{|route| params[:controller].gsub(/^main\/mobile/, 'main') == route.defaults[:controller] && params[:action] == route.defaults[:action]}
+        redirect_to request.fullpath.gsub(/^\/mobile/, '')
+      end
+    end
   end
 
   def check_browser

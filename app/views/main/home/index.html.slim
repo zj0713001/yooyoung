@@ -22,7 +22,8 @@
                     .main-flag-label
                       .main-flag-label__flag
                       .main-flag-label__text
-                        = "#{show_currency data[:package_price]}元/套餐起"
+                        .main-flag-label__unit ￥
+                        = "#{show_currency data[:package_price]}/套餐起"
                       .clear
                       .main-flag-label__shadow
       a.home-index-banner__prev.js_main_home_index_banner_slick_prev

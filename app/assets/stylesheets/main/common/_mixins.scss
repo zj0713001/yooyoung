@@ -22,7 +22,14 @@
   background-position: 50% 50%;
   background-repeat: no-repeat;
   @include background-size(cover);
-  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=#{image-path($image)},sizingMethod='scale');
+}
+
+@mixin cover_background_image_with_multiply($image, $color) {
+  background: (image-url($image), $color);
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  @include background-size(cover);
+  background-blend-mode: multiply
 }
 
 @mixin main-container {
@@ -44,4 +51,10 @@
   @include breakpoint(max-width $desktop-maxwidth) {
     min-height: 460px;
   }
+}
+
+@mixin flex-center {
+  @include display(flex);
+  @include align-items(center);
+  @include justify-content(center);
 }

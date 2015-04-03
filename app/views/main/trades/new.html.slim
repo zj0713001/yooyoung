@@ -150,23 +150,21 @@ ruby:
         .trade-new-bill__content.js_main_trade_new_bill
           .trade-new-bill__group
             .trade-new-bill__price ms-visible='!package_price'
-              | 套餐价格：
-              em = PackageService.new(@hotel.package).min_price_by_date
-              | 元起
+              | 套餐价格：￥
+              em ms-text="min_package_parice"
+              | 起
           .trade-new-bill__group ms-visible='package_price'
             .trade-new-bill__price
-              | 套餐价格：
+              | 套餐价格：￥
               em ms-text="package_price"
-              | 元
               span ms-text="'（共'+days+'晚）'"
           .trade-new-bill__group ms-visible='extra_bed_num > 0'
             .trade-new-bill__price
-              | 加床价格：
-              span ms-text="extra_bed_price*days+'元×'+extra_bed_num+'张 ='"
+              | 加床价格：￥
+              span ms-text="extra_bed_price*days+'×'+extra_bed_num+'张 ='"
+              | ￥
               em ms-text='extra_bed_price*extra_bed_num*days'
-              | 元
           .trade-new-bill__group ms-visible='package_price'
             .trade-new-bill__total-price
-              | 订单总价：
+              | 订单总价：￥
               em ms-text="package_price+(extra_bed_price*extra_bed_num*days)"
-              | 元

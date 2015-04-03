@@ -43,8 +43,8 @@ ruby:
                       | (#{trade.room.name})
                 .my-index-container-trades__item-price
                   - if trade.price_changed?
-                    .my-index-container-trades__item-changed-price #{trade.total_price}元
-                  = "#{trade.payment_price}元"
+                    .my-index-container-trades__item-changed-price ￥#{trade.total_price}
+                  = "￥#{trade.payment_price}"
                 .my-index-container-trades__item-actions
                   .my-index-container-trades__item-action
                     = render partial: 'main/trades/state', locals: { trade: trade, show_button: true }

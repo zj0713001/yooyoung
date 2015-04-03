@@ -10,7 +10,7 @@ ruby:
 .main-mobile-hotels-show.js_main_mobile_hotels_show
   .main-mobile-hotels-show__banner
     .main-mobile-hotels-show-banner
-      .main-mobile-hotels-show-banner__background style="background-image: #{background_image_cover(@hotel.cover_photo.try(:image).try(:normal_narrow).try(:url))}"
+      .main-mobile-hotels-show-banner__background style="background-image: #{background_image_cover(@hotel.cover_photo.try(:image).try(:small_narrow).try(:url))}"
       h1.main-mobile-hotels-show-banner__title = @hotel.chinese
       hr.main-mobile-hotels-show-banner__hr
       .main-mobile-hotels-show-banner__location
@@ -24,7 +24,7 @@ ruby:
       .main-mobile-hotels-show-photos__price-flag
         span.main-mobile-hotels-show-photos__price-unite ￥
         span.main-mobile-hotels-show-photos__price-money = show_currency min_price
-        | 元/套餐起
+        | /套餐起
     - else
       .main-mobile-hotels-show-photos__price-flag.main-mobile-hotels-show-photos__price-flag--soldout 已售罄
     .ui.page.dimmer.main-mobile-hotels-show-modal.js_main_mobile_hotels_photos_modal

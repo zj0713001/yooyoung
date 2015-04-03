@@ -6,6 +6,7 @@ html
     = csrf_meta_tags
     = javascript_include_tag :'main/mobile/application', :'data-turbolinks-track' => true
   body.main-mobile.js_main_mobile
-    = render 'main/mobile/shared/header'
+    = render 'main/mobile/shared/header' unless @is_no_header
     = yield
-    = render 'main/mobile/shared/footer'
+    = render 'main/mobile/shared/footer' unless @is_no_fotter
+    = include_gon init: true, namespace: :jsvar

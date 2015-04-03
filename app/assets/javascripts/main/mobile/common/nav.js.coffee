@@ -1,11 +1,11 @@
 hide_nav = ->
-  $('.js_main_mobile_nav').velocity("slideUp")
+  $('.js_main_mobile_nav').velocity("slideUp", {duration: 200})
   $('.js_main_mobile_nav_open').show()
 
 
 $(document).on 'page:change', ->
   $('.js_main_mobile_nav_open').on 'click', ->
-    $('.js_main_mobile_nav').velocity("slideDown")
+    $('.js_main_mobile_nav').velocity("slideDown", {duration: 200})
     $(this).hide()
   $('.js_main_mobile_nav_close').on 'click', ->
     hide_nav()

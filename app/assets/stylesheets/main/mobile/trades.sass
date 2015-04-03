@@ -1,0 +1,72 @@
+.main-mobile-trades-index
+  +size(100% null)
+  min-height: 100%
+  color: $dark
+  font-size: rem($font_h5)
+  line-height: rem($font_h1)
+  +margin(0 0 rem(-100) 0)
+  +padding(rem(10) 0 rem(100) 0)
+  .main-mobile-trades-index__no-trade
+    +padding(rem(40))
+    a
+      color: blue
+.main-mobile-trades-show
+  +size(100% null)
+  min-height: 100%
+  +margin(0 0 rem(-100) 0)
+  +padding(rem(10) 0 rem(100) 0)
+.main-mobile-trades-simple-item
+  +margin(0 rem(10) rem(10))
+  +border-style(solid)
+  +border-width(rem(1))
+  +border-color($light_dark)
+  +background($lightest_green)
+  color: $dark
+  font-size: rem($font_standard)
+  line-height: rem($font_h3)
+  .main-mobile-trades-simple-item__title
+    +padding(null rem(10))
+    font-size: rem($font_h5)
+    line-height: rem($font_h1)
+    +border-style(none none solid none)
+    +border-width(rem(1))
+    +border-color($light_dark)
+  .main-mobile-trades-simple-item__list
+    +position(relative)
+    +padding(rem(5) rem(10))
+    .icon-arrow-right
+      +position(absolute, 50% rem(10) null null)
+      +size(rem(20))
+      +margin(rem(-10) null null null)
+      font-size: rem(20)
+      line-height: rem(20)
+      color: $light_dark
+  .main-mobile-trades-simple-item__group
+    +clearfix
+  .main-mobile-trades-simple-item__label
+    +span(1 of 4)
+    color: $gray_dark
+  .main-mobile-trades-simple-item__content
+    +span(3 of 4)
+    p
+      line-height: rem(24)
+  .main-mobile-trades-simple-item__remark
+    font-size: rem(10)
+    line-height: rem($font_h5)
+  .main-mobile-trades-simple-item__package-content
+    +span(3 of 4)
+    +padding(rem(5) rem(10))
+    +margin(null null rem(10) null)
+    +background($white)
+  .main-mobile-trades-simple-item__package-day
+    color: $gray_dark
+    font-size: rem(10)
+    line-height: rem(30)
+  .main-mobile-trades-simple-item__package-item
+    +position(relative)
+    line-height: rem(20)
+    +padding(null null null rem(20))
+  .main-mobile-trades-simple-item__li
+    +position(absolute, rem(5) null null 0)
+    background: rgba($red, .3)
+    +size(rem(10))

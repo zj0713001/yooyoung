@@ -2,7 +2,7 @@
   +display(none)
   +position(absolute, 0 null null 0)
   +size(100% null)
-  +background(rgba($deeper_green, .96))
+  +background(rgba($dark, .96))
   z-index: 999
   font-size: $font_h5
   color: rgba($white, .6)
@@ -21,16 +21,17 @@
       font-weight: bold
       +padding(null rem(20))
       display: block
+      &:visited
+        color: rgba($white, .6)
   .main-mobile-nav__service
     +border-style(solid null null null)
     +border-width(rem(1))
-    +display(flex)
-    +align-items(center)
-    +justify-content(center)
     +clearfix
     +padding(rem(15) null rem(20) null)
     .main-mobile-nav__service-box
       +position(relative)
+      +margin(auto)
+      +size(rem(180) null)
     .icon-phone-receiver
       +position(absolute, 0 null null 0)
       font-size: $font_h2

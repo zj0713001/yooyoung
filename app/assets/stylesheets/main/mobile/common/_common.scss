@@ -2,6 +2,7 @@
 
 $em-base: 10px;
 html {
+  height: 100%;
   font-size: 10px !important;
   font-weight: normal;
   @include font-family-mobile-heiti;
@@ -9,8 +10,11 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 body {
-  min-height: 100vh;
   font-size: 10px !important;
   background: $white !important;
   line-height: initial !important;
+}
+
+.hidden {
+  display: none;
 }

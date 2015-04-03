@@ -1,0 +1,83 @@
+.main-mobile-sessions-new
+  +size(100%)
+  +position(relative)
+  +padding(rem(40) rem(20) null)
+  overflow: hidden
+  .main-mobile-sessions-new__background
+    +size(110%)
+    +position(absolute, -5% null null -5%)
+    +cover_background_image_with_multiply("main/mobile/sessions/background.jpg", rgba($dark, .2))
+    +filter(blur(rem(2)))
+    z-index: -1
+  .main-mobile-sessions-new__form
+    +size(100%)
+.main-mobile-sessions-new-form
+  +size(100%)
+  +margin(rem(30) null null null)
+  .main-mobile-sessions-new-form__group
+    +margin(null null rem(10) null)
+    line-height: rem($font_h1)
+    +position(relative)
+  .main-mobile-sessions-new-form__label
+    font-size: rem($font_h4)
+    color: rgba($white, .8)
+    +position(absolute, 0 null null rem(10))
+  .main-mobile-sessions-new-form__input
+    +size(100% rem($font_h1))
+    +background(rgba($black, .4))
+    +padding(null null null rem(40))
+    font-size: rem($font_h5)
+    border: none
+    +border-radius(0)
+    outline: 0
+    color: rgba($white, .8)
+    +placeholder
+      color: rgba($white, .6)
+    &:focus, &:active
+      +background(rgba($black, .3))
+      +placeholder
+        color: transparent
+    &.main-mobile-sessions-new-form__input--short
+      float: left
+      +size(rem(150) null)
+      +padding(null rem(10))
+      text-align: center
+  .main-mobile-sessions-new-form__captcha-button
+    float: right
+    +size(rem(118) null)
+    +background(rgba($black, .5))
+    font-size: rem($font_h5)
+    line-height: rem(34)
+    color: $white
+    &.disabled
+      color: rgba($white, .6)
+      border-color: rgba($white, .6)
+  .main-mobile-sessions-new-form__submit
+    letter-spacing: rem(5)
+    +background(rgba($black, .5))
+    font-size: rem($font_h4)
+    line-height: rem($font_h1)
+    +margin(rem(20) null null null)
+  .main-mobile-sessions-new-form__sign-up,
+  .main-mobile-sessions-new-form__sign-in
+    +display(block)
+    +size(100% null)
+    color: $white
+    font-size: rem($font_h5)
+    text-align: center
+    +margin(rem(50) null null null)
+    +padding(rem(20) null)
+  .main-mobile-sessions-new-form__error-message
+    +position(relative)
+    +inline-block
+    +background(rgba($red, .5))
+    color: $white
+    font-size: rem($font_h5)
+    line-height: rem($font_h5)
+    +padding(rem(5) rem(10))
+    &:before
+      content: ''
+      +position(absolute, rem(-10) null null rem(15))
+      +border-style(solid)
+      +border-width(rem(5))
+      +border-color(transparent transparent rgba($red, .5) transparent)

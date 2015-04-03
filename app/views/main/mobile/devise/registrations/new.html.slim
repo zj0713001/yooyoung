@@ -1,0 +1,33 @@
+ruby:
+  set_meta_tags(
+    title: "注册新用户",
+    description: "悠漾旅行注册新用户。",
+    keywords: "悠漾旅行，注册新用户"
+  )
+  @is_no_fotter = true
+.main-mobile-sessions-new.js_mobile_main_sessions_new
+  .main-mobile-sessions-new__background
+  .main-mobile-sessions-new__form
+    = form_for(@user, url: registration_path(@user), html: { class: :'main-mobile-sessions-new-form js_mobile_main_sessions_sign_up'}) do |f|
+      .main-mobile-sessions-new-form__group
+        = f.label :phone, class: :'main-mobile-sessions-new-form__label' do
+          .iconfont.icon-phone
+        = f.phone_field :phone, placeholder: '手机号码', class: :'main-mobile-sessions-new-form__input js_mobile_main_sessions_phone', autocomplete: 'off', :'data-url' => users_check_phone_path
+      .main-mobile-sessions-new-form__group
+        = f.label :password, class: :'main-mobile-sessions-new-form__label' do
+          .iconfont.icon-password
+        = f.password_field :password, placeholder: '密码', class: :'main-mobile-sessions-new-form__input js_mobile_main_sessions_password'
+      .main-mobile-sessions-new-form__group
+        = f.label :password_confirmation, class: :'main-mobile-sessions-new-form__label' do
+          .iconfont.icon-password
+        = f.password_field :password_confirmation, placeholder: '确认密码', class: :'main-mobile-sessions-new-form__input'
+      .main-mobile-sessions-new-form__group.js_mobile_main_sessions_captcha
+        = phone_field_tag :sms_captcha, nil, placeholder: '请输入6位验证码', class: :'main-mobile-sessions-new-form__input main-mobile-sessions-new-form__input--short js_mobile_main_sessions_captcha_field', disabled: true
+        = link_to "javascript:void(0);", class: :'opacity-button main-mobile-sessions-new-form__captcha-button js_mobile_main_sessions_captcha_button disabled', :'data-url' => users_send_sms_captcha_path do
+          span.js_mobile_main_sessions_send_captcha 获取验证码
+          span.hidden.js_mobile_main_sessions_captcha_sending
+            |重新获取（
+            em data-time=60 60
+            |）
+      = f.submit '注册', class: :'opacity-button full-button main-mobile-sessions-new-form__submit'
+      = link_to '已有账户，去登录', new_mobile_sessions_path, class: :'main-mobile-sessions-new-form__sign-up'

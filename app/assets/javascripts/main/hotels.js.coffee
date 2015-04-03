@@ -163,6 +163,12 @@ $ ->
         if package_top - $(document).scrollTop() > 100
           $slick_active = $('.js_main_hotel_show_content_package .slick-active')
           package_info_hide($slick_active) if $slick_active.data('show-info')
+        if $(this).scrollTop() > $('.js_main_hotel_show_content_favorite').offset().top
+          min_price = $('.js_main_hotel_show_banner_booking').data('favorite-min-price')
+          $('.js_main_hotel_show_package_min_price').text(min_price) if parseInt(min_price) != parseInt($('.js_main_hotel_show_package_min_price'))
+        else
+          min_price = $('.js_main_hotel_show_banner_booking').data('package-min-price')
+          $('.js_main_hotel_show_package_min_price').text(min_price) if parseInt(min_price) != parseInt($('.js_main_hotel_show_package_min_price'))
       true
 
     _.delay ->
@@ -293,3 +299,12 @@ $ ->
 
     $('.js_hotel_show_content_favorite_photos_slick_next').on 'click', ->
       $(this).siblings('.js_hotel_show_content_favorite_photos').slick('slickNext')
+
+    $(window).on 'load', ->
+      $.ajax
+        url: $('.js_main_hotel_show_banner_booking').data('url')
+        type: 'GET'
+        dataType: 'json'
+        success: (data) ->
+          if data.status
+            $('.js_main_hotel_show_banner_booking').data('favorite-min-price', data.data.favorite_price)

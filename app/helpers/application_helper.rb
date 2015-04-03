@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def show_currency(number)
-    number_to_currency number, precision: 0, unit: ''
+    number_to_currency(number, precision: 0, unit: '', delimiter: '').to_s.strip
   end
 
   def default_meta_tags

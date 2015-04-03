@@ -8,6 +8,7 @@ $ ->
       vm.end_day = ''
       vm.days = vm.hotel.package.days
       vm.end_day_weekday = ''
+      vm.min_package_parice = jsvar.package_min_price
       vm.$watch 'start_day', (day) ->
         return if _.isEmpty(vm.start_day)
         end_day = moment(day).add(vm.days, 'days')
@@ -61,9 +62,11 @@ $ ->
         if vm.is_favorite
           vm.selected_package = vm.hotel.favorite_package
           vm.days = vm.hotel.favorite_package.days
+          vm.min_package_parice = jsvar.favorite_min_price
         else
           vm.selected_package = vm.hotel.package
           vm.days = vm.hotel.package.days
+          vm.min_package_parice = jsvar.package_min_price
       vm.$watch 'days', ->
         vm.$fire("start_day", vm.start_day, vm.start_day)
       vm.select_room = (room) ->

@@ -3,6 +3,10 @@
 #= require jquery_ujs
 #= require underscore
 #= require semantic-ui
+#= require jquery.validate
+#= require jquery.validate.additional-methods
+#= require 3rd/jquery.validate.methods
+#= require 3rd/jquery.validate.zh-CN
 
 #= require 3rd/jquery.lazyload
 #= require 3rd/jquery.sticky
@@ -18,6 +22,8 @@
 
 #= require main/mobile/home
 #= require main/mobile/hotels
+#= require main/mobile/devise/sessions
+#= require main/mobile/devise/registrations
 
 #= require turbolinks
 

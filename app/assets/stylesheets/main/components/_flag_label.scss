@@ -6,6 +6,10 @@
     border-width: 1em .5em;
     border-color: rgba($white, .3) rgba($white, .3) rgba($white, .3) rgba($white, 0);
   }
+  .main-flag-label__unit {
+    float: left;
+    font-size: .5em;
+  }
   .main-flag-label__text {
     float: left;
     line-height: 2em;

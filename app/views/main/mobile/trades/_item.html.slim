@@ -1,0 +1,86 @@
+- type ||= :simple
+.main-mobile-trades-simple-item
+  .main-mobile-trades-simple-item__title #{Trade.human_attribute_name(:trade_no)}：#{trade.to_param}
+  .main-mobile-trades-simple-item__list
+    - if type == :simple
+      .iconfont.icon-arrow-right
+    .main-mobile-trades-simple-item__group
+      .main-mobile-trades-simple-item__label = Trade.human_attribute_name(:hotel_id)
+      .main-mobile-trades-simple-item__content
+        = trade.hotel.chinese
+        .main-mobile-trades-simple-item__remark = trade.hotel.name
+    .main-mobile-trades-simple-item__group
+      .main-mobile-trades-simple-item__label = Trade.human_attribute_name(:package_id)
+      .main-mobile-trades-simple-item__content = trade.package.name
+    .main-mobile-trades-simple-item__group
+      .main-mobile-trades-simple-item__label = Trade.human_attribute_name(:room_id)
+      .main-mobile-trades-simple-item__content
+        = trade.room.chinese
+        .main-mobile-trades-simple-item__remark = trade.room.name
+    .main-mobile-trades-simple-item__group
+      .main-mobile-trades-simple-item__label = Trade.human_attribute_name(:start_day)
+      .main-mobile-trades-simple-item__content = trade.start_day.to_s(:db)
+    - if type == :detail
+      .main-mobile-trades-simple-item__group
+        .main-mobile-trades-simple-item__label = Trade.human_attribute_name(:end_day)
+        .main-mobile-trades-simple-item__content = trade.end_day.to_s(:db)
+    .main-mobile-trades-simple-item__group
+      .main-mobile-trades-simple-item__label = Trade.human_attribute_name(:people_num)
+      .main-mobile-trades-simple-item__content
+        = "#{trade.people_num}位成人"
+        - unless trade.child_num.zero?
+          = "，#{trade.child_num}位儿童"
+        - unless trade.extra_bed_num.zero?
+          = "，需加床#{trade.extra_bed_num}张"
+    - if type == :detail
+      - if @trade.price_changed?
+        .main-mobile-trades-simple-item__group
+          .main-mobile-trades-simple-item__label = Trade.human_attribute_name(:changed_price)
+          .main-mobile-trades-simple-item__content = "￥#{trade.changed_price}"
+      - if @trade.extra_remark.try(:content).present?
+        .main-mobile-trades-simple-item__group
+          .main-mobile-trades-simple-item__label = Trade.human_attribute_name(:extra_remark)
+          .main-mobile-trades-simple-item__content = simple_format @trade.extra_remark.content
+    .main-mobile-trades-simple-item__group
+      .main-mobile-trades-simple-item__label = Trade.human_attribute_name(:payment_price)
+      .main-mobile-trades-simple-item__content ￥#{trade.payment_price}
+    .main-mobile-trades-simple-item__group
+      .main-mobile-trades-simple-item__label = Trade.human_attribute_name("aasm_state")
+      .main-mobile-trades-simple-item__content = Trade.human_attribute_name("aasm_states/#{trade.aasm_state}")
+    - if type == :detail
+      - if trade.user_remark.try(:content).present?
+        .main-mobile-trades-simple-item__group
+          .main-mobile-trades-simple-item__label = Remark.human_attribute_name(:content)
+          .main-mobile-trades-simple-item__content = simple_format trade.user_remark.try(:content)
+      .main-mobile-trades-simple-item__group
+        .main-mobile-trades-simple-item__label = Trade.human_attribute_name(:package_id)
+        .main-mobile-trades-simple-item__package-content
+          - if trade.package.favorite
+            - trade.package.items.group_by(&:service_day).sort.each_with_index do |(day_index, items), index|
+              .main-mobile-trades-simple-item__package-day Day #{day_index}
+              - items.each_with_index do |item, index|
+                .main-mobile-trades-simple-item__package-item
+                  .main-mobile-trades-simple-item__li
+                  = item.content
+          - else
+            - trade.package.items.each do |item|
+              .main-mobile-trades-simple-item__package-item
+                .main-mobile-trades-simple-item__li
+                = item.content
+      .main-mobile-trades-simple-item__group
+        .main-mobile-trades-simple-item__label = Trade.human_attribute_name(:communicate_id)
+        .main-mobile-trades-simple-item__content
+          p
+            = trade.communicate.name
+            | &nbsp;
+            = trade.communicate.phone
+          p
+            = trade.communicate.email
+      .main-mobile-trades-simple-item__group
+        .main-mobile-trades-simple-item__label = Trade.human_attribute_name(:attendences)
+        .main-mobile-trades-simple-item__content
+          - trade.attendences.each do |attendence|
+            p
+              = attendence.name
+              | &nbsp;
+              = attendence.phone

@@ -1,0 +1,21 @@
+ruby:
+  set_meta_tags(
+    title: "登录悠漾",
+    description: "悠漾旅行用户登录。",
+    keywords: "悠漾旅行，用户登录"
+  )
+  @is_no_fotter = true
+.main-mobile-sessions-new.js_mobile_main_sessions_new
+  .main-mobile-sessions-new__background
+  .main-mobile-sessions-new__form
+    = form_for(@user, url: session_path(@user), html: { class: :'main-mobile-sessions-new-form js_mobile_main_sessions_sign_in'}) do |f|
+      .main-mobile-sessions-new-form__group
+        = f.label :phone, class: :'main-mobile-sessions-new-form__label' do
+          .iconfont.icon-phone
+        = f.phone_field :phone, placeholder: '手机号码', class: :'main-mobile-sessions-new-form__input js_mobile_main_sessions_phone', autocomplete: 'off'
+      .main-mobile-sessions-new-form__group
+        = f.label :password, class: :'main-mobile-sessions-new-form__label' do
+          .iconfont.icon-password
+        = f.password_field :password, placeholder: '密码', class: :'main-mobile-sessions-new-form__input'
+      = f.submit '登录', class: :'opacity-button full-button main-mobile-sessions-new-form__submit'
+      = link_to '没有账户，去注册', new_mobile_registrations_path, class: :'main-mobile-sessions-new-form__sign-up'

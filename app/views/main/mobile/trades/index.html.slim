@@ -1,0 +1,9 @@
+- @is_no_header = true
+.main-mobile-trades-index
+  - if @trades.blank?
+    .main-mobile-trades-index__no-trade
+      | 您还没有订单，
+      = link_to '随便看看', mobile_hotel_path(Hotel.published.order("RAND()").first)
+  - @trades.each do |trade|
+    = link_to mobile_trade_path(trade) do
+      = render partial: 'main/mobile/trades/item', locals: { trade: trade }

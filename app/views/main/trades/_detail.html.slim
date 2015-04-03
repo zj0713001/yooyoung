@@ -11,13 +11,13 @@
     .detail-container__label
       = Trade.human_attribute_name(:total_price)
     .detail-container__content
-      = "#{trade.total_price}元"
+      = "￥#{trade.total_price}"
   - if @trade.price_changed?
     .detail-container__group
       .detail-container__label
         = Trade.human_attribute_name(:changed_price)
       .detail-container__content
-        = "#{trade.changed_price}元"
+        = "￥#{trade.changed_price}"
   - if @trade.extra_remark.try(:content).present?
       .detail-container__group
         .detail-container__label
@@ -28,7 +28,7 @@
     .detail-container__label
       = Trade.human_attribute_name(:payment_price)
     .detail-container__content
-      = "#{trade.payment_price}元"
+      = "￥#{trade.payment_price}"
   .detail-container__group.js_main_payment_group
     .detail-container__label
       = Trade.human_attribute_name("aasm_state")
@@ -94,6 +94,25 @@
       = Remark.human_attribute_name(:content)
     .detail-container__content
       = simple_format trade.user_remark.try(:content)
+  .detail-container__group
+    .detail-container__label
+      = Trade.human_attribute_name(:communicate_id)
+    .detail-container__content
+      p
+        = trade.communicate.name
+        | &nbsp;
+        = trade.communicate.phone
+      p
+        = trade.communicate.email
+  .detail-container__group
+    .detail-container__label
+      = Trade.human_attribute_name(:attendences)
+    .detail-container__content
+      - trade.attendences.each do |attendence|
+        p
+          = attendence.name
+          | &nbsp;
+          = attendence.phone
   - if trade.can_cancel? && !no_cancel
     .detail-container__group
       = link_to '取消订单', 'javascript:void(0);', class: :'detail-container__submit minor-button normal-button js_main_trade_cancel', :'data-url' => trade_path(trade)

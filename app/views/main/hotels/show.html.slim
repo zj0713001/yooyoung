@@ -22,7 +22,7 @@ ruby:
           span.iconfont.icon-location
           span.main-location__text #{hotel_location_text(@hotel)}
     - if can_buy
-      a.hotel-show-banner__booking.opacity-button.js_main_hotel_show_banner_booking href="#{new_trade_path(hotel_id: @hotel.to_param)}" 立即预定
+      a.hotel-show-banner__booking.opacity-button.js_main_hotel_show_banner_booking data-package-min-price="#{min_price}" data-url="#{package_min_price_price_path(@hotel)}" href="#{new_trade_path(hotel_id: @hotel.to_param)}" 立即预定
     - else
       a.hotel-show-banner__booking.opacity-button.js_main_hotel_show_banner_booking href="javasctipt:void(0);" 已售罄
     .hotel-show-banner__click-down.js_main_hotel_show_banner_down
@@ -44,9 +44,9 @@ ruby:
             a href='#tips' 旅行贴士
         - if can_buy
           .hotel-show-content-nav__price
-            | 套餐价：
-            em = show_currency min_price
-            | 元起
+            | 套餐价：￥
+            em.js_main_hotel_show_package_min_price = show_currency min_price
+            | 起
           a.hotel-show-content-nav__booking.primary-button href="#{new_trade_path(hotel_id: @hotel.to_param)}" 立即预定
         - else
           a.hotel-show-content-nav__booking.minor-button href="javascript:void(0);" 已售罄
@@ -58,7 +58,7 @@ ruby:
       = render 'main/hotels/show/package_simple', hotel: @hotel
     .hotel-show-content__package.js_main_hotel_show_content_package_container
       = render 'main/hotels/show/package', hotel: @hotel
-    .hotel-show-content__favorite#favorite
+    .hotel-show-content__favorite.js_main_hotel_show_content_favorite#favorite
       = render 'main/hotels/show/favorite_package', hotel: @hotel
     .hotel-show-content__tips#tips
       = render 'main/hotels/show/tips', hotel: @hotel

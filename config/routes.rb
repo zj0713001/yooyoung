@@ -58,6 +58,14 @@ Rails.application.routes.draw do
           get :pay_success
         end
       end
+      devise_for :users, skip: [:sessions, :registrations, :passwords]
+
+      resources :sessions, only: [:new], path: :users, controller: 'devise/sessions' do
+        get :new, path: :sign_in, as: :new, on: :collection
+      end
+      resources :registrations, only: [:new], path: :users, controller: 'devise/registrations' do
+        get :new, path: :sign_up, as: :new, on: :collection
+      end
     end
   end
 
