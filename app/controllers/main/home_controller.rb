@@ -35,6 +35,8 @@ class Main::HomeController < Main::ApplicationController
       {type: :area, view: :'small-square', color: :yellow, area_name: '巴厘岛'},
       {type: :hotel, view: :horizontal},
       {type: :area, view: :'small-square', color: :green, area_name: '杭州'},
+      {type: :hotel, view: :horizontal},
+      {type: :hotel, view: :horizontal},
     ].each_with_index do |option, index|
       @section_data[index].merge! option
     end
