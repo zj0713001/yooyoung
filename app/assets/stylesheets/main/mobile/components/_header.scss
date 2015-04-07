@@ -1,7 +1,7 @@
 .main-mobile-header {
   @include position(absolute, 0 null null 0);
   @include size(100% rem(40));
-  z-index: 999;
+  z-index: 900;
   .main-mobile-header__container {
     @include size(100% rem(40));
     @include position(relative);

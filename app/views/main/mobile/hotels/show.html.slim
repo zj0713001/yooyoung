@@ -9,13 +9,7 @@ ruby:
   can_buy = has_price && !min_price.to_i.zero?
 .main-mobile-hotels-show.js_main_mobile_hotels_show
   .main-mobile-hotels-show__banner
-    .main-mobile-hotels-show-banner
-      .main-mobile-hotels-show-banner__background style="background-image: #{background_image_cover(@hotel.cover_photo.try(:image).try(:small_narrow).try(:url))}"
-      h1.main-mobile-hotels-show-banner__title = @hotel.chinese
-      hr.main-mobile-hotels-show-banner__hr
-      .main-mobile-hotels-show-banner__location
-        span.iconfont.icon-location
-        = hotel_location_text(@hotel)
+    = render partial: 'main/mobile/hotels/banner', locals: { hotel: @hotel }
   .main-mobile-hotels-show__photos.main-mobile-hotels-show-photos
     .main-mobile-hotels-show-photos__cover style="background-image: #{background_image_cover(@hotel.photos.first.try(:image).try(:normal).try(:url))}" class="#{'js_main_mobile_hotels_photo' if @hotel.photos.to_a.count > 0}"
       - if @hotel.photos.to_a.count > 0

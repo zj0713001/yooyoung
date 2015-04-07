@@ -96,7 +96,7 @@ class Hotel < ActiveRecord::Base
       #   only: [:image],
       # },
       package: {
-        only: [:id, :name, :description, :days],
+        only: [:id, :name, :description, :days, :favorite],
         include: {
           items: {
             only: [:id, :content, :description, :address, :tips, :openning_hours, :phone, :service_day],
@@ -109,7 +109,7 @@ class Hotel < ActiveRecord::Base
         },
       },
       favorite_package: {
-        only: [:id, :name, :description, :days],
+        only: [:id, :name, :description, :days, :favorite],
         include: {
           items: {
             only: [:id, :content, :description, :address, :tips, :openning_hours, :phone, :service_day],

@@ -50,6 +50,5 @@ class Main::PricesController < Main::ApplicationController
         }
       }
     end
-
   end
 end

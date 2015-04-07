@@ -1,0 +1,6 @@
+- @is_no_header = true
+.main-mobile-trades-show
+  h1.main-mobile-trades-show__title 预定成功！
+  .main-mobile-trades-show__notice
+    | 您的订单将在24小时内确认，请注意查收短信及邮件通知。如您有其他疑问请咨询客服电话：#{Settings.yooyoung.service_phone}。
+  = render partial: 'main/mobile/trades/item', locals: { trade: @trade, type: :detail }

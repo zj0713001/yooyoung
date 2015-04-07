@@ -1,0 +1,4 @@
+.mobile-calendar
+  = month_calendar title: calendar_title, previous_link: calendar_previous_link, next_link: calendar_next_link, day_names: "date.short_day_names" do |date|
+    .day-item.js_main_mobile_trades_new_day data-day="#{date.to_s}"
+      = date.mday
