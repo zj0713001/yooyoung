@@ -1,0 +1,171 @@
+- @is_no_fotter = true
+.main-mobile-trades-new.js_main_mobile_trades_new ms-controller='mobile_main_trade_new'
+  .main-mobile-trades-new__banner
+    = render partial: 'main/mobile/hotels/banner', locals: { hotel: @hotel }
+  = form_for [:mobile, @trade], html: { class: :'js_main_mobile_trades_new_form' } do |f|
+    = f.hidden_field :package_id, :'ms-duplex' => 'selected_package.id'
+    = f.hidden_field :start_day, :'ms-duplex' => 'selected_start_day'
+    = f.hidden_field :end_day, :'ms-duplex' => 'selected_end_day'
+    = f.hidden_field :room_id, :'ms-duplex' => 'selected_room.id'
+    = f.hidden_field :people_num, :'ms-duplex' => 'people_num'
+    = f.hidden_field :extra_bed_num, :'ms-duplex' => 'extra_bed_num'
+    = f.hidden_field :child_num, :'ms-duplex' => 'child_num'
+    .main-mobile-trades-new__step ms-visible="!is_submitting"
+      h2.main-mobile-trades-new__title
+        .main-mobile-trades-new__title-icon
+        | 套餐类型
+      .main-mobile-trades-new__select-button ms-click='select_package_step'
+        .main-mobile-trades-new__select-text ms-text='selected_package_text'
+        .iconfont.icon-arrow-down
+      .ui.page.dimmer.main-mobile-trades-new-step.js_main_mobile_trades_new_package_step
+        .main-mobile-trades-new-step__content
+          .main-mobile-trades-new-step__title 请选择套餐类型
+          .main-mobile-trades-new-step__selectable-item ms-click="select_package(hotel.package)"
+            .main-mobile-trades-new-step__selectable-li ms-class="active:selected_package==hotel.package"
+            | {{ hotel.package.name }}
+          .main-mobile-trades-new-step__selectable-item ms-click="select_package(hotel.favorite_package)"
+            .main-mobile-trades-new-step__selectable-li ms-class="active:selected_package==hotel.favorite_package"
+            | {{ hotel.favorite_package.name}}
+          .main-mobile-trades-new-step__detail-content ms-visible="selected_package==hotel.package"
+            - @hotel.package.items.each do |item|
+              .main-mobile-trades-new-step__detail-item
+                .main-mobile-trades-new-step__li
+                = item.content
+          .main-mobile-trades-new-step__detail-content ms-visible="selected_package==hotel.favorite_package"
+            - @hotel.favorite_package.items.group_by(&:service_day).sort.each_with_index do |(day_index, items), index|
+              .main-mobile-trades-new-step__detail-day Day #{day_index}
+              - items.each_with_index do |item, index|
+                .main-mobile-trades-new-step__detail-item
+                  .main-mobile-trades-new-step__li
+                  = item.content
+          .main-mobile-trades-new-step__tips
+            | *实际价格会根据选定日期及入住人数有所调整
+      h2.main-mobile-trades-new__title
+        .main-mobile-trades-new__title-icon
+        | 入住日期
+      .main-mobile-trades-new__select-button ms-click='select_day_step' ms-class='disabled:!selected_package'
+        .main-mobile-trades-new__select-text ms-text="selected_day_text"
+        .iconfont.icon-arrow-down
+      .main-mobile-trades-new__check-out ms-text="end_day_text" ms-visible="end_day_text"
+      .ui.page.dimmer.main-mobile-trades-new-step.js_main_mobile_trades_new_day_step data-calendar-url="#{calendar_mobile_trades_path}" data-price-url="#{prices_path}"
+        .main-mobile-trades-new-step__content
+          .main-mobile-trades-new-step__title 请选择入住日期
+          .main-mobile-trades-new-step__calendar ms-html="calendar_html"
+          .main-mobile-trades-new-step__explain
+            .main-mobile-trades-new-step__explain-icon.main-mobile-trades-new-step__explain-icon--disabled
+            | 不可选日期
+          .main-mobile-trades-new-step__explain
+            .main-mobile-trades-new-step__explain-icon.main-mobile-trades-new-step__explain-icon--active
+            | 可选日期
+          .main-mobile-trades-new-step__explain
+            .main-mobile-trades-new-step__explain-icon.main-mobile-trades-new-step__explain-icon--check-in
+            | 入住日期，根据套餐不同入住天数不同
+          .main-mobile-trades-new-step__explain
+            .main-mobile-trades-new-step__explain-icon.main-mobile-trades-new-step__explain-icon--check-out
+            | 退房日期
+          .main-mobile-trades-new-step__tips
+            | *实际价格会根据选定日期及入住人数有所调整
+      h2.main-mobile-trades-new__title
+        .main-mobile-trades-new__title-icon
+        | 入住房型
+      .main-mobile-trades-new__select-button ms-click='select_room_step' ms-class='disabled:!selected_start_day'
+        .main-mobile-trades-new__select-text ms-text="selected_room_text"
+        .iconfont.icon-arrow-down
+      .main-mobile-trades-new__check-out ms-text="room_people_text" ms-visible="room_people_text"
+      .ui.page.dimmer.main-mobile-trades-new-step.js_main_mobile_trades_new_room_step
+        .main-mobile-trades-new-step__content
+          .main-mobile-trades-new-step__title 请选择您的客房类型及入住人数
+          .main-mobile-trades-new-step__selectable-item ms-repeat-room='hotel.rooms' ms-click="select_room(room)"
+            .main-mobile-trades-new-step__selectable-li ms-class="active:selected_room==room"
+            | {{ room.chinese }}
+          .main-mobile-trades-new-step__detail-content ms-visible="selected_room==room" ms-repeat-room='hotel.rooms'
+            .main-mobile-trades-new-step__detail-item ms-visible='room.bed_type'
+              .main-mobile-trades-new-step__li
+              | #{Room.human_attribute_name(:bed_type)}：{{ room.bed_type }}
+            .main-mobile-trades-new-step__detail-item ms-visible='room.area'
+              .main-mobile-trades-new-step__li
+              | #{Room.human_attribute_name(:area)}：{{ room.area }}
+            .main-mobile-trades-new-step__detail-item ms-visible='room.sight'
+              .main-mobile-trades-new-step__li
+              | #{Room.human_attribute_name(:sight)}：{{ room.sight }}
+            .main-mobile-trades-new-step__detail-item ms-visible='room.population'
+              .main-mobile-trades-new-step__li
+              | #{Room.human_attribute_name(:population)}：{{ room.population }}
+            .main-mobile-trades-new-step__detail-item ms-visible='room.prices.extra_bed_price.limit'
+              .main-mobile-trades-new-step__li
+              | #{Prices::ExtraBed.human_attribute_name(:limit)}：{{ room.prices.extra_bed_price.limit }}
+            .main-mobile-trades-new-step__detail-item ms-visible='room.facilities'
+              .main-mobile-trades-new-step__li
+              .main-mobile-trades-new-step__detail-short-label
+                = "#{Room.human_attribute_name(:facilities)}："
+              .main-mobile-trades-new-step__detail-short-items
+                p ms-repeat-facility='room.facilities'
+                  | {{ facility }}
+          .main-mobile-trades-new-step__input-group ms-visible='selected_room'
+            .main-mobile-trades-new-step__input-label 入住成人
+            .main-mobile-trades-new-step__minus-button ms-click='people_num_minus' -
+            .main-mobile-trades-new-step__people-num ms-text='people_num'
+            .main-mobile-trades-new-step__plus-button ms-click='people_num_plus' +
+          .main-mobile-trades-new-step__input-group ms-visible='selected_room'
+            .main-mobile-trades-new-step__input-label 入住儿童
+            .main-mobile-trades-new-step__minus-button ms-click='child_num_minus' -
+            .main-mobile-trades-new-step__people-num ms-text='child_num'
+            .main-mobile-trades-new-step__plus-button ms-click='child_num_plus' +
+          .main-mobile-trades-new-step__tips
+            | *实际价格会根据选定日期及入住人数有所调整
+          - if @hotel.provisions.present?
+            .main-mobile-trades-new-step__detail-content ms-visible='selected_room'
+              .main-mobile-trades-new-step__detail-title = Hotel.human_attribute_name(:provisions)
+              - @hotel.provisions.split("\n").each do |item|
+                .main-mobile-trades-new-step__detail-item
+                  .main-mobile-trades-new-step__li
+                  = item
+          - if @hotel.children_provisions.present?
+            .main-mobile-trades-new-step__detail-content.cyan ms-visible='child_num>0&&selected_room'
+              .main-mobile-trades-new-step__detail-title = Hotel.human_attribute_name(:children_provisions)
+              - @hotel.children_provisions.split("\n").each do |item|
+                .main-mobile-trades-new-step__detail-item
+                  .main-mobile-trades-new-step__li
+                  = item
+          - if @hotel.drawback_provisions.present?
+            .main-mobile-trades-new-step__detail-content.green ms-visible='selected_room'
+              .main-mobile-trades-new-step__detail-title = Hotel.human_attribute_name(:drawback_provisions)
+              - @hotel.drawback_provisions.split("\n").each do |item|
+                .main-mobile-trades-new-step__detail-item
+                  .main-mobile-trades-new-step__li
+                  = item
+    .main-mobile-trades-new__step ms-visible="is_submitting"
+      .main-mobile-trades-new__content
+        h2.main-mobile-trades-new__title
+          .main-mobile-trades-new__title-icon
+          | 联系人信息
+        = f.fields_for :communicate, @trade.communicate do |ff|
+          .main-mobile-trades-new__form-group
+            .iconfont.icon-people
+            = ff.text_field :name, class: :'main-mobile-trades-new__input', :'ms-duplex' => :"communicate.name", :'ms-blur' => 'copy_communicate_name', :'placeholder' => "请输入#{Contacts::Communicate.human_attribute_name(:name)}"
+          .main-mobile-trades-new__form-group
+            .iconfont.icon-email
+            = ff.email_field :email, class: :'main-mobile-trades-new__input', :'ms-duplex' => :"communicate.email", :'placeholder' => "请输入#{Contacts::Communicate.human_attribute_name(:email)}"
+          .main-mobile-trades-new__form-group
+            .iconfont.icon-phone
+            = ff.phone_field :phone, class: :'main-mobile-trades-new__input', :'ms-duplex' => :"communicate.phone", :'ms-blur' => 'copy_communicate_phone', :'placeholder' => "请输入#{Contacts::Communicate.human_attribute_name(:phone)}"
+        = f.fields_for :user_remark, @trade.user_remark do |ff|
+          .main-mobile-trades-new__form-group
+            = ff.text_area :content, class: 'main-mobile-trades-new__textarea', rows: 3, :'placeholder' => "请输入#{Remark.human_attribute_name(:content)}"
+      .main-mobile-trades-new__content ms-repeat-attendence='attendences'
+        h2.main-mobile-trades-new__title
+          .main-mobile-trades-new__title-icon
+          | 第{{$index+1}}位入住人
+        .main-mobile-trades-new__form-group
+          .iconfont.icon-people
+          input.main-mobile-trades-new__input type="text" ms-attr-name="trade[attendences_attributes][{{$index}}][name]" ms-duplex="attendence.name" placeholder="请输入#{Contacts::Attendence.human_attribute_name(:name)}"
+        .main-mobile-trades-new__form-group
+          .iconfont.icon-phone
+          input.main-mobile-trades-new__input type="tel" ms-attr-name="trade[attendences_attributes][{{$index}}][phone]" ms-duplex="attendence.phone" placeholder="请输入#{Contacts::Attendence.human_attribute_name(:phone)}"
+    .main-mobile-trades-new-button
+      .main-mobile-trades-new-button__price
+        span ￥
+        em ms-text="total_price || min_package_price"
+        span ms-visible="!total_price" 起
+      .main-mobile-trades-new-button__action ms-visible="!is_submitting" ms-click="next" 下一步
+      .main-mobile-trades-new-button__action ms-visible="is_submitting" ms-click="submit" 提交

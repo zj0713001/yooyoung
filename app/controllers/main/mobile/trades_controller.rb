@@ -23,4 +23,44 @@ class Main::Mobile::TradesController < Main::Mobile::ApplicationController
     jsvar.package_min_price = PackageService.new(@hotel.package).min_price_by_date
     jsvar.favorite_min_price = PackageService.new(@hotel.favorite_package).min_price_by_date
   end
+
+  def create
+    authorize! :create, model
+
+    @trade = model.new
+    @success = TradeService.new.create(@trade, trade_params, current_user)
+
+    respond_to do |format|
+      if @success
+        format.html { render :success }
+        format.json { render json: { status: true, data: @trade } }
+      else
+        format.html { render action: :new, hotel_id: @trade.hotel.to_param }
+        format.json { raise YooYoung::CreateError }
+      end
+    end
+  end
+
+  def calendar
+    authorize! :create, model
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          status: true,
+          data: render_to_string(partial: 'main/mobile/trades/calendar', formats: :html),
+        }
+      }
+    end
+  end
+
+  private
+  def trade_params
+    params.require(:trade).permit(
+      :package_id, :room_id, :start_day, :end_day, :people_num, :child_num, :extra_bed_num, :user_remark,
+      communicate_attributes: [:name, :phone, :email],
+      attendences_attributes: [:name, :phone],
+      user_remark_attributes: [:content],
+    )
+  end
 end

@@ -39,19 +39,7 @@ class Main::TradesController < Main::ApplicationController
     authorize! :create, model
 
     @trade = model.new
-    @trade.attributes = trade_params
-    @trade.user = current_user
-    extra_bed_num_max = @trade.room.extra_bed_price.limit.to_i
-    people_num_max = @trade.room.population.to_i + extra_bed_num_max
-    if people_num_max > 0
-      @trade.people_num = [@trade.people_num, people_num_max].min
-      @trade.extra_bed_num = @trade.people_num - @trade.room.population.to_i
-    end
-    @trade.child_num = [@trade.child_num, @trade.room.child_price.limit.to_i].min
-    @trade.total_price = TradeService.new.price(@trade, :sale_price)
-    @trade.cost_price = TradeService.new.price(@trade, :cost_price)
-    @trade.user_remark.user = current_user if @trade.user_remark
-    @success = @trade.save
+    @success = TradeService.new.create(@trade, trade_params, current_user)
 
     respond_to do |format|
       if @success
@@ -62,7 +50,6 @@ class Main::TradesController < Main::ApplicationController
         format.json { raise YooYoung::CreateError }
       end
     end
-
   end
 
   def edit

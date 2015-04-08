@@ -1,5 +1,13 @@
 zh-CN:
   date:
+    short_day_names:
+    - 日
+    - 一
+    - 二
+    - 三
+    - 四
+    - 五
+    - 六
     abbr_day_names:
     - 周日
     - 周一

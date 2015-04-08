@@ -5,3 +5,6 @@ $(document).on 'page:restore', ->
 $(document).on 'page:change', ->
   NProgress.done()
   FastClick.attach(document.body)
+  $('img.lazy').lazyload
+    threshold: 300
+    effect: "fadeIn"

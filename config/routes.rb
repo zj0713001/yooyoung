@@ -57,6 +57,9 @@ Rails.application.routes.draw do
         member do
           get :pay_success
         end
+        collection do
+          get :calendar
+        end
       end
       devise_for :users, skip: [:sessions, :registrations, :passwords]
 
