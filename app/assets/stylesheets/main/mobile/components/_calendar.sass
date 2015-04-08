@@ -1,0 +1,53 @@
+.mobile-calendar
+  +border-style(solid)
+  +border-width(rem(1))
+  +border-color($light_dark)
+  +background($lightest_green)
+  .calendar-header
+    text-align: center
+    +padding(rem(12) null)
+    +clearfix
+    +border-style(null null solid null)
+    +border-width(rem(1))
+    +border-color($light_dark)
+    span,
+    a
+      display: block
+      float: left
+    span
+      width: 40%
+    .previous,
+    .next
+      color: $light_dark
+      width: 30%
+  table
+    width: 100%
+    text-align: center
+    th
+      +padding(rem(10) null)
+      color: $gray_dark
+      font-size: $font_standard
+      +padding(null null rem(10) rem(10))
+      &:last-child
+        +padding(null rem(10) rem(10) rem(10))
+    .day
+      color: $white
+      +size(rem(40))
+      +padding(null null rem(10) rem(10))
+      &.past
+        .day-item
+          +background($gray)
+      &.prev-month,
+      &.next-month
+        .day-item
+          display: none
+      &:last-child
+        +padding(null rem(10) rem(10) rem(10))
+    .day-item
+      +size(rem(28))
+      +background($light_dark)
+      line-height: rem(28)
+      &.check-in
+        +background($red)
+      &.check-out
+        +background(rgba($red, .6))

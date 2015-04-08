@@ -1,0 +1,7 @@
+.main-mobile-hotels-show-banner
+  .main-mobile-hotels-show-banner__background style="background-image: #{background_image_cover(hotel.cover_photo.try(:image).try(:small_narrow).try(:url))}"
+  h1.main-mobile-hotels-show-banner__title = hotel.chinese
+  hr.main-mobile-hotels-show-banner__hr
+  .main-mobile-hotels-show-banner__location
+    span.iconfont.icon-location
+    = hotel_location_text(hotel)

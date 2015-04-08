@@ -1,0 +1,23 @@
+.main-mobile-trades-new-button
+  +position(fixed, null null 0 0)
+  +size(100% rem(50))
+  +clearfix
+  z-index: 999
+  +background(rgba($red, .8))
+  color: $white
+  text-align: center
+  line-height: rem(48)
+  .main-mobile-trades-new-button__price
+    +margin(rem(1) null)
+    +span(1 of 2)
+    font-size: $font_standard
+    em
+      font-size: $font_h4
+      +margin(null rem(5))
+  .main-mobile-trades-new-button__action
+    +margin(rem(1) null)
+    +span(1 of 2)
+    font-size: $font_h4
+    +border-style(null null null solid)
+    +border-width(rem(1))
+    +border-color($white)
