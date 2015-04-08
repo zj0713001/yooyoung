@@ -7,6 +7,7 @@ ruby:
   has_price = PriceService.new(@hotel.package).has_prices?
   min_price = has_price && PackageService.new(@hotel.package).min_price_by_date
   can_buy = has_price && !min_price.to_i.zero?
+  @is_no_fotter = true
 .main-mobile-hotels-show.js_main_mobile_hotels_show
   .main-mobile-hotels-show__banner
     = render partial: 'main/mobile/hotels/banner', locals: { hotel: @hotel }
@@ -113,3 +114,13 @@ ruby:
                 .main-mobile-hotels-show-modal-favorite-day__description = simple_format item.description
               - if items.length != index+1
                 .iconfont.icon-arrow-double-down
+    .main-mobile-trades-new-button
+      .main-mobile-trades-new-button__price
+        - if has_price
+          span ￥
+          em = min_price
+          span 起
+      - if can_buy
+        = link_to '立即预定', new_mobile_trade_path(hotel_id: @hotel.to_param), class: :'main-mobile-trades-new-button__action'
+      - else
+        .main-mobile-trades-new-button__action 已售罄
