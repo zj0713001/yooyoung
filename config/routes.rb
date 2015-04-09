@@ -56,10 +56,17 @@ Rails.application.routes.draw do
       resources :trades, except: [:edit] do
         member do
           get :pay_success
+          # get :pay
         end
         collection do
           get :calendar
         end
+        # resources :payments, path: :pay, only: [] do
+        #   member do
+        #     get :done
+        #     post :done
+        #   end
+        # end
       end
       devise_for :users, skip: [:sessions, :registrations, :passwords]
 

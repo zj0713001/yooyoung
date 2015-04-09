@@ -1,0 +1,10 @@
+- @is_no_header = true
+.main-mobile-trades-show
+  h1.main-mobile-trades-show__title
+    | 付款#{@trade.successed? ? "成功" : "失败"}！
+  .main-mobile-trades-show__notice
+    - if @trade.successed?
+      | 您的订单已经付款成功，请您及时安排出行计划。
+    - else
+      | 您的订单付款失败，如您已经付款，请联系客服查询付款信息。客服电话：#{Settings.yooyoung.service_phone}。
+  = render partial: 'main/mobile/trades/item', locals: { trade: @trade, type: :detail }
