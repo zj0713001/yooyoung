@@ -7,7 +7,7 @@
 body, html {
   width: 100%;
   height: 100%;
-  @include font-family-songti;
+  @include font-family-heiti;
   font-size: $font_h6;
   font-weight: normal;
   -webkit-font-smoothing: antialiased;
@@ -20,7 +20,7 @@ label {
 }
 
 input {
-  @include font-family-songti;
+  @include font-family-heiti;
   -webkit-font-smoothing: antialiased;
 }
 
