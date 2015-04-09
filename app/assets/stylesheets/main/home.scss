@@ -33,7 +33,7 @@
   .home-index__banner {
     width: 100%;
     height: auto;
-    height: 100vh;
+    height: 85vh;
   }
   .home-index__section {
     width: 100%;
@@ -60,8 +60,7 @@
   position: relative;
   overflow: hidden;
   .home-index-banner__item {
-    height: auto;
-    height: 100vh;
+    height: 85vh;
   }
   .home-index-banner__prev, .home-index-banner__next {
     display: block;
@@ -89,8 +88,7 @@
 .home-index-banner-item {
   .home-index-banner-item__image {
     width: 100%;
-    height: auto;
-    height: 100vh;
+    height: 85vh;
     background-position: 50% 50%;
     background-repeat: no-repeat;
     @include background-size(cover);
@@ -130,7 +128,7 @@
   }
 }
 .home-index-section {
-  padding: 10px;
+  padding: 40px 10px 10px;
   .home-index-section__item {
     position: relative;
     margin: 10px;
