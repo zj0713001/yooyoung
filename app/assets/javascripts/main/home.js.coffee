@@ -69,10 +69,10 @@ $ ->
       $(this).velocity("stop").velocity({'height': '100%', 'width': '100%', 'top': '0', 'left': '0'}, 500, 'easeIn')
     , '.js_main_home_index_section_item_background'
 
-  fit_height = ->
-    $('.js_main_home_index_banner_height').height($(window).height())
-  lazy_fit_height = _.debounce(fit_height, resize_delay_time)
-  $(window).resize(lazy_fit_height)
+  # fit_height = ->
+  #   $('.js_main_home_index_banner_height').height($(window).height())
+  # lazy_fit_height = _.debounce(fit_height, resize_delay_time)
+  # $(window).resize(lazy_fit_height)
 
   resize_items_height = ->
     unit_length = ($(window).width() - 100) / 4
