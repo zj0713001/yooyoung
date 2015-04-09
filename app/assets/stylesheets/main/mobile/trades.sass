@@ -80,6 +80,13 @@
     +position(absolute, rem(7) null null 0)
     background: rgba($red, .3)
     +size(rem(5))
+  .main-mobile-trades-simple-item__action
+    +border-style(solid none none none)
+    +border-width(rem(1))
+    +border-color($light_dark)
+    +padding(rem(10) rem(20))
+  .main-mobile-trades-simple-item__pay-button
+    +display(block)
 .main-mobile-trades-new
   +position(relative)
   .main-mobile-trades-new__step
@@ -143,7 +150,7 @@
     +appearance(none)
     +placeholder
       color: $gray_dark
-    &:focus, &:active
+    &:focus
       +placeholder
         color: transparent
   .main-mobile-trades-new__input

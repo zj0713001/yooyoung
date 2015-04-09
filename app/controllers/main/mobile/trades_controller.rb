@@ -54,6 +54,19 @@ class Main::Mobile::TradesController < Main::Mobile::ApplicationController
     end
   end
 
+  def pay
+    @trade = model.find_by_param params[:id]
+
+    authorize! :update, model
+
+    redirect_to @trade and return if !@trade.confirmed?
+  end
+
+  def pay_success
+    @trade = model.find_by_param params[:id]
+    authorize! :show, @trade
+  end
+
   private
   def trade_params
     params.require(:trade).permit(

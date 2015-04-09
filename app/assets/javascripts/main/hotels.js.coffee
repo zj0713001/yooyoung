@@ -139,36 +139,38 @@ $ ->
 
 
     $(document).on 'scroll', (e) ->
-      if !$('.js_main_hotel_show_banner').data('is_banner_sliced') && $(this).scrollTop() > 0
-        banner_slice()
-      if $('.js_main_hotel_show_banner').data('is_banner_sliced')
-        if $(this).scrollTop() == 0
-          banner_close()
-        package_top = parseInt($('.js_main_hotel_show_content_package').offset().top - 60)
-        if Math.abs($(document).scrollTop() - package_top) > 100
-          $(document).unmousewheel()
-          $('.js_main_hotel_show_content_package').data('skip', false) if $(document).scrollTop() < package_top
-          $('.js_main_hotel_show_content_package').data('skip', true) if $(document).scrollTop() > package_top
-          $('.js_main_hotel_show_content_package').data('package-scroll', false)
-        if $(document).scrollTop() >= package_top && ($(document).scrollTop() - package_top) < 100 && !$('.js_main_hotel_show_content_package').data('package-scroll') && !$('.js_main_hotel_show_content_package').data('skip')
-          $('.js_main_hotel_show_content_package').data('package-scroll', true)
-          $('.js_main_hotel_show_content_package').data('skip', true)
-          $(document).scrollTo($('.js_main_hotel_show_content_package').offset().top-60)
-          package_scroll()
-        if $(document).scrollTop() >= package_top && ($(document).scrollTop() - package_top) > $(window).height()
-          $slick_active = $('.js_main_hotel_show_content_package .slick-active')
-          package_info_hide($slick_active) if $slick_active.data('show-info')
-          $('.js_main_hotel_show_content_package').slick('unslick');
-          content_package_slick_bind()
-        if package_top - $(document).scrollTop() > 100
-          $slick_active = $('.js_main_hotel_show_content_package .slick-active')
-          package_info_hide($slick_active) if $slick_active.data('show-info')
-        if $(this).scrollTop() > $('.js_main_hotel_show_content_favorite').offset().top
-          min_price = $('.js_main_hotel_show_banner_booking').data('favorite-min-price')
-          $('.js_main_hotel_show_package_min_price').text(min_price) if parseInt(min_price) != parseInt($('.js_main_hotel_show_package_min_price'))
-        else
-          min_price = $('.js_main_hotel_show_banner_booking').data('package-min-price')
-          $('.js_main_hotel_show_package_min_price').text(min_price) if parseInt(min_price) != parseInt($('.js_main_hotel_show_package_min_price'))
+      setTimeout ->
+        if !$('.js_main_hotel_show_banner').data('is_banner_sliced') && $(this).scrollTop() > 0
+          banner_slice()
+        if $('.js_main_hotel_show_banner').data('is_banner_sliced')
+          if $(this).scrollTop() == 0
+            banner_close()
+          package_top = parseInt($('.js_main_hotel_show_content_package').offset().top - 60)
+          if Math.abs($(document).scrollTop() - package_top) > 100
+            $(document).unmousewheel()
+            $('.js_main_hotel_show_content_package').data('skip', false) if $(document).scrollTop() < package_top
+            $('.js_main_hotel_show_content_package').data('skip', true) if $(document).scrollTop() > package_top
+            $('.js_main_hotel_show_content_package').data('package-scroll', false)
+          if $(document).scrollTop() >= package_top && ($(document).scrollTop() - package_top) < 100 && !$('.js_main_hotel_show_content_package').data('package-scroll') && !$('.js_main_hotel_show_content_package').data('skip')
+            $('.js_main_hotel_show_content_package').data('package-scroll', true)
+            $('.js_main_hotel_show_content_package').data('skip', true)
+            $(document).scrollTo($('.js_main_hotel_show_content_package').offset().top-60)
+            package_scroll()
+          if $(document).scrollTop() >= package_top && ($(document).scrollTop() - package_top) > $(window).height()
+            $slick_active = $('.js_main_hotel_show_content_package .slick-active')
+            package_info_hide($slick_active) if $slick_active.data('show-info')
+            $('.js_main_hotel_show_content_package').slick('unslick');
+            content_package_slick_bind()
+          if package_top - $(document).scrollTop() > 100
+            $slick_active = $('.js_main_hotel_show_content_package .slick-active')
+            package_info_hide($slick_active) if $slick_active.data('show-info')
+          if $(this).scrollTop() > $('.js_main_hotel_show_content_favorite').offset().top
+            min_price = $('.js_main_hotel_show_banner_booking').data('favorite-min-price')
+            $('.js_main_hotel_show_package_min_price').text(min_price) if parseInt(min_price) != parseInt($('.js_main_hotel_show_package_min_price'))
+          else
+            min_price = $('.js_main_hotel_show_banner_booking').data('package-min-price')
+            $('.js_main_hotel_show_package_min_price').text(min_price) if parseInt(min_price) != parseInt($('.js_main_hotel_show_package_min_price'))
+      , 1
       true
 
     _.delay ->

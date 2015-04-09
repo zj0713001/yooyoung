@@ -84,3 +84,8 @@
               = attendence.name
               | &nbsp;
               = attendence.phone
+  - if type == :detail && trade.confirmed?
+    .main-mobile-trades-simple-item__action
+      / = link_to '立即付款', pay_mobile_trade_path(trade), class: :'main-mobile-trades-simple-item__pay-button primary-button normal-button'
+      / 临时只使用支付宝 pay页面先不用
+      = link_to '立即付款', new_trade_payment_path(trade, service: :alipay_wap), class: :'main-mobile-trades-simple-item__pay-button primary-button normal-button'

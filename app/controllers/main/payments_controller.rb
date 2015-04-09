@@ -90,6 +90,6 @@ class Main::PaymentsController < Main::ApplicationController
       @payment_service.handle_notify(process_params, from: :get)
     end
 
-    render 'main/trades/pay_success'
+    redirect_to pay_success_trade_path(@trade)
   end
 end
