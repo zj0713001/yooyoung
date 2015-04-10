@@ -11,7 +11,7 @@ class SmsSender
     raise 'phone number error!' if Array(phone).any?{|p| p.match(TotalRegexp.phone).blank? }
 
     content << '【悠漾旅行】'
-    response = Timeout::timeout(30) { ChinaSMS.to phone, content }
+    response = Timeout::timeout(120) { ChinaSMS.to phone, content }
     return false unless response.try(:[], :success)
     true
   end
