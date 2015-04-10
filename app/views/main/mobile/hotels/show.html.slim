@@ -24,7 +24,7 @@ ruby:
       .main-mobile-hotels-show-photos__price-flag.main-mobile-hotels-show-photos__price-flag--soldout 已售罄
     .ui.page.dimmer.main-mobile-hotels-show-modal.js_main_mobile_hotels_photos_modal
       .main-mobile-hotels-show-modal-photos.main-mobile-hotels-show-modal-photos--center.js_main_mobile_hotels_album
-        - @hotel.photos[0..2].each do |photo|
+        - @hotel.photos.each do |photo|
           .main-mobile-hotels-show-modal-photos__item
             = image_tag photo.image.normal.url, lazy: true
   h2.main-mobile-hotels-show__title
@@ -74,7 +74,7 @@ ruby:
         - if items.count > 0
           .main-mobile-hotels-show-package-detail__multi.opacity-button.js_main_mobile_package_photo 图集
       .main-mobile-hotels-show-package-detail__description
-        = simple_format items.first.try(:description)
+        = simple_format items.first.try(:content)
     .ui.page.dimmer.main-mobile-hotels-show-modal.js_main_mobile_hotels_package_modal
       .main-mobile-hotels-show-modal-package
         .main-mobile-hotels-show-modal-package__title = @hotel.package.name
