@@ -42,15 +42,15 @@
   padding: 60px 67px;
   width: 100%;
   height: auto;
-  @include rgba-background-inline(rgba($black, 0.4));
+  @include background(rgba($black, 0.4));
   .sessions-new-form__input {
-    @include rgba-background-inline(rgba($black, 0.4));
+    @include background(rgba($black, 0.4));
     color: $gray_white;
     @include placeholder {
       color: $darker_white;
     }
     &:hover {
-      @include rgba-background-inline(rgba($black, 0.3));
+      @include background(rgba($black, 0.3));
     }
     &:focus {
       @include placeholder {
@@ -73,12 +73,12 @@
   }
   .sessions-new-form__submit {
     letter-spacing: 10px;
-    @include rgba-background-inline(rgba($black, 0.5));
+    @include background(rgba($black, 0.5));
     &:hover {
-      @include rgba-background-inline(rgba($black, 0.3));
+      @include background(rgba($black, 0.3));
     }
     &:active {
-      @include rgba-background-inline(rgba($black, 0.4));
+      @include background(rgba($black, 0.4));
     }
   }
   .sessions-new-form__tips {
@@ -94,12 +94,12 @@
     top: 0;
     right: 0;
     text-align: center;
-    @include rgba-background-inline(rgba($black, 0.4));
+    @include background(rgba($black, 0.4));
     border: solid;
     border-width: 1px;
     font-size: $font_h4;
     &:hover {
-      @include rgba-background-inline(rgba($black, 0.3));
+      @include background(rgba($black, 0.3));
     }
   }
   .sessions-new-form__sending-captcha {

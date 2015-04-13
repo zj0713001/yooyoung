@@ -17,7 +17,7 @@
       ul.hotel-show-content-overview__info-features.js_main_hotel_show_content_overview_item
         - hotel.recommends.each do |recommend|
           li
-            span.iconfont.icon-water
+            .hotel-show-content-overview__info-icon
             = recommend
       .hotel-show-content-overview__info-traffics.js_main_hotel_show_content_overview_item
         - if hotel.arounds.present?

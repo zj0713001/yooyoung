@@ -14,7 +14,7 @@
     float: left;
     line-height: 2em;
     padding-right: 1em;
-    @include rgba-background-inline(rgba($white, .3));
+    @include background(rgba($white, .3));
   }
   .main-flag-label__shadow {
     float: right;

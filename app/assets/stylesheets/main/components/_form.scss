@@ -90,6 +90,6 @@
     line-height: 14px;
     @include inline-block;
     color: $white;
-    @include rgba-background-inline(rgba($red, 0.5));
+    @include background(rgba($red, 0.5));
   }
 }

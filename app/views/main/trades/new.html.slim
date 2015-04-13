@@ -30,7 +30,7 @@ ruby:
             .trade-new-form__package-array
             - @hotel.package.items.each do |item|
               .trade-new-form__package-content
-                .iconfont.icon-water
+                .trade-new-form__package-icon
                 = item.content
           .trade-new-form__package-section ms-class='trade-new-form__package-section--selected:is_favorite'
             .trade-new-form__favorite-array
@@ -38,7 +38,7 @@ ruby:
               .trade-new-form__favorite-package-day Day #{day_index}
               - items.each_with_index do |item, index|
                 .trade-new-form__favorite-package-content
-                  .iconfont.icon-water
+                  .trade-new-form__package-icon
                   = item.content
         .main-form__group
           = f.label :start_day, class: :'trade-new-form__label main-form__label'

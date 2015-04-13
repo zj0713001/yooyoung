@@ -43,12 +43,12 @@
     font-size: $font_h6;
     line-height: $font_h3;
     color: $gray_black;
-    .iconfont.icon-water {
-      position: absolute;
-      left: -2px;
-      top: 0;
-      color: $light_black;
-    }
+  }
+  .detail-container__package-icon {
+    position: absolute;
+    top: 8px;
+    left: 0;
+    @extend %secondary-title-icon;
   }
   .detail-container__input {
     width: 400px;

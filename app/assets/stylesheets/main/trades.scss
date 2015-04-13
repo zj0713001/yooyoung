@@ -231,12 +231,12 @@
     position: relative;
     padding-left: 20px;
     line-height: $font_h3;
-    .iconfont.icon-water {
-      position: absolute;
-      left: -2px;
-      top: 0;
-      color: $gray_black;
-    }
+  }
+  .trade-new-form__package-icon {
+    position: absolute;
+    top: 8px;
+    left: 0;
+    @extend %secondary-title-icon;
   }
   .trade-new-form__package-pricde,
   .trade-new-form__room-pricde {
