@@ -14,9 +14,8 @@ else
 fi
 
 if [ -f $sidekiq_pidfile ]; then
-  bundle exec sidekiqctl stop $sidekiq_pid
+  bundle exec sidekiqctl stop $sidekiq_pidfile
 fi
-pkill -u $user -f 'sidekiq [0-9]'
 bundle exec sidekiq -C config/sidekiq.yml -P $sidekiq_pidfile -L log/sidekiq.log -e production -d
 
 while true; do
