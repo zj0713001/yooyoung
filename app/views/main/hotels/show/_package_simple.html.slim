@@ -1,12 +1,14 @@
 .hotel-show-content-package-simple
   .hotel-show-content-package-simple__content
-    h2.hotel-show-content-package-simple__title = hotel.package.name
+    h2.hotel-show-content-package-simple__title
+      .hotel-show-content__title-icon
+      = hotel.package.name
     .hotel-show-content-package-simple__list
       .hotel-show-content-package-simple__list-info 套餐包含：
       ul
         - hotel.package.items.each do |item|
           li
-            span.iconfont.icon-water
+            .hotel-show-content-package-simple__item-icon
             = item.content
     .hotel-show-content-package-simple__description
       = simple_format hotel.package.description

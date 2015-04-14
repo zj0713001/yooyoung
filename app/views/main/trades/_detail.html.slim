@@ -66,12 +66,12 @@
               .detail-container__package-day Day #{day_index}
               - items.each_with_index do |item, index|
                 .detail-container__package-item
-                  .iconfont.icon-water
+                  .detail-container__package-icon
                   = item.content
           - else
             - trade.package.items.each do |item|
               .detail-container__package-item
-                .iconfont.icon-water
+                .detail-container__package-icon
                 = item.content
   .detail-container__group
     .detail-container__label

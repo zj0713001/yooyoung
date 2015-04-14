@@ -8,8 +8,8 @@
 @import "rgbapng";
 
 // Common
-@import "main/common/mixins";
 @import "main/common/variables";
+@import "main/common/mixins";
 @import "main/common/reset";
 @import "main/common/icons";
 @import "main/common/common";
@@ -69,7 +69,7 @@
     top: 50%;
     z-index: 999;
     &:hover {
-      @include rgba-background-inline(rgba($white, .3));
+      @include background(rgba($white, .3));
     }
     .iconfont {
       font-size: 4.2em;
@@ -105,7 +105,7 @@
   font-size: 1.5em;
   line-height: 1em;
   .home-index-banner-item-hotel__section {
-    @include rgba-background-inline(rgba($black, .5));
+    @include background(rgba($black, .5));
     padding: 1em .8em;
     margin-right: .5em;
     display: none;
@@ -159,7 +159,7 @@
   }
   .home-index-section-item__info {
     position: absolute;
-    @include rgba-background-inline(rgba($black, .5));
+    @include background(rgba($black, .5));
     padding: 1em;
     left: 0;
     bottom: 00;
@@ -189,13 +189,13 @@
     padding-top: 50%;
   }
   &.home-index-section-item-area--yellow {
-    @include rgba-background-inline(rgba($orange, .7));
+    @include background(rgba($orange, .7));
     &:hover {
       @include background(none)
     }
   }
   &.home-index-section-item-area--green {
-    @include rgba-background-inline(rgba($green, .7));
+    @include background(rgba($green, .7));
     &:hover {
       @include background(none)
     }
