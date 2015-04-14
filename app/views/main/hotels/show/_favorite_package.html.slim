@@ -1,20 +1,21 @@
 .hotel-show-content-favorite
   .hotel-show-content-favorite__container
     h2.hotel-show-content-favorite__title
+      .hotel-show-content__title-icon
       | 悠漾专属套餐
       a.js_hotel_show_content_favorite_help 什么是悠漾专属套餐？
     .hotel-show-content-favorite__explain.js_hotel_show_content_favorite_explain
       .hotel-show-content-favorite__explain-item
-        span.iconfont.icon-water
+        .hotel-show-content-favorite__explain-icon
         | 精选酒店本身最值得体验的吃喝玩乐项目
       .hotel-show-content-favorite__explain-item
-        span.iconfont.icon-water
+        .hotel-show-content-favorite__explain-icon
         | 整合酒店周边值得体验的旅行产品
       .hotel-show-content-favorite__explain-item
-        span.iconfont.icon-water
+        .hotel-show-content-favorite__explain-icon
         | 每日详细行程为您提供出行参考
       .hotel-show-content-favorite__explain-item
-        span.iconfont.icon-water
+        .hotel-show-content-favorite__explain-icon
         | 一键下单，费用全包，轻松出行
   .hotel-show-content-favorite__package
     .hotel-show-content-favorite__package-background.js_hotel_show_content_favorite_background style="background-image: #{background_image_cover(image_url hotel.cover_photo.try(:image).try(:huge).try(:url))}"
@@ -27,7 +28,7 @@
         - items.each_with_index do |item, index|
           .hotel-show-content-favorite__item
             .hotel-show-content-favorite__item-content
-              span.iconfont.icon-water
+              .hotel-show-content-favorite__item-icon
               = item.content
             - if item.photos.present?
               .hotel-show-content-favorite__item-photos

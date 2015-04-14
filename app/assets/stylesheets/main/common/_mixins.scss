@@ -58,3 +58,16 @@
   @include align-items(center);
   @include justify-content(center);
 }
+
+%primary-title-icon {
+  height: 10px;
+  width: 16px;
+  @include background-size(8, 5);
+  @include background(linear-gradient(rgba($red, 0.3) 50%, $red 50%));
+}
+
+%secondary-title-icon {
+  height: 8px;
+  width: 8px;
+  background: rgba($red, .3)
+}

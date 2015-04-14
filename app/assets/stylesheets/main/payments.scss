@@ -58,7 +58,7 @@ $sprites2x: sprite-map("main/payments-retina/*.png");
     top: 0;
     left: 0;
     z-index: 999;
-    @include rgba-background-inline(rgba($black, .7));
+    @include background(rgba($black, .7));
   }
   .main-payment-services__modal {
     width: 550px;
