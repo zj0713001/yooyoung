@@ -1,8 +1,8 @@
-source 'https://ruby.taobao.org/'
+source 'https://rubygems.org/'
 ruby '2.2.2'
 
 # Core
-gem 'rails', '~> 4.2.0'
+gem 'rails', '~> 4.2.1'
 
 # Cache
 gem 'redis-rails'
@@ -73,7 +73,7 @@ gem 'sunspot_solr'
 gem 'mongoid'
 
 # Assets
-gem 'sass-rails'
+gem 'sass-rails', '<= 5.0.1'
 gem 'uglifier'
 gem 'coffee-rails'
 gem 'jquery-rails'
@@ -85,7 +85,7 @@ gem 'semantic-ui-sass', github: 'zj0713001/semantic-ui-sass'
 gem 'compass'
 gem 'compass-rgbapng'
 gem 'oily_png'
-gem 'compass-rails'
+gem 'compass-rails', '~> 2.0.4'
 gem 'compass-import-once'
 gem 'susy'
 gem 'bourbon'
@@ -97,6 +97,7 @@ gem 'gon'
 gem 'breakpoint'
 gem 'avalon-rails'
 gem 'facebox-rails'
+gem 'sprockets', '< 2.13'
 
 # Security
 gem 'rack-attack'
