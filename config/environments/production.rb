@@ -66,7 +66,7 @@ Rails.application.configure do
     entitystore: 'redis://localhost:6379/1/entity_store',
   }
 
-  config.action_controller.default_url_options = { host: 'www.yooyoung.cn', scheme: 'http' }
+  config.action_controller.default_url_options = { host: 'http://www.yooyoung.cn' }
 
   config.roadie.url_options = { host: 'www.yooyoung.cn', scheme: 'http' }
 
