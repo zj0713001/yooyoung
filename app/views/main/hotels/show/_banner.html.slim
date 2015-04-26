@@ -1,0 +1,16 @@
+.hotel-show-banner style="background-image: #{background_image_cover hotel.cover_photo.try(:image).try(:huge).try(:url)}"
+  .hotel-show-banner__section
+    .hotel-show-banner-section
+      .hotel-show-banner-section__title = hotel.chinese
+      .hotel-show-banner-section__location
+        .main-location.main-location--center
+          span.iconfont.icon-location
+          span.main-location__text #{hotel_location_text(hotel)}
+      - if can_buy
+        a.hotel-show-banner-section__booking.opacity-button href="#{new_trade_path(hotel_id: hotel.to_param)}" 立即预定
+        .hotel-show-banner-section__price-tag
+          small ￥
+          em = min_price
+          | /人起
+      - else
+        a.hotel-show-banner-section__booking.opacity-button href="javascript:void(0);" 已售罄

@@ -61,18 +61,10 @@
       = trade.package.name
       - if show_package
         .detail-container__package-content
-          - if trade.package.favorite
-            - trade.package.items.group_by(&:service_day).sort.each_with_index do |(day_index, items), index|
-              .detail-container__package-day Day #{day_index}
-              - items.each_with_index do |item, index|
-                .detail-container__package-item
-                  .detail-container__package-icon
-                  = item.content
-          - else
-            - trade.package.items.each do |item|
-              .detail-container__package-item
-                .detail-container__package-icon
-                = item.content
+          - trade.package.items.each do |item|
+            .detail-container__package-item
+              .detail-container__package-icon
+              = item.content
   .detail-container__group
     .detail-container__label
       = Trade.human_attribute_name(:room_id)

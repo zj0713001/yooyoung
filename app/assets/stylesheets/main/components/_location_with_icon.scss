@@ -1,25 +1,22 @@
 .main-location {
   position: relative;
-  height: 1em;
   white-space: nowrap;
   .main-location__text {
-    font-size: .8em;
-    margin-left: 2em;
+    font-size: $font_h4;
+    margin-left: 10px;
   }
   .icon-location {
     position: absolute;
-    font-size: 1.1em;
+    font-size: $font_h3;
     left: 0;
   }
 }
 
 .main-location--center {
   text-align: center;
-  .main-location__text, .icon-location {
-    position: relative;
-    left: 0;
-  }
   .icon-location {
-    margin-right: 1em;
+    position: relative;
+    font-size: 15px;
+    top: -3px;
   }
 }

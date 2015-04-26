@@ -1,0 +1,23 @@
+.hotel-show-nav
+  ul.main-navbar.nav
+    li.active
+      a href='#features' 套餐亮点
+    li
+      a href='#overview' 酒店介绍
+    li
+      a href='#rooms' 房型信息
+    li
+      a href='#packages' 费用说明
+    li
+      a href='#extras' 精彩活动
+  - if can_buy
+    .hotel-show-nav__price
+      span.js_main_hotel_show_package_days data-id="#{min_price_package.id}"
+        - if min_price_package
+          = "#{min_price_package.days+1}天#{min_price_package.days}晚"
+          | ：￥
+      em.js_main_hotel_show_package_min_price = show_currency min_price
+      | 起
+    a.hotel-show-nav__booking.primary-button href="#{new_trade_path(hotel_id: hotel.to_param)}" 立即预定
+  - else
+    a.hotel-show-nav__booking.minor-button href="javascript:void(0);" 已售罄

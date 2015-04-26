@@ -1,64 +1,30 @@
 ruby:
   set_meta_tags(
-    title: "#{@hotel.chinese}_#{@hotel.package.name}_#{@hotel.city.country.chinese}_#{@hotel.city.chinese} - 悠漾旅行",
-    description: "#{@hotel.city.country.chinese}，#{@hotel.city.chinese}，#{@hotel.chinese}，#{@hotel.package.name}。特色：#{@hotel.recommends.join('，')}",
-    keywords: "#{@hotel.city.country.chinese}酒店,#{@hotel.city.chinese}酒店,#{@hotel.chinese}推荐,#{@hotel.chinese}介绍,#{@hotel.chinese}房间,#{@hotel.chinese}特惠,#{@hotel.package.name}预订"
+    title: [@hotel.chinese, @packages.first.try(:name)].join(',')+" - 悠漾旅行",
+    description: "#{@hotel.city.country.chinese}，#{@hotel.city.chinese}，#{@hotel.chinese}，#{@packages.first.try(:name)}。特色：#{@hotel.recommends.join('，')}",
+    keywords: "#{@hotel.city.country.chinese}酒店,#{@hotel.city.chinese}酒店,#{@hotel.chinese}推荐,#{@hotel.chinese}介绍,#{@hotel.chinese}房间,#{@hotel.chinese}特惠,#{@packages.first.try(:name)}预订"
   )
-  has_price = PriceService.new(@hotel.package).has_prices?
-  min_price = has_price && PackageService.new(@hotel.package).min_price_by_date
-  can_buy = has_price && !min_price.to_i.zero?
+  min_price_hash = @packages.map{|package| { package => PackageService.new(package).min_price_by_date }}.inject(&:merge)
+  min_price = min_price_hash.values.compact.min
+  can_buy = !min_price.to_i.zero?
+  min_price_package = can_buy ? min_price_hash.find{|k,v| v == min_price}.first : nil
+
 .hotel-show.js_main_hotel_show
   = render 'main/shared/main_header'
-  .hotel-show__banner.hotel-show-banner.js_main_hotel_show_banner
-    .hotel-show-banner__first-half.js_main_hotel_show_banner_first_half
-      = image_tag @hotel.cover_photo.try(:image).try(:huge).try(:url)
-    .hotel-show-banner__second-half.js_main_hotel_show_banner_second_half
-      = image_tag @hotel.cover_photo.try(:image).try(:huge).try(:url)
-    .hotel-show-banner__section.js_main_hotel_show_banner_section
-      .hotel-show-banner-section.js_main_hotel_show_banner_section_block
-        h1.hotel-show-banner-section__name = @hotel.chinese
-        hr.hotel-show-banner-section__hr
-        .main-location.main-location--center
-          span.iconfont.icon-location
-          span.main-location__text #{hotel_location_text(@hotel)}
-    - if can_buy
-      a.hotel-show-banner__booking.opacity-button.js_main_hotel_show_banner_booking data-package-min-price="#{min_price}" data-url="#{package_min_price_price_path(@hotel)}" href="#{new_trade_path(hotel_id: @hotel.to_param)}" 立即预定
-    - else
-      a.hotel-show-banner__booking.opacity-button.js_main_hotel_show_banner_booking href="javasctipt:void(0);" 已售罄
-    .hotel-show-banner__click-down.js_main_hotel_show_banner_down
-      .iconfont.icon-arrow-down
-    .clear
-  .hotel-show__content.hotel-show-content.js_main_hotel_show_content#overview
-    .hotel-show-content__nav.js_main_hotel_show_content_nav
-      .hotel-show-content-nav
-        ul.main-navbar.nav
-          li.active
-            a href='#overview' 酒店概览
-          li
-            a href='#rooms' 房型介绍
-          li
-            a href='#package' 酒店套餐
-          li
-            a href='#favorite' 悠漾专属套餐
-          li
-            a href='#tips' 旅行贴士
-        - if can_buy
-          .hotel-show-content-nav__price
-            | 套餐价：￥
-            em.js_main_hotel_show_package_min_price = show_currency min_price
-            | 起
-          a.hotel-show-content-nav__booking.primary-button href="#{new_trade_path(hotel_id: @hotel.to_param)}" 立即预定
-        - else
-          a.hotel-show-content-nav__booking.minor-button href="javascript:void(0);" 已售罄
-    .hotel-show-content__overview
-      = render 'main/hotels/show/overview', hotel: @hotel
-    .hotel-show-content__rooms#rooms
-      = render 'main/hotels/show/rooms', hotel: @hotel
-    .hotel-show-content__package-simple.js_main_hotel_show_content_package_simple#package
-      = render 'main/hotels/show/package_simple', hotel: @hotel
-    .hotel-show-content__package
-      = render 'main/hotels/show/package', hotel: @hotel
-    .hotel-show-content__favorite.js_main_hotel_show_content_favorite#favorite
-      = render 'main/hotels/show/favorite_package', hotel: @hotel
-    .hotel-show-content__tips#tips
-      = render 'main/hotels/show/tips', hotel: @hotel
+  .hotel-show__banner
+    = render partial: 'main/hotels/show/banner', locals: { hotel: @hotel, min_price: min_price, can_buy: can_buy }
+  .hotel-show__nav.js_main_hotel_show_nav
+    = render partial: 'main/hotels/show/nav', locals: { hotel: @hotel, min_price: min_price, can_buy: can_buy, min_price_package: min_price_package }
+  / - if @hotel.video.present?
+  /   .hotel-show__video
+  /     = render partial: 'main/hotels/show/video', locals: { hotel: @hotel }
+  .hotel-show__features#features
+    = render partial: 'main/hotels/show/features', collection: @hotel.features, as: :feature
+  .hotel-show__overview#overview
+    = render partial: 'main/hotels/show/overview', locals: { hotel: @hotel }
+  .hotel-show__rooms#rooms
+    = render partial: 'main/hotels/show/rooms', locals: { hotel: @hotel }
+  .hotel-show__packages#packages
+    = render partial: 'main/hotels/show/packages', collection: @hotel.packages.published, as: :package, locals: { min_price_hash: min_price_hash }
+  .hotel-show__extras#extras
+    = render partial: 'main/hotels/show/extras', collection: @hotel.extra_services, as: :extra_service

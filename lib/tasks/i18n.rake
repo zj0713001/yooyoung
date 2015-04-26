@@ -15,6 +15,7 @@ namespace :i18n do
       'sequence' => '排序',
       'description' => '描述',
       'tips' => 'Tips',
+      'cover_photo_id' => '封面图片',
     }
   end
 

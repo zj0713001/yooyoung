@@ -4,6 +4,9 @@
 @import "compass/css3";
 @import "compass/utilities";
 @import "rgbapng";
+@import 'semantic-ui/modules/dimmer';
+@import 'semantic-ui/modules/modal';
+@import 'semantic-ui/modules/transition';
 
 // Common
 @import "main/common/variables";

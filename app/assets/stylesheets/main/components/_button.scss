@@ -14,10 +14,13 @@
   border-width: 1px;
   border-color: $white;
   @include border-radius(0);
-  background: none;
+  background: rgba($black, .8);
   color: $white;
   cursor: pointer;
   text-align: center;
+  &:hover {
+    background: rgba($black, .6);
+  }
 }
 .minor-button {
   border: 1px solid $gray_black;

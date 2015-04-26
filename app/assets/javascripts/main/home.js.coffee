@@ -9,7 +9,6 @@
 #= require 3rd/velocity
 #= require 3rd/jquery.tooltipster
 
-#= require main/common/redraw_font_size
 #= require main/common/footer
 
 $ ->

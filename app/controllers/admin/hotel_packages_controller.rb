@@ -1,13 +1,23 @@
 class Admin::HotelPackagesController < Admin::ApplicationController
   before_action :init_hotel
 
+  def index
+    @packages = @hotel.packages
+    .where(permited_params[:where])
+    .order((params[:order]||{id: :desc}))
+    .page(params[:page]).per(params[:per_page])
+    @packages = @packages.none unless can?(:index, Hotel)
+
+    respond_with(@packages)
+  end
+
   def show
   end
 
   def new
     authorize! :create, @hotel
 
-    @package = model.new(favorite: params[:favorite])
+    @package = model.new
     @package.items.build(sequence: 1)
 
     render :show
@@ -18,7 +28,6 @@ class Admin::HotelPackagesController < Admin::ApplicationController
 
     @package = model.new
     @package.attributes = params[:hotel_package].permit!
-    @package.rooms = @hotel.rooms
     @package.editor = current_user
 
     @package.save
@@ -34,9 +43,13 @@ class Admin::HotelPackagesController < Admin::ApplicationController
 
   def update
     authorize! :edit, @hotel
+    if params[:published].nil?
+      @package.attributes = params[:hotel_package].permit!
+    else
+      authorize! :publish, @hotel
+      @package.attributes = { published: params[:published] }
+    end
 
-    @package.attributes = params[:hotel_package].permit!
-    @package.rooms = @hotel.rooms
     @package.editor = current_user
 
     @success = @package.save
@@ -51,6 +64,8 @@ class Admin::HotelPackagesController < Admin::ApplicationController
   end
 
   def destroy
+    @package.destroy
+    render :show
   end
 
   private

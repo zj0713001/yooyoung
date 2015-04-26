@@ -1,0 +1,28 @@
+.hotel-show-packages.js_main_hotel_show_package data-id="#{package.id}" data-text="#{package.days+1}天#{package.days}晚：￥" data-price="#{show_currency min_price_hash[package]}"
+  .hotel-show-packages__container
+    .hotel-show-packages__name = package.name
+    table
+      tr
+        td
+          .hotel-show-packages__title
+            .hotel-show-packages__title-icon
+            | 套餐内容包含
+          - package.items.each do |item|
+            .hotel-show-packages__item
+              .hotel-show-packages__item-icon
+              = item.content
+          .hotel-show-packages__title
+            .hotel-show-packages__title-icon
+            | 悠漾超值赠送
+          - package.presents.each do |present|
+            .hotel-show-packages__item
+              .hotel-show-packages__item-icon
+              = present
+        td
+          .hotel-show-packages__title
+            .hotel-show-packages__title-icon
+            | 费用不含
+          - package.exclusives.each do |exclusive|
+            .hotel-show-packages__item
+              .hotel-show-packages__item-icon
+              = exclusive

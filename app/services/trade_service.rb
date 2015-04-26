@@ -2,11 +2,7 @@ class TradeService
   def price(trade, price_type)
     package_price = PriceService.new(trade.package).find_by_date(trade.start_day, price_type: price_type)
     room_price = PriceService.new(trade.room).find_all_by_date(trade.start_day, trade.start_day+(trade.package.days-1).days, price_type: price_type)
-    room_price_disabled = if trade.package.favorite
-      room_price.any?{|d| d[:exist] == false || d[price_type].to_i.zero?} || package_price[:exist] == false || package_price[price_type].to_i.zero?
-    else
-      room_price.any?{|d| d[:exist] == false || d[price_type].to_i.zero?} || package_price[:exist] == false
-    end
+    room_price_disabled = room_price.any?{|d| d[:exist] == false || d[price_type].to_i.zero?} || package_price[:exist] == false
 
     return nil if room_price_disabled == true
 

@@ -14,6 +14,12 @@ zh-CN:
         editor_id: "编辑"
         created_at: "创建时间"
         updated_at: "修改时间"
-        favorite: 是否为悠漾套餐
         cover_photo: 封面图片
         days: 套餐天数
+        published: 发布？
+        active: 有效？
+        on_saled: 可售？
+        published_at: 发布时间
+        unpublished_at: 取消发布时间
+        presents: 超值赠送
+        exclusives: 费用不含

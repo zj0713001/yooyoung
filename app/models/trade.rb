@@ -19,10 +19,10 @@
 #  book_email         :string(255)
 #  book_cc_email      :string(255)
 #  aasm_state         :string(255)
-#  lock_version       :integer          default("0"), not null
+#  lock_version       :integer          default(0), not null
 #  created_at         :datetime
 #  updated_at         :datetime
-#  people_num         :integer          default("2"), not null
+#  people_num         :integer          default(2), not null
 #  trade_no           :string(255)      default(""), not null
 #  deleted_at         :datetime
 #  cost_price         :integer

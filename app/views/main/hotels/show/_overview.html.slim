@@ -1,40 +1,58 @@
-.hotel-show-content-overview
-  .hotel-show-content-overview__images
-    .js_main_hotel_show_content_overview_images
-      - hotel.photos.each do |photo|
-        .hotel-show-content-overview__image-item
-          = image_tag photo.image.large_narrow.url, lazy: true
-    - if hotel.photos.count > 1
-      a.main-slick__prev.js_main_hotel_show_content_overview_slick_prev
-        .iconfont.icon-arrow-left
-      a.main-slick__next.js_main_hotel_show_content_overview_slick_next
-        .iconfont.icon-arrow-right
-  .hotel-show-content-overview__info
-    .hotel-show-content-overview__info-tab
-      .hotel-show-content-overview__info-tab-item.active.js_main_hotel_show_content_overview_tab_item 非去不可
-      .hotel-show-content-overview__info-tab-item.js_main_hotel_show_content_overview_tab_item 交通信息
-    .hotel-show-content-overview__info-items
-      ul.hotel-show-content-overview__info-features.js_main_hotel_show_content_overview_item
-        - hotel.recommends.each do |recommend|
-          li
-            .hotel-show-content-overview__info-icon
-            = recommend
-      .hotel-show-content-overview__info-traffics.js_main_hotel_show_content_overview_item
-        - if hotel.arounds.present?
-          .hotel-show-content-overview__info-title
-            | 位置和周边：
-          .hotel-show-content-overview__info-traffics-text
-            = simple_format hotel.arounds
-        .hotel-show-content-overview__info-title
-          | 地址：
-        - if hotel.address.present?
-          .hotel-show-content-overview__info-traffics-text
-            = hotel.address
-        - if hotel.local_address.present?
-          .hotel-show-content-overview__info-traffics-text
-            = hotel.local_address
-        - if hotel.traffics.present?
-          .hotel-show-content-overview__info-title
-            | 到达和离开：
-          .hotel-show-content-overview__info-traffics-text
-            = simple_format hotel.traffics
+.hotel-show-overview
+  .hotel-show-overview__container
+    .hotel-show-overview__images
+      .hotel-show-overview__images-main
+        .js_main_hotel_show_overview_images
+          - hotel.photos.each do |photo|
+            .hotel-show-overview__image-item
+              = image_tag photo.image.large_narrow.url, lazy: true
+        .iconfont.icon-fullscreen.js_main_hotel_show_overview_images_fullscreen
+        - if hotel.photos.count > 1
+          a.main-slick__prev.js_main_hotel_show_overview_slick_prev
+            .iconfont.icon-arrow-left
+          a.main-slick__next.js_main_hotel_show_overview_slick_next
+            .iconfont.icon-arrow-right
+        .ui.modal.transition.hotel-show-overview-images-modal.js_main_hotel_show_overview_images_modal
+          .js_main_hotel_show_overview_images_model_images
+            - hotel.photos.each do |photo|
+              .hotel-show-overview-images-modal__image-item
+                = image_tag photo.image.huge_narrow.url, lazy: true
+          - if hotel.photos.count > 1
+            a.main-slick__prev.js_main_hotel_show_overview_images_model_images_slick_prev
+              .iconfont.icon-arrow-left
+            a.main-slick__next.js_main_hotel_show_overview_images_model_images_slick_next
+              .iconfont.icon-arrow-right
+      - if hotel.photos.count > 1
+        .js_main_hotel_show_overview_images_nav
+          - hotel.photos.each do |photo|
+            .hotel-show-overview__image-nav-item
+              = image_tag photo.image.small_narrow.url
+    .hotel-show-overview__info
+      .hotel-show-overview__info-tab
+        .hotel-show-overview__info-tab-item.active.js_main_hotel_show_overview_tab_item 非去不可
+        .hotel-show-overview__info-tab-item.js_main_hotel_show_overview_tab_item 交通信息
+      .hotel-show-overview__info-items
+        ul.hotel-show-overview__info-features.js_main_hotel_show_overview_item
+          - hotel.recommends.each do |recommend|
+            li
+              .hotel-show-overview__info-icon
+              = recommend
+        .hotel-show-overview__info-traffics.js_main_hotel_show_overview_item
+          - if hotel.arounds.present?
+            .hotel-show-overview__info-title
+              | 位置和周边：
+            .hotel-show-overview__info-traffics-text
+              = simple_format hotel.arounds
+          .hotel-show-overview__info-title
+            | 地址：
+          - if hotel.address.present?
+            .hotel-show-overview__info-traffics-text
+              = hotel.address
+          - if hotel.local_address.present?
+            .hotel-show-overview__info-traffics-text
+              = hotel.local_address
+          - if hotel.traffics.present?
+            .hotel-show-overview__info-title
+              | 到达和离开：
+            .hotel-show-overview__info-traffics-text
+              = simple_format hotel.traffics

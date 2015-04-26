@@ -148,8 +148,10 @@ Rails.application.routes.draw do
     resources :cities, concerns: :deletable
     resources :countries, concerns: :deletable
     resources :hotels, concerns: :deletable do
-      resources :rooms, except: [:index], concerns: :deletable
-      resources :hotel_packages, except: [:index], concerns: :deletable
+      resources :rooms, concerns: :deletable
+      resources :hotel_packages, concerns: :deletable
+      resources :hotel_extra_services, concerns: :deletable
+      resources :hotel_features, concerns: :deletable
     end
     resources :links
     resources :provinces, concerns: :deletable
