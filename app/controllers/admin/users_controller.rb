@@ -27,10 +27,10 @@ class Admin::UsersController < Admin::ApplicationController
       OpenStruct.new({
         fullpath: link.first,
         count: link.last.count,
-        anonymous_count: link.last.map(&:user_track).select{|ut| ut.user_id.blank?}.count,
-        anonymous_user_count: link.last.map(&:user_track).select{|ut| ut.user_id.blank?}.uniq.compact.count,
-        known_count: link.last.map(&:user_track).select{|ut| ut.user_id.present?}.count,
-        known_user_count: link.last.map(&:user_track).select{|ut| ut.user_id.present?}.uniq.compact.count,
+        anonymous_count: link.last.map(&:user_track).compact.select{|ut| ut.user_id.blank?}.count,
+        anonymous_user_count: link.last.map(&:user_track).compact.select{|ut| ut.user_id.blank?}.uniq.compact.count,
+        known_count: link.last.map(&:user_track).compact.select{|ut| ut.user_id.present?}.count,
+        known_user_count: link.last.map(&:user_track).compact.select{|ut| ut.user_id.present?}.uniq.compact.count,
       })
     end.sort_by{|link| -link.count}
 
@@ -60,10 +60,10 @@ class Admin::UsersController < Admin::ApplicationController
       OpenStruct.new({
         user_agent: link.first,
         count: link.last.count,
-        anonymous_count: link.last.map(&:user_track).select{|ut| ut.user_id.blank?}.count,
-        anonymous_user_count: link.last.map(&:user_track).select{|ut| ut.user_id.blank?}.uniq.compact.count,
-        known_count: link.last.map(&:user_track).select{|ut| ut.user_id.present?}.count,
-        known_user_count: link.last.map(&:user_track).select{|ut| ut.user_id.present?}.uniq.compact.count,
+        anonymous_count: link.last.map(&:user_track).compact.select{|ut| ut.user_id.blank?}.count,
+        anonymous_user_count: link.last.map(&:user_track).compact.select{|ut| ut.user_id.blank?}.uniq.compact.count,
+        known_count: link.last.map(&:user_track).compact.select{|ut| ut.user_id.present?}.count,
+        known_user_count: link.last.map(&:user_track).compact.select{|ut| ut.user_id.present?}.uniq.compact.count,
       })
     end.sort_by{|link| -link.count}
 
