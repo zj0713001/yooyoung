@@ -11,4 +11,4 @@
           .hotel-show-content-package-section__title = item.content
           .hotel-show-content-package-section__description
             = simple_format item.description
-          .hotel-show-content-package-section__image style="background-image: #{background_image_cover(image_url item.cover_photo.image.normal.url)}"
+          .hotel-show-content-package-section__image style="background-image: #{background_image_cover(image_url item.cover_photo.try(:image).try(:normal).try(:url))}"
