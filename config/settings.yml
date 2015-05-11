@@ -6,6 +6,7 @@ defaults: &defaults
   sms_captcha:
     length: 6
     range: <%= (0..9).to_a %>
+    time: 60
   yooyoung:
     name: 悠漾旅行
     homepage: "www.yooyoung.cn"
