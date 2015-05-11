@@ -134,7 +134,7 @@ class NotificationService
   protected
 
   def build_notification(notification_type: nil, channel: nil, title: nil, identifier: nil, content: nil, verify_limit: false)
-    raise YooYoung::TryTooManyTimesError if verify_limit && Notification.where(notification_type: notification_type, channel: channel, identifier: identifier, :created_at.gt =>  Time.new.midnight).count >= Settings.sms.sms_limit.to_i
+    raise YooYoung::TryTooManyTimesError if verify_limit && (Notification.where(notification_type: notification_type, channel: channel, identifier: identifier, :created_at.gt =>  Settings.sms_captcha.time.seconds.ago).exists? || Notification.where(notification_type: notification_type, channel: channel, identifier: identifier, :created_at.gt =>  Time.new.midnight).count >= Settings.sms.sms_limit.to_i)
 
     notification = Notification.new
     notification.attributes = {
