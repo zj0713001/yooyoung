@@ -27,7 +27,7 @@ defaults: &defaults
     sms_limit: 5
   home:
     banner: <%= %w[21 20 11] %>
-    section: <%= %w[24 11 12 20 19 18 22 7 21] %>
+    section: <%= %w[24 27 12 20 19 18 22 7 21] %>
   payment:
     alipay:
       gateway: https://mapi.alipay.com/gateway.do
