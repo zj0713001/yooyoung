@@ -113,7 +113,7 @@ $ ->
         vm.attendences = _.times num, ->
           { name: '', phone: '' }
       vm.people_num_minus = ->
-        vm.people_num-- if vm.people_num > 1
+        vm.people_num-- if vm.people_num > 2
       vm.people_num_plus = ->
         vm.people_num++ if (vm.selected_room.population+vm.selected_room.prices.extra_bed_price.limit) > vm.people_num
       vm.child_num_minus = ->

@@ -5,7 +5,7 @@ ruby:
     keywords: "#{@hotel.city.country.chinese}酒店,#{@hotel.city.chinese}酒店,#{@hotel.chinese}推荐,#{@hotel.chinese}介绍,#{@hotel.chinese}房间,#{@hotel.chinese}特惠,#{@hotel.package.name}预订"
   )
   has_price = PriceService.new(@hotel.package).has_prices?
-  min_price = has_price && PackageService.new(@hotel.package).min_price_by_date
+  min_price = has_price && (PackageService.new(@hotel.package).min_price_by_date/2.0).ceil
   can_buy = has_price && !min_price.to_i.zero?
   @is_no_fotter = true
 .main-mobile-hotels-show.js_main_mobile_hotels_show
@@ -19,7 +19,7 @@ ruby:
       .main-mobile-hotels-show-photos__price-flag
         span.main-mobile-hotels-show-photos__price-unite ￥
         span.main-mobile-hotels-show-photos__price-money = show_currency min_price
-        | /套餐起
+        | /人起
     - else
       .main-mobile-hotels-show-photos__price-flag.main-mobile-hotels-show-photos__price-flag--soldout 已售罄
     .ui.page.dimmer.main-mobile-hotels-show-modal.js_main_mobile_hotels_photos_modal

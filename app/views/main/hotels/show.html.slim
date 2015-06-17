@@ -5,7 +5,7 @@ ruby:
     keywords: "#{@hotel.city.country.chinese}酒店,#{@hotel.city.chinese}酒店,#{@hotel.chinese}推荐,#{@hotel.chinese}介绍,#{@hotel.chinese}房间,#{@hotel.chinese}特惠,#{@hotel.package.name}预订"
   )
   has_price = PriceService.new(@hotel.package).has_prices?
-  min_price = has_price && PackageService.new(@hotel.package).min_price_by_date
+  min_price = has_price && (PackageService.new(@hotel.package).min_price_by_date/2.0).ceil
   can_buy = has_price && !min_price.to_i.zero?
 .hotel-show.js_main_hotel_show
   = render 'main/shared/main_header'
@@ -45,8 +45,8 @@ ruby:
         - if can_buy
           .hotel-show-content-nav__price
             | 套餐价：￥
-            em.js_main_hotel_show_package_min_price = show_currency min_price
-            | 起
+            em.js_main_hotel_show_package_min_price = show_currency min_price}
+            | /人起
           a.hotel-show-content-nav__booking.primary-button href="#{new_trade_path(hotel_id: @hotel.to_param)}" 立即预定
         - else
           a.hotel-show-content-nav__booking.minor-button href="javascript:void(0);" 已售罄

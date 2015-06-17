@@ -31,8 +31,8 @@ class Main::TradesController < Main::ApplicationController
 
     @trade = model.new
     jsvar.hotel = @hotel.as_json
-    jsvar.package_min_price = PackageService.new(@hotel.package).min_price_by_date
-    jsvar.favorite_min_price = PackageService.new(@hotel.favorite_package).min_price_by_date
+    jsvar.package_min_price = (PackageService.new(@hotel.package).min_price_by_date/2.0).ceil
+    jsvar.favorite_min_price = (PackageService.new(@hotel.favorite_package).min_price_by_date/2.0).ceil
   end
 
   def create
