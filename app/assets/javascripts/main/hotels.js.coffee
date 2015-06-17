@@ -88,10 +88,12 @@ $ ->
             banner_close()
           if $(this).scrollTop() > $('.js_main_hotel_show_content_favorite').offset().top
             min_price = $('.js_main_hotel_show_banner_booking').data('favorite-min-price')
-            $('.js_main_hotel_show_package_min_price').text(min_price) if parseInt(min_price) != parseInt($('.js_main_hotel_show_package_min_price'))
+            days = $('.js_main_hotel_show_banner_booking').data('favorite-package-days')
           else
             min_price = $('.js_main_hotel_show_banner_booking').data('package-min-price')
-            $('.js_main_hotel_show_package_min_price').text(min_price) if parseInt(min_price) != parseInt($('.js_main_hotel_show_package_min_price'))
+            days = $('.js_main_hotel_show_banner_booking').data('package-days')
+          $('.js_main_hotel_show_package_min_price').text(min_price) if parseInt(min_price) != parseInt($('.js_main_hotel_show_package_min_price'))
+          $('.js_main_hotel_show_package_days').text("#{parseInt(days)+1}天#{parseInt(days)}晚")
       , 1
       true
 

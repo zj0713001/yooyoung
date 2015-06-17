@@ -119,7 +119,8 @@ ruby:
         - if has_price
           span ￥
           em = min_price
-          span 起
+          span
+            | /人起
       - if can_buy
         = link_to '立即预定', new_mobile_trade_path(hotel_id: @hotel.to_param), class: :'main-mobile-trades-new-button__action'
       - else
