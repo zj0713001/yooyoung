@@ -10,7 +10,7 @@ class Main::HomeController < Main::ApplicationController
       {
         image: view_context.image_url(hotel.cover_photo.try(:image).try(:huge).try(:url)),
         package_name: hotel.package.name,
-        package_price: PriceService.new(hotel.package).has_prices? ? PackageService.new(hotel.package).min_price_by_date : nil,
+        package_price: PriceService.new(hotel.package).has_prices? ? (PackageService.new(hotel.package).min_price_by_date/2.0).ceil : nil,
         name: hotel.chinese,
         location: hotel_location_text(hotel),
         link: hotel_path(hotel)
