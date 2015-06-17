@@ -44,8 +44,8 @@ ruby:
             a href='#tips' 旅行贴士
         - if can_buy
           .hotel-show-content-nav__price
-            span.js_main_hotel_show_package_days "#{@hotel.package.days+1}天#{@hotel.package.days}晚"
-            | ￥
+            span.js_main_hotel_show_package_days #{@hotel.package.days+1}天#{@hotel.package.days}晚
+            | ：￥
             em.js_main_hotel_show_package_min_price = show_currency min_price
             | /人起
           a.hotel-show-content-nav__booking.primary-button href="#{new_trade_path(hotel_id: @hotel.to_param)}" 立即预定
