@@ -45,7 +45,7 @@ ruby:
         - if can_buy
           .hotel-show-content-nav__price
             | 套餐价：￥
-            em.js_main_hotel_show_package_min_price = show_currency min_price}
+            em.js_main_hotel_show_package_min_price = show_currency min_price
             | /人起
           a.hotel-show-content-nav__booking.primary-button href="#{new_trade_path(hotel_id: @hotel.to_param)}" 立即预定
         - else
