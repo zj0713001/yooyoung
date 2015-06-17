@@ -85,7 +85,7 @@ gem 'semantic-ui-sass', github: 'zj0713001/semantic-ui-sass'
 gem 'compass'
 gem 'compass-rgbapng'
 gem 'oily_png'
-gem 'compass-rails'
+gem 'compass-rails', '~> 2.0.4'
 gem 'compass-import-once'
 gem 'susy'
 gem 'bourbon'
@@ -97,7 +97,6 @@ gem 'gon'
 gem 'breakpoint'
 gem 'avalon-rails'
 gem 'facebox-rails'
-gem 'sprockets'
 
 # Security
 gem 'rack-attack'
@@ -108,7 +107,7 @@ gem 'sdoc', group: :doc
 # Dev
 group :development, :test do
   gem 'pry'
-  gem 'web-console'
+  # gem 'web-console'
   gem 'quiet_assets'
   gem 'thin'
   gem 'grizzled-rails-logger'
