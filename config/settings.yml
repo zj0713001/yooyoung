@@ -26,8 +26,8 @@ defaults: &defaults
     password: "yooyoung0120"
     sms_limit: 5
   home:
-    banner: <%= %w[21 20 11] %>
-    section: <%= %w[24 27 12 20 19 18 22 7 21] %>
+    banner: <%= %w[30 20 21] %>
+    section: <%= %w[28 27 12 22 11 30 19 20 21 24 7 18] %>
   payment:
     alipay:
       gateway: https://mapi.alipay.com/gateway.do
