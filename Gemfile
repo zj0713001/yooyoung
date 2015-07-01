@@ -2,7 +2,7 @@ source 'http://rubygems.org/'
 ruby '2.2.2'
 
 # Core
-gem 'rails', '~> 4.2.1'
+gem 'rails', '~> 4.2.2'
 
 # Cache
 gem 'redis-rails'
@@ -73,7 +73,7 @@ gem 'sunspot_solr'
 gem 'mongoid'
 
 # Assets
-gem 'sass-rails', '<= 5.0.1'
+gem 'sass-rails'
 gem 'uglifier'
 gem 'coffee-rails'
 gem 'jquery-rails'
@@ -97,7 +97,6 @@ gem 'gon'
 gem 'breakpoint'
 gem 'avalon-rails'
 gem 'facebox-rails'
-gem 'sprockets', '< 2.13'
 
 # Security
 gem 'rack-attack'
@@ -108,7 +107,7 @@ gem 'sdoc', group: :doc
 # Dev
 group :development, :test do
   gem 'pry'
-  gem 'web-console'
+  # gem 'web-console'
   gem 'quiet_assets'
   gem 'thin'
   gem 'grizzled-rails-logger'

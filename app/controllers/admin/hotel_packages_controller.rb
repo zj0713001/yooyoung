@@ -37,6 +37,7 @@ class Admin::HotelPackagesController < Admin::ApplicationController
 
   def edit
     authorize! :edit, @hotel
+    @package.items.build(sequence: 1)
 
     render :show
   end

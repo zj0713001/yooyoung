@@ -93,7 +93,7 @@ h2.ui.dividing.header.js_admin_price_update
               .four.wide.field
                 label 销售价格
               .eight.wide.field
-                - %w[10 15 20].each do |multiple|
+                - %w[10 15 20 25 30].each do |multiple|
                   a.ui.label ms-click='calculate_sale_price' data-multiple="#{multiple}" #{multiple}%
                 input type='text' name='sale_price' ms-duplex="sale_price"
         .actions

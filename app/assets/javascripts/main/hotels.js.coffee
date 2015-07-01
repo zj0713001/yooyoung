@@ -118,21 +118,13 @@ $ ->
       $(this).fadeOut()
       $('.js_main_hotel_show_room_photos.active').removeClass('blur')
 
-
     $('.js_main_hotel_show_extras_simple').on 'click', ->
       $(this).parents('.js_main_hotel_show_extras').find('.js_main_hotel_show_extras_content').slideToggle()
 
     $(document).on 'scroll', (e) ->
       setTimeout ->
-        # _.each $('.js_main_hotel_show_package'), (item) ->
-        #   console.log $(item).offset().top + $(item).height() + 40
-        #   console.log $('body').scrollTop()
-        #
-        #
         package_index = _.findIndex $('.js_main_hotel_show_package'), (item) ->
           $(item).offset().top - 60 <= $('body').scrollTop() && $('body').scrollTop() <= $(item).offset().top + $(item).height() + 40
-
-
           $(item).offset().top + $(item).height() - 20 >= $('body').scrollTop()
 
         if package_index > -1

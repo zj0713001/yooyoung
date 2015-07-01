@@ -20,7 +20,7 @@ class Main::Mobile::TradesController < Main::Mobile::ApplicationController
 
     @trade = model.new
     jsvar.hotel = @hotel.as_json
-    jsvar.package_min_price = PackageService.new(@hotel.package).min_price_by_date
+    jsvar.package_min_price = PackageService.new(@hotel.packages.first).min_price_by_date
   end
 
   def create

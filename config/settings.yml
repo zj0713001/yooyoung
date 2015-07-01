@@ -6,6 +6,7 @@ defaults: &defaults
   sms_captcha:
     length: 6
     range: <%= (0..9).to_a %>
+    time: 60
   yooyoung:
     name: 悠漾旅行
     homepage: "www.yooyoung.cn"
@@ -25,8 +26,8 @@ defaults: &defaults
     password: "yooyoung0120"
     sms_limit: 5
   home:
-    banner: <%= %w[21 20 11] %>
-    section: <%= %w[21 11 12 20 19 18 7 23] %>
+    banner: <%= %w[30 20 21] %>
+    section: <%= %w[28 27 12 22 11 30 19 20 21 24 7 18] %>
   payment:
     alipay:
       gateway: https://mapi.alipay.com/gateway.do

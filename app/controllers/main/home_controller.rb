@@ -10,7 +10,7 @@ class Main::HomeController < Main::ApplicationController
       {
         image: view_context.image_url(hotel.cover_photo.try(:image).try(:huge).try(:url)),
         package_name: hotel.packages.first.name,
-        package_price: PriceService.new(hotel.packages.first).has_prices? ? PackageService.new(hotel.packages.first).min_price_by_date : nil,
+        package_price: PriceService.new(hotel.packages.first).has_prices? ? (PackageService.new(hotel.packages.first).min_price_by_date/2.0).ceil : nil,
         name: hotel.chinese,
         location: hotel_location_text(hotel),
         link: hotel_path(hotel)
@@ -34,8 +34,12 @@ class Main::HomeController < Main::ApplicationController
       {type: :hotel, view: :vertical},
       {type: :area, view: :'small-square', color: :yellow, area_name: '巴厘岛'},
       {type: :hotel, view: :horizontal},
-      {type: :area, view: :'small-square', color: :green, area_name: '杭州'},
+      {type: :area, view: :'small-square', color: :green, area_name: '甲米'},
+      {type: :hotel, view: :'big-square'},
       {type: :hotel, view: :horizontal},
+      {type: :area, view: :'small-square', color: :yellow, area_name: '苏梅岛'},
+      {type: :hotel, view: :vertical},
+      {type: :area, view: :'small-square', color: :green, area_name: '长白山'},
       {type: :hotel, view: :horizontal},
     ].each_with_index do |option, index|
       @section_data[index].merge! option
