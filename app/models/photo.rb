@@ -22,4 +22,8 @@ class Photo < ActiveRecord::Base
   belongs_to :editor, class_name: User
 
   validates :editor, existence: true
+
+  def normal_narrow_url
+    image.try(:normal_narrow).try(:url)
+  end
 end

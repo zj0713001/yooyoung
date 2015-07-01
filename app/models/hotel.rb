@@ -91,26 +91,22 @@ class Hotel < ActiveRecord::Base
       # photos: {
       #   only: [:image],
       # },
-      package: {
-        only: [:id, :name, :description, :days],
+      packages: {
+        only: [:id, :name, :description, :days, :presents, :exclusives],
         include: {
           items: {
             only: [:id, :content, :description, :address, :tips, :openning_hours, :phone, :service_day],
-            # include: {
-            #   cover_photo: {
-            #     only: [:image],
-            #   },
-            # },
           },
         },
       },
       rooms: {
         only: [:id, :name, :description, :features, :sight, :area, :facilities, :population, :bed_type, :chinese],
-        # include: {
-        #   photos: {
-        #     only: [:image],
-        #   },
-        # },
+        include: {
+          photos: {
+            only: [],
+            methods: :normal_narrow_url,
+          },
+        },
       },
     },
     methods: :to_param,

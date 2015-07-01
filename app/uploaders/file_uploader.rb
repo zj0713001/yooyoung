@@ -34,4 +34,12 @@ class FileUploader < CarrierWave::Uploader::Base
     model.file_size = file.size.to_s
     model.content_type = file.content_type
   end
+
+  def move_to_cache
+    true
+  end
+
+  def move_to_store
+    true
+  end
 end
