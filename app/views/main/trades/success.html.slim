@@ -1,13 +1,13 @@
 ruby:
   set_meta_tags(
-    title: "预订成功！#{@trade.hotel.chinese}_#{@trade.hotel.package.name}",
+    title: "订单创建成功！#{@trade.hotel.chinese}_#{@trade.package.name}",
   )
 .trade-new
   = render 'main/shared/main_header'
   .trade-new__banner.trade-new-banner
     .trade-new-banner__baclground style="background-image: #{background_image_cover(image_url @trade.hotel.cover_photo.try(:image).try(:huge_narrow).try(:url))}"
   .trade-new__title.trade-new-title
-    h1.trade-new-title__name 预定成功！
+    h1.trade-new-title__name 订单创建成功！
     hr.trade-new-title__hr
   .trade-new__container
     .trade-new__success-container

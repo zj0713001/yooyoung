@@ -40,6 +40,7 @@ class Trade < ActiveRecord::Base
   belongs_to :editor, class_name: User
   has_many :payments
   has_and_belongs_to_many :attendences, uniq: true, class_name: Contacts::Attendence, join_table: :contacts_infos_trades, association_foreign_key: :contacts_info_id
+  has_and_belongs_to_many :extra_services, uniq: true, class_name: HotelExtraService, join_table: :hotel_extra_services_trades, association_foreign_key: :hotel_extra_service_id
 
   default_value_for :communicate do
     Contacts::Communicate.new
@@ -53,7 +54,6 @@ class Trade < ActiveRecord::Base
 
   before_create :build_hotel_and_end_day
   def build_hotel_and_end_day
-    self.hotel = self.package.hotel
     self.end_day = self.start_day + self.package.days
   end
   before_create :build_prices

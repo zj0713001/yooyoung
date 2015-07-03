@@ -11,4 +11,4 @@ ruby:
         = render partial: 'main/shared/main_my_menu', locals: { active: :trades }
       .my-index-container__content
         .my-index-container__trade
-          = render partial: 'detail', locals: { trade: @trade, show_package: true, show_button: true }
+          = render partial: 'detail', locals: { trade: @trade, show_package: true, show_extra: true, show_button: true }

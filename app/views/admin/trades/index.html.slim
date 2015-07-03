@@ -19,6 +19,8 @@ table.ui.table.segment
       tr
         td
           p = trade.trade_no
+          - if trade.extra_services.present?
+            .ui.label.green 活动
         td
           = link_to_if can?(:show, User), trade.user.phone, [:admin, trade.user], alt: t('admin.show'), class: :'ui link action', target: :_blank
         td

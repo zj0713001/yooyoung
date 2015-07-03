@@ -108,6 +108,9 @@ class Hotel < ActiveRecord::Base
           },
         },
       },
+      extra_services: {
+        only: [:id, :name, :description, :keywords, :time, :itineraries]
+      },
     },
     methods: :to_param,
   }.merge(options.to_h))

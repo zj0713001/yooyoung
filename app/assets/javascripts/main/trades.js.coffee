@@ -8,6 +8,7 @@ $ ->
       vm.days = vm.hotel.packages[0].days
       vm.end_day_weekday = ''
       vm.selected_package = null
+      vm.selected_extras = []
       vm.$watch 'start_day', (day) ->
         return if _.isEmpty(vm.start_day)
         vm.select_package(vm.hotel.packages[0]) if !vm.selected_package
@@ -24,10 +25,9 @@ $ ->
           success: (data) ->
             if data.status == true
               vm.hotel.rooms = _.map vm.hotel.rooms, (room) ->
-                room_data = _.find data.data, (r) ->
+                room_data = _.find data.data.room_prices, (r) ->
                   r.id == room.id
                 _.extend room, room_data
-                room.prices = room.prices
                 room.is_price_loaded = true
                 if vm.selected_room == room
                   vm.select_room(room)
@@ -42,14 +42,37 @@ $ ->
                 $(this).siblings('.js_main_trade_new_room_photos').slick('slickPrev')
               $('.js_main_trade_new_room_photo_slick_next').on 'click', ->
                 $(this).siblings('.js_main_trade_new_room_photos').slick('slickNext')
+              vm.hotel.extra_services = _.map vm.hotel.extra_services, (extra_service) ->
+                extra_service_data = _.find data.data.extra_prices, (ex) ->
+                  ex.id == extra_service.id
+                _.extend extra_service, extra_service_data
+                extra_service
       vm.select_package = (p) ->
         vm.selected_package = p
         vm.days = p.days
+        vm.calculate_price() if vm.selected_room?
       vm.$watch 'days', ->
         vm.$fire("start_day", vm.start_day, vm.start_day)
       vm.select_room = (room) ->
         return if _.isEmpty(vm.start_day)
         vm.selected_room = room
+        vm.calculate_price()
+      vm.is_selected_extra = (extra) ->
+        _.contains vm.selected_extras, extra
+      vm.select_extra = (extra) ->
+        vm.selected_extras = if vm.is_selected_extra(extra)
+          _.without vm.selected_extras, extra
+        else
+          _.union vm.selected_extras, [extra]
+        vm.calculate_extra_price()
+      vm.calculate_extra_price = ->
+        extra_prices = _.map vm.selected_extras, (extra) ->
+          extra.price * (parseInt(vm.people_num) + parseInt(vm.child_num))
+        vm.extra_price = _.reduce extra_prices, (a, b) ->
+          a + b
+        , 0
+      vm.calculate_price = ->
+        room = vm.selected_room
         if room.is_price_loaded
           package_prices = _.find room.prices.package_prices, (prices) ->
             parseInt(prices.id) == parseInt(vm.selected_package.id)
@@ -70,6 +93,7 @@ $ ->
           if vm.selected_room.is_price_loaded
             num = _.min [num, vm.selected_room.population+vm.selected_room.prices.extra_bed_price.limit]
         vm.people_num = num
+        vm.calculate_extra_price()
         vm.attendences = _.times num, ->
           { name: '', phone: '' }
       vm.people_num_minus = ->
@@ -87,6 +111,7 @@ $ ->
         if vm.selected_room && vm.selected_room.is_price_loaded
           num = _.min [num, vm.selected_room.prices.child_price.limit]
         vm.child_num = num
+        vm.calculate_extra_price()
       vm.communicate = { name: '', phone: '', email: '' }
       vm.copy_communicate_name = ->
         vm.attendences[0].name = vm.communicate.name
@@ -96,6 +121,7 @@ $ ->
         { name: '', phone: '' }
       vm.package_price = null
       vm.extra_bed_price = null
+      vm.extra_price = 0
     avalon.scan()
     $('.js_main_trade_new_form').validate
       ignore: ''

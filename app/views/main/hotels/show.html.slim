@@ -4,7 +4,7 @@ ruby:
     description: "#{@hotel.city.country.chinese}，#{@hotel.city.chinese}，#{@hotel.chinese}，#{@packages.first.try(:name)}。特色：#{@hotel.recommends.join('，')}",
     keywords: "#{@hotel.city.country.chinese}酒店,#{@hotel.city.chinese}酒店,#{@hotel.chinese}推荐,#{@hotel.chinese}介绍,#{@hotel.chinese}房间,#{@hotel.chinese}特惠,#{@packages.first.try(:name)}预订"
   )
-  min_price_hash = @packages.map{|package| { package => PackageService.new(package).min_price_by_date }}.inject(&:merge)
+  min_price_hash = @packages.map{|package| { package => (PackageService.new(package).min_price_by_date/2.0).ceil }}.inject(&:merge)
   min_price = min_price_hash.values.compact.min
   can_buy = !min_price.to_i.zero?
   min_price_package = can_buy ? min_price_hash.find{|k,v| v == min_price}.first : nil

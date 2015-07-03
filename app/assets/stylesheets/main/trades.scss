@@ -3,7 +3,7 @@
   color: $dark_black;
   .trade-new__banner {
     width: 100%;
-    height: 100px;
+    height: 150px;
   }
   .trade-new__title {
     width: 540px;
@@ -26,6 +26,7 @@
   }
 }
 .trade-new-banner {
+  padding-top: 50px;
   @include clearfix;
   .trade-new-banner__baclground {
     width: 100%;
@@ -164,6 +165,10 @@
     color: $red;
     font-size: $font_h6;
   }
+  .trade-new-form__warning {
+    font-size: $font_h6;
+    color: transparent;
+  }
   .trade-new-form__select {
     position: relative;
     float: left;
@@ -181,17 +186,17 @@
       bottom: 0;
     }
     &.trade-new-form__select--hover {
-      color: rgba($red, .8);
       border-color: rgba($red, .8);
       .icon-yes {
         display: block;
+        color: rgba($red, .8);
       }
-      .trade-new-form__room-warning {
+      .trade-new-form__warning {
         color: $red;
       }
     }
     &.trade-new-form__select--hover-no-start-day {
-      .trade-new-form__room-warning {
+      .trade-new-form__warning {
         color: $red;
       }
     }
@@ -230,8 +235,7 @@
       display: block;
     }
   }
-  .trade-new-form__package-content,
-  .trade-new-form__favorite-package-content {
+  .trade-new-form__package-content {
     position: relative;
     padding-left: 20px;
     line-height: $font_h3;
@@ -242,16 +246,12 @@
     left: 0;
     @extend %secondary-title-icon;
   }
-  .trade-new-form__package-pricde,
-  .trade-new-form__room-pricde {
+  .trade-new-form__package-price,
+  .trade-new-form__room-price {
     font-size: $font_h6;
     width: 100%;
     text-align: center;
     color: $red;
-  }
-  .trade-new-form__favorite-package-day {
-    color: $dark_black;
-    font-weight: bold;
   }
   .trade-new-form__rooms,
   .trade-new-form__room-content {
@@ -271,16 +271,27 @@
     font-size: $font_h6;
     line-height: $font_h5;
   }
-  .trade-new-form__room-warning {
-    font-size: $font_h6;
-    color: transparent;
-  }
   .trade-new-form__room-error {
     font-size: $font_h6;
     color: $gray_black;
   }
   .trade-new-form__span {
     @include inline-block;
+  }
+
+  .trade-new-form__extras {
+    margin-left: 110px;
+    @include clearfix;
+  }
+  .trade-new-form__extra-select {
+    width: auto;
+    padding: 5px 30px;
+  }
+  .trade-new-form__extra-price {
+    font-size: $font_h6;
+    width: 100%;
+    text-align: center;
+    color: $red;
   }
   .trade-new-form__price,
   .trade-new-form__totle-price,

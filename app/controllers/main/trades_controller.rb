@@ -27,7 +27,7 @@ class Main::TradesController < Main::ApplicationController
     @hotel = Hotel.friendly_acquire params[:hotel_id]
 
     min_price_hash = @hotel.packages.map do |package|
-      { package => PackageService.new(package).min_price_by_date }
+      { package => (PackageService.new(package).min_price_by_date/2.0).ceil }
     end.inject(&:merge)
     @min_price = min_price_hash.values.compact.min
     can_buy = !@min_price.to_i.zero?
@@ -104,7 +104,7 @@ class Main::TradesController < Main::ApplicationController
   private
   def trade_params
     params.require(:trade).permit(
-      :package_id, :room_id, :start_day, :end_day, :people_num, :child_num, :extra_bed_num, :user_remark,
+      :package_id, :room_id, :start_day, :end_day, :people_num, :child_num, :extra_bed_num, :user_remark, extra_services_ids: [],
       communicate_attributes: [:name, :phone, :email],
       attendences_attributes: [:name, :phone],
       user_remark_attributes: [:content],
