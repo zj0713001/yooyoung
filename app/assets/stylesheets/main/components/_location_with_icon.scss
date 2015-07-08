@@ -2,21 +2,24 @@
   position: relative;
   white-space: nowrap;
   .main-location__text {
-    font-size: $font_h4;
-    margin-left: 10px;
+    @include inline-block;
+    font-size: $font_h6;
   }
   .icon-location {
-    position: absolute;
-    font-size: $font_h3;
-    left: 0;
+    @include inline-block;
+    position: relative;
+    font-size: 15px;
+    top: 1px;
   }
 }
 
 .main-location--center {
   text-align: center;
+  .main-location__text {
+    margin-left: 10px;
+  }
   .icon-location {
-    position: relative;
     font-size: 15px;
-    top: -3px;
+    top: -1px;
   }
 }

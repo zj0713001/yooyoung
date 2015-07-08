@@ -84,11 +84,13 @@ $ ->
 
   reflow_home_index_section = ->
     resize_items_height()
-    _.delay ->
-      $('.js_main_home_index_section').waterfall('reflow')
-    , resize_delay_time
+    $('.js_main_home_index_section').waterfall('reflow')
 
   lazy_reflow_home_index_section = _.debounce(reflow_home_index_section, resize_delay_time)
   $(window).resize(lazy_reflow_home_index_section)
 
-  $(window).trigger('resize')
+  $(window).on 'load', ->
+    $(window).trigger('resize')
+    _.delay ->
+      $('.js_main_home_index_section').fadeIn()
+    , resize_delay_time

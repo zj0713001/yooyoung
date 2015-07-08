@@ -42,7 +42,7 @@ class Main::HomeController < Main::ApplicationController
       {type: :area, view: :'small-square', color: :green, area_name: '长白山'},
       {type: :hotel, view: :horizontal},
     ].each_with_index do |option, index|
-      @section_data[index].merge! option
+      @section_data[index].merge! option if @section_data[index]
     end
   end
 end
