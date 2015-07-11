@@ -29,7 +29,7 @@ class Main::TradesController < Main::ApplicationController
     min_price_hash = @hotel.packages.map do |package|
       { package => (PackageService.new(package).min_price_by_date/2.0).ceil }
     end.inject(&:merge)
-    @min_price = min_price_hash.values.compact.min
+    @min_price = min_price_hash.to_h.values.compact.min
     can_buy = !@min_price.to_i.zero?
 
     unless can_buy
@@ -37,7 +37,7 @@ class Main::TradesController < Main::ApplicationController
     end
 
     @trade = model.new
-    jsvar.hotel = @hotel.as_json
+    jsvar.hotel = HotelSerializer.new(@hotel).as_json['hotel']
   end
 
   def create

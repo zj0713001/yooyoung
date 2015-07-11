@@ -1,0 +1,11 @@
+.hotel-show-banner style="background-image: #{background_image_cover hotel.cover_photo.try(:image).try(:normal).try(:url)}"
+  .hotel-show-banner__section.hotel-show-banner-section
+    .hotel-show-banner-section__title = hotel.chinese
+    .hotel-show-banner-section__location
+      span.iconfont.icon-location
+      span.main-location__text #{hotel_location_text(hotel)}
+    - if can_buy
+      .hotel-show-banner-section__price-tag
+        small ￥
+        em = min_price
+        | /人起

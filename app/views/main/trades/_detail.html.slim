@@ -82,18 +82,19 @@
         = "，#{trade.child_num}位儿童"
       - unless trade.extra_bed_num.zero?
         = "，需加床#{trade.extra_bed_num}张"
-  .detail-container__group
-    .detail-container__label
-      = Trade.human_attribute_name(:extra_services)
-    .detail-container__content
-      - trade.extra_services.each do |extra_service|
-        p = "#{extra_service.name}（#{trade.people_num+trade.child_num}人）"
-        - if show_extra
-          .detail-container__package-content
-            - extra_service.itineraries.each do |itinerary|
-              .detail-container__package-item
-                .detail-container__package-icon
-                = itinerary
+  - if trade.extra_services.present?
+    .detail-container__group
+      .detail-container__label
+        = Trade.human_attribute_name(:extra_services)
+      .detail-container__content
+        - trade.extra_services.each do |extra_service|
+          p = "#{extra_service.name}（#{trade.people_num+trade.child_num}人）"
+          - if show_extra
+            .detail-container__package-content
+              - extra_service.itineraries.each do |itinerary|
+                .detail-container__package-item
+                  .detail-container__package-icon
+                  = itinerary
   .detail-container__group
     .detail-container__label
       = Remark.human_attribute_name(:content)

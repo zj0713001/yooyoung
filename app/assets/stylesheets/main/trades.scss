@@ -26,7 +26,6 @@
   }
 }
 .trade-new-banner {
-  padding-top: 50px;
   @include clearfix;
   .trade-new-banner__baclground {
     width: 100%;
@@ -284,8 +283,9 @@
     @include clearfix;
   }
   .trade-new-form__extra-select {
-    width: auto;
+    width: 510px;
     padding: 5px 30px;
+    margin-bottom: 20px;
   }
   .trade-new-form__extra-price {
     font-size: $font_h6;

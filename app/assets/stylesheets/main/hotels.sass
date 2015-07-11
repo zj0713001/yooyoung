@@ -2,8 +2,6 @@
   +font-family-heiti
   +no-select
   position: relative
-  .hotel-show__banner
-    +padding(50px null null null)
   .hotel-show__nav
     +background($lighter_green)
     +display(none)
@@ -390,6 +388,16 @@
     +position(absolute, 4px null null 0)
 
 // Extras
+.hotel-show-extras-explain
+  +main-container
+  text-align: center
+  font-size: $font_h4
+  line-height: 40px
+  color: $gray_dark
+  +margin(0 auto 20px auto)
+  .icon-gift
+    font-size: 40px
+    +margin(0 20px 0 0)
 .hotel-show-extras
   +background($lighter_green)
   padding: 20px 0
@@ -410,6 +418,7 @@
     +background($white)
     +container-box-shadow
     img
+      +display(block)
       height: auto
       width: 100%
   .hotel-show-extras-simple__content

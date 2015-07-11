@@ -5,7 +5,7 @@ ruby:
     keywords: "#{@hotel.city.country.chinese}酒店,#{@hotel.city.chinese}酒店,#{@hotel.chinese}推荐,#{@hotel.chinese}介绍,#{@hotel.chinese}房间,#{@hotel.chinese}特惠,#{@packages.first.try(:name)}预订"
   )
   min_price_hash = @packages.map{|package| { package => (PackageService.new(package).min_price_by_date/2.0).ceil }}.inject(&:merge)
-  min_price = min_price_hash.values.compact.min
+  min_price = min_price_hash.to_h.values.compact.min
   can_buy = !min_price.to_i.zero?
   min_price_package = can_buy ? min_price_hash.find{|k,v| v == min_price}.first : nil
 
@@ -18,13 +18,18 @@ ruby:
   / - if @hotel.video.present?
   /   .hotel-show__video
   /     = render partial: 'main/hotels/show/video', locals: { hotel: @hotel }
-  .hotel-show__features#features
-    = render partial: 'main/hotels/show/features', collection: @hotel.features, as: :feature
+  - if @hotel.features.present?
+    .hotel-show__features#features
+      = render partial: 'main/hotels/show/features', collection: @hotel.features, as: :feature
   .hotel-show__overview#overview
     = render partial: 'main/hotels/show/overview', locals: { hotel: @hotel }
   .hotel-show__rooms#rooms
     = render partial: 'main/hotels/show/rooms', locals: { hotel: @hotel }
   .hotel-show__packages#packages
     = render partial: 'main/hotels/show/packages', collection: @hotel.packages.published, as: :package, locals: { min_price_hash: min_price_hash }
-  .hotel-show__extras#extras
-    = render partial: 'main/hotels/show/extras', collection: @hotel.extra_services, as: :extra_service
+  - if @hotel.extra_services.present?
+    .hotel-show__extras#extras
+      .hotel-show-extras-explain
+        span.iconfont.icon-gift
+        | 精彩活动不容错过，自由组合省心订！
+      = render partial: 'main/hotels/show/extras', collection: @hotel.extra_services, as: :extra_service

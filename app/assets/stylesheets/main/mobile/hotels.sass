@@ -1,69 +1,60 @@
-.main-mobile-hotels-show
-  color: $dark
-  +padding(null null rem(50) null)
-  .main-mobile-hotels-show__banner
-    +position(relative)
-    overflow: hidden
-  .main-mobile-hotels-show__photos
-    +position(relative)
-  .main-mobile-hotels-show__title
-    @extend %main-title
-    +margin(rem(25) null rem(15) null)
-  .main-mobile-hotels-show__title-icon
-    @extend %main-title-icon
-  .main-mobile-hotels-show__list-section
-    +clearfix
-  .main-mobile-hotels-show__favorite
-    +clearfix
-.main-mobile-hotels-show-banner
-  +size(100% rem(110))
-  +background(rgba($deep_green, .3))
-  +padding(rem(44) null null null)
+.hotel-show
+  +font-family-heiti
+  +no-select
+  position: relative
+  +padding(0 0 rem(50) 0)
+  .hotel-show__features,
+  .hotel-show__overview,
+  .hotel-show__rooms,
+  .hotel-show__packages,
+  .hotel-show__extras,
+    +margin(rem(10) 0)
+
+// Banner
+.hotel-show-banner
+  +position(relative)
+  +container
+  height: rem(170)
+  background-position: 50% 50%
+  background-repeat: no-repeat
+  +background-size(cover)
+  .hotel-show-banner__section
+    +absolute-center
+    +size(rem(256) rem(130))
+    +margin(rem(-65) 0 0 rem(-128))
+    +background(rgba($black, .3))
+.hotel-show-banner-section
+  +position(relative)
+  +padding(rem(10))
   color: $white
   text-align: center
-  .main-mobile-hotels-show-banner__background
-    +position(absolute, -5% null null -5%)
-    +size(110%)
-    +background-size(cover)
-    +filter(blur(rem(2)))
-    z-index: -1
-  .main-mobile-hotels-show-banner__title
+  .hotel-show-banner-section__title
     font-size: rem($font_h4)
-    line-height: rem($font_h1)
-  .main-mobile-hotels-show-banner__hr
-    display: block
-    border: 0
-    +size(null rem(1))
-    +margin(null rem(30))
-    +background(linear-gradient(left, rgba($white, .1), rgba($white, 1), rgba($white, .1)))
-  .main-mobile-hotels-show-banner__location
-    font-size: rem($font_h6)
-    line-height: rem($font_h2)
+    +margin(rem(15) 0)
+  .hotel-show-banner-section__location
+    font-size: rem($font_standard)
+    +margin(rem(5) 0)
     .icon-location
-      +margin(null rem(5) null null)
-.main-mobile-hotels-show-photos
-  +size(100% 24.5rem)
-  +padding(rem(10) rem(10) null rem(10))
-  overflow: hidden
-  .main-mobile-hotels-show-photos__price-flag
-    +position(absolute, rem(10) rem(5) null null)
-    +padding(0 rem(15) 0 rem(5))
+      +margin(0 rem(5) 0 0)
+  .hotel-show-banner-section__price-tag
+    +position(absolute, null rem(-5) rem(10) null)
+    +padding(0 rem(10) 0 rem(5))
+    height: rem(24)
     font-size: rem($font_h6)
-    line-height: rem($font_h1)
-    color: $white
-    background: rgba($red, .75)
-    .main-mobile-hotels-show-photos__price-unite
+    line-height: rem(24)
+    +background(rgba($red, .75))
+    +container-box-shadow
+    small
       font-size: rem($font_standard)
-    .main-mobile-hotels-show-photos__price-money
-      font-size: rem($font_h4)
-      line-height: rem(10)
-      +margin(null rem(3) null null)
+    em
+      +margin(0 rem(5))
+      font-size: rdem($font_h4)
     &:before
       content: ''
       +size(0)
       +position(absolute, 0 100% null null)
       +border-color(transparent rgba($red, .75) transparent transparent)
-      +border-width(rem($font_h4) rem($font_h6))
+      +border-width(rem(12))
       +border-style(solid)
     &:after
       content: ''
@@ -72,169 +63,242 @@
       +border-color($red transparent transparent transparent)
       +border-width(rem(5) rem(5) 0 0)
       +border-style(solid)
-    &.main-mobile-hotels-show-photos__price-flag--soldout
-      background: rgba($black, .3)
-      &:before
-        +border-color(transparent rgba($black, .3) transparent transparent)
-      &:after
-        +border-color(rgba($black, .6) transparent transparent transparent)
-  .main-mobile-hotels-show-photos__cover
-    +size(100%)
-    +background-size(cover)
-    +position(relative)
-  .main-mobile-hotels-show-photos__multi
-    +position(absolute, null rem(10) rem(10) nul)
-    +padding(rem(5) rem(10))
-    +background(rgba($black, .6))
-    font-size: $font_standard
-    line-height: $font_standard
-.main-mobile-hotels-show-modal.ui.dimmer
-  +background(rgba($black, .9))
-.main-mobile-hotels-show-modal-photos
-  +size(100vw null)
-  +position(relative)
-  +margin(rem(10) null)
-  .main-mobile-hotels-show-modal-photos__item
-    +size(100vw null)
+
+// Features
+.hotel-show-feature
+  .hotel-show-feature__image
+    +margin(rem(10) 0)
     img
+      +display(block)
       +size(100% auto)
-  &.main-mobile-hotels-show-modal-photos--center
-    +margin(25% null null null)
-.main-mobile-hotels-show-list-section
-  @extend %main-list-section
-  +position(relative)
-  .main-mobile-hotels-show-list-section__tips
-    color: $gray_dark
-    +margin(null null rem(10) null)
-  .main-mobile-hotels-show-list-section__item
-    @extend %main-list-section-item
-    .main-mobile-hotels-show-list-section__item-icon
-      @extend %main-list-section-item-icon
-  &.main-mobile-hotels-show-list-section--recommends
-    +background($light_cyan)
-  &.main-mobile-hotels-show-list-section--arounds
-    +background($lightest_green)
-  &.main-mobile-hotels-show-list-section--package
-    +background($lighter_green)
-  &.main-mobile-hotels-show-list-section--package-detail
-    +background($light_cyan)
-    +margin(rem(10) null null null)
-.main-mobile-hotels-show-package-detail
-  .main-mobile-hotels-show-package-detail__container
-    +margin(null null null rem(5))
-    +padding(null null null rem(15))
-    +border-style(null null null solid)
-    +border-width(rem(2))
-    +border-color($light_gray)
-    +position(relative)
-  .main-mobile-hotels-show-package-detail__cover
-    +size(100% null)
-    +position(relative)
-    +clearfix
-    img
-      +size(100% auto)
-      +float(left)
-  .main-mobile-hotels-show-package-detail__title
-    +size(rem($font_standard) null)
-    color: $gray_dark
+  .hotel-show-feature__title
     font-size: rem($font_h6)
-    line-height: rem($font_h4)
-    +padding(rem(10) null)
-    +position(absolute, rem(50) null null rem(10))
+    color: $dark
+    +margin(rem(10))
+  .hotel-show-feature__description
+    font-size: rem($font_standard)
+    color: $gray_dark
+    +margin(rem(10) rem(10) rem(20))
+    p
+      line-height: rem($font_h4)
+
+// Overview
+.hotel-show-overview
+  +margin(rem(20) 0)
+  .hotel-show-overview__recommends
+    @extend %main-section
     +background($light_cyan)
-    writing-mode: tb-rl
-    z-index: 1
-  .main-mobile-hotels-show-package-detail__multi
-    +position(absolute, null rem(10) rem(10) nul)
-    +padding(rem(5) rem(10))
-    +background(rgba($black, .6))
-    font-size: $font_standard
-    line-height: $font_standard
-  .main-mobile-hotels-show-package-detail__description
-    +margin(rem(10) null null null)
-.main-mobile-hotels-show-modal-package
-  +position(relative)
-  +size(100%)
-  color: $white
-  overflow-y: auto
-  .main-mobile-hotels-show-modal-package__title
-    font-size: $font_h4
-    +margin(rem(20))
-  .main-mobile-hotels-show-modal-package__description
-    +background(rgba($black, .95))
-    +padding(rem(10))
-    font-size: $font_h6
+  .hotel-show-overview__address
+    @extend %main-section
+    +background($lightest_green)
+    +margin(rem(10) 0 0)
+  .hotel-show-overview__title
+    @extend %main-title
+  .hotel-show-overview__list
+    @extend %main-section-list-card
+  .hotel-show-overview__list-item
+    @extend %main-section-list-item
+  .hotel-show-overview__list-item-content
+    color: $gray_dark
+    +margin(rem(5) 0 0 0)
+  .hotel-show-overview__list-item-icon
+    @extend %main-secondary-icon
+  .hotel-show-overview__album
+    +position(relative)
+    +margin(rem(20) 0 0 0)
+  .hotel-show-overview__album-item
+    img
+      +display(block)
+      +size(100% auto)
+
+// Rooms
+.hotel-show-rooms
+  @extend %main-section
+  +background($lighter_green)
+  .hotel-show-rooms__title
+    @extend %main-title
+  .hotel-show-rooms__rooms
+    +position(absolute, rem(11) rem(10) null null)
+    font-size: rem($font_h6)
+    .ui.dropdown
+      min-width: rem(130)
+      +padding(rem(10) rem(15))
+      .menu
+        +breakpoint(max-width 767px)
+          max-height: rem(200)
+        .item
+          font-size: rem($font_h6)
+          padding: rem(10) rem(15) !important
+  .hotel-show-rooms__albumes
+    +position(relative)
+    +margin(rem(10) 0 0 0)
+  .hotel-show-rooms__album
     display: none
-    text-align: left
-.main-mobile-hotels-show-favorite
-  +padding(null rem(10))
-  +position(relative)
-  .main-mobile-hotels-show-favorite__day-group
+    &:first-child
+      display: block
+  .hotel-show-rooms__album-photos
+    &.blur
+      +filter(blur(rem(3)))
+  .hotel-show-overview__album-item
+    img
+      +display(block)
+      +size(rem(300) auto)
+  .hotel-show-rooms__album-info-btn
+    +position(absolute, null rem(10) rem(10) null)
+    +padding(rem(5) rem(10))
+.hotel-show-room-info
+  display: none
+  +position(absolute, 0 0)
+  +background(rgba($black, .7))
+  color: $white
+  font-size: rem($font_h6)
+  overflow-y: auto
+  +padding(rem(20))
+  .hotel-show-room-info__item
+    +margin(0 0 rem(5) 0)
+  .hotel-show-room-info__facilities
+    +clearfix
+  .hotel-show-room-info__facility
+    +span(rem(85))
+  .hotel-show-room-info__facility-items
+    +span(rem(175))
+
+// Packages
+.hotel-show-packages
+  +margin(rem(20) 0)
+  @extend %main-section
+  +background($light_cyan)
+  .hotel-show-packages__name
+    @extend %main-title
+  .hotel-show-packages__list-title
+    font-size: rem($font_h6)
+    color: $deep_green
+    +margin(0 0 rem(10) 0)
+  .hotel-show-packages__list-title-icon
+    @extend %main-primary-icon
+  .hotel-show-packages__list
+    @extend %main-section-list-card
+    +margin(0 0 rem(10) 0)
+  .hotel-show-packages__list-item
+    @extend %main-section-list-item
+  .hotel-show-packages__list-item-icon
+    @extend %main-secondary-icon
+
+// Extra
+.hotel-show-extras-explain
+  +container
+  text-align: center
+  font-size: rem($font_h6)
+  line-height: rem($font_h3)
+  color: $gray_dark
+  +margin(0 auto rem(20) auto)
+  .icon-gift
+    font-size: rem($font_h3)
+    +margin(0 rem(10) 0 0)
+.hotel-show-extras
+  +margin(rem(20) 0)
+  @extend %main-section
+  +background($lightest_green)
+  &.hotel-show-extras--more
+    .hotel-show-extras__cover-photo
+      +span(100%)
+      +margin(0 0 rem(10) 0)
+    .hotel-show-extras__simple
+      +padding(0)
+    .hotel-show-extras__keywords
+      +span(100%)
+      .hotel-show-extras__keyword
+        min-width: 23%
+    .hotel-show-extras__more
+      +display(none)
+      &.hotel-show-extras__more--pickup
+        +display(block)
+    .hotel-show-extras-content
+      display: block
+  .hotel-show-extras__title
+    @extend %main-title
+    font-size: rem($font_h5)
+  .hotel-show-extras__label
+    +inline-block
     +position(relative)
-    .icon-arrow-right
-      +position(absolute, 50% rem(5) null null)
-      font-size: rem($font_h4)
-      +margin(rem(-14) null null null)
-      color: $light_dark
-  .main-mobile-hotels-show-favorite__day
-    +position(absolute, 50% null null 0)
-    +size(rem(40))
-    +margin(rem(-20) null null null)
-    text-align: center
-    +background($white)
-  .main-mobile-hotels-show-favorite__day-border
-    +position(absolute, rem(5) null null rem(5))
-    +size(rem(30))
-    +transform(rotateZ(45deg))
-    border: solid rem(1) $light_dark
-  .main-mobile-hotels-show-favorite__day-number
-    font-size: rem(10)
-    line-height: rem(10)
-    +margin(rem(10) null)
-  .main-mobile-hotels-show-favorite__day-list
-    +padding(rem(10) rem(20) rem(10) rem(10))
-    +margin(rem(10) null rem(10) rem(55))
-    +background($lighter_green)
-    +position(relative)
+    +margin(null null null rem(10))
+    +background($red)
+    +border-radius(0 rem(2) rem(2) 0)
+    font-size: rem($font_standard)
+    line-height: rem($font_standard)
+    font-weight: bold
+    color: $white
+    +padding(rem(4) rem(5) rem(4) rem(10))
     &:before
       content: ''
-      +size(0)
-      +position(absolute, 50% 100% null null)
-      +border-color(transparent $lighter_green transparent transparent)
-      +border-width(rem(8) rem(6))
-      +border-style(solid)
-      +margin(rem(-8) null null null)
-    &:first-child
-      +margin(0 null null null)
-  .main-mobile-hotels-show-favorite__day-item
-    font-size: $font_standard
-    line-height: $font_h4
-  .main-mobile-hotels-show-favorite__border
-    +position(absolute, 0 null null rem(30))
-    +size(rem(1) 100%)
-    +padding(rem(20) null)
-  .main-mobile-hotels-show-favorite__border-background
-    +size(100%)
-    +background($light_dark)
-.main-mobile-hotels-show-modal-favorite-day
-  +position(relative)
-  +size(100%)
-  color: $white
-  text-align: left
-  +background(rgba($black, .95))
-  overflow-y: auto
-  +padding(null null rem(50))
-  .main-mobile-hotels-show-modal-favorite-day__title
-    font-size: $font_h4
-    +margin(rem(20))
-  .main-mobile-hotels-show-modal-favorite-day__content
-    font-size: $font_h5
-    font-weight: bold
+      +position(absolute)
+      +transform(translateY(-50%)translateX(50%)rotate(-45deg))
+      top: 50%
+      right: 100%
+      +background($red)
+      +size(rem(14))
+    &:after
+      content: ''
+      +position(absolute)
+      top: 50%
+      left: 0%
+      +margin(rem(-2) null null null)
+      +background($white)
+      +size(rem(4))
+      +box-shadow(0 rem(-1) rem(-1) 0 rgba($white, .3))
+      +border-radius(500rem)
+  .hotel-show-extras__simple
+    +clearfix
+    +position(relative)
+    +padding(0 0 rem(5) 0)
+  .hotel-show-extras__cover-photo
+    +span(1 of 2)
+    @extend %main-section-list-card
+    +padding(rem(5))
+    img
+      +display(block)
+      +size(100% auto)
+  .hotel-show-extras__keywords
+    +span(1 of 2)
+    color: $gray_dark
+    .hotel-show-extras__keyword
+      +position(relative)
+      +padding(0 0 0 rem(20))
+      +margin(0 0 rem(5) 0)
+      +inline-block
+      min-width: 45%
+    .hotel-show-extras__keyword-icon
+      @extend %main-secondary-icon
+      left: rem(10)
+  .hotel-show-extras__price
+    +float(left)
+    color: $red
+    em
+      font-size: rem($font_h6)
+      +padding(0 rem(2))
+  .hotel-show-extras__more
+    +float(right)
+    +margin(0 rem(10) 0 0)
+    color: $gray_dark
+    .icon-arrow-double-down
+      +margin(0 0 0 rem(5))
+    &.hotel-show-extras__more--pickup
+      +display(none)
+.hotel-show-extras-content
+  +display(none)
+  .hotel-show-extras-content__hr
+    +display(block)
+    border: 0
+    height: rem(1)
     +margin(rem(10))
-  .main-mobile-hotels-show-modal-favorite-day__description
-    +margin(rem(10))
-    font-size: $font_h6
-    overflow-y: auto
-  .icon-arrow-double-down
-    font-size: $font_h3
-    +margin(rem(20))
+    @include background(linear-gradient(left, rgba($light_dark, .1), rgba($light_dark, 1), rgba($light_dark, .1)))
+  .hotel-show-extras-content__description
+    color: $deep_green
+  .hotel-show-extras-content__list
+    @extend %main-section-list-card
+    +margin(rem(10) 0)
+  .hotel-show-extras-content__list-item
+    @extend %main-section-list-item
+    color: $deep_green
+  .hotel-show-extras-content__list-item-icon
+    @extend %main-secondary-icon

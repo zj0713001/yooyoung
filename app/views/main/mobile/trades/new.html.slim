@@ -1,7 +1,11 @@
-- @is_no_fotter = true
+ruby:
+  @is_no_fotter = true
+  set_meta_tags(
+    title: "填写订单信息_#{@hotel.chinese}",
+  )
 .main-mobile-trades-new.js_main_mobile_trades_new ms-controller='mobile_main_trade_new'
   .main-mobile-trades-new__banner
-    = render partial: 'main/mobile/hotels/banner', locals: { hotel: @hotel }
+    = render partial: 'main/mobile/hotels/show/banner', locals: { hotel: @hotel, can_buy: true, min_price: @min_price }
   = form_for [:mobile, @trade], html: { class: :'js_main_mobile_trades_new_form' } do |f|
     = f.hidden_field :package_id, :'ms-duplex' => 'selected_package.id'
     = f.hidden_field :start_day, :'ms-duplex' => 'selected_start_day'
@@ -10,6 +14,7 @@
     = f.hidden_field :people_num, :'ms-duplex' => 'people_num'
     = f.hidden_field :extra_bed_num, :'ms-duplex' => 'extra_bed_num'
     = f.hidden_field :child_num, :'ms-duplex' => 'child_num'
+    = hidden_field_tag 'trade[extra_services_ids][]', '', :'ms-repeat-extra_service' => 'selected_extras', :'ms-duplex' => 'extra_service.id'
     .main-mobile-trades-new__step ms-visible="!is_submitting"
       h2.main-mobile-trades-new__title
         .main-mobile-trades-new__title-icon
@@ -20,31 +25,20 @@
       .ui.page.dimmer.main-mobile-trades-new-step.js_main_mobile_trades_new_package_step
         .main-mobile-trades-new-step__content
           .main-mobile-trades-new-step__title 请选择套餐类型
-          .main-mobile-trades-new-step__selectable-item ms-click="select_package(hotel.package)"
-            .main-mobile-trades-new-step__selectable-li ms-class="active:selected_package==hotel.package"
-            | {{ hotel.package.name }}
-          .main-mobile-trades-new-step__selectable-item ms-click="select_package(hotel.favorite_package)"
-            .main-mobile-trades-new-step__selectable-li ms-class="active:selected_package==hotel.favorite_package"
-            | {{ hotel.favorite_package.name}}
-          .main-mobile-trades-new-step__detail-content ms-visible="selected_package==hotel.package"
-            - @hotel.package.items.each do |item|
-              .main-mobile-trades-new-step__detail-item
-                .main-mobile-trades-new-step__li
-                = item.content
-          .main-mobile-trades-new-step__detail-content ms-visible="selected_package==hotel.favorite_package"
-            - @hotel.favorite_package.items.group_by(&:service_day).sort.each_with_index do |(day_index, items), index|
-              .main-mobile-trades-new-step__detail-day Day #{day_index}
-              - items.each_with_index do |item, index|
-                .main-mobile-trades-new-step__detail-item
-                  .main-mobile-trades-new-step__li
-                  = item.content
+          .main-mobile-trades-new-step__selectable-item ms-repeat-p='hotel.packages' ms-click="select_package(p)"
+            .main-mobile-trades-new-step__selectable-li ms-class="active:selected_package==p"
+            | {{ p.name }}
+          .main-mobile-trades-new-step__detail-content ms-visible="!!selected_package"
+            .main-mobile-trades-new-step__detail-item ms-repeat-item='selected_package_items'
+              .main-mobile-trades-new-step__li
+              | {{ item.content }}
           .main-mobile-trades-new-step__tips
             | *实际价格会根据选定日期及入住人数有所调整
       h2.main-mobile-trades-new__title
         .main-mobile-trades-new__title-icon
         | 入住日期
       .main-mobile-trades-new__select-button ms-click='select_day_step' ms-class='disabled:!selected_package'
-        .main-mobile-trades-new__select-text ms-text="selected_day_text"
+        .main-mobile-trades-new__select-text  ms-text="selected_day_text"
         .iconfont.icon-arrow-down
       .main-mobile-trades-new__check-out ms-text="end_day_text" ms-visible="end_day_text"
       .ui.page.dimmer.main-mobile-trades-new-step.js_main_mobile_trades_new_day_step data-calendar-url="#{calendar_mobile_trades_path}" data-price-url="#{prices_path}"
@@ -134,6 +128,24 @@
                 .main-mobile-trades-new-step__detail-item
                   .main-mobile-trades-new-step__li
                   = item
+      - if @hotel.extra_services.present?
+        h2.main-mobile-trades-new__title
+          .main-mobile-trades-new__title-icon
+          | 精彩活动
+        .main-mobile-trades-new__select-button ms-click='select_extras_step' ms-class='disabled:!selected_room'
+          .main-mobile-trades-new__select-text ms-text='selected_extras_text'
+          .iconfont.icon-arrow-down
+        .main-mobile-trades-new__extra ms-repeat-extra='selected_extras'
+          .main-mobile-trades-new__extra-icon
+          | {{ extra.name }}（{{ extra.time }} - {{ people_num + child_num}}人）
+        .ui.page.dimmer.main-mobile-trades-new-step.js_main_mobile_trades_new_extras_step
+          .main-mobile-trades-new-step__content
+            .main-mobile-trades-new-step__title 请选择精彩活动
+            .main-mobile-trades-new-step__selectable-item ms-repeat-extra='hotel.extra_services' ms-click="select_extras(extra)"
+              .main-mobile-trades-new-step__selectable-li ms-class="active:is_selected_extra(extra)"
+              span.main-mobile-trades-new-step__selectable-item-price
+                | ￥{{ extra.price }}/人
+              | {{ extra.name }}（{{ extra.time }}）
     .main-mobile-trades-new__step ms-visible="is_submitting"
       .main-mobile-trades-new__content
         h2.main-mobile-trades-new__title
@@ -165,7 +177,7 @@
     .main-mobile-trades-new-button
       .main-mobile-trades-new-button__price
         span ￥
-        em ms-text="total_price || min_package_price"
+        em ms-text="total_price || min_price"
         span ms-visible="!total_price"
           | /人起
       .main-mobile-trades-new-button__action ms-visible="!is_submitting" ms-click="next" 下一步

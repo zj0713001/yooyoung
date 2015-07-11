@@ -53,7 +53,7 @@
     @extend %main-title
     +margin(rem(30) null rem(20) null)
   .main-mobile-about__title-icon
-    @extend %main-title-icon
+    @extend %main-primary-icon
   .main-mobile-about__footer-title
     font-size: rem($font_h4)
     line-height: rem(30)
@@ -72,9 +72,9 @@
   &.main-mobile-about-section:nth-of-type(3n)
     +background($lighter_green)
 .main-mobile-about-list-section
-  @extend %main-list-section
+  @extend %main-section
   +position(relative)
   .main-mobile-about-list-section__item
-    @extend %main-list-section-item
+    @extend %main-section-list-item
     .main-mobile-about-list-section__item-icon
-      @extend %main-list-section-item-icon
+      @extend %main-secondary-icon

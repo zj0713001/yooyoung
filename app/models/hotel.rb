@@ -80,39 +80,4 @@ class Hotel < ActiveRecord::Base
   # validates :provisions, presence: true
   validates :city, existence: true
   validates :editor, existence: true
-
-  def as_json(options = nil)
-  super({
-    only: [:name, :chinese, :description, :provisions, :children_provisions, :drawback_provisions, :address, :phone, :checkin, :checkout, :traffics, :arounds, :best_season, :tips, :recommends, :local_address, :visa_tip, :language_tip, :money_tip, :network_tip, :power_tip, :luggage_tip],
-    include: {
-      # cover_photo: {
-      #   only: [:image],
-      # },
-      # photos: {
-      #   only: [:image],
-      # },
-      packages: {
-        only: [:id, :name, :description, :days, :presents, :exclusives],
-        include: {
-          items: {
-            only: [:id, :content, :description, :address, :tips, :openning_hours, :phone, :service_day],
-          },
-        },
-      },
-      rooms: {
-        only: [:id, :name, :description, :features, :sight, :area, :facilities, :population, :bed_type, :chinese],
-        include: {
-          photos: {
-            only: [],
-            methods: :normal_narrow_url,
-          },
-        },
-      },
-      extra_services: {
-        only: [:id, :name, :description, :keywords, :time, :itineraries]
-      },
-    },
-    methods: :to_param,
-  }.merge(options.to_h))
-end
 end

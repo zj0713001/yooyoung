@@ -1,0 +1,30 @@
+.hotel-show-extras.js_main_mobile_hotel_show_extras
+  .hotel-show-extras__title
+    = extra_service.name
+    .hotel-show-extras__label = extra_service.time
+  .hotel-show-extras__simple
+    .hotel-show-extras__cover-photo
+      = image_tag extra_service.cover_photo.try(:image).try(:normal).try(:url)
+    .hotel-show-extras__keywords
+      - extra_service.keywords.each do |keyword|
+        .hotel-show-extras__keyword
+          .hotel-show-extras__keyword-icon
+          = keyword
+  .hotel-show-extras-content
+    hr.hotel-show-extras-content__hr
+    .hotel-show-extras-content__description = simple_format extra_service.description
+    .hotel-show-extras-content__list
+      - extra_service.itineraries.each do |itinerary|
+        .hotel-show-extras-content__list-item
+          .hotel-show-extras-content__list-item-icon
+          = itinerary
+  .hotel-show-extras__price
+    | ￥
+    em 350元
+    | /人起
+  .hotel-show-extras__more.js_main_mobile_hotel_show_extras_more
+    | 查看详情
+    span.iconfont.icon-arrow-double-down
+  .hotel-show-extras__more.hotel-show-extras__more--pickup.js_main_mobile_hotel_show_extras_more
+    | 收起详情
+    span.iconfont.icon-arrow-double-up

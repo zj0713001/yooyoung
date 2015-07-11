@@ -2,10 +2,10 @@
   +display(none)
   +position(absolute, 0 null null 0)
   +size(100% null)
-  +background(rgba($dark, .96))
+  +background(rgba($black, .9))
   z-index: 999
   font-size: $font_h5
-  color: rgba($white, .6)
+  color: rgba($white, .9)
   .main-mobile-nav__logo
     +clearfix
   .icon-logo
@@ -21,6 +21,8 @@
       font-weight: bold
       +padding(null rem(20))
       display: block
+      &:active
+        color: $white
   .main-mobile-nav__service
     +border-style(solid null null null)
     +border-width(rem(1))

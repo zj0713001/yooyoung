@@ -87,18 +87,17 @@ ruby:
           span.trade-new-form__minus-button ms-click='child_num_minus' -
           = f.text_field :child_num, class: :'trade-new-form__input trade-new-form__input--smallest main-form__input main-form__input--smallest', :'ms-duplex' => :"child_num", readonly: true
           span.trade-new-form__plus-button ms-click='child_num_plus' +
-        .main-form__group
-          = label_tag :extra, '精彩活动', class: :'trade-new-form__label main-form__label'
-          = hidden_field_tag 'trade[extra_services_ids][]', '', :'ms-repeat-extra_service' => 'selected_extras', :'ms-duplex' => 'extra_service.id'
-          .trade-new-form__hint
-            | 精彩活动不容错过，自由组合省心订！
-          .trade-new-form__extras
-            .trade-new-form__extra-select.trade-new-form__select ms-repeat-extra='hotel.extra_services' ms-hover='trade-new-form__select--hover:start_day' ms-hover-2='trade-new-form__select--hover-no-start-day:!start_day' ms-class='trade-new-form__select--selected:is_selected_extra(extra)' ms-click='select_extra(extra)'
-              .trade-new-form__extra-name ms-text="extra.name+'（'+extra.time+'）'"
-              .trade-new-form__warning ms-visible='!start_day'
-                | 请选择入住日期
-              .trade-new-form__extra-price ms-visible='extra.price' ms-text='extra.price+"元/人"'
-              .iconfont.icon-yes
+        - if @hotel.extra_services.present?
+          .main-form__group
+            = label_tag :extra, '精彩活动', class: :'trade-new-form__label main-form__label'
+            = hidden_field_tag 'trade[extra_services_ids][]', '', :'ms-repeat-extra_service' => 'selected_extras', :'ms-duplex' => 'extra_service.id'
+            .trade-new-form__extras
+              .trade-new-form__extra-select.trade-new-form__select ms-repeat-extra='hotel.extra_services' ms-hover='trade-new-form__select--hover:start_day' ms-hover-2='trade-new-form__select--hover-no-start-day:!start_day' ms-class='trade-new-form__select--selected:is_selected_extra(extra)' ms-click='select_extra(extra)'
+                .trade-new-form__extra-name ms-text="extra.name+'（'+extra.time+'）'"
+                .trade-new-form__warning ms-visible='!start_day'
+                  | 请选择入住日期
+                .trade-new-form__extra-price ms-visible='extra.price' ms-text='extra.price+"元/人"'
+                .iconfont.icon-yes
         hr.main-form__hr
         = f.fields_for :communicate, @trade.communicate do |ff|
           .main-form__group
