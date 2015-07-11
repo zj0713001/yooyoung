@@ -1,6 +1,6 @@
-$sprites: sprite-map("main/mobile/logo/*.png");
-$sprites2x: sprite-map("main/mobile/logo-retina/*.png");
+$sprites: sprite-map("shared/logo/*.png");
+$sprites2x: sprite-map("shared/logo-retina/*.png");
 
 .icon-logo {
-  @include retina-sprite(logo-small);
+  @include retina-sprite(logo);
 }

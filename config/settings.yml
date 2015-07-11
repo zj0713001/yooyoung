@@ -41,6 +41,9 @@ defaults: &defaults
 
 development:
   <<: *defaults
+  home:
+    banner: <%= %w[3 11 9] %>
+    section: <%= %w[28 27 12 22 11 30 19 20 21 24 7 18] %>
 
 test:
   <<: *defaults

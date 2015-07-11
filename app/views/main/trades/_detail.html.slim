@@ -1,4 +1,5 @@
 - show_package ||= false
+- show_extra ||= false
 - no_cancel ||= false
 - show_button ||= false
 .detail-container
@@ -61,18 +62,10 @@
       = trade.package.name
       - if show_package
         .detail-container__package-content
-          - if trade.package.favorite
-            - trade.package.items.group_by(&:service_day).sort.each_with_index do |(day_index, items), index|
-              .detail-container__package-day Day #{day_index}
-              - items.each_with_index do |item, index|
-                .detail-container__package-item
-                  .detail-container__package-icon
-                  = item.content
-          - else
-            - trade.package.items.each do |item|
-              .detail-container__package-item
-                .detail-container__package-icon
-                = item.content
+          - trade.package.items.each do |item|
+            .detail-container__package-item
+              .detail-container__package-icon
+              = item.content
   .detail-container__group
     .detail-container__label
       = Trade.human_attribute_name(:room_id)
@@ -89,6 +82,19 @@
         = "，#{trade.child_num}位儿童"
       - unless trade.extra_bed_num.zero?
         = "，需加床#{trade.extra_bed_num}张"
+  - if trade.extra_services.present?
+    .detail-container__group
+      .detail-container__label
+        = Trade.human_attribute_name(:extra_services)
+      .detail-container__content
+        - trade.extra_services.each do |extra_service|
+          p = "#{extra_service.name}（#{trade.people_num+trade.child_num}人）"
+          - if show_extra
+            .detail-container__package-content
+              - extra_service.itineraries.each do |itinerary|
+                .detail-container__package-item
+                  .detail-container__package-icon
+                  = itinerary
   .detail-container__group
     .detail-container__label
       = Remark.human_attribute_name(:content)

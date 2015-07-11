@@ -1,0 +1,526 @@
+.hotel-show
+  +font-family-heiti
+  +no-select
+  position: relative
+  .hotel-show__nav
+    +background($lighter_green)
+    +display(none)
+    z-index: 990
+  .hotel-show__features,
+  .hotel-show__overview,
+  .hotel-show__rooms,
+  .hotel-show__packages,
+  .hotel-show__extras,
+    +padding(60px null 0)
+
+// Banner
+.hotel-show-banner
+  +position(relative)
+  +full-width
+  height: 300px
+  background-position: 50% 50%
+  background-repeat: no-repeat
+  +background-size(cover)
+  .hotel-show-banner__section
+    +absolute-center
+    +size(600px 160px)
+    +margin(-80px 0 0 -300px)
+    +background(rgba($black, .3))
+.hotel-show-banner-section
+  +position(relative)
+  +padding(10px)
+  color: $white
+  text-align: center
+  .hotel-show-banner-section__title
+    font-size: $font_h3
+    +margin(15px 0)
+  .hotel-show-banner-section__location
+    +margin(10px 0)
+  .hotel-show-banner-section__booking
+    display: block
+    width: 100px
+    +margin(auto)
+    font-size: $font_h5
+    line-height: 30px
+  .hotel-show-banner-section__price-tag
+    +position(absolute, null -5px 10px null)
+    +padding(0 30px 0 20px)
+    height: 32px
+    font-size: $font_h6
+    line-height: 32px
+    +background(rgba($red, .75))
+    +container-box-shadow
+    small
+      font-size: $font_standard
+    em
+      +margin(0 5px)
+      font-size: $font_h4
+    &:before
+      content: ''
+      +size(0)
+      +position(absolute, 0 100% null null)
+      +border-color(transparent rgba($red, .75) transparent transparent)
+      +border-width($font_h5)
+      +border-style(solid)
+    &:after
+      content: ''
+      +size(0)
+      +position(absolute, 100% 0 null null)
+      +border-color($red transparent transparent transparent)
+      +border-width(5px 5px 0 0)
+      +border-style(solid)
+
+// Nav
+.hotel-show-nav
+  +main-container
+  padding: 10px 0
+  text-align: center
+  position: relative
+  height: 60px
+  ul.main-navbar
+    > li
+      line-height: 36px
+      margin-right: 20px
+      min-width: 100px
+      line-height: 36px
+      color: $dark
+      a
+        padding: 9px 10px
+        font-size: $font_h4
+      &:hover,
+      &.active
+        border: 2px
+        border-style: none none solid none
+        border-color: $light_dark
+  .hotel-show-nav__price
+    position: absolute
+    right: 120px
+    margin: 3px 0
+    color: $red
+    line-height: $font_h2
+    font-size: $font_h6
+    em
+      font-size: $font_h3
+      font-weight: bold
+  .hotel-show-nav__booking
+    position: absolute
+    right: 0
+    width: 100px
+    font-size: $font_h5
+    line-height: 30px
+    margin: 3px 0
+    display: block
+
+// Feature
+.hotel-show-feature
+  +main-container
+  +margin(0 auto 100px)
+  &.hotel-show-feature--even
+    .hotel-show-feature__content, .hotel-show-feature__image
+      float: left
+  &.hotel-show-feature--odd
+    .hotel-show-feature__content, .hotel-show-feature__image
+      float: right
+  &:last-child
+    +margin(0 auto 60px)
+  .hotel-show-feature__content
+    +span(1 of 2)
+    +padding(30px 35px)
+    font-size: $font_h4
+    line-height: $font_h2
+  .hotel-show-feature__image
+    +span(1 of 2)
+    +padding(0 10px)
+    img
+      +size(100%)
+      +container-box-shadow
+  .hotel-show-feature__title
+    color: $dark
+    +margin(null null 10px null)
+  .hotel-show-feature__description
+    color: $gray_dark
+
+// Overview
+.hotel-show-overview
+  +background($lightest_green)
+  .hotel-show-overview__container
+    +main-container
+    padding: 20px 0
+    position: relative
+  .hotel-show-overview__images
+    position: relative
+    overflow: hidden
+    +span(840px)
+    +breakpoint(max-width $desktop-maxwidth)
+      +span(600px)
+  .hotel-show-overview__images-main
+    position: relative
+    .icon-fullscreen
+      position: absolute
+      top: 10px
+      right: 10px
+      font-size: $font_h2
+      color: $white
+      cursor: pointer
+  .hotel-show-overview__image-item
+    height: 500px
+    +breakpoint(max-width $desktop-maxwidth)
+      height: 375px
+    img
+      max-height: 100%
+      max-width: 100%
+  .hotel-show-overview__image-nav-item
+    height: 60px
+    cursor: pointer
+    +margin(2px 2px null null)
+    img
+      max-height: 100%
+      max-width: 100%
+    opacity: .5
+    &.slick-current
+      opacity: 1
+
+  .hotel-show-overview__info
+    +span(420px)
+    height: 562px
+    margin-left: 20px
+    +breakpoint(max-width $desktop-maxwidth)
+      +span(340px)
+      height: 437px
+    color: $dark
+    font-size: $font_h4
+    background: $white
+  .hotel-show-overview__info-tab
+    +clearfix
+    width: 100%
+    background: $lightest_green
+  .hotel-show-overview__info-tab-item
+    +span(100px)
+    line-height: 40px
+    color: $dark
+    text-align: center
+    cursor: pointer
+    &.active
+      background: $white
+  .hotel-show-overview__info-items
+    +clearfix
+    height: 522px
+    overflow-y: auto
+    font-size: $font_h5
+    +breakpoint(max-width $desktop-maxwidth)
+      height: 397px
+    +container-box-shadow
+  .hotel-show-overview__info-features
+    overflow-y: auto
+    margin: 20px
+    li
+      position: relative
+      margin-bottom: 20px
+      padding-left: 20px
+      font-size: $font_h6
+      line-height: $font_h3
+  .hotel-show-overview__info-icon
+    position: absolute
+    top: 8px
+    left: 0
+    @extend %secondary-title-icon
+  .hotel-show-overview__info-traffics
+    +clearfix
+    margin: 10px 20px
+    font-size: $font_h6
+    line-height: $font_h3
+    display: none
+    color: $dark
+  .hotel-show-overview__info-title
+    color: $gray_dark
+    margin: 10px 0 5px
+
+.ui.modal.hotel-show-overview-images-modal
+  +main-container
+  background: $black
+  +size(95% 90%)
+  overflow: hidden
+  border-radius: 0
+  margin: 3% auto 0 !important
+  .hotel-show-overview-images-modal__image-item
+    img
+      +size(100%)
+  > :last-child
+    border-radius: 0
+
+//Rooms
+.hotel-show-rooms
+  +background($lightest_green)
+  padding: 20px 0
+  position: relative
+  .hotel-show-rooms__container
+    +main-container
+  .hotel-show-rooms__list
+    +span(400px)
+    height: 630px
+    +breakpoint(max-width $desktop-maxwidth)
+      +span(320px)
+      height: 450px
+    font-size: $font_h4
+    ul
+      float: left
+      min-width: 260px
+      max-width: 320px
+      +padding(20px 30px)
+      +background($white)
+      +container-box-shadow
+    li
+      position: relative
+      color: $gray_dark
+      +padding(10px 0 10px 30px)
+      cursor: pointer
+      .hotel-show-rooms__list-icon
+        position: absolute
+        top: 15px
+        left: 0
+        @extend %primary-title-icon
+        display: none
+      &.active
+        color: $dark
+        .hotel-show-rooms__list-icon
+          display: block
+  .hotel-show-rooms__content
+    position: relative
+    +span(840px)
+    height: 630px
+    margin-left: 40px
+    +breakpoint(max-width $desktop-maxwidth)
+      +span(600px)
+      height: 450px
+  .hotel-show-rooms__room-photos
+    position: relative
+    display: none
+    height: 100%
+    +transition(all 0.3s ease-in)
+    &.active
+      display: block
+    &.blur
+      +filter(blur(3px))
+  .hotel-show-rooms__room-photo
+    height: 100%
+    img
+      width: 100%
+  .hotel-show-rooms__room-infos
+    display: none
+    position: absolute
+    z-index: 900
+    width: 100%
+    height: 100%
+    top: 0
+    +box-shadow(0 0 40px $white)
+  .hotel-show-rooms__room-info-btn
+    position: absolute
+    bottom: 20px
+    right: 20px
+    +padding(10px)
+  .hotel-show-rooms__room-info
+    position: relative
+    width: 100%
+    height: 100%
+    padding: 0 40px
+    +background(rgba($black, .5))
+    color: $white
+    font-size: $font_h4
+    line-height: $font_h4
+  .hotel-show-rooms__room-name
+    font-size: $font_h3
+    line-height: 66px
+    border-style: none none solid none
+    border-width: 1px
+    margin-bottom: 20px
+  .hotel-show-rooms__room-info-item
+    margin-bottom: 20px
+  .hotel-show-rooms__room-info-facilities
+    +clearfix
+  .hotel-show-rooms__room-info-facility
+    +span(110px)
+  .hotel-show-rooms__room-info-facility-items
+    float: left
+    width: 410px
+    height: 220px
+    overflow-y: auto
+
+// Packages
+.hotel-show-packages
+  +background($lightest_green)
+  padding: 20px 0 40px
+  margin-bottom: 40px
+  position: relative
+  color: $dark
+  &:last-child
+    margin-bottom: 0
+  .hotel-show-packages__container
+    +main-container
+  .hotel-show-packages__name
+    font-size: $font_h3
+    line-height: $font_h1
+    +margin(10px 20px)
+  table
+    width: 100%
+    border-collapse: separate
+    border-spacing: 20px 0
+    td
+      width: 50%
+      +padding(0 20px)
+      +background($white)
+      +container-box-shadow
+      vertical-align: top
+  .hotel-show-packages__title
+    +position(relative)
+    font-size: $font_h4
+    +padding(null null null 30px)
+    +margin(20px null)
+  .hotel-show-packages__title-icon
+    @extend %primary-title-icon
+    +position(absolute, 5px null null 0)
+  .hotel-show-packages__item
+    +position(relative)
+    font-size: $font_h6
+    +padding(null null null 20px)
+    +margin(15px null)
+  .hotel-show-packages__item-icon
+    @extend %secondary-title-icon
+    +position(absolute, 4px null null 0)
+
+// Extras
+.hotel-show-extras-explain
+  +main-container
+  text-align: center
+  font-size: $font_h4
+  line-height: 40px
+  color: $gray_dark
+  +margin(0 auto 20px auto)
+  .icon-gift
+    font-size: 40px
+    +margin(0 20px 0 0)
+.hotel-show-extras
+  +background($lighter_green)
+  padding: 20px 0
+  margin-bottom: 40px
+  position: relative
+  color: $dark
+  &:last-child
+    margin-bottom: 60px
+  .hotel-show-extras__container
+    +main-container
+.hotel-show-extras-simple
+  +position(relative)
+  +float(left)
+  width: 100%
+  .hotel-show-extras-simple__cover-photo
+    width: 40%
+    +padding(20px)
+    +background($white)
+    +container-box-shadow
+    img
+      +display(block)
+      height: auto
+      width: 100%
+  .hotel-show-extras-simple__content
+    width: 60%
+    +padding(10px 0 0 20px)
+    vertical-align: top
+    +position(relative)
+  .hotel-show-extras-simple__name
+    font-size: $font_h4
+    +margin(null null 20px null)
+  .hotel-show-extras-simple__name-label
+    +inline-block
+    +position(relative)
+    +margin(null null null 20px)
+    +background($red)
+    +border-radius(0 2px 2px 0)
+    font-size: $font_standard
+    line-height: $font_standard
+    font-weight: bold
+    color: $white
+    +padding(5px 5px 5px 10px)
+    &:before
+      content: ''
+      +position(absolute)
+      +transform(translateY(-50%)translateX(50%)rotate(-45deg))
+      top: 50%
+      right: 100%
+      +background($red)
+      +size(15px)
+    &:after
+      content: ''
+      +position(absolute)
+      top: 50%
+      left: 0%
+      +margin(-2px null null null)
+      +background($white)
+      +size(4px)
+      +box-shadow(0 -1px 1px 0 rgba($white, .3))
+      +border-radius(500rem)
+  .hotel-show-extras-simple__keywords
+    +clearfix
+  .hotel-show-extras-simple__keyword
+    +position(relative)
+    +span(1 of 4)
+    +margin(null null 15px null)
+    +padding(null null null 15px)
+    color: $gray_dark
+  .hotel-show-extras-simple__keyword-icon
+    position: absolute
+    top: 4px
+    left: 0
+    @extend %secondary-title-icon
+  .hotel-show-extras-simple__hr
+    +display(block)
+    border: 0
+    height: 1px
+    +margin(0px 20px 20px)
+    @include background(linear-gradient(left, rgba($light_dark, .1), rgba($light_dark, 1), rgba($light_dark, .1)))
+  .hotel-show-extras-simple__description
+    line-height: $font_h2
+  .hotel-show-extras-simple__price
+    +position(absolute, null null 5px 20px)
+    color: $red
+    em
+      font-size: $font_h4
+      +padding(0 5px)
+  .hotel-show-extras-simple__more
+    +position(absolute, null 40px 5px null)
+    color: $gray_dark
+    cursor: pointer
+.hotel-show-extras-content
+  +position(relative)
+  +display(none)
+  +float(left)
+  width: 100%
+  +margin(30px null null null)
+  .hotel-show-extras-content__item
+    +span(1 of 2)
+  .hotel-show-extras-content__item-title
+    font-size: $font_h4
+    line-height: $font_h2
+    +margin(null null 15px null)
+  .hotel-show-extras-content__itinerary
+    +position(relative)
+    +padding(0 40px 0 15px)
+    line-height: $font_h2
+  .hotel-show-extras-content__itinerary-icon
+    +position(absolute)
+    top: 13px
+    left: 0
+    @extend %secondary-title-icon
+    +size(4px)
+  .hotel-show-extras-content__exclusive
+    +position(relative)
+    +padding(null null null 20px)
+    +margin(null null 10px null)
+  .hotel-show-extras-content__exclusive-icon
+    +position(absolute)
+    top: 4px
+    left: 0
+    @extend %secondary-title-icon
+  .hotel-show-extras-content__exclusives
+    +margin(null null 30px 5px)
+    span
+      +margin(null 10px null null)

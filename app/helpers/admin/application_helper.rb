@@ -27,8 +27,9 @@ module Admin::ApplicationHelper
     render 'admin/shared/admin_paginate', collections: collections
   end
 
-  def admin_publish_tag(object)
-    if can? :publish, object.class
+  def admin_publish_tag(object, authorize_object=nil)
+    authorize_class = authorize_object.try(:class) || object.class
+    if can? :publish, authorize_class
       render 'admin/shared/admin_publish', object: object
     end
   end

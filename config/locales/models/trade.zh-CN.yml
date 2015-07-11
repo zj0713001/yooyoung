@@ -33,6 +33,7 @@ zh-CN:
         user_remark: 用户备注
         editor_remark: 编辑备注
         extra_remark: 附加备注
+        extra_services: 附加活动
         aasm_states/sms_submitted: 订单待确认
         aasm_states/sms_confirmed: 订单已确认
         aasm_states/sms_valid: 订单已付款

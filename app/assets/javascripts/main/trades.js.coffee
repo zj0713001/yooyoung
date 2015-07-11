@@ -2,15 +2,16 @@ $ ->
   if _.isElement($('.js_main_trade_new')[0])
     trade = avalon.define 'main_trade_new', (vm) ->
       vm.hotel = jsvar.hotel
-      vm.selected_package = vm.hotel.package
       vm.selected_room = null
       vm.start_day = ''
       vm.end_day = ''
-      vm.days = vm.hotel.package.days
+      vm.days = vm.hotel.packages[0].days
       vm.end_day_weekday = ''
-      vm.min_package_price = jsvar.package_min_price
+      vm.selected_package = null
+      vm.selected_extras = []
       vm.$watch 'start_day', (day) ->
         return if _.isEmpty(vm.start_day)
+        vm.select_package(vm.hotel.packages[0]) if !vm.selected_package
         end_day = moment(day).add(vm.days, 'days')
         weekday_arr = ["一", "二", "三", "四", "五", "六", "日"]
         vm.end_day = end_day.format('L')
@@ -24,15 +25,9 @@ $ ->
           success: (data) ->
             if data.status == true
               vm.hotel.rooms = _.map vm.hotel.rooms, (room) ->
-                room_data = _.find data.data, (r) ->
+                room_data = _.find data.data.room_prices, (r) ->
                   r.id == room.id
                 _.extend room, room_data
-                if vm.is_favorite
-                  room.disabled = room.favorite_package_disabled
-                  room.prices = room.favorite_package_prices
-                else
-                  room.disabled = room.package_disabled
-                  room.prices = room.package_prices
                 room.is_price_loaded = true
                 if vm.selected_room == room
                   vm.select_room(room)
@@ -47,33 +42,41 @@ $ ->
                 $(this).siblings('.js_main_trade_new_room_photos').slick('slickPrev')
               $('.js_main_trade_new_room_photo_slick_next').on 'click', ->
                 $(this).siblings('.js_main_trade_new_room_photos').slick('slickNext')
-      vm.is_favorite = false
-      vm.$watch 'is_favorite', ->
-        _.each vm.hotel.rooms, (room) ->
-          if room.is_price_loaded
-            if vm.is_favorite
-              room.disabled = room.favorite_package_disabled
-              room.prices = room.favorite_package_prices
-            else
-              room.disabled = room.package_disabled
-              room.prices = room.package_prices
-      vm.select_package = ->
-        vm.is_favorite = $(this).data('is-favorite')
-        if vm.is_favorite
-          vm.selected_package = vm.hotel.favorite_package
-          vm.days = vm.hotel.favorite_package.days
-          vm.min_package_price = jsvar.favorite_min_price
-        else
-          vm.selected_package = vm.hotel.package
-          vm.days = vm.hotel.package.days
-          vm.min_package_price = jsvar.package_min_price
+              vm.hotel.extra_services = _.map vm.hotel.extra_services, (extra_service) ->
+                extra_service_data = _.find data.data.extra_prices, (ex) ->
+                  ex.id == extra_service.id
+                _.extend extra_service, extra_service_data
+                extra_service
+      vm.select_package = (p) ->
+        vm.selected_package = p
+        vm.days = p.days
+        vm.calculate_price() if vm.selected_room?
       vm.$watch 'days', ->
         vm.$fire("start_day", vm.start_day, vm.start_day)
       vm.select_room = (room) ->
-        return if room.disabled || _.isEmpty(vm.start_day)
+        return if _.isEmpty(vm.start_day)
         vm.selected_room = room
+        vm.calculate_price()
+      vm.is_selected_extra = (extra) ->
+        _.contains vm.selected_extras, extra
+      vm.select_extra = (extra) ->
+        vm.selected_extras = if vm.is_selected_extra(extra)
+          _.without vm.selected_extras, extra
+        else
+          _.union vm.selected_extras, [extra]
+        vm.calculate_extra_price()
+      vm.calculate_extra_price = ->
+        extra_prices = _.map vm.selected_extras, (extra) ->
+          extra.price * (parseInt(vm.people_num) + parseInt(vm.child_num))
+        vm.extra_price = _.reduce extra_prices, (a, b) ->
+          a + b
+        , 0
+      vm.calculate_price = ->
+        room = vm.selected_room
         if room.is_price_loaded
-          vm.package_price = room.prices.sale_price
+          package_prices = _.find room.prices.package_prices, (prices) ->
+            parseInt(prices.id) == parseInt(vm.selected_package.id)
+          vm.package_price = package_prices.sale_price
           vm.extra_bed_price = room.prices.extra_bed_price.items[0].price
       vm.people_num = 2
       vm.child_num = 0
@@ -90,6 +93,7 @@ $ ->
           if vm.selected_room.is_price_loaded
             num = _.min [num, vm.selected_room.population+vm.selected_room.prices.extra_bed_price.limit]
         vm.people_num = num
+        vm.calculate_extra_price()
         vm.attendences = _.times num, ->
           { name: '', phone: '' }
       vm.people_num_minus = ->
@@ -107,6 +111,7 @@ $ ->
         if vm.selected_room && vm.selected_room.is_price_loaded
           num = _.min [num, vm.selected_room.prices.child_price.limit]
         vm.child_num = num
+        vm.calculate_extra_price()
       vm.communicate = { name: '', phone: '', email: '' }
       vm.copy_communicate_name = ->
         vm.attendences[0].name = vm.communicate.name
@@ -116,6 +121,7 @@ $ ->
         { name: '', phone: '' }
       vm.package_price = null
       vm.extra_bed_price = null
+      vm.extra_price = 0
     avalon.scan()
     $('.js_main_trade_new_form').validate
       ignore: ''

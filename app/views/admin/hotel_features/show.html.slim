@@ -1,0 +1,72 @@
+ruby:
+  set_meta_tags(
+    title: "#{ @hotel.chinese } - #{t('admin.seo.title')}"
+  )
+  show = !params[:action].in?(%w[new edit]) && @feature.persisted? && @feature.valid?
+h2.ui.dividing.header
+  = "#{t("admin.#{show ? 'show' : @feature.new_record? ? 'new' : 'edit'}")}#{model.model_name.human} - #{@hotel.chinese}"
+= render 'admin/shared/admin_form_messages', object: @hotel
+= form_for @feature, url: [:admin, @hotel, @feature], method: @feature.new_record? ? :post : :put, html: { multipart: true } do |f|
+  .ui.grid
+    .three.wide.column
+      .js_admin_sticky
+        .ui.vertical.menu.pointing
+          - @hotel.features.each do |feature|
+            = link_to feature.title, show ? admin_hotel_hotel_feature_path(@hotel, feature) : edit_admin_hotel_hotel_feature_path(@hotel, feature), class: "item #{'active' if @feature == feature}"
+          = link_to new_admin_hotel_hotel_feature_path(@hotel), class: "item #{'active' if @feature.new_record?}" do
+            i.icon.add.circle
+            = "#{t("admin.new")}#{model.model_name.human}"
+        .ui.aligned.basic.segment
+          - if show
+            = link_to t('admin.edit'), [:edit, :admin, @hotel, @feature], class: :'ui label teal button huge'
+          - else
+            - if @feature.persisted?
+              = link_to "#{t("admin.delete")}", [:admin, @hotel, @feature], method: :delete, data: { confirm: '确定删除套餐特点？', 'turbolinks-eval' => false }, class: :'ui label red button huge'
+              .ui.horizontal.divider OR
+            = f.submit t('admin.submit'), class: :'ui label teal button huge'
+    .thirteen.wide.column
+      = render partial: 'admin/hotels/steps', locals: { show: show, status: :feature, hotel: @hotel }
+      .ui.fluid.form.segment
+        = f.hidden_field :hotel_id, value: @hotel.id
+        .fields
+          .four.wide.field.required
+            = f.label :title
+          .eight.wide.field
+            - if show
+              .text = f.object.try(:title)
+            - else
+              = f.text_field :title, class: :js_admin_text_limit, :'data-max' => 20
+        .fields
+          .four.wide.field.required
+            = f.label :sequence
+          .eight.wide.field
+            - if show
+              .text = f.object.try(:sequence)
+            - else
+              = f.text_field :sequence
+        .fields
+          .four.wide.field.required
+            = f.label :description
+          .eight.wide.field
+            - if show
+              .text = simple_format f.object.try(:description)
+            - else
+              = f.text_area :description, class: :js_admin_text_limit, :'data-max' => 100
+        .fields
+          .four.wide.field.required
+            = f.label :cover_photo
+          .eight.wide.field
+            - if show
+              = render partial: 'admin/photos/item', locals: { photos: f.object.try(:cover_photo) }
+            - else
+              = render partial: 'admin/photos/uploader', locals: { field: :"#{f.object_name}[cover_photo_id]", multiple: false, photos: f.object.try(:cover_photo) }
+        .ui.divider
+          .fields
+            .four.wide.field
+            .eight.wide.field
+              br
+              br
+              - if show
+                = link_to t('admin.edit'), [:edit, :admin, @hotel, @feature], class: :'ui label teal button huge'
+              - else
+                = f.submit t('admin.submit'), class: :'ui label teal button huge'

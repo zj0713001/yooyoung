@@ -1,0 +1,37 @@
+h2.ui.dividing.header
+  = model.model_name.human
+  .ui.black.pointing.left.label = @packages.total_count
+= render partial: 'admin/hotels/steps', locals: { show: true, status: :package, hotel: @hotel }
+.ui.fluid.form.segment
+  = form_tag request.path, method: :get, class: 'js_admin_search_form' do
+    = new_link_tag model, Hotel
+table.ui.table.segment
+  thead
+    - %w[id name start_day end_day editor_id updated_at].each do |name|
+      th = model.human_attribute_name(name)
+    th = t('admin.actions')
+    th = t('admin.public')
+  tbody
+    - @packages.each do |package|
+      tr
+        td = package.id
+        td = package.name
+        td = package.start_day.try(:to_s, :db)
+        td = package.end_day.try(:to_s, :db)
+        td = package.editor.try(:nickname)
+        td = package.updated_at.try(:localtime).try(:to_s, :db)
+        td
+          - if can? :show, Hotel
+            = link_to [:admin, @hotel, package], alt: t('admin.show'), class: :'ui link action' do
+              i.search.icon
+          - if can? :edit, Hotel
+            = link_to [:edit, :admin, @hotel, package], alt: t('admin.edit'), class: :'ui link' do
+              i.edit.icon
+            - if can?(:edit, Hotel)
+              = link_to admin_prices_path(target: package.class.name, target_id: package.id), alt: t('admin.edit'), class: :'ui link', target: :_blank do
+                i.yen.icon
+        td
+          .ui.toggle.checkbox.js_admin_pulish_checkbox
+            = check_box_tag package.id, package.published, package.published, :'data-url' => polymorphic_path([:admin, @hotel, package])
+            label
+= admin_paginate_tag @packages

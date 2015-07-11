@@ -53,6 +53,13 @@
       = f.label :extra_bed_num
     .eight.wide.field
       .text = @trade.extra_bed_num
+- if @trade.extra_services.present?
+  .fields
+    .four.wide.field
+      = f.label :extra_services
+    .eight.wide.field
+      - @trade.extra_services.each do |extra_service|
+        .text = "#{extra_service.name}（#{trade.people_num+trade.child_num}人）"
 .fields
   .four.wide.field
     = f.label :user_remark

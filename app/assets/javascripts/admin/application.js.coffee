@@ -11,6 +11,7 @@
 
 # 3rd
 #= require 3rd/jquery.sticky
+#= require 3rd/jquery.textcounter.js
 #= require 3rd/jquery.browser
 #= require 3rd/select2
 #= require 3rd/fileupload/load-image.all.min

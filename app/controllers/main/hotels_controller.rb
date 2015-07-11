@@ -9,6 +9,8 @@ class Main::HotelsController < Main::ApplicationController
     @hotel = model.friendly_acquire params[:id]
     authorize! :show, @hotel
 
+    @packages = @hotel.packages.published
+
     respond_with(@hotel)
   end
 end

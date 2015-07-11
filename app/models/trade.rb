@@ -19,10 +19,10 @@
 #  book_email         :string(255)
 #  book_cc_email      :string(255)
 #  aasm_state         :string(255)
-#  lock_version       :integer          default("0"), not null
+#  lock_version       :integer          default(0), not null
 #  created_at         :datetime
 #  updated_at         :datetime
-#  people_num         :integer          default("2"), not null
+#  people_num         :integer          default(2), not null
 #  trade_no           :string(255)      default(""), not null
 #  deleted_at         :datetime
 #  cost_price         :integer
@@ -40,6 +40,7 @@ class Trade < ActiveRecord::Base
   belongs_to :editor, class_name: User
   has_many :payments
   has_and_belongs_to_many :attendences, uniq: true, class_name: Contacts::Attendence, join_table: :contacts_infos_trades, association_foreign_key: :contacts_info_id
+  has_and_belongs_to_many :extra_services, uniq: true, class_name: HotelExtraService, join_table: :hotel_extra_services_trades, association_foreign_key: :hotel_extra_service_id
 
   default_value_for :communicate do
     Contacts::Communicate.new
@@ -53,7 +54,6 @@ class Trade < ActiveRecord::Base
 
   before_create :build_hotel_and_end_day
   def build_hotel_and_end_day
-    self.hotel = self.package.hotel
     self.end_day = self.start_day + self.package.days
   end
   before_create :build_prices

@@ -1,0 +1,33 @@
+.hotel-show-rooms
+  .hotel-show-rooms__title 房型信息
+  .hotel-show-rooms__rooms
+    = select_tag 'room', options_from_collection_for_select(hotel.rooms, :id, :chinese), class: 'ui dropdown needsclick js_main_mobile_hotels_rooms_dropdown'
+  .hotel-show-rooms__albumes
+    - hotel.rooms.each do |room|
+      .hotel-show-rooms__album.js_main_mobile_hotels_rooms_album data-room-id="#{room.id}"
+        .hotel-show-rooms__album-photos.js_main_mobile_hotels_rooms_photos
+          - room.photos.each do |photo|
+            .hotel-show-overview__album-item
+              = image_tag photo.image.normal.url, lazy: true
+        - if room.photos.count > 1
+          a.main-slick__prev.js_main_mobile_hotels_rooms_album_prev
+            .iconfont.icon-arrow-left
+          a.main-slick__next.js_main_mobile_hotels_rooms_album_next
+            .iconfont.icon-arrow-right
+        .hotel-show-rooms__album-info-btn.opacity-button.js_main_mobile_hotels_rooms_album_info_btn 查看服务与设施
+        .hotel-show-rooms__album-room-info.hotel-show-room-info.js_main_mobile_hotels_rooms_album_info
+          - if room.bed_type.present?
+            .hotel-show-room-info__item #{Room.human_attribute_name(:bed_type)}：#{room.bed_type}
+          - if room.area.present?
+            .hotel-show-room-info__item #{Room.human_attribute_name(:area)}：#{room.area}
+          - if room.sight.present?
+            .hotel-show-room-info__item #{Room.human_attribute_name(:sight)}：#{room.sight}
+          - if room.population.present?
+            .hotel-show-room-info__item #{Room.human_attribute_name(:population)}：#{room.population}
+          - if room.facilities.present?
+            .hotel-show-room-info__facilities
+              .hotel-show-room-info__facility #{Room.human_attribute_name(:facilities)}：
+              - room.facilities.in_groups_of(5, false).each do |facilities|
+                .hotel-show-room-info__facility-items
+                  - facilities.each do |facility|
+                    .hotel-show-room-info__item #{facility}

@@ -1,0 +1,6 @@
+.hotel-show-feature class="hotel-show-feature--#{cycle("even", "odd")}"
+  .hotel-show-feature__content
+    .hotel-show-feature__title = feature.title
+    .hotel-show-feature__description = simple_format feature.description
+  .hotel-show-feature__image
+    = image_tag feature.cover_photo.try(:image).try(:large_narrow).try(:url)

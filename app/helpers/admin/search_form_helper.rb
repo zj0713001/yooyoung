@@ -11,7 +11,7 @@ module Admin::SearchFormHelper
     render "admin/shared/search/page"
   end
 
-  def new_link_tag(object)
-    link_to t('admin.new'), { action: :new }, class: :'ui label green button large' if can? :create, object
+  def new_link_tag(object, authorize_object=nil)
+    link_to t('admin.new'), { action: :new }, class: :'ui label green button large' if can?(:create, (authorize_object || object))
   end
 end

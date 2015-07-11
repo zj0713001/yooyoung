@@ -4,54 +4,51 @@ $ ->
       autoplay: false
       arrows: false
       lazyLoad: 'progressive'
-      dots: true
-      infinite: false
-      variableWidth: true
+      dots: false
+      infinite: true
+      touchThreshold: 5
+      speed: 500
 
-    $('.js_main_mobile_hotels_photo').on 'click', ->
-      $('.js_main_mobile_hotels_album').slick('slickGoTo', 0, true)
-      $('.js_main_mobile_hotels_photos_modal').dimmer('setting', 'transition', 'fade up').dimmer('show')
+    $('.js_main_mobile_hotels_album_prev').on 'click', ->
+      $('.js_main_mobile_hotels_album').slick('slickPrev')
 
-    package_item_description_fadein = (index)->
-      $('.js_main_mobile_photo_album_description').html($('.js_main_mobile_photo_album .slick-active').data('description')).fadeIn()
-    package_item_description_fadeout = ->
-      $('.js_main_mobile_photo_album_description').fadeOut()
+    $('.js_main_mobile_hotels_album_next').on 'click', ->
+      $('.js_main_mobile_hotels_album').slick('slickNext')
 
-    $('.js_main_mobile_photo_album').on
-      beforeChange: ->
-        package_item_description_fadeout()
-      afterChange: ->
-        package_item_description_fadein()
+    $('.js_main_mobile_hotels_rooms_dropdown').dropdown
+      on: 'disable'#disable
+      onChange: (value) ->
+        return false if !value
+        $('.js_main_mobile_hotels_rooms_album_info:visible').trigger('click')
+        $('.js_main_mobile_hotels_rooms_album').hide()
+        $(".js_main_mobile_hotels_rooms_album[data-room-id='#{value}']").fadeIn()
 
-    $('.js_main_mobile_photo_album').slick
+    _.each $('.js_main_mobile_hotels_rooms_photos img'), (img) ->
+      $(img).width($(window).width() - 20)
+
+    $('.js_main_mobile_hotels_rooms_photos').slick
       autoplay: false
       arrows: false
       lazyLoad: 'progressive'
-      dots: true
+      dots: false
+      infinite: true
+      touchThreshold: 5
+      speed: 500
       variableWidth: true
-      infinite: false
 
-    $('.js_main_mobile_package_photo').on 'click', ->
-      $('.js_main_mobile_photo_album').slick('slickGoTo', 0, true)
-      $('.js_main_mobile_hotels_package_modal').dimmer('setting', 'transition', 'fade up').dimmer('show')
-      package_item_description_fadein()
+    $('.js_main_mobile_hotels_rooms_album_prev').on 'click', ->
+      $(this).siblings('.js_main_mobile_hotels_rooms_photos').slick('slickPrev')
 
-    $('.js_main_mobile_hotels_package_modal').on 'click', (e) ->
-      $(this).dimmer('hide')
-      e.stopPropagation()
+    $('.js_main_mobile_hotels_rooms_album_next').on 'click', ->
+      $(this).siblings('.js_main_mobile_hotels_rooms_photos').slick('slickNext')
 
-    $('.js_main_mobile_favorite_photo').slick
-      autoplay: false
-      arrows: false
-      lazyLoad: 'progressive'
-      dots: true
-      variableWidth: true
-      infinite: false
+    $('.js_main_mobile_hotels_rooms_album_info_btn').on 'click', ->
+      $(this).siblings('.js_main_mobile_hotels_rooms_photos').addClass('blur')
+      $(this).siblings('.js_main_mobile_hotels_rooms_album_info').fadeIn(200)
 
-    $('.js_main_mobile_hotels_favorite_day').on 'click', ->
-      $(this).find('.js_main_mobile_favorite_photo').slick('slickGoTo', 0, true)
-      $(this).find('.js_main_mobile_hotels_favorite_day_modal').dimmer('setting', 'transition', 'fade up').dimmer('show')
+    $('.js_main_mobile_hotels_rooms_album_info').on 'click', ->
+      $(this).fadeOut(200)
+      $(this).siblings('.js_main_mobile_hotels_rooms_photos').removeClass('blur')
 
-    $('.js_main_mobile_hotels_favorite_day_modal').on 'click', (e) ->
-      $(this).dimmer('hide')
-      e.stopPropagation()
+    $('.js_main_mobile_hotel_show_extras_more').on 'click', ->
+      $(this).parents('.js_main_mobile_hotel_show_extras').toggleClass('hotel-show-extras--more')

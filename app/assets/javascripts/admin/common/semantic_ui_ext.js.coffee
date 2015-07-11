@@ -1,7 +1,9 @@
 $ ->
   $('.js_admin_menu').first().sidebar('attach events', '.js_admin_toggle_menu')
-  $('.ui.dropdown').dropdown()
+  $('select.dropdown').dropdown()
   publish_ajax = (checkbox, published) ->
+
+  $('.ui.checkbox').checkbox()
 
   $('.js_admin_pulish_checkbox').checkbox
     onChange: ->

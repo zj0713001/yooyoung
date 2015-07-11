@@ -1,0 +1,37 @@
+.hotel-show-overview
+  .hotel-show-overview__recommends
+    .hotel-show-overview__title 非去不可
+    .hotel-show-overview__list
+      - hotel.recommends.each do |recommend|
+        .hotel-show-overview__list-item
+          .hotel-show-overview__list-item-icon
+          = recommend
+    .hotel-show-overview__album
+      .js_main_mobile_hotels_album
+        - hotel.photos.each do |photo|
+          .hotel-show-overview__album-item
+            = image_tag photo.image.normal.url, lazy: true
+      a.main-slick__prev.js_main_mobile_hotels_album_prev
+        .iconfont.icon-arrow-left
+      a.main-slick__next.js_main_mobile_hotels_album_next
+        .iconfont.icon-arrow-right
+  .hotel-show-overview__address
+    .hotel-show-overview__title 交通信息
+    .hotel-show-overview__list
+      - if @hotel.arounds.present?
+        .hotel-show-overview__list-item
+          .hotel-show-overview__list-item-icon
+          | 位置和周边：
+          .hotel-show-overview__list-item-content = simple_format hotel.arounds
+      .hotel-show-overview__list-item
+        .hotel-show-overview__list-item-icon
+        | 地址：
+        .hotel-show-overview__list-item-content
+          - if hotel.address.present?
+            = hotel.address
+          - if hotel.local_address.present?
+            = hotel.local_address
+      .hotel-show-overview__list-item
+        .hotel-show-overview__list-item-icon
+        | 到达和离开：
+        .hotel-show-overview__list-item-content = simple_format hotel.traffics

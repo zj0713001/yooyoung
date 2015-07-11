@@ -15,7 +15,7 @@
 #  updated_at       :datetime
 #  service_day      :integer
 #  cover_photo_id   :integer
-#  sequence         :integer          default("0")
+#  sequence         :integer          default(0)
 #
 
 class HotelPackageItem < ActiveRecord::Base

@@ -64,7 +64,6 @@
     font-size: rem(10)
     line-height: rem($font_h5)
   .main-mobile-trades-simple-item__package-content
-    +span(3 of 4)
     +padding(rem(5) rem(10))
     +margin(null null rem(10) null)
     +background($white)
@@ -99,7 +98,7 @@
     +margin(rem(25) null rem(15) null)
     color: $dark
   .main-mobile-trades-new__title-icon
-    @extend %main-title-icon
+    @extend %main-primary-icon
   .main-mobile-trades-new__select-button
     +position(relative)
     +margin(rem(15) rem(10))
@@ -127,6 +126,18 @@
     font-size: rem($font_standard)
     +margin(rem(10) null)
     +padding(null null null rem(20))
+  .main-mobile-trades-new__extra
+    +position(relative)
+    +padding(0 0 0 rem(25))
+    +margin(rem(10) 0)
+    font-size: $font_h6
+    line-height: $font_h6
+    color: $dark
+  .main-mobile-trades-new__extra-icon
+    +position(absolute, rem(2) null null rem(10))
+    +size(rem(10))
+    background: rgba($red, .3)
+
   .main-mobile-trades-new__form-group
     +position(relative)
     +margin(rem(20) rem(10))
@@ -209,6 +220,9 @@
     +position(relative)
     line-height: rem(40)
     +padding(null null null rem(20))
+  .main-mobile-trades-new-step__selectable-item-price
+    color: $red
+    +margin(0 rem(5) 0 0)
   .main-mobile-trades-new-step__selectable-li
     +position(absolute, rem(15) null null 0)
     +size(rem(10))

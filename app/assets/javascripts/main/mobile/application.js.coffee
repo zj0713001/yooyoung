@@ -2,13 +2,15 @@
 #= require jquery.turbolinks
 #= require jquery_ujs
 #= require underscore
-#= require semantic-ui/dimmer
-#= require semantic-ui/transition
 #= require avalon.shim
 #= require jquery.validate
 #= require jquery.validate.additional-methods
 #= require 3rd/jquery.validate.methods
 #= require 3rd/jquery.validate.zh-CN
+
+#= require semantic-ui/dropdown
+#= require semantic-ui/dimmer
+#= require semantic-ui/transition
 
 #= require 3rd/jquery.lazyload
 #= require 3rd/jquery.sticky
