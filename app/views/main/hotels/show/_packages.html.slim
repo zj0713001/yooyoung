@@ -11,13 +11,14 @@
             .hotel-show-packages__item
               .hotel-show-packages__item-icon
               = item.content
-          .hotel-show-packages__title
-            .hotel-show-packages__title-icon
-            | 悠漾超值赠送
-          - package.presents.each do |present|
-            .hotel-show-packages__item
-              .hotel-show-packages__item-icon
-              = present
+          - if package.presents.present?
+            .hotel-show-packages__title
+              .hotel-show-packages__title-icon
+              | 悠漾超值赠送
+            - package.presents.each do |present|
+              .hotel-show-packages__item
+                .hotel-show-packages__item-icon
+                = present
         td
           .hotel-show-packages__title
             .hotel-show-packages__title-icon
