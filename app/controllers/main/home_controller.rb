@@ -13,7 +13,8 @@ class Main::HomeController < Main::ApplicationController
         package_price: PriceService.new(hotel.packages.first).has_prices? ? (PackageService.new(hotel.packages.first).min_price_by_date.to_i/2.0).ceil : nil,
         name: hotel.chinese,
         location: hotel_location_text(hotel),
-        link: hotel_path(hotel)
+        link: hotel_path(hotel),
+        days: hotel.packages.first.days,
       }
     end
 
