@@ -16,7 +16,7 @@ class Main::Mobile::TradesController < Main::Mobile::ApplicationController
     @hotel = Hotel.friendly_acquire params[:hotel_id]
 
     min_price_hash = @hotel.packages.map do |package|
-      { package => (PackageService.new(package).min_price_by_date/2.0).ceil }
+      { package => (PackageService.new(package).min_price_by_date.to_i/2.0).ceil }
     end.inject(&:merge)
     @min_price = min_price_hash.to_h.values.compact.min
     can_buy = !@min_price.to_i.zero?

@@ -49,7 +49,7 @@ class Main::PricesController < Main::ApplicationController
     @hotel = Hotel.friendly_acquire params[:id]
     @prices = {
       # package_price: PriceService.new(@hotel.package).has_prices? ? PackageService.new(@hotel.package).min_price_by_date : nil,
-      # favorite_price: PriceService.new(@hotel.favorite_package).has_prices? ? (PackageService.new(@hotel.favorite_package).min_price_by_date/2.0).ceil : nil
+      # favorite_price: PriceService.new(@hotel.favorite_package).has_prices? ? (PackageService.new(@hotel.favorite_package).min_price_by_date.to_i/2.0).ceil : nil
     }
 
     respond_to do |format|
