@@ -7,7 +7,7 @@
 #  target_id    :integer
 #  target_type  :string(255)
 #  editor_id    :integer
-#  lock_version :integer          default("0"), not null
+#  lock_version :integer          default(0), not null
 #  created_at   :datetime
 #  updated_at   :datetime
 #  description  :text(65535)
@@ -22,4 +22,8 @@ class Photo < ActiveRecord::Base
   belongs_to :editor, class_name: User
 
   validates :editor, existence: true
+
+  def normal_narrow_url
+    image.try(:normal_narrow).try(:url)
+  end
 end

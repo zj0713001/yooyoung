@@ -1,6 +1,12 @@
 class Admin::RoomsController < Admin::ApplicationController
   before_action :init_hotel
 
+  def index
+    @rooms = @hotel.rooms.page(params[:page]).per(params[:per_page])
+
+    @rooms = @rooms.none unless can?(:index, @hotel)
+  end
+
   def show
   end
 

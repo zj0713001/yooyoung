@@ -1,0 +1,22 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      hotel_extra_service: ''
+    attributes:
+      hotel_extra_service:
+        id: ID
+        name: 名称
+        description: "描述"
+        hotel_id: 酒店
+        cover_photo: "封面图片"
+        editor_id: "编辑"
+        created_at: "创建时间"
+        updated_at: "修改时间"
+        sequence: "排序"
+        keywords: 关键字
+        time: 活动时长
+        itineraries: 行程安排
+        presents: 费用包含
+        exclusives: 费用不含
+        tips: 推荐携带或Tips

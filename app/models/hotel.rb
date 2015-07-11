@@ -5,7 +5,7 @@
 #  id                  :integer          not null, primary key
 #  name                :string(255)      not null
 #  chinese             :string(255)      not null
-#  sequence            :integer          default("0")
+#  sequence            :integer          default(0)
 #  city_id             :integer
 #  editor_id           :integer
 #  description         :text(65535)
@@ -15,9 +15,9 @@
 #  checkin             :datetime
 #  checkout            :datetime
 #  traffics            :text(65535)
-#  published           :boolean          default("0"), not null
-#  active              :boolean          default("1"), not null
-#  lock_version        :integer          default("0"), not null
+#  published           :boolean          default(FALSE), not null
+#  active              :boolean          default(TRUE), not null
+#  lock_version        :integer          default(0), not null
 #  created_at          :datetime
 #  updated_at          :datetime
 #  deleted_at          :datetime
@@ -55,20 +55,16 @@ class Hotel < ActiveRecord::Base
   include Iron::Condition
 
   has_many :photos, as: :target, dependent: :destroy
-  has_one :package, -> { where favorite: false }, class_name: HotelPackage
+  has_many :packages, class_name: HotelPackage
+  has_many :features, class_name: HotelFeature
+  has_many :extra_services, class_name: HotelExtraService
   has_many :rooms, -> { where active: true }, dependent: :destroy
-  has_one :favorite_package, -> { where favorite: true }, class_name: HotelPackage
-  has_many :reasons, -> { where active: true }, class_name: HotelReason
-  has_many :cheats, -> { where active: true }, class_name: HotelCheat
-  has_and_belongs_to_many :categories, -> { where active: true }, uniq: true
+  # has_and_belongs_to_many :categories, -> { where active: true }, uniq: true
 
   belongs_to :city
   delegate :area, :country, to: :city, allow_nil: true
   belongs_to :cover_photo, dependent: :destroy, class_name: Photo
   belongs_to :editor, class_name: User
-
-  accepts_nested_attributes_for :package, allow_destroy: true, reject_if: Proc.new { |attributes| attributes['name'].blank? }
-  accepts_nested_attributes_for :favorite_package, allow_destroy: true, reject_if: Proc.new { |attributes| attributes['name'].blank? }
 
   serialize_fields [:tips, :recommends], Array do |variables|
     variables.delete_if{|variable| variable.blank?}
@@ -84,53 +80,4 @@ class Hotel < ActiveRecord::Base
   # validates :provisions, presence: true
   validates :city, existence: true
   validates :editor, existence: true
-
-  def as_json(options = nil)
-  super({
-    only: [:name, :chinese, :description, :provisions, :children_provisions, :drawback_provisions, :address, :phone, :checkin, :checkout, :traffics, :arounds, :best_season, :tips, :recommends, :local_address, :visa_tip, :language_tip, :money_tip, :network_tip, :power_tip, :luggage_tip],
-    include: {
-      # cover_photo: {
-      #   only: [:image],
-      # },
-      # photos: {
-      #   only: [:image],
-      # },
-      package: {
-        only: [:id, :name, :description, :days, :favorite],
-        include: {
-          items: {
-            only: [:id, :content, :description, :address, :tips, :openning_hours, :phone, :service_day],
-            # include: {
-            #   cover_photo: {
-            #     only: [:image],
-            #   },
-            # },
-          },
-        },
-      },
-      favorite_package: {
-        only: [:id, :name, :description, :days, :favorite],
-        include: {
-          items: {
-            only: [:id, :content, :description, :address, :tips, :openning_hours, :phone, :service_day],
-            # include: {
-            #   photos: {
-            #     only: [:image],
-            #   },
-            # },
-          },
-        },
-      },
-      rooms: {
-        only: [:id, :name, :description, :features, :sight, :area, :facilities, :population, :bed_type, :chinese],
-        # include: {
-        #   photos: {
-        #     only: [:image],
-        #   },
-        # },
-      },
-    },
-    methods: :to_param,
-  }.merge(options.to_h))
-end
 end

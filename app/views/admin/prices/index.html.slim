@@ -6,8 +6,11 @@ h2.ui.dividing.header.js_admin_price_update
       - @hotel.rooms.each do |room|
         = link_to [room.chinese, room.name].join(' '), { target: room.class.name, target_id: room.id }, class: "item #{'active' if room == @target}"
     .ui.vertical.menu.pointing
-      = link_to '酒店套餐', { target: @hotel.package.class.name, target_id: @hotel.package.id }, class: "item #{'active' if @hotel.package == @target}"
-      = link_to '悠漾套餐', { target: @hotel.favorite_package.class.name, target_id: @hotel.favorite_package.id }, class: "item #{'active' if @hotel.favorite_package == @target}"
+      - @hotel.packages.each do |package|
+        = link_to package.name, { target: package.class.name, target_id: package.id }, class: "item #{'active' if package == @target}"
+    .ui.vertical.menu.pointing
+      - @hotel.extra_services.each do |extra_service|
+        = link_to extra_service.name, { target: extra_service.class.name, target_id: extra_service.id }, class: "item #{'active' if extra_service == @target}"
   .thirteen.wide.column
     .ui.fluid.segment ms-controller='admin_prices'
       .calendar

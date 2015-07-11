@@ -1,0 +1,5 @@
+.hotel-show-feature
+  .hotel-show-feature__image
+    = image_tag feature.cover_photo.try(:image).try(:normal_narrow).try(:url)
+  .hotel-show-feature__title = feature.title
+  .hotel-show-feature__description = simple_format feature.description

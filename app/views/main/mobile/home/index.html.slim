@@ -1,11 +1,11 @@
 .main-mobile-home
   .main-mobile-home__banner.js_main_mobile_home_banner
     h1.main-mobile-home__banner-title 悠漾旅行
-    .main-mobile-home__banner-subtitle 悠选酒店套餐，打造非凡旅行
+    .main-mobile-home__banner-subtitle 让您的度假旅行立体而完整
   .main-mobile-home__container
     .main-mobile-home__title
       .main-mobile-home__title-icon
-      | 酒店套餐
+      | 度假套餐
     - @section_data.each do |data|
       = link_to data[:link] do
         .main-mobile-home__hotel.single-section style="background-image: #{background_image_cover(data[:image])}"

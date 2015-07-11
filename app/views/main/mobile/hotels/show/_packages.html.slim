@@ -1,0 +1,28 @@
+.hotel-show-packages
+    .hotel-show-packages__name = "#{package.name}（#{package.days+1}天#{package.days}晚）"
+    .hotel-show-packages__list
+      .hotel-show-packages__list-title
+        .hotel-show-packages__list-title-icon
+        | 套餐内容包含
+      - package.items.each do |item|
+        .hotel-show-packages__list-item
+          .hotel-show-packages__list-item-icon
+          = item.content
+    - if package.presents.present?
+      .hotel-show-packages__list
+        .hotel-show-packages__list-title
+          .hotel-show-packages__list-title-icon
+          | 悠漾超值赠送
+        - package.presents.each do |present|
+          .hotel-show-packages__list-item
+            .hotel-show-packages__list-item-icon
+            = present
+    - if package.exclusives.present?
+      .hotel-show-packages__list
+        .hotel-show-packages__list-title
+          .hotel-show-packages__list-title-icon
+          | 费用不含
+        - package.exclusives.each do |exclusive|
+          .hotel-show-packages__list-item
+            .hotel-show-packages__list-item-icon
+            = exclusive

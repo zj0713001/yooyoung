@@ -1,6 +1,9 @@
 - fields = [] if fields.blank?
 - fields = fields.fill('', fields.length..(2)) if fields.count < 3
 .js_admin_sortable_muti_fields
+  textarea.hidden.js_admin_sortable_muti_field_html
+    .field.js_admin_sortable_muti_field
+      input type="text" name="#{field_name}"
   - fields.each do |field|
       .field.js_admin_sortable_muti_field
         input type="text" name="#{field_name}" value="#{field}"

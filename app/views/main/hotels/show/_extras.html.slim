@@ -1,0 +1,50 @@
+.hotel-show-extras.js_main_hotel_show_extras
+  .hotel-show-extras__container
+    .hotel-show-extras__simple.hotel-show-extras-simple
+      table
+        tr
+          td.hotel-show-extras-simple__cover-photo
+            = image_tag extra_service.cover_photo.try(:image).try(:normal).try(:url)
+          td.hotel-show-extras-simple__content
+            .hotel-show-extras-simple__name
+              = extra_service.name
+              .hotel-show-extras-simple__name-label = extra_service.time
+            .hotel-show-extras-simple__keywords
+              - extra_service.keywords.each do |keyword|
+                .hotel-show-extras-simple__keyword
+                  .hotel-show-extras-simple__keyword-icon
+                  = keyword
+            hr.hotel-show-extras-simple__hr
+            .hotel-show-extras-simple__description = simple_format extra_service.description
+            .hotel-show-extras-simple__price
+              | ￥
+              em 350元
+              | /人起
+            .hotel-show-extras-simple__more.js_main_hotel_show_extras_simple 查看更多信息
+    .hotel-show-extras__content.hotel-show-extras-content.js_main_hotel_show_extras_content
+      .hotel-show-extras-content__item
+        .hotel-show-extras-content__item-title 活动安排
+        - extra_service.itineraries.each do |itinerary|
+          .hotel-show-extras-content__itinerary
+            .hotel-show-extras-content__itinerary-icon
+            = itinerary
+      .hotel-show-extras-content__item
+        .hotel-show-extras-content__item-title 费用说明
+        .hotel-show-extras-content__exclusive
+          .hotel-show-extras-content__exclusive-icon
+          | 费用包含
+        .hotel-show-extras-content__exclusives
+          - extra_service.presents.each do |present|
+            span = present
+        .hotel-show-extras-content__exclusive
+          .hotel-show-extras-content__exclusive-icon
+          | 费用不含
+        .hotel-show-extras-content__exclusives
+          - extra_service.exclusives.each do |exclusive|
+            span = exclusive
+        .hotel-show-extras-content__exclusive
+          .hotel-show-extras-content__exclusive-icon
+          | 推荐携带物品
+        .hotel-show-extras-content__exclusives
+          - extra_service.tips.each do |tip|
+            span = tip

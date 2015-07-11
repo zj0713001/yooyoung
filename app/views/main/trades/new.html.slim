@@ -1,6 +1,6 @@
 ruby:
   set_meta_tags(
-    title: "填写订单信息_#{@hotel.chinese}_#{@hotel.package.name}",
+    title: "填写订单信息_#{@hotel.chinese}",
   )
 .trade-new.js_main_trade_new
   = render 'main/shared/main_header'
@@ -13,33 +13,18 @@ ruby:
     .trade-new-container ms-controller='main_trade_new'
       = form_for @trade, html: { class: :'trade-new-form main-form js_main_trade_new_form', :'data-price-url' => prices_path } do |f|
         .main-form__group
-          = f.label :package_id, class: :'trade-new-form__label main-form__label'
+          = label_tag :package_id, '选择套餐', class: :'trade-new-form__label main-form__label'
           = f.hidden_field :package_id, :'ms-duplex' => 'selected_package.id'
-          .trade-new-form__package-select.trade-new-form__select ms-hover='trade-new-form__select--hover' ms-class='trade-new-form__select--selected:!is_favorite' ms-click='select_package' data-is-favorite='false'
-            .trade-new-form__package-name = @hotel.package.name
-            .trade-new-form__package-warning
-              | 包含#{@hotel.package.days}晚住宿
-            .iconfont.icon-yes
-          .trade-new-form__select.trade-new-form__favorite-package-select ms-hover='trade-new-form__select--hover' ms-class='trade-new-form__select--selected:is_favorite' ms-click='select_package' data-is-favorite='true' data-package-id="#{@hotel.favorite_package.id}"
-            .trade-new-form__package-name
-              | 悠漾专属套餐
-            .trade-new-form__package-warning
-              | 包含#{@hotel.favorite_package.days}晚住宿
-            .iconfont.icon-yes
-          .trade-new-form__package-section ms-class='trade-new-form__package-section--selected:!is_favorite'
-            .trade-new-form__package-array
-            - @hotel.package.items.each do |item|
-              .trade-new-form__package-content
+          .trade-new-form__packages
+            .trade-new-form__package-select.trade-new-form__select ms-repeat-p='hotel.packages' ms-hover='trade-new-form__select--hover' ms-class='trade-new-form__select--selected:p==selected_package' ms-click='select_package(p)'
+              .trade-new-form__package-name ms-text = 'p.name'
+              .trade-new-form__package-warning
+                | {{ p.days+1 }}天{{ p.days }}晚
+              .iconfont.icon-yes
+            .trade-new-form__package-section ms-repeat-p='hotel.packages' ms-class='trade-new-form__package-section--selected:p==selected_package'
+              .trade-new-form__package-content ms-repeat-item='p.items'
                 .trade-new-form__package-icon
-                = item.content
-          .trade-new-form__package-section ms-class='trade-new-form__package-section--selected:is_favorite'
-            .trade-new-form__favorite-array
-            - @hotel.favorite_package.items.group_by(&:service_day).sort.each_with_index do |(day_index, items), index|
-              .trade-new-form__favorite-package-day Day #{day_index}
-              - items.each_with_index do |item, index|
-                .trade-new-form__favorite-package-content
-                  .trade-new-form__package-icon
-                  = item.content
+                | {{ item.content }}
         .main-form__group
           = f.label :start_day, class: :'trade-new-form__label main-form__label'
           = f.text_field :start_day, class: :'trade-new-form__input main-form__input js_main_date date', readonly: true, :'ms-duplex' => :"start_day", placeholder: :'请选择入住日期'
@@ -55,23 +40,20 @@ ruby:
         .main-form__group
           = f.label :room_id, class: :'trade-new-form__label main-form__label'
           .trade-new-form__rooms
-            .trade-new-form__room ms-repeat-room='hotel.rooms'
-              .trade-new-form__room-select.trade-new-form__select ms-hover-1='trade-new-form__select--hover:start_day && !room.disabled' ms-hover-2='trade-new-form__select--hover-no-start-day:!start_day' ms-click='select_room(room)' ms-class-1='trade-new-form__room-select--even:$index % 2' ms-class-2='trade-new-form__select--selected:selected_room == room && !room.disabled'
-                .trade-new-form__room-name ms-text='room.chinese'
-                .trade-new-form__room-warning ms-visible='!start_day'
-                  | 请选择入住日期
-                .trade-new-form__room-error ms-visible='start_day && room.disabled'
-                  | 无法预订
-                .trade-new-form__room-pricde ms-visible='room.is_price_loaded && !room.disabled'
-                  | 可以预订
-                .iconfont.icon-yes
+            .trade-new-form__room-select.trade-new-form__select ms-repeat-room='hotel.rooms' ms-hover-1='trade-new-form__select--hover:start_day' ms-hover-2='trade-new-form__select--hover-no-start-day:!start_day' ms-click='select_room(room)' ms-class-2='trade-new-form__select--selected:selected_room == room'
+              .trade-new-form__room-name ms-text='room.chinese'
+              .trade-new-form__warning ms-visible='!start_day'
+                | 请选择入住日期
+              .trade-new-form__room-price ms-visible='room.is_price_loaded'
+                | 可以预订
+              .iconfont.icon-yes
           = f.hidden_field :room_id, :'ms-duplex' => 'selected_room.id'
           .trade-new-form__room-content.trade-new-form-room-content
             .trade-new-form-room-content__room ms-repeat-room='hotel.rooms' ms-visible='selected_room == room'
               .trade-new-form-room-content__photos
                 .js_main_trade_new_room_photos
                   .trade-new-form-room-content__room-photo ms-repeat-photo='room.photos'
-                    img ms-src='photo.image.normal_narrow.url'
+                    img ms-src='photo.normal_narrow_url'
                 a.main-slick__prev.js_main_trade_new_room_photo_slick_prev ms-visible='room.photos.size() > 1'
                   .iconfont.icon-arrow-left
                 a.main-slick__next.js_main_trade_new_room_photo_slick_next ms-visible='room.photos.size() > 1'
@@ -101,11 +83,21 @@ ruby:
           = f.hidden_field :extra_bed_num, :'ms-duplex' => :"extra_bed_num"
           .trade-new-form__span ms-visible='extra_bed_num > 0'
             | {{ extra_bed_num }}张
-
           = f.label :child_num, class: :'trade-new-form__label main-form__label trade-new-form__label--smallest'
           span.trade-new-form__minus-button ms-click='child_num_minus' -
           = f.text_field :child_num, class: :'trade-new-form__input trade-new-form__input--smallest main-form__input main-form__input--smallest', :'ms-duplex' => :"child_num", readonly: true
           span.trade-new-form__plus-button ms-click='child_num_plus' +
+        - if @hotel.extra_services.present?
+          .main-form__group
+            = label_tag :extra, '精彩活动', class: :'trade-new-form__label main-form__label'
+            = hidden_field_tag 'trade[extra_services_ids][]', '', :'ms-repeat-extra_service' => 'selected_extras', :'ms-duplex' => 'extra_service.id'
+            .trade-new-form__extras
+              .trade-new-form__extra-select.trade-new-form__select ms-repeat-extra='hotel.extra_services' ms-hover='trade-new-form__select--hover:start_day' ms-hover-2='trade-new-form__select--hover-no-start-day:!start_day' ms-class='trade-new-form__select--selected:is_selected_extra(extra)' ms-click='select_extra(extra)'
+                .trade-new-form__extra-name ms-text="extra.name+'（'+extra.time+'）'"
+                .trade-new-form__warning ms-visible='!start_day'
+                  | 请选择入住日期
+                .trade-new-form__extra-price ms-visible='extra.price' ms-text='extra.price+"元/人"'
+                .iconfont.icon-yes
         hr.main-form__hr
         = f.fields_for :communicate, @trade.communicate do |ff|
           .main-form__group
@@ -151,7 +143,7 @@ ruby:
           .trade-new-bill__group
             .trade-new-bill__price ms-visible='!package_price'
               | 套餐价格：￥
-              em ms-text="min_package_price"
+              em = @min_price
               | /人起（两人起定）
           .trade-new-bill__group ms-visible='package_price'
             .trade-new-bill__price
@@ -164,7 +156,14 @@ ruby:
               span ms-text="extra_bed_price*days+'×'+extra_bed_num+'张 ='"
               | ￥
               em ms-text='extra_bed_price*extra_bed_num*days'
+          .trade-new-bill__group ms-visible='selected_extras.length > 0'
+            .trade-new-bill__price ms-repeat-extra_service='selected_extras'
+              | 活动价格：
+              span
+                | {{ extra_service.name }}￥{{ extra_service.price }}/人×{{ people_num+child_num }}=
+              | ￥
+              em ms-text='extra_service.price*(people_num+child_num)'
           .trade-new-bill__group ms-visible='package_price'
             .trade-new-bill__total-price
               | 订单总价：￥
-              em ms-text="package_price+(extra_bed_price*extra_bed_num*days)"
+              em ms-text="package_price+(extra_bed_price*extra_bed_num*days)+extra_price"

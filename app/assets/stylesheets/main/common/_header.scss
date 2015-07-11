@@ -1,17 +1,15 @@
 .main-header {
   width: 100%;
-  height: 60px;
+  height: 50px;
 }
 .main-index-header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 5em;
-  line-height: 5em;
+  position: relative;
+  height: 50px;
+  line-height: 50px;
   width: 100%;
   @include no-select;
   z-index: 990;
-  @include background(linear-gradient(top, rgba($black, .3), rgba($black, 0)));
+  @include background($white);
   .main-index-header__logo {
     position: absolute;
     top: 0;
@@ -21,14 +19,14 @@
       position: relative;
     }
     .icon-logo {
-      height: 5em;
-      width: 8.3em;
+      height: 50px;
+      width: 85px;
       position: relative;
     }
   }
   .main-index-header__nav {
     position: relative;
     width: 100%;
-    height: 5em;
+    height: 50px;
   }
 }

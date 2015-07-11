@@ -59,6 +59,7 @@ gem 'simple_calendar'
 gem 'aasm'
 gem 'roadie'
 gem 'roadie-rails'
+gem 'active_model_serializers'
 
 # Datebase
 gem 'mysql2'

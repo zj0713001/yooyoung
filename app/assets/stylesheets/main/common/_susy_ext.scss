@@ -7,7 +7,7 @@ $susy: (
   gutter-position: inside,
 );
 
-$desktop-maxwidth: 1300px;
+$desktop-maxwidth: 1300px; //兼容360浏览器
 
 @import "susy";
 @import "breakpoint";

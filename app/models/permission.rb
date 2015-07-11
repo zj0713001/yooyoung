@@ -7,8 +7,8 @@
 #  resource     :string(255)      not null
 #  action       :string(255)      not null
 #  editor_id    :integer
-#  active       :boolean          default("1"), not null
-#  lock_version :integer          default("0"), not null
+#  active       :boolean          default(TRUE), not null
+#  lock_version :integer          default(0), not null
 #  created_at   :datetime
 #  updated_at   :datetime
 #

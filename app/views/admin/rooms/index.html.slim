@@ -1,0 +1,33 @@
+h2.ui.dividing.header
+  = "#{@hotel.chinese} - #{model.model_name.human}"
+= render partial: 'admin/hotels/steps', locals: { show: :show, status: :room, hotel: @hotel }
+.ui.fluid.form.segment
+  = form_tag request.path, method: :get, class: 'js_admin_search_form' do
+    = link_to t('admin.new'), { action: :new }, class: :'ui label green button large' if can? :create, Hotel
+table.ui.table.segment
+  thead
+    - %w[id chinese sequence created_at editor_id].each do |name|
+      th = model.human_attribute_name(name)
+    th = t('admin.actions')
+  tbody
+    - @rooms.each do |room|
+      tr
+        td = room.id
+        td
+          = room.chinese
+          p = room.name
+        td = room.sequence
+        td = room.created_at.try(:localtime).try(:to_s, :db)
+        td = room.editor.try(:nickname)
+        td
+          - if can? :show, Hotel
+            = link_to admin_hotel_room_path(@hotel, room), alt: t('admin.show'), class: :'ui link action', target: :_blank do
+              i.search.icon
+          - if can? :edit, Hotel
+            = link_to edit_admin_hotel_room_path(@hotel, room), alt: t('admin.edit'), class: :'ui link', target: :_blank do
+              i.edit.icon
+            = link_to admin_prices_path(target: Room.name, target_id: room.id), alt: t('admin.edit'), class: :'ui link', target: :_blank do
+              i.yen.icon
+            = link_to admin_hotel_room_path(@hotel, room), method: :delete, data: { confirm: '确定删除房间？', 'turbolinks-eval' => false }, class: :'ui link action' do
+              i.remove.circle.outline.icon
+= admin_paginate_tag @rooms

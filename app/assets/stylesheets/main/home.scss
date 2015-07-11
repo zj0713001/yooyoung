@@ -32,8 +32,11 @@
   @include font-family-heiti;
   .home-index__banner {
     width: 100%;
-    height: auto;
-    height: 85vh;
+    height: 38vw;
+  }
+  .home-index__slogan {
+    @include main-container;
+    margin: 30px 10% 20px;
   }
   .home-index__section {
     width: 100%;
@@ -44,7 +47,7 @@
     @include cover_background_image("main/home/more.jpg");
     a {
       display: block;
-      font-size: 2em;
+      font-size: $font_h3;
       line-height: 70px;
       color: $gray_white;
       text-align: center;
@@ -60,22 +63,22 @@
   position: relative;
   overflow: hidden;
   .home-index-banner__item {
-    height: 85vh;
+    height: 38vw;
   }
   .home-index-banner__prev, .home-index-banner__next {
     display: block;
     position: absolute;
-    margin-top: -4.2em;
+    margin-top: -50px;
     top: 50%;
     z-index: 999;
     &:hover {
       @include background(rgba($white, .3));
     }
     .iconfont {
-      font-size: 4.2em;
+      font-size: 50px;
       color: $white;
-      line-height: 2em;
-      padding: 0 .5em;
+      line-height: 100px;
+      padding: 0 25px;
     }
   }
   .home-index-banner__prev {
@@ -88,47 +91,89 @@
 .home-index-banner-item {
   .home-index-banner-item__image {
     width: 100%;
-    height: 85vh;
+    height: 38vw;
     background-position: 50% 50%;
     background-repeat: no-repeat;
     @include background-size(cover);
   }
   .home-index-banner-item__hotel {
     position: absolute;
-    right: 0;
-    bottom: 0;
+    right: 10px;
+    bottom: 5%;
   }
 }
 .home-index-banner-item-hotel {
   position: relative;
   color: $white;
-  font-size: 1.5em;
-  line-height: 1em;
+  font-size: $font_h4;
+  line-height: $font_h4;
   .home-index-banner-item-hotel__section {
-    @include background(rgba($black, .5));
-    padding: 1em .8em;
-    margin-right: .5em;
+    @include background(rgba($black, .3));
+    padding: 20px 25px;
+    margin-right: 10px;
     display: none;
     .main-location {
-      padding-right: 9em;
+      padding-right: 180px;
     }
   }
-  .home-index-banner-item-hotel__name {
-    padding-right: 3em;
-    margin-bottom: .8em;
-  }
   .home-index-banner-item-hotel__package-name {
-    padding-right: 9em;
-    margin-bottom: 1em;
+    margin-bottom: 25px;
   }
   .home-index-banner-item-hotel__price {
     position: absolute;
-    right: 0;
-    bottom: 1em;
+    right: 5px;
+    bottom: 10px;
+    height: 32px;
+    font-size: $font_h6;
+    line-height: 32px;
+    padding: 0 30px 0 20px;
+    @include background(rgba($red, .75));
+    @include container-box-shadow;
+    small {
+      font-size: $font_standard;
+    }
+    em {
+      margin: 0 5px;
+      font-size: $font_h4;
+    }
+    &:before {
+      content: '';
+      @include size(0);
+      @include position(absolute, 0 100% null null);
+      @include border-color(transparent rgba($red, .75) transparent transparent);
+      @include border-width($font_h5);
+      @include border-style(solid);
+    }
+    &:after {
+      content: '';
+      @include size(0);
+      @include position(absolute, 100% 0 null null);
+      @include border-color($red transparent transparent transparent);
+      @include border-width(5px 5px 0 0);
+      @include border-style(solid);
+    }
   }
 }
+
+.home-index-slogan {
+  color: $dark_green;
+  font-size: $font_h3;
+  text-align: center;
+  .home-index-slogan__item {
+    @include span(1 of 3);
+    margin: 20px 0 30px;
+    font-size: $font_h4;
+  }
+  .iconfont {
+    font-size: 60px;
+    color: $gray_green;
+    margin: 20px 0;
+  }
+}
+
 .home-index-section {
-  padding: 40px 10px 10px;
+  padding: 10px;
+  display: none;
   .home-index-section__item {
     position: relative;
     margin: 10px;
@@ -136,6 +181,7 @@
     @include translateZ(0);
   }
   .home-index-section__link {
+    @include clearfix;
     color: $gray_white;
     &:hover {
       color: $white;
@@ -147,6 +193,7 @@
   @include clearfix;
   height: 100%;
   width: 100%;
+  @include border-radius(5px);
   .home-index-section-item__background {
     position: absolute;
     height: 100%;
@@ -160,25 +207,25 @@
   .home-index-section-item__info {
     position: absolute;
     @include background(rgba($black, .5));
-    padding: 1em;
+    padding: 15px;
     left: 0;
-    bottom: 00;
+    bottom: 0;
   }
   .home-index-section-item__area {
     position: relative;
   }
 }
 .home-index-section-item-info {
-  font-size: 1.5em;
-  line-height: 1em;
+  font-size: $font_h4;
+  line-height: $font_h4;
   position: relative;
   .home-index-section-item-info__name {
-    margin-bottom: 0.5em;
+    margin-bottom: 10px;
   }
 }
 .home-index-section-item-area {
   height: 100%;
-  font-size: 3em;
+  font-size: 40px;
   line-height: 0;
   text-align: center;
   .home-index-section-item-area__text {

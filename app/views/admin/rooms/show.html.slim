@@ -10,13 +10,6 @@ h2.ui.dividing.header
   .ui.grid
     .three.wide.column
       .js_admin_sticky
-        .ui.vertical.menu.pointing
-          - @hotel.rooms.each do |room|
-            = link_to show ? admin_hotel_room_path(@hotel, room) : edit_admin_hotel_room_path(@hotel, room), class: "item #{'active' if room == @room}" do
-              = [room.chinese, room.name].join(' ')
-          = link_to new_admin_hotel_room_path(@hotel), class: "item #{'active' if @room.new_record?}" do
-            i.icon.add.circle
-            = t("admin.new")
         .ui.aligned.basic.segment
           - if show
             = link_to t('admin.edit'), [:edit, :admin, @hotel, @room], class: :'ui label teal button huge' unless @room.deleted?

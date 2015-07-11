@@ -11,12 +11,23 @@
 #  editor_id      :integer
 #  created_at     :datetime
 #  updated_at     :datetime
-#  favorite       :boolean          default("0"), not null
 #  cover_photo_id :integer
-#  days           :integer          default("1"), not null
+#  days           :integer          default(1), not null
+#  published      :boolean          default(FALSE), not null
+#  on_saled       :boolean          default(FALSE), not null
+#  published_at   :datetime
+#  active         :boolean          default(TRUE), not null
+#  unpublished_at :datetime
+#  deleted_at     :datetime
+#  presents       :text(65535)
+#  exclusives     :text(65535)
 #
 
 class HotelPackage < ActiveRecord::Base
+  include ActiveRecord::SoftDeletable
+  include ActiveRecord::Publishable
+  include ActiveRecord::Serializeable
+
   has_many :photos, as: :target, dependent: :destroy
   has_and_belongs_to_many :rooms, -> { where active: true }, uniq: true
   has_many :items, ->{ order('service_day ASC').order('sequence ASC') }, class_name: HotelPackageItem
@@ -28,17 +39,14 @@ class HotelPackage < ActiveRecord::Base
   belongs_to :editor, class_name: User
 
   accepts_nested_attributes_for :items, allow_destroy: true, reject_if: Proc.new { |attributes| attributes['content'].blank? }
-  accepts_nested_attributes_for :rooms, allow_destroy: true, reject_if: Proc.new { |attributes| attributes['name'].blank? && attributes['chinese'].blank? }
-
-  # Todo 价格
+  # accepts_nested_attributes_for :rooms, allow_destroy: true, reject_if: Proc.new { |attributes| attributes['name'].blank? && attributes['chinese'].blank? }
 
   # validates :name, presence: true
   # validates :hotel, existence: true
   # validates :editor, existence: true
 
-  before_save :set_editor
-  def set_editor
-    self.editor = self.hotel.try(:editor)
+  serialize_fields [:presents, :exclusives], Array do |variables|
+    variables.delete_if{|variable| variable.blank?}
   end
 
   after_save :sequence_items

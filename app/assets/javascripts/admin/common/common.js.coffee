@@ -28,3 +28,13 @@ $(document).on 'page:change', ->
   $.each $('.js_admin_sticky'), (index, item) ->
     $(item).sticky
       topSpacing: $(item).offset().top
+
+  $.each $('.js_admin_text_limit'), (index, item) ->
+    $(item).textcounter
+      counterText: '已输入：'
+      max: $(item).data('max')
+      stopInputAtMaximum: false
+      maximumErrorText: '字数超过推荐值！'
+      countDown: true
+      countDownText: '剩余字数：'
+      errorTextElement: 'span'

@@ -10,7 +10,7 @@
 #  service_type  :integer
 #  response_data :text(65535)
 #  status        :integer
-#  lock_version  :integer          default("0"), not null
+#  lock_version  :integer          default(0), not null
 #  created_at    :datetime
 #  updated_at    :datetime
 #  payment_price :integer

@@ -10,19 +10,19 @@
 #  reset_password_token   :string(255)
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
-#  sign_in_count          :integer          default("0"), not null
+#  sign_in_count          :integer          default(0), not null
 #  current_sign_in_at     :datetime
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
-#  failed_attempts        :integer          default("0"), not null
+#  failed_attempts        :integer          default(0), not null
 #  unlock_token           :string(255)
 #  locked_at              :datetime
 #  created_at             :datetime
 #  updated_at             :datetime
 #  role_id                :integer
 #  avatar                 :string(255)
-#  lock_version           :integer          default("0"), not null
+#  lock_version           :integer          default(0), not null
 #  file_name              :string(255)
 #  file_size              :string(255)
 #  content_type           :string(255)

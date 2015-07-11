@@ -5,13 +5,11 @@
       .js_main_home_index_banner_slick
         - @banner_data.each do |data|
           .home-index-banner__item.home-index-banner-item.js_main_home_index_banner_height
-            .home-index-banner-item__image.js_main_home_index_banner_image.js_main_home_index_banner_height  data-background-image="#{background_image_cover(data[:image])}"
-            .home-index-banner-item__hotel
-              a href="#{data[:link]}" rel="next" rev="prev" target="_blank"
+            a href="#{data[:link]}" rel="next" rev="prev" target="_blank"
+              .home-index-banner-item__image.js_main_home_index_banner_image.js_main_home_index_banner_height  data-background-image="#{background_image_cover(data[:image])}"
+              .home-index-banner-item__hotel
                 .home-index-banner-item-hotel
                   .home-index-banner-item-hotel__section.js_main_home_index_banner_item_delay
-                    .home-index-banner-item-hotel__name
-                      = data[:name]
                     .home-index-banner-item-hotel__package-name
                       = data[:package_name]
                     .main-location
@@ -19,17 +17,25 @@
                       .main-location__text
                         = data[:location]
                   .home-index-banner-item-hotel__price.js_main_home_index_banner_item_delay class="#{'hidden' if data[:package_price].blank?}"
-                    .main-flag-label
-                      .main-flag-label__flag
-                      .main-flag-label__text
-                        .main-flag-label__unit ￥
-                        = "#{show_currency data[:package_price]}/人起"
-                      .clear
-                      .main-flag-label__shadow
+                    small ￥
+                    em = show_currency data[:package_price]
+                    | /人起
       a.home-index-banner__prev.js_main_home_index_banner_slick_prev
         .iconfont.icon-arrow-left
       a.home-index-banner__next.js_main_home_index_banner_slick_next
         .iconfont.icon-arrow-right
+  .home-index__slogan.home-index-slogan
+    .home-index-slogan__title 精选世界各地最有特点的酒店，搭配当地最有特色的玩法
+    .home-index-slogan__item
+      .iconfont.icon-building
+      | 或者有悠久的历史
+    .home-index-slogan__item
+      .iconfont.icon-landscape
+      | 或者有绝美的景观
+    .home-index-slogan__item
+      .iconfont.icon-activity
+      | 或者有特别有趣的活动
+    .home-index-slogan__conclusion 或者三者兼得，让您的度假旅行立体而完整
   .home-index__section.home-index-section.js_main_home_index_section
     - @section_data.each do |data|
       .home-index-section__item.js_main_home_index_section_item data-span="#{data[:view].in?([:'big-square', :horizontal]) ? 2 : 1}" data-height="#{data[:view].in?([:'big-square', :vertical]) ? 2 : 1}"

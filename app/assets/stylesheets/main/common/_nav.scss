@@ -2,23 +2,28 @@
   position: absolute;
   top: 0;
   right: 0;
-  line-height: 5em;
-  letter-spacing: .1em;
+  padding: 0 20px 0 0;
+  @include border-style(null solid null null);
+  @include border-width(3px);
+  @include border-color($red);
+  line-height: 50px;
+  letter-spacing: 1px;
   text-align: center;
   .main-nav__item {
     display: block;
     float: left;
-    font-size: 1.2em;
-    padding: 0 1em;
-    color: $gray_white;
+    font-size: $font_h6;
+    padding: 0 20px;
+    color: $gray_dark;
+    @include transition(all .1s ease-in);
     &:hover {
-      color: $white;
+      color: $dark;
     }
     &.main-nav__item--login {
-      padding: 0 .2em 0 1em;
+      padding: 0 5px 0 20px;
     }
     &.main-nav__item--signup {
-      padding: 0 1em 0 .2em;
+      padding: 0 20px 0 5px;
     }
     &.main-nav__item--small {
       padding: 0;

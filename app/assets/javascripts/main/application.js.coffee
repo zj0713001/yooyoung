@@ -23,7 +23,6 @@
 #= require 3rd/jquery.tooltipster
 
 #= require main/3rd/jquery.validate.default
-#= require main/common/redraw_font_size
 #= require main/common/datepocker_ext
 #= require main/common/filepicker_ext
 #= require main/common/footer
@@ -31,6 +30,10 @@
 
 #= require bootstrap/scrollspy
 #= require bootstrap/tab
+
+#= require semantic-ui/dimmer
+#= require semantic-ui/modal
+#= require semantic-ui/transition
 
 #= require main/devise/registrations
 #= require main/devise/sessions

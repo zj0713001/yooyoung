@@ -8,7 +8,7 @@
 #  limit        :integer
 #  target_id    :integer
 #  target_type  :string(255)
-#  lock_version :integer          default("0"), not null
+#  lock_version :integer          default(0), not null
 #  created_at   :datetime
 #  updated_at   :datetime
 #

@@ -2,10 +2,13 @@
 @import "bourbon";
 @import "compass/css3";
 @import "compass/utilities";
-@import "semantic-ui";
 
 @import "3rd/nprogress";
 @import "3rd/slick";
+
+@import 'semantic-ui/modules/dropdown';
+@import 'semantic-ui/modules/dimmer';
+@import 'semantic-ui/modules/transition';
 
 @import "main/mobile/common/variables";
 @import "main/common/mixins";
@@ -27,6 +30,7 @@
 @import "main/mobile/components/mixins";
 @import "main/mobile/components/trade_new_float_button";
 @import "main/mobile/components/calendar";
+@import "main/mobile/components/slick";
 
 @import "main/mobile/home";
 @import "main/mobile/hotels";

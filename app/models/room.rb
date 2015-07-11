@@ -9,13 +9,13 @@
 #  sight          :string(255)
 #  area           :string(255)
 #  editor_id      :integer
-#  lock_version   :integer          default("0"), not null
+#  lock_version   :integer          default(0), not null
 #  created_at     :datetime
 #  updated_at     :datetime
 #  hotel_id       :integer
 #  facilities     :text(65535)
-#  active         :boolean          default("1"), not null
-#  published      :boolean          default("0"), not null
+#  active         :boolean          default(TRUE), not null
+#  published      :boolean          default(FALSE), not null
 #  deleted_at     :datetime
 #  published_at   :datetime
 #  unpublished_at :datetime
@@ -23,6 +23,7 @@
 #  cover_photo_id :integer
 #  bed_type       :string(255)
 #  chinese        :string(255)
+#  sequence       :integer          default(0)
 #
 
 class Room < ActiveRecord::Base

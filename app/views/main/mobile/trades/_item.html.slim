@@ -11,12 +11,31 @@
         .main-mobile-trades-simple-item__remark = trade.hotel.name
     .main-mobile-trades-simple-item__group
       .main-mobile-trades-simple-item__label = Trade.human_attribute_name(:package_id)
-      .main-mobile-trades-simple-item__content = trade.package.name
+      .main-mobile-trades-simple-item__content
+        = trade.package.name
+        - if type == :detail
+          .main-mobile-trades-simple-item__package-content
+            - trade.package.items.each do |item|
+              .main-mobile-trades-simple-item__package-item
+                .main-mobile-trades-simple-item__li
+                = item.content
     .main-mobile-trades-simple-item__group
       .main-mobile-trades-simple-item__label = Trade.human_attribute_name(:room_id)
       .main-mobile-trades-simple-item__content
         = trade.room.chinese
         .main-mobile-trades-simple-item__remark = trade.room.name
+    - if trade.extra_services.present?
+      .main-mobile-trades-simple-item__group
+        .main-mobile-trades-simple-item__label = Trade.human_attribute_name(:extra_services)
+        .main-mobile-trades-simple-item__content
+          - trade.extra_services.each do |extra_service|
+            = "#{extra_service.name}（#{extra_service.time} - #{trade.people_num+trade.child_num}人）"
+            - if type == :detail
+              .main-mobile-trades-simple-item__package-content
+                - extra_service.itineraries.each do |itinerary|
+                  .main-mobile-trades-simple-item__package-item
+                    .main-mobile-trades-simple-item__li
+                    = itinerary
     .main-mobile-trades-simple-item__group
       .main-mobile-trades-simple-item__label = Trade.human_attribute_name(:start_day)
       .main-mobile-trades-simple-item__content = trade.start_day.to_s(:db)
@@ -52,21 +71,6 @@
         .main-mobile-trades-simple-item__group
           .main-mobile-trades-simple-item__label = Remark.human_attribute_name(:content)
           .main-mobile-trades-simple-item__content = simple_format trade.user_remark.try(:content)
-      .main-mobile-trades-simple-item__group
-        .main-mobile-trades-simple-item__label = Trade.human_attribute_name(:package_id)
-        .main-mobile-trades-simple-item__package-content
-          - if trade.package.favorite
-            - trade.package.items.group_by(&:service_day).sort.each_with_index do |(day_index, items), index|
-              .main-mobile-trades-simple-item__package-day Day #{day_index}
-              - items.each_with_index do |item, index|
-                .main-mobile-trades-simple-item__package-item
-                  .main-mobile-trades-simple-item__li
-                  = item.content
-          - else
-            - trade.package.items.each do |item|
-              .main-mobile-trades-simple-item__package-item
-                .main-mobile-trades-simple-item__li
-                = item.content
       .main-mobile-trades-simple-item__group
         .main-mobile-trades-simple-item__label = Trade.human_attribute_name(:communicate_id)
         .main-mobile-trades-simple-item__content

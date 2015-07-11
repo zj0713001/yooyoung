@@ -25,14 +25,19 @@ class Main::TradesController < Main::ApplicationController
     authorize! :create, model
 
     @hotel = Hotel.friendly_acquire params[:hotel_id]
-    unless PriceService.new(@hotel.package).has_prices?
+
+    min_price_hash = @hotel.packages.map do |package|
+      { package => (PackageService.new(package).min_price_by_date/2.0).ceil }
+    end.inject(&:merge)
+    @min_price = min_price_hash.to_h.values.compact.min
+    can_buy = !@min_price.to_i.zero?
+
+    unless can_buy
       redirect_to @hotel and return
     end
 
     @trade = model.new
-    jsvar.hotel = @hotel.as_json
-    jsvar.package_min_price = (PackageService.new(@hotel.package).min_price_by_date/2.0).ceil
-    jsvar.favorite_min_price = (PackageService.new(@hotel.favorite_package).min_price_by_date/2.0).ceil
+    jsvar.hotel = HotelSerializer.new(@hotel).as_json['hotel']
   end
 
   def create
@@ -99,7 +104,7 @@ class Main::TradesController < Main::ApplicationController
   private
   def trade_params
     params.require(:trade).permit(
-      :package_id, :room_id, :start_day, :end_day, :people_num, :child_num, :extra_bed_num, :user_remark,
+      :package_id, :room_id, :start_day, :end_day, :people_num, :child_num, :extra_bed_num, :user_remark, extra_services_ids: [],
       communicate_attributes: [:name, :phone, :email],
       attendences_attributes: [:name, :phone],
       user_remark_attributes: [:content],

@@ -1,0 +1,31 @@
+h2.ui.dividing.header
+  = model.model_name.human
+  .ui.black.pointing.left.label = @features.total_count
+= render partial: 'admin/hotels/steps', locals: { show: true, status: :feature, hotel: @hotel }
+.ui.fluid.form.segment
+  = form_tag request.path, method: :get, class: 'js_admin_search_form' do
+    = new_link_tag model, Hotel
+table.ui.table.segment
+  thead
+    - %w[id title sequence editor_id updated_at].each do |name|
+      th = model.human_attribute_name(name)
+    th = t('admin.actions')
+  tbody
+    - @features.each do |feature|
+      tr
+        td = feature.id
+        td = feature.title
+        td = feature.sequence
+        td = feature.editor.try(:nickname)
+        td = feature.updated_at.try(:localtime).try(:to_s, :db)
+        td
+          - if can? :show, Hotel
+            = link_to [:admin, @hotel, feature], alt: t('admin.show'), class: :'ui link action' do
+              i.search.icon
+          - if can? :edit, Hotel
+            = link_to [:edit, :admin, @hotel, feature], alt: t('admin.edit'), class: :'ui link' do
+              i.edit.icon
+            - if can?(:edit, Hotel)
+              = link_to admin_prices_path(target: feature.class.name, target_id: feature.id), alt: t('admin.edit'), class: :'ui link', target: :_blank do
+                i.yen.icon
+= admin_paginate_tag @features
