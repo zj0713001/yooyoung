@@ -2,8 +2,7 @@ class Main::Devise::SessionsController < Devise::SessionsController
   respond_to :json
 
   def create
-    self.resource = warden.authenticate(auth_options)
-    raise YooYoung::VerificationFailure unless resource
+    self.resource = warden.authenticate!(auth_options)
     set_flash_message(:notice, :signed_in) if is_flashing_format?
     sign_in(resource_name, resource)
     delete_user_track_from_session
