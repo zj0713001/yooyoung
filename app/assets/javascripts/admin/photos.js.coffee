@@ -51,7 +51,7 @@ $ ->
     .on 'fileuploaddone', (e, data) ->
       unless data.image_id
         data.context.find('.js_admin_upload_file_description').remove()
-        data.context.append $('<div/>').addClass('photo-uploader__file-url').text(data.result.url).prepend($("<i/>").addClass("black icon linkify"))
+        data.context.append $('<div/>').addClass('photo-uploader__file-url').text(data.result.image.image.url).prepend($("<i/>").addClass("black icon linkify"))
         # data.context.append $('<div/>').addClass('photo-uploader__file-description').text(data.result.description).prepend($("<i/>").addClass("black icon tag"))
         remove_button = $("<a/>").addClass("ui red label large js_admin_upload_file_remove").text("删除").data('image-id': data.result.id)
         data.context.append remove_button
