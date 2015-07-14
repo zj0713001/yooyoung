@@ -1,3 +1,3 @@
 class PhotoSerializer < ActiveModel::Serializer
-  attributes :normal_narrow_url
+  attributes :id, :url, :normal_narrow_url
 end
