@@ -19,6 +19,14 @@ class FileUploader < CarrierWave::Uploader::Base
     "#{secure_token}.#{extension}"
   end
 
+  def move_to_cache
+    true
+  end
+
+  def move_to_store
+    true
+  end
+
   protected
   def extension
     file.extension
@@ -33,13 +41,5 @@ class FileUploader < CarrierWave::Uploader::Base
     model.file_name = file.filename
     model.file_size = file.size.to_s
     model.content_type = file.content_type
-  end
-
-  def move_to_cache
-    true
-  end
-
-  def move_to_store
-    true
   end
 end
