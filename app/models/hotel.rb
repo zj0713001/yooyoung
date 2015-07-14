@@ -56,7 +56,7 @@ class Hotel < ActiveRecord::Base
 
   has_many :photos, as: :target, dependent: :destroy
   has_many :packages, class_name: HotelPackage
-  has_many :features, class_name: HotelFeature
+  has_many :features, ->{ order('sequence ASC') }, class_name: HotelFeature
   has_many :extra_services, class_name: HotelExtraService
   has_many :rooms, -> { where active: true }, dependent: :destroy
   # has_and_belongs_to_many :categories, -> { where active: true }, uniq: true
