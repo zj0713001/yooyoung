@@ -9,7 +9,7 @@ class Admin::PhotosController < Admin::ApplicationController
 
     if @photo.save
       respond_to do |format|
-        format.json { render json: @photo }
+        format.json { render json: @photo, root: false }
       end
     else
       respond_to do |format|
