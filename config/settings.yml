@@ -32,7 +32,7 @@ defaults: &defaults
     alipay:
       gateway: https://mapi.alipay.com/gateway.do
       account: 2088811054686737
-      email: 2495363351@qq.com
+      email: yooyoung@aliyun.com
       key: kvvq2f6ks5siat7ecvqka8wu3z5b8x8i
   seo:
     title: "悠漾，悠选酒店套餐，打造非凡旅行，臻选全球奢华酒店预订，私人定制，酒店套餐，度假旅行，蜜月旅行预订"
